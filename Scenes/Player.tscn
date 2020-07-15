@@ -10,11 +10,28 @@ height = 1.65191
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 2 )
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.968047, 0.250769, 0, -0.250769, 0.968047, 0, 2.23975, 3.73885 )
-
 [node name="BasicVehicle" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 1.6, 0 )
+
+[node name="RotationHelper" type="Spatial" parent="BasicVehicle"]
+
+[node name="Camera" type="Camera" parent="BasicVehicle/RotationHelper"]
+transform = Transform( -1, -8.17108e-08, 3.15429e-07, 0, 0.968047, 0.250769, -3.25841e-07, 0.250769, -0.968047, 1.31542e-06, 2.60131, -4.03701 )
+fov = 90.0
+far = 1000.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.166183, 0.0700196 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
 shape = SubResource( 1 )
+
+[node name="GroundDetect1" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01033, -0.75 )
+enabled = true
+cast_to = Vector3( 0, -1.01, 0 )
+collide_with_areas = true
+
+[node name="GroundDetect2" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01, 0.75 )
+enabled = true
+cast_to = Vector3( 0, -1.01, 0 )
+collide_with_areas = true
