@@ -1,31 +1,22 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/BasicVehicle.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/NPC.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/GroundDetect.gd" type="Script" id=3]
 
 [sub_resource type="SpatialMaterial" id=1]
-albedo_color = Color( 1, 0.619608, 0.0784314, 1 )
+albedo_color = Color( 1, 0.0784314, 0.0784314, 1 )
 
 [sub_resource type="CapsuleShape" id=2]
 radius = 0.739985
 height = 1.65191
 
-[node name="Player" type="KinematicBody"]
+[node name="NPC" type="KinematicBody"]
 script = ExtResource( 2 )
 
 [node name="BasicVehicle" parent="." instance=ExtResource( 1 )]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 1.6, 0 )
 material/0 = SubResource( 1 )
-
-[node name="RotationHelper" type="Spatial" parent="BasicVehicle"]
-
-[node name="Camera" type="Camera" parent="BasicVehicle/RotationHelper"]
-transform = Transform( -1, -8.17108e-08, 3.15429e-07, 0, 0.968047, 0.250769, -3.25841e-07, 0.250769, -0.968047, 1.31542e-06, 2.60131, -4.03701 )
-visible = false
-current = true
-fov = 90.0
-far = 1000.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )

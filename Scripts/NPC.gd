@@ -22,28 +22,17 @@ var is_boosting : bool = false
 var is_braking : bool = false
 var is_on_ground : bool = false
 
-var mouse_vert_sensitivity : float = 0.1
-var mouse_horz_sensitivity : float  = 0.1
-var mouse_vert_invert : int = 1
-var mouse_horz_invert : int = -1
-
-onready var RotationHelper : Spatial = $BasicVehicle/RotationHelper
-
 var prev_ground_distance : float = 0
 
 var lap_number : int = 0
 var checkpoint_number : int = 0
 
-func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-func _process(delta : float) -> void:
-	_get_key_input()
-	_move_camera(delta)
-
+func _ready():
+	pass
+	
 func _physics_process(delta : float) -> void:
 	var move_direction : Vector3 = Vector3()
-	var player_basis : Basis = global_transform.basis
+	var npc_basis : Basis = global_transform.basis
 	var temp_velocity : Vector3 = velocity
 	temp_velocity.y = 0
 	
@@ -51,38 +40,38 @@ func _physics_process(delta : float) -> void:
 		var ground_normal : Vector3 = _get_ground_normal()
 		
 		# Align player Y vector to ground normal
-		if player_basis[1].dot(ground_normal) > 0:
-			global_transform.basis = player_basis.slerp(_align_to_normal(ground_normal), delta*4)
+		if npc_basis[1].dot(ground_normal) > 0:
+			global_transform.basis = npc_basis.slerp(_align_to_normal(ground_normal), delta*4)
 		
 		# Apply acceleration/deacceleration along player X vector based on input
 		if !is_braking:
 			if movement_input.x != 0:
-				var delta_move : Vector3 = player_basis[0] * movement_input.x * STRIFE_ACCELERATION
-				var strife_vel : Vector3 = player_basis[0].dot(temp_velocity) * temp_velocity.normalized()
+				var delta_move : Vector3 = npc_basis[0] * movement_input.x * STRIFE_ACCELERATION
+				var strife_vel : Vector3 = npc_basis[0].dot(temp_velocity) * temp_velocity.normalized()
 				if abs((strife_vel + delta_move).length()) < MAX_STRIFE_VEL:
 					move_direction += delta_move
 			else:
-				move_direction -= player_basis[0].dot(temp_velocity) * player_basis[0].normalized() * DEACCELERATION
+				move_direction -= npc_basis[0].dot(temp_velocity) * npc_basis[0].normalized() * DEACCELERATION
 				
 			# Apply acceleration/deacceleration along player Z vector based on input
 			if movement_input.y > 0:
 				if !is_boosting:
-					var delta_move : Vector3 = player_basis[2] * -movement_input.y * FORWARD_ACCELERATION
-					var forward_vel : Vector3 = player_basis[2].dot(temp_velocity) * temp_velocity.normalized()
+					var delta_move : Vector3 = npc_basis[2] * -movement_input.y * FORWARD_ACCELERATION
+					var forward_vel : Vector3 = npc_basis[2].dot(temp_velocity) * temp_velocity.normalized()
 					if abs((forward_vel + delta_move).length()) < MAX_FORWARD_VEL:
 						move_direction += delta_move
 				else:
-					var delta_move : Vector3 = player_basis[2] * -movement_input.y * BOOST_ACCELERATION
-					var boost_vel : Vector3 = player_basis[2].dot(temp_velocity) * temp_velocity.normalized()
+					var delta_move : Vector3 = npc_basis[2] * -movement_input.y * BOOST_ACCELERATION
+					var boost_vel : Vector3 = npc_basis[2].dot(temp_velocity) * temp_velocity.normalized()
 					if abs((boost_vel + delta_move).length()) < MAX_BOOST_VEL:
 						move_direction += delta_move
 			elif movement_input.y < 0:
-				var delta_move : Vector3 = player_basis[2] * -movement_input.y * REVERSE_ACCELERATION
-				var reverse_vel : Vector3 = player_basis[2].dot(temp_velocity) * temp_velocity.normalized()
+				var delta_move : Vector3 = npc_basis[2] * -movement_input.y * REVERSE_ACCELERATION
+				var reverse_vel : Vector3 = npc_basis[2].dot(temp_velocity) * temp_velocity.normalized()
 				if abs((reverse_vel + delta_move).length()) < MAX_REVERSE_VEL:
 					move_direction += delta_move
 			else:
-				move_direction -= player_basis[2].dot(temp_velocity) * player_basis[2] * DEACCELERATION
+				move_direction -= npc_basis[2].dot(temp_velocity) * npc_basis[2] * DEACCELERATION
 		
 		# Hover along surface normal and slide downhill
 		var downhill : Vector3 = Vector3(0, -1, 0).cross(ground_normal).cross(ground_normal)
@@ -102,7 +91,7 @@ func _physics_process(delta : float) -> void:
 		prev_ground_distance = ground_distance
 		
 	else:
-		global_transform.basis = player_basis.slerp(_align_to_normal(Vector3(0, 1, 0)), delta*2)
+		global_transform.basis = npc_basis.slerp(_align_to_normal(Vector3(0, 1, 0)), delta*2)
 		prev_ground_distance = 0
 		move_direction = Vector3(0, -GRAVITY, 0)
 	
@@ -119,53 +108,6 @@ func _physics_process(delta : float) -> void:
 	velocity = move_and_slide(velocity, Vector3(0,1,0))
 	
 	is_on_ground = false
-
-# Track what keyboard input is being pressed
-func _get_key_input() -> void:
-	movement_input = Vector2.ZERO
-	is_boosting = false
-	is_braking = false
-	
-	if Input.is_action_pressed("Accelerate"):
-		movement_input.y += 1
-	if Input.is_action_pressed("Strife_Left"):
-		movement_input.x -= 1
-	if Input.is_action_pressed("Strife_Right"):
-		movement_input.x += 1
-	if Input.is_action_pressed("Reverse"):
-		movement_input.y -= 1
-		
-	if Input.is_action_pressed("Boost"):
-		is_boosting = true
-	if Input.is_action_pressed("Brake"):
-		is_braking = true
-
-func _input(event) -> void:		
-	if event.is_action_pressed("Pause"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
-	# Rotate the camera based on mouse movement
-	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		if event is InputEventMouseMotion:
-			RotationHelper.rotate_x(deg2rad(event.relative.y * mouse_vert_invert * mouse_vert_sensitivity))
-			RotationHelper.rotate_y(deg2rad(event.relative.x * mouse_horz_invert * mouse_horz_sensitivity))
-			
-			var helper_rotation : Vector3 = RotationHelper.rotation_degrees
-			helper_rotation.x = clamp(helper_rotation.x, -10, 10)
-			helper_rotation.y = clamp(helper_rotation.y, -30, 30)
-			helper_rotation.z = 0
-			RotationHelper.rotation_degrees = helper_rotation
-
-# Turn the character and correct the camera if the camera has been rotated	
-func _move_camera(var delta : float) -> void:
-	if RotationHelper.rotation_degrees.y != 0:
-		var yRot : float = RotationHelper.rotation_degrees.y
-		yRot = yRot + (0 - yRot) * (delta * TURN_SPEED)
-		RotationHelper.rotation_degrees.y = yRot
-		rotate_object_local(Vector3(0, 1, 0), deg2rad(yRot * delta * TURN_SPEED))
 
 # Helper function to align player with the ground normal
 func _align_to_normal(ground_normal : Vector3) -> Basis:

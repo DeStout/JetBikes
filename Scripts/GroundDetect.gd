@@ -7,4 +7,4 @@ func _ready():
 	
 func _process(delta):
 	if is_colliding():
-		emit_signal("is_colliding")
+		call_deferred("emit_signal", "is_colliding")

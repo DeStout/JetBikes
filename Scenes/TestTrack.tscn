@@ -1,12 +1,122 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/TestTrackBase.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Checkpoint.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/TestTrackNav.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Navigation.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/NPC.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scripts/Path.gd" type="Script" id=7]
+
+[sub_resource type="Curve3D" id=10]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -46.6187, 1.64212, 2.44421, 0, 0, 0, 0, 0, 0, 37.9279, 1.65426, 2.33009 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 1, 6.34393, 34.2084 )
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 1, 6.21557, 21.8902 )
+
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 1, 6.16789, 46.2178 )
+
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 1, 21.6077, 54.5974 )
+
+[sub_resource type="SpatialMaterial" id=5]
+flags_unshaded = true
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="Curve3D" id=4]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0.448399, -0.554268, 0.0808893, 0, 0, 0, 0, 0, 0, -3.73468, -1.19466, -122.187, 0, 0, 0, 0, 0, 0, -8.53006, 11.7036, -167.379, 0, 0, 0, 0, 0, 0, -28.7985, -36.0765, -256.263, 0, 0, 0, 0, 0, 0, -103.826, -69.1137, -477.831, 0, 0, 0, 0, 0, 0, -230.345, -90.4199, -576.569, 0, 0, 0, 0, 0, 0, -395.511, -97.808, -592.962, 0, 0, 0, 0, 0, 0, -502.523, -100.098, -558.667, 0, 0, 0, 0, 0, 0, -553.654, -93.4701, -446.433, 0, 0, 0, 0, 0, 0, -552.589, -55.5666, -264.815, 0, 0, 0, 0, 0, 0, -551.929, -58.2859, -61.5321, 0, 0, 0, 0, 0, 0, -552.111, -55.2821, -26.2921, 0, 0, 0, 0, 0, 0, -530.069, -44.7985, 1.45959, 0, 0, 0, 0, 0, 0, -496.385, -35.4688, 8.51098, 0, 0, 0, 0, 0, 0, -463.883, -31.1133, -3.3623, 0, 0, 0, 0, 0, 0, -434.428, -25.0231, -34.92, 0, 0, 0, 0, 0, 0, -419.77, -25.646, -82.2487, 0, 0, 0, 0, 0, 0, -424.852, -27.8416, -129.179, 0, 0, 0, 0, 0, 0, -434.784, -14.2635, -235.263, 0, 0, 0, 0, 0, 0, -443.28, -1.82245, -333.556, 0, 0, 0, 0, 0, 0, -405.626, 3.70177, -413.706, 0, 0, 0, 0, 0, 0, -334.435, 11.2532, -443.878, 0, 0, 0, 0, 0, 0, -248.106, 15.1489, -384.125, 0, 0, 0, 0, 0, 0, -176.062, 66.2036, -187.117, 0, 0, 0, 0, 0, 0, -177.471, -29.8062, -60.4764, 0, 0, 0, 0, 0, 0, -215.878, -38.5292, 108.402, 0, 0, 0, 0, 0, 0, -256.218, -35.676, 145.125, 0, 0, 0, 0, 0, 0, -320.734, -56.1036, 149.794, 0, 0, 0, 0, 0, 0, -367.57, -50.7104, 205.419, 0, 0, 0, 0, 0, 0, -352.756, -39.004, 257.276 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
 
 [node name="TestTrack" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0865936, 0, 0.355713 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 73.233, 0 )
+[node name="Navigation" type="Navigation" parent="."]
+script = ExtResource( 5 )
 
-[node name="TestTrack" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 71.744, 0 )
+[node name="TestTrack" parent="Navigation" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 71.754, 0 )
+
+[node name="TestTrack_Nav" parent="Navigation/TestTrack" instance=ExtResource( 4 )]
+visible = false
+
+[node name="Path" type="Path" parent="Navigation"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.78268, 67.3066, -198.542 )
+curve = SubResource( 10 )
+script = ExtResource( 7 )
+
+[node name="Player" parent="Navigation" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 71.754, 0 )
+
+[node name="Checkpoints" type="Node" parent="Navigation"]
+
+[node name="Checkpoint0" parent="Navigation/Checkpoints" instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6.02316, 82.8374, -167.639 )
+next_serial = 1
+
+[node name="Shape" parent="Navigation/Checkpoints/Checkpoint0" index="0"]
+shape = SubResource( 6 )
+
+[node name="Checkpoint1" parent="Navigation/Checkpoints" instance=ExtResource( 3 )]
+transform = Transform( -5.46241e-08, 0.0208121, -1.24983, 9.09725e-10, 1.24983, 0.0208121, 1.25, -1.25872e-13, -5.46317e-08, -555.158, -21.8138, -446.563 )
+serial = 1
+next_serial = 2
+
+[node name="Shape" parent="Navigation/Checkpoints/Checkpoint1" index="0"]
+shape = SubResource( 7 )
+
+[node name="Checkpoint2" parent="Navigation/Checkpoints" instance=ExtResource( 3 )]
+transform = Transform( -0.0586826, -0.0697333, -1.24667, -0.00327881, 1.24805, -0.0696562, 1.24862, -1.74623e-09, -0.0587741, -179.417, 133.936, -197.565 )
+serial = 2
+next_serial = 3
+
+[node name="Shape" parent="Navigation/Checkpoints/Checkpoint2" index="0"]
+shape = SubResource( 8 )
+
+[node name="Checkpoint3" parent="Navigation/Checkpoints" instance=ExtResource( 3 )]
+transform = Transform( 1.15193, -0.0697333, -0.480305, 0.0643626, 1.24805, -0.0268364, 0.481054, -4.65661e-09, 1.15373, -214.204, 56.0057, 369.866 )
+serial = 3
+
+[node name="Shape" parent="Navigation/Checkpoints/Checkpoint3" index="0"]
+shape = SubResource( 9 )
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="Navigation"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+material_override = SubResource( 5 )
+cast_shadow = 0
+
+[node name="Start" type="Spatial" parent="Navigation"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 73.9172, 0 )
+
+[node name="End" type="Spatial" parent="Navigation"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5093, 98.0035, 320.562 )
+
+[node name="Path_old" type="Path" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56488, 74.7468, -0.121521 )
+visible = false
+curve = SubResource( 4 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -0.453384, 0.891315, 0, -0.891315, -0.453384, 0, 81.7067, 0 )
+visible = false
+light_color = Color( 0.0980392, 0.309804, 0.607843, 1 )
+shadow_enabled = true
+
+[node name="NPC" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0281372, 81.7502, -161.668 )
+
+[editable path="Navigation/Checkpoints/Checkpoint0"]
+
+[editable path="Navigation/Checkpoints/Checkpoint1"]
+
+[editable path="Navigation/Checkpoints/Checkpoint2"]
+
+[editable path="Navigation/Checkpoints/Checkpoint3"]
