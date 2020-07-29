@@ -13,9 +13,21 @@ _global_script_classes=[ {
 "class": "Checkpoint",
 "language": "GDScript",
 "path": "res://Scripts/Checkpoint.gd"
+}, {
+"base": "Spatial",
+"class": "PathNode",
+"language": "GDScript",
+"path": "res://Scripts/PathNode.gd"
+}, {
+"base": "KinematicBody",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Scripts/Player.gd"
 } ]
 _global_script_class_icons={
-"Checkpoint": ""
+"Checkpoint": "",
+"PathNode": "",
+"Player": ""
 }
 
 [application]

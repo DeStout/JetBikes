@@ -1,122 +1,361 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/TestTrackBase.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Checkpoint.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/TestTrackNav.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Navigation.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/PathNode.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/TestTrackNav.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/NPC.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scripts/Path.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/PlayersTracker.gd" type="Script" id=7]
 
-[sub_resource type="Curve3D" id=10]
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 5, 25, 5 )
+
+[sub_resource type="Curve3D" id=2]
 _data = {
-"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -46.6187, 1.64212, 2.44421, 0, 0, 0, 0, 0, 0, 37.9279, 1.65426, 2.33009 ),
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -31.4709, -0.88369, -1.16812, 0, 0, 0, 0, 0, 0, 34.2234, 0.513824, 1.12263 ),
 "tilts": PoolRealArray( 0, 0 )
 }
 
-[sub_resource type="BoxShape" id=6]
-extents = Vector3( 1, 6.34393, 34.2084 )
-
-[sub_resource type="BoxShape" id=7]
-extents = Vector3( 1, 6.21557, 21.8902 )
-
-[sub_resource type="BoxShape" id=8]
-extents = Vector3( 1, 6.16789, 46.2178 )
-
-[sub_resource type="BoxShape" id=9]
-extents = Vector3( 1, 21.6077, 54.5974 )
-
-[sub_resource type="SpatialMaterial" id=5]
-flags_unshaded = true
-albedo_color = Color( 0, 0, 0, 1 )
+[sub_resource type="Curve3D" id=3]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -57.0855, -7.03653, -14.8973, 0, 0, 0, 0, 0, 0, 65.8858, -4.4715, -61.2407 ),
+"tilts": PoolRealArray( 0, 0 )
+}
 
 [sub_resource type="Curve3D" id=4]
 _data = {
-"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0.448399, -0.554268, 0.0808893, 0, 0, 0, 0, 0, 0, -3.73468, -1.19466, -122.187, 0, 0, 0, 0, 0, 0, -8.53006, 11.7036, -167.379, 0, 0, 0, 0, 0, 0, -28.7985, -36.0765, -256.263, 0, 0, 0, 0, 0, 0, -103.826, -69.1137, -477.831, 0, 0, 0, 0, 0, 0, -230.345, -90.4199, -576.569, 0, 0, 0, 0, 0, 0, -395.511, -97.808, -592.962, 0, 0, 0, 0, 0, 0, -502.523, -100.098, -558.667, 0, 0, 0, 0, 0, 0, -553.654, -93.4701, -446.433, 0, 0, 0, 0, 0, 0, -552.589, -55.5666, -264.815, 0, 0, 0, 0, 0, 0, -551.929, -58.2859, -61.5321, 0, 0, 0, 0, 0, 0, -552.111, -55.2821, -26.2921, 0, 0, 0, 0, 0, 0, -530.069, -44.7985, 1.45959, 0, 0, 0, 0, 0, 0, -496.385, -35.4688, 8.51098, 0, 0, 0, 0, 0, 0, -463.883, -31.1133, -3.3623, 0, 0, 0, 0, 0, 0, -434.428, -25.0231, -34.92, 0, 0, 0, 0, 0, 0, -419.77, -25.646, -82.2487, 0, 0, 0, 0, 0, 0, -424.852, -27.8416, -129.179, 0, 0, 0, 0, 0, 0, -434.784, -14.2635, -235.263, 0, 0, 0, 0, 0, 0, -443.28, -1.82245, -333.556, 0, 0, 0, 0, 0, 0, -405.626, 3.70177, -413.706, 0, 0, 0, 0, 0, 0, -334.435, 11.2532, -443.878, 0, 0, 0, 0, 0, 0, -248.106, 15.1489, -384.125, 0, 0, 0, 0, 0, 0, -176.062, 66.2036, -187.117, 0, 0, 0, 0, 0, 0, -177.471, -29.8062, -60.4764, 0, 0, 0, 0, 0, 0, -215.878, -38.5292, 108.402, 0, 0, 0, 0, 0, 0, -256.218, -35.676, 145.125, 0, 0, 0, 0, 0, 0, -320.734, -56.1036, 149.794, 0, 0, 0, 0, 0, 0, -367.57, -50.7104, 205.419, 0, 0, 0, 0, 0, 0, -352.756, -39.004, 257.276 ),
-"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -14.8511, 3.85725, 95.4066, 0, 0, 0, 0, 0, 0, 30.5729, -1.61504, -95.5978 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=5]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 51.0896, 3.16633, 35.962, 0, 0, 0, 0, 0, 0, -28.0923, -2.84721, -20.4411 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=6]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 16.8145, -0.302186, 6.53917, 0, 0, 0, 0, 0, 0, -14.6217, 2.21316, 9.97439 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=7]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 20.8294, 8.67712, 4.74438, 0, 0, 0, 0, 0, 0, -12.661, -4.5749, 2.12914 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=8]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 21.7184, 7.7256, -36.1568, 0, 0, 0, 0, 0, 0, 47.7912, -5.00546, 19.4412 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=9]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 57.5464, 5.17201, 2.41444, 0, 0, 0, 0, 0, 0, -55.2362, -4.65442, -2.63011 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=10]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 88.7389, -0.164574, -5.02687, 0, 0, 0, 0, 0, 0, -86.7737, -0.0949516, -9.96095 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=11]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 27.4105, -1.74564, -6.4348, 0, 0, 0, 0, 0, 0, -25.5139, 1.32447, 4.54752 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=12]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -16.5676, 0.778572, 2.27189, 0, 0, 0, 0, 0, 0, 22.1222, -2.84873, -2.77928 ),
+"tilts": PoolRealArray( 0, 0 )
 }
 
 [node name="TestTrack" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0865936, 0, 0.355713 )
 
 [node name="Navigation" type="Navigation" parent="."]
-script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="TestTrack" parent="Navigation" instance=ExtResource( 2 )]
+[node name="NavigationMeshInstance" parent="Navigation" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 71.754, 0 )
 
-[node name="TestTrack_Nav" parent="Navigation/TestTrack" instance=ExtResource( 4 )]
-visible = false
+[node name="TestTrack" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 2 )]
 
-[node name="Path" type="Path" parent="Navigation"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.78268, 67.3066, -198.542 )
+[node name="Obstacle" type="StaticBody" parent="Navigation/NavigationMeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31.1243, -21.3892, -302.751 )
+
+[node name="CSGBox" type="CSGBox" parent="Navigation/NavigationMeshInstance/Obstacle"]
+width = 10.0
+height = 50.0
+depth = 10.0
+
+[node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/Obstacle"]
+shape = SubResource( 1 )
+
+[node name="Obstacle2" type="StaticBody" parent="Navigation/NavigationMeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31.1243, -34.8025, -403.547 )
+
+[node name="CSGBox" type="CSGBox" parent="Navigation/NavigationMeshInstance/Obstacle2"]
+width = 10.0
+height = 50.0
+depth = 10.0
+
+[node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/Obstacle2"]
+shape = SubResource( 1 )
+
+[node name="Obstacle3" type="StaticBody" parent="Navigation/NavigationMeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -96.3465, -34.8025, -363.429 )
+
+[node name="CSGBox" type="CSGBox" parent="Navigation/NavigationMeshInstance/Obstacle3"]
+width = 10.0
+height = 50.0
+depth = 10.0
+
+[node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/Obstacle3"]
+shape = SubResource( 1 )
+
+[node name="Obstacle4" type="StaticBody" parent="Navigation/NavigationMeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -96.2422, -50.9766, -486.932 )
+
+[node name="CSGBox" type="CSGBox" parent="Navigation/NavigationMeshInstance/Obstacle4"]
+width = 10.0
+height = 50.0
+depth = 10.0
+
+[node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/Obstacle4"]
+shape = SubResource( 1 )
+
+[node name="Obstacle5" type="StaticBody" parent="Navigation/NavigationMeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -142.36, -53.0186, -486.932 )
+
+[node name="CSGBox" type="CSGBox" parent="Navigation/NavigationMeshInstance/Obstacle5"]
+width = 10.0
+height = 50.0
+depth = 10.0
+
+[node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/Obstacle5"]
+shape = SubResource( 1 )
+
+[node name="Obstacle6" type="StaticBody" parent="Navigation/NavigationMeshInstance"]
+transform = Transform( 0.87106, 0, -1.97846, 0, 1, 0, 0.491177, 0, 3.50863, -142.36, -57.3782, -542.197 )
+
+[node name="CSGBox" type="CSGBox" parent="Navigation/NavigationMeshInstance/Obstacle6"]
+width = 10.0
+height = 50.0
+depth = 10.0
+
+[node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/Obstacle6"]
+shape = SubResource( 1 )
+
+[node name="Obstacle7" type="StaticBody" parent="Navigation/NavigationMeshInstance"]
+transform = Transform( 0.87106, 0, -1.97846, 0, 1, 0, 0.491177, 0, 3.50863, -260.834, -64.4224, -508.114 )
+
+[node name="CSGBox" type="CSGBox" parent="Navigation/NavigationMeshInstance/Obstacle7"]
+width = 10.0
+height = 50.0
+depth = 10.0
+
+[node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/Obstacle7"]
+shape = SubResource( 1 )
+
+[node name="Obstacle8" type="StaticBody" parent="Navigation/NavigationMeshInstance"]
+transform = Transform( 3.49799, 0, 0.831554, 0, 1, 0, -0.738035, 0, 3.94123, -214.422, -67.1762, -590.423 )
+
+[node name="CSGBox" type="CSGBox" parent="Navigation/NavigationMeshInstance/Obstacle8"]
+width = 10.0
+height = 50.0
+depth = 10.0
+
+[node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/Obstacle8"]
+shape = SubResource( 1 )
+
+[node name="Obstacle9" type="StaticBody" parent="Navigation/NavigationMeshInstance"]
+transform = Transform( 3.49799, 0, 0.831554, 0, 1, 0, -0.738035, 0, 3.94123, -317.758, -72.5416, -568.62 )
+
+[node name="CSGBox" type="CSGBox" parent="Navigation/NavigationMeshInstance/Obstacle9"]
+width = 10.0
+height = 50.0
+depth = 10.0
+
+[node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/Obstacle9"]
+shape = SubResource( 1 )
+
+[node name="PathNodes" type="Node" parent="Navigation"]
+
+[node name="PathNode0" parent="Navigation/PathNodes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.73445, 82.7549, -165.886 )
+next_serial = 1
+
+[node name="Path" parent="Navigation/PathNodes/PathNode0" index="0"]
+curve = SubResource( 2 )
+
+[node name="PathNode1" parent="Navigation/PathNodes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -100.318, 10.075, -417.514 )
+serial = 1
+next_serial = 2
+
+[node name="Path" parent="Navigation/PathNodes/PathNode1" index="0"]
+curve = SubResource( 3 )
+
+[node name="PathNode2" parent="Navigation/PathNodes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -275.029, -21.2046, -597.115 )
+serial = 2
+next_serial = 3
+
+[node name="Path" parent="Navigation/PathNodes/PathNode2" index="0"]
+curve = SubResource( 4 )
+
+[node name="PathNode3" parent="Navigation/PathNodes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -550.211, -26.415, -501.292 )
+serial = 3
+next_serial = 4
+
+[node name="Path" parent="Navigation/PathNodes/PathNode3" index="0"]
+curve = SubResource( 5 )
+
+[node name="PathNode4" parent="Navigation/PathNodes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -553.633, 15.8662, -42.6986 )
+serial = 4
+next_serial = 5
+
+[node name="Path" parent="Navigation/PathNodes/PathNode4" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0528564, 0, 0.330696 )
+curve = SubResource( 6 )
+
+[node name="PathNode5" parent="Navigation/PathNodes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -426.827, 43.0673, -79.7104 )
+serial = 5
+next_serial = 6
+
+[node name="Path" parent="Navigation/PathNodes/PathNode5" index="0"]
+curve = SubResource( 7 )
+
+[node name="PathNode6" parent="Navigation/PathNodes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -403.586, 77.778, -424.076 )
+serial = 6
+next_serial = 7
+
+[node name="Path" parent="Navigation/PathNodes/PathNode6" index="0"]
+curve = SubResource( 8 )
+
+[node name="PathNode7" parent="Navigation/PathNodes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -184.668, 135.415, -170.003 )
+serial = 7
+next_serial = 8
+
+[node name="Path" parent="Navigation/PathNodes/PathNode7" index="0"]
+curve = SubResource( 9 )
+
+[node name="PathNode8" parent="Navigation/PathNodes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -180.688, 37.1733, -53.7071 )
+serial = 8
+next_serial = 9
+
+[node name="Path" parent="Navigation/PathNodes/PathNode8" index="0"]
 curve = SubResource( 10 )
-script = ExtResource( 7 )
 
-[node name="Player" parent="Navigation" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 71.754, 0 )
+[node name="PathNode9" parent="Navigation/PathNodes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -364.852, 26.104, 242.256 )
+serial = 9
+next_serial = 10
 
-[node name="Checkpoints" type="Node" parent="Navigation"]
+[node name="Path" parent="Navigation/PathNodes/PathNode9" index="0"]
+curve = SubResource( 11 )
 
-[node name="Checkpoint0" parent="Navigation/Checkpoints" instance=ExtResource( 3 )]
+[node name="PathNode10" parent="Navigation/PathNodes" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42.6293, 92.9151, 116.222 )
+serial = 10
+
+[node name="Path" parent="Navigation/PathNodes/PathNode10" index="0"]
+curve = SubResource( 12 )
+
+[node name="Checkpoints" type="Node" parent="."]
+
+[node name="Checkpoint0" parent="Checkpoints" instance=ExtResource( 3 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6.02316, 82.8374, -167.639 )
 next_serial = 1
 
-[node name="Shape" parent="Navigation/Checkpoints/Checkpoint0" index="0"]
-shape = SubResource( 6 )
-
-[node name="Checkpoint1" parent="Navigation/Checkpoints" instance=ExtResource( 3 )]
+[node name="Checkpoint1" parent="Checkpoints" instance=ExtResource( 3 )]
 transform = Transform( -5.46241e-08, 0.0208121, -1.24983, 9.09725e-10, 1.24983, 0.0208121, 1.25, -1.25872e-13, -5.46317e-08, -555.158, -21.8138, -446.563 )
 serial = 1
 next_serial = 2
 
-[node name="Shape" parent="Navigation/Checkpoints/Checkpoint1" index="0"]
-shape = SubResource( 7 )
-
-[node name="Checkpoint2" parent="Navigation/Checkpoints" instance=ExtResource( 3 )]
+[node name="Checkpoint2" parent="Checkpoints" instance=ExtResource( 3 )]
 transform = Transform( -0.0586826, -0.0697333, -1.24667, -0.00327881, 1.24805, -0.0696562, 1.24862, -1.74623e-09, -0.0587741, -179.417, 133.936, -197.565 )
 serial = 2
 next_serial = 3
 
-[node name="Shape" parent="Navigation/Checkpoints/Checkpoint2" index="0"]
-shape = SubResource( 8 )
-
-[node name="Checkpoint3" parent="Navigation/Checkpoints" instance=ExtResource( 3 )]
+[node name="Checkpoint3" parent="Checkpoints" instance=ExtResource( 3 )]
 transform = Transform( 1.15193, -0.0697333, -0.480305, 0.0643626, 1.24805, -0.0268364, 0.481054, -4.65661e-09, 1.15373, -214.204, 56.0057, 369.866 )
 serial = 3
 
-[node name="Shape" parent="Navigation/Checkpoints/Checkpoint3" index="0"]
-shape = SubResource( 9 )
-
-[node name="ImmediateGeometry" type="ImmediateGeometry" parent="Navigation"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-material_override = SubResource( 5 )
-cast_shadow = 0
-
-[node name="Start" type="Spatial" parent="Navigation"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 73.9172, 0 )
-
-[node name="End" type="Spatial" parent="Navigation"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5093, 98.0035, 320.562 )
-
-[node name="Path_old" type="Path" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56488, 74.7468, -0.121521 )
-visible = false
-curve = SubResource( 4 )
-
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -0.453384, 0.891315, 0, -0.891315, -0.453384, 0, 81.7067, 0 )
-visible = false
+transform = Transform( 1, 0, 0, 0, -0.453384, 0.891315, 0, -0.891315, -0.453384, 0, 0, 0 )
 light_color = Color( 0.0980392, 0.309804, 0.607843, 1 )
 shadow_enabled = true
+shadow_color = Color( 0.0196078, 0.0627451, 0.215686, 1 )
 
-[node name="NPC" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0281372, 81.7502, -161.668 )
+[node name="Players" type="Node" parent="."]
+script = ExtResource( 7 )
 
-[editable path="Navigation/Checkpoints/Checkpoint0"]
+[node name="Player" parent="Players" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0865936, 71.754, 0.355713 )
 
-[editable path="Navigation/Checkpoints/Checkpoint1"]
+[node name="NPC1" parent="Players" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.01465, 73.0298, -0.436207 )
 
-[editable path="Navigation/Checkpoints/Checkpoint2"]
+[node name="NPC2" parent="Players" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.59548, 72.432, -0.436207 )
 
-[editable path="Navigation/Checkpoints/Checkpoint3"]
+[node name="NPC3" parent="Players" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1064, 72.432, -0.436207 )
+
+[node name="NPC4" parent="Players" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.7793, 72.432, -0.436207 )
+
+[node name="NPC5" parent="Players" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.01465, 73.0298, 8.97375 )
+
+[node name="NPC6" parent="Players" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.59548, 72.432, 8.97375 )
+
+[node name="NPC7" parent="Players" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1064, 72.432, 8.97375 )
+
+[node name="NPC8" parent="Players" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.7793, 72.432, 8.97375 )
+
+[editable path="Navigation/PathNodes/PathNode0"]
+
+[editable path="Navigation/PathNodes/PathNode1"]
+
+[editable path="Navigation/PathNodes/PathNode2"]
+
+[editable path="Navigation/PathNodes/PathNode3"]
+
+[editable path="Navigation/PathNodes/PathNode4"]
+
+[editable path="Navigation/PathNodes/PathNode5"]
+
+[editable path="Navigation/PathNodes/PathNode6"]
+
+[editable path="Navigation/PathNodes/PathNode7"]
+
+[editable path="Navigation/PathNodes/PathNode8"]
+
+[editable path="Navigation/PathNodes/PathNode9"]
+
+[editable path="Navigation/PathNodes/PathNode10"]
+
+[editable path="Checkpoints/Checkpoint0"]
+
+[editable path="Checkpoints/Checkpoint1"]

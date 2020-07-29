@@ -1,3 +1,4 @@
+class_name Player
 extends KinematicBody
 
 const GRAVITY : float = 1.5
@@ -34,12 +35,21 @@ var prev_ground_distance : float = 0
 var lap_number : int = 0
 var checkpoint_number : int = 0
 
+var current_path_node : PathNode
+var local_player_path : Vector3
+var path_node_point : Vector3
+var path_node_distance : float
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	current_path_node = get_parent().get_parent().get_node("Navigation/PathNodes/PathNode0")
 
 func _process(delta : float) -> void:
 	_get_key_input()
 	_move_camera(delta)
+	
+	_path_node_distance()
 
 func _physics_process(delta : float) -> void:
 	var move_direction : Vector3 = Vector3()
@@ -93,7 +103,11 @@ func _physics_process(delta : float) -> void:
 			($GroundDetect1.cast_to.length() - 0.1) * -0.499, \
 			($GroundDetect1.cast_to.length() - 0.1) * 0.499)
 		var prev_move_distance : float = ground_distance - prev_ground_distance
-		var move_force : float = 1 / (ground_distance / (prev_move_distance + 0.001)) - ground_distance
+		if ground_distance == 0:
+			ground_distance = 0.001
+		if prev_move_distance == 0:
+			prev_move_distance = 0.001
+		var move_force : float = 1 / (ground_distance / (prev_move_distance)) - ground_distance
 		move_force = clamp(move_force, -11, 11)
 		
 		move_direction += ground_normal * move_force * 1.1
@@ -207,6 +221,17 @@ func checkpoint_reached(new_checkpoint : Checkpoint):
 			print("Lap: " + str(lap_number))
 		print("Checkpoint: " + str(checkpoint_number) + "\n")
 		checkpoint_number = new_checkpoint.next_serial
+		
+func _path_node_distance():
+	local_player_path = global_transform.origin - current_path_node.center_point
+	path_node_point = current_path_node.path.curve.get_closest_point(local_player_path)
+	path_node_distance = path_node_point.distance_to(local_player_path)
+	if path_node_distance < 15:
+		if current_path_node.serial == 0:
+			lap_number += 1
+			$Control/LapLabel.text = ("Lap: " + str(lap_number))
+		current_path_node = get_parent().get_parent().get_node("Navigation/PathNodes/PathNode" + str(current_path_node.next_serial))
+		print("Player: " + current_path_node.name)
 
 func _interpolate_float(current: float, target: float, amount: float) -> float:
 	current += amount * sign(target - current)
