@@ -34,6 +34,7 @@ var prev_ground_distance : float = 0
 
 var lap_number : int = 0
 var checkpoint_number : int = 0
+var placement : int = 0 setget _set_placement
 
 var current_path_node : PathNode
 var local_player_path : Vector3
@@ -222,6 +223,10 @@ func checkpoint_reached(new_checkpoint : Checkpoint):
 		print("Checkpoint: " + str(checkpoint_number) + "\n")
 		checkpoint_number = new_checkpoint.next_serial
 		
+func _set_placement(new_placement) -> void:
+	placement = new_placement
+	$HUD/TimerPlaceLabel.text = str(placement)
+		
 func _path_node_distance():
 	local_player_path = global_transform.origin - current_path_node.center_point
 	path_node_point = current_path_node.path.curve.get_closest_point(local_player_path)
@@ -229,7 +234,7 @@ func _path_node_distance():
 	if path_node_distance < 15:
 		if current_path_node.serial == 0:
 			lap_number += 1
-			$Control/LapLabel.text = ("Lap: " + str(lap_number))
+			$HUD/LapLabel.text = ("Lap: " + str(lap_number))
 		current_path_node = get_parent().get_parent().get_node("Navigation/PathNodes/PathNode" + str(current_path_node.next_serial))
 		print("Player: " + current_path_node.name)
 

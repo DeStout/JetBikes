@@ -308,7 +308,7 @@ shadow_color = Color( 0.0196078, 0.0627451, 0.215686, 1 )
 script = ExtResource( 7 )
 
 [node name="Player" parent="Players" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0865936, 71.754, 0.355713 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0865936, 71.754, -27.4787 )
 
 [node name="NPC1" parent="Players" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.01465, 73.0298, -0.436207 )

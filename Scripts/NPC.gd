@@ -26,6 +26,7 @@ var prev_ground_distance : float = 0
 
 var lap_number : int = 0
 var checkpoint_number : int = 0
+var placement : int = 0
 
 var simple_path : PoolVector3Array
 var current_goal : int = 0
@@ -197,6 +198,8 @@ func _path_node_distance():
 	path_node_point = current_path_node.path.curve.get_closest_point(local_npc_path)
 	path_node_distance = path_node_point.distance_to(local_npc_path)
 	if path_node_distance < 30:
+		if current_path_node.serial == 0:
+			lap_number += 1
 		_pathfind_next_node()
 		
 func _pathfind_next_node():
@@ -204,7 +207,7 @@ func _pathfind_next_node():
 	current_path_node = get_parent().get_parent().get_node("Navigation/PathNodes/PathNode" + str(current_path_node.next_serial))
 	simple_path = navigation.get_simple_path(global_transform.origin, current_path_node.center_point + path_node_point, true)
 	current_goal = 0
-	print(name + ": " + current_path_node.name)
+#	print(name + ": " + current_path_node.name)
 	
 
 func _interpolate_float(current: float, target: float, amount: float) -> float:
