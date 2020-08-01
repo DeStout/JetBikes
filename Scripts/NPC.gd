@@ -18,6 +18,7 @@ const TURN_SPEED : int = 8
 var movement_input : Vector2 = Vector2.ZERO
 var velocity: Vector3 = Vector3.ZERO
 
+var has_control: bool = false
 var is_boosting : bool = false
 var is_braking : bool = false
 var is_on_ground : bool = false
@@ -41,7 +42,8 @@ onready var player : Player = get_parent().get_node("Player")
 func _ready():
 	current_path_node = get_parent().get_parent().get_node("Navigation/PathNodes/PathNode0")
 	_path_node_distance()
-	simple_path = navigation.get_simple_path(global_transform.origin, current_path_node.center_point + path_node_point, true)
+	simple_path = navigation \
+		.get_simple_path(global_transform.origin, current_path_node.center_point + path_node_point, true)
 	
 func _process(_delta):
 	if global_transform.origin.distance_to(player.global_transform.origin) < 5:
@@ -60,7 +62,7 @@ func _physics_process(delta : float) -> void:
 	var temp_velocity : Vector3 = velocity
 	temp_velocity.y = 0
 
-	if is_on_ground:
+	if is_on_ground and has_control:
 		var ground_normal : Vector3 = _get_ground_normal()
 
 		# Align player Y vector to ground normal
@@ -204,8 +206,10 @@ func _path_node_distance():
 		
 func _pathfind_next_node():
 	simple_path.empty()
-	current_path_node = get_parent().get_parent().get_node("Navigation/PathNodes/PathNode" + str(current_path_node.next_serial))
-	simple_path = navigation.get_simple_path(global_transform.origin, current_path_node.center_point + path_node_point, true)
+	current_path_node = get_parent().get_parent() \
+		.get_node("Navigation/PathNodes/PathNode" + str(current_path_node.next_serial))
+	simple_path = navigation \
+		.get_simple_path(global_transform.origin, current_path_node.center_point + path_node_point, true)
 	current_goal = 0
 #	print(name + ": " + current_path_node.name)
 	

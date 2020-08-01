@@ -1,9 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Fonts/MenuFont.tres" type="DynamicFont" id=2]
 
-[node name="MainMenu" type="Node2D"]
+[node name="MainMenu" type="Control"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="MenuFrame" type="ColorRect" parent="."]
 margin_left = 64.0
@@ -15,40 +19,68 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Solo_Button" type="Button" parent="MenuFrame"]
-margin_left = 320.0
+[node name="MainPanel" type="GridContainer" parent="MenuFrame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 288.0
 margin_top = 64.0
-margin_right = 576.0
-margin_bottom = 128.0
-text = "Single Player"
+margin_right = -287.0
+margin_bottom = -64.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/vseparation = 46
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Online_Button" type="Button" parent="MenuFrame"]
-margin_left = 320.0
-margin_top = 160.0
-margin_right = 576.0
-margin_bottom = 224.0
+[node name="Solo_Button" type="Button" parent="MenuFrame/MainPanel"]
+margin_right = 223.0
+margin_bottom = 51.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+text = "Single Player"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Online_Button" type="Button" parent="MenuFrame/MainPanel"]
+margin_top = 97.0
+margin_right = 321.0
+margin_bottom = 148.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
 disabled = true
 text = "Online Multiplayer"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Options_Button" type="Button" parent="MenuFrame"]
-margin_left = 320.0
-margin_top = 256.0
-margin_right = 576.0
-margin_bottom = 320.0
+[node name="Options_Button" type="Button" parent="MenuFrame/MainPanel"]
+margin_top = 194.0
+margin_right = 142.0
+margin_bottom = 245.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
 disabled = true
 text = "Options"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Quit_Button" type="Button" parent="MenuFrame"]
-margin_left = 320.0
-margin_top = 352.0
-margin_right = 576.0
-margin_bottom = 416.0
+[node name="Quit_Button" type="Button" parent="MenuFrame/MainPanel"]
+margin_top = 291.0
+margin_right = 84.0
+margin_bottom = 342.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+action_mode = 0
 text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="MenuFrame/Solo_Button" to="." method="_on_Solo_Button_pressed"]
-[connection signal="pressed" from="MenuFrame/Quit_Button" to="." method="_on_Quit_Button_pressed"]
+[connection signal="pressed" from="MenuFrame/MainPanel/Solo_Button" to="." method="_on_Solo_Button_pressed"]
+[connection signal="pressed" from="MenuFrame/MainPanel/Quit_Button" to="." method="_on_Quit_Button_pressed"]

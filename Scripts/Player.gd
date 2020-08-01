@@ -19,6 +19,7 @@ const TURN_SPEED : int = 8
 var movement_input : Vector2 = Vector2.ZERO
 var velocity: Vector3 = Vector3.ZERO
 
+var has_control : bool = false
 var is_boosting : bool = false
 var is_braking : bool = false
 var is_on_ground : bool = false
@@ -30,8 +31,10 @@ var mouse_horz_invert : int = -1
 
 onready var RotationHelper : Spatial = $BasicVehicle/RotationHelper
 
+var ground_point : Vector3
 var prev_ground_distance : float = 0
 
+signal race_finished
 var lap_number : int = 0
 var checkpoint_number : int = 0
 var placement : int = 0 setget _set_placement
@@ -41,9 +44,7 @@ var local_player_path : Vector3
 var path_node_point : Vector3
 var path_node_distance : float
 
-func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
+func _ready() -> void:	
 	current_path_node = get_parent().get_parent().get_node("Navigation/PathNodes/PathNode0")
 
 func _process(delta : float) -> void:
@@ -53,6 +54,9 @@ func _process(delta : float) -> void:
 	_path_node_distance()
 
 func _physics_process(delta : float) -> void:
+	if global_transform.origin.y < -70:
+		print(to_global(ground_point))
+		global_transform.origin = ground_point
 	var move_direction : Vector3 = Vector3()
 	var player_basis : Basis = global_transform.basis
 	var temp_velocity : Vector3 = velocity
@@ -98,7 +102,7 @@ func _physics_process(delta : float) -> void:
 		# Hover along surface normal and slide downhill
 		var downhill : Vector3 = Vector3(0, -1, 0).cross(ground_normal).cross(ground_normal)
 		var cast_point : Vector3 = _get_cast_point()
-		var ground_point : Vector3 = _get_ground_point()
+		ground_point = _get_ground_point()
 		
 		var ground_distance : float = clamp(cast_point.length() - ground_point.length(), \
 			($GroundDetect1.cast_to.length() - 0.1) * -0.499, \
@@ -140,20 +144,20 @@ func _get_key_input() -> void:
 	movement_input = Vector2.ZERO
 	is_boosting = false
 	is_braking = false
-	
-	if Input.is_action_pressed("Accelerate"):
-		movement_input.y += 1
-	if Input.is_action_pressed("Strife_Left"):
-		movement_input.x -= 1
-	if Input.is_action_pressed("Strife_Right"):
-		movement_input.x += 1
-	if Input.is_action_pressed("Reverse"):
-		movement_input.y -= 1
-		
-	if Input.is_action_pressed("Boost"):
-		is_boosting = true
-	if Input.is_action_pressed("Brake"):
-		is_braking = true
+	if has_control:
+		if Input.is_action_pressed("Accelerate"):
+			movement_input.y += 1
+		if Input.is_action_pressed("Strife_Left"):
+			movement_input.x -= 1
+		if Input.is_action_pressed("Strife_Right"):
+			movement_input.x += 1
+		if Input.is_action_pressed("Reverse"):
+			movement_input.y -= 1
+			
+		if Input.is_action_pressed("Boost"):
+			is_boosting = true
+		if Input.is_action_pressed("Brake"):
+			is_braking = true
 
 func _input(event) -> void:		
 	if event.is_action_pressed("Pause"):
@@ -180,7 +184,8 @@ func _move_camera(var delta : float) -> void:
 		var yRot : float = RotationHelper.rotation_degrees.y
 		yRot = yRot + (0 - yRot) * (delta * TURN_SPEED)
 		RotationHelper.rotation_degrees.y = yRot
-		rotate_object_local(Vector3(0, 1, 0), deg2rad(yRot * delta * TURN_SPEED))
+		if has_control:
+			rotate_object_local(Vector3(0, 1, 0), deg2rad(yRot * delta * TURN_SPEED))
 
 # Helper function to align player with the ground normal
 func _align_to_normal(ground_normal : Vector3) -> Basis:
@@ -215,13 +220,8 @@ func _get_cast_point() -> Vector3:
 	
 	return (cast_point1 + cast_point2) * 0.5 - Vector3(0, 1.1, 0)
 	
-func checkpoint_reached(new_checkpoint : Checkpoint):
-	if checkpoint_number == new_checkpoint.serial:
-		if new_checkpoint.serial == 0:
-			lap_number += 1
-			print("Lap: " + str(lap_number))
-		print("Checkpoint: " + str(checkpoint_number) + "\n")
-		checkpoint_number = new_checkpoint.next_serial
+func display_start_time(var time_left : float):
+	$HUD/TimerPlaceLabel.text = "%2d" % (time_left + 1)
 		
 func _set_placement(new_placement) -> void:
 	placement = new_placement
@@ -234,9 +234,12 @@ func _path_node_distance():
 	if path_node_distance < 15:
 		if current_path_node.serial == 0:
 			lap_number += 1
+			if lap_number == 3:
+				emit_signal("race_finished")
 			$HUD/LapLabel.text = ("Lap: " + str(lap_number))
-		current_path_node = get_parent().get_parent().get_node("Navigation/PathNodes/PathNode" + str(current_path_node.next_serial))
-		print("Player: " + current_path_node.name)
+		current_path_node = get_parent().get_parent() \
+			.get_node("Navigation/PathNodes/PathNode" + str(current_path_node.next_serial))
+#		print("Player: " + current_path_node.name)
 
 func _interpolate_float(current: float, target: float, amount: float) -> float:
 	current += amount * sign(target - current)

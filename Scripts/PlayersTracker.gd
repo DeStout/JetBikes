@@ -7,8 +7,17 @@ func _ready() -> void:
 	_alert_players()
 	
 func _process(delta) -> void:
-	players.sort_custom(self, "_sort_placement")
-	_alert_players()
+	if get_parent().start_timer.is_stopped():
+		players.sort_custom(self, "_sort_placement")
+		_alert_players()
+	
+func start_race() -> void:
+	for p in players:
+		p.has_control = true
+	
+func finish_race() -> void:
+	for p in players:
+		p.has_control = false
 	
 func _alert_players() -> void:
 	if get_child_count() == players.size():
@@ -26,9 +35,9 @@ func _sort_placement(player1 : KinematicBody, player2 : KinematicBody) -> bool:
 		var player1_serial = player1.current_path_node.serial
 		var player2_serial = player2.current_path_node.serial
 		if player1_serial == 0:
-			player1_serial = 11
+			player1_serial = 12
 		if player2_serial == 0:
-			player2_serial = 11
+			player2_serial = 12
 			
 		if player1_serial > player2_serial:
 			return true
