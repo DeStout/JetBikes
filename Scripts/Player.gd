@@ -44,7 +44,8 @@ var local_player_path : Vector3
 var path_node_point : Vector3
 var path_node_distance : float
 
-func _ready() -> void:	
+func _ready() -> void:
+	$HUD/LapLabel.text = ("Lap: -/" + str(Globals.laps_number))
 	current_path_node = get_parent().get_parent().get_node("Navigation/PathNodes/PathNode0")
 
 func _process(delta : float) -> void:
@@ -226,6 +227,10 @@ func display_start_time(var time_left : float):
 func _set_placement(new_placement) -> void:
 	placement = new_placement
 	$HUD/TimerPlaceLabel.text = str(placement)
+	
+func _set_lap_display(new_lap_number) -> void:
+	lap_number = new_lap_number
+	print("yes")
 		
 func _path_node_distance():
 	local_player_path = global_transform.origin - current_path_node.center_point
@@ -234,9 +239,10 @@ func _path_node_distance():
 	if path_node_distance < 15:
 		if current_path_node.serial == 0:
 			lap_number += 1
-			if lap_number == 3:
+			$HUD/LapLabel.text = ("Lap: " + str(lap_number) + "/" + str(Globals.laps_number))
+			if lap_number == Globals.laps_number + 1:
+				$HUD/LapLabel.text = ("Finished!")
 				emit_signal("race_finished")
-			$HUD/LapLabel.text = ("Lap: " + str(lap_number))
 		current_path_node = get_parent().get_parent() \
 			.get_node("Navigation/PathNodes/PathNode" + str(current_path_node.next_serial))
 #		print("Player: " + current_path_node.name)

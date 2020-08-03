@@ -1,11 +1,9 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=24 format=2]
 
-[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/TestTrackBase.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Track.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/PathNode.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/TestTrackNav.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/NPC.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/PlayersTracker.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Skyboxes/Cold Sunset Equirect.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Music/NoMessingWithUs.wav" type="AudioStream" id=9]
@@ -110,6 +108,12 @@ mix_target = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.886478, 0.46277, 0, -0.46277, 0.886478, 0, 0, 0 )
+light_color = Color( 0.509804, 0.6, 0.694118, 1 )
+shadow_enabled = true
+shadow_color = Color( 0.109833, 0.176351, 0.238281, 1 )
 
 [node name="Navigation" type="Navigation" parent="."]
 __meta__ = {
@@ -328,41 +332,65 @@ curve = SubResource( 16 )
 [node name="Players" type="Node" parent="."]
 script = ExtResource( 7 )
 
-[node name="Player" parent="Players" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.70943, 73.6991, 11.9881 )
+[node name="PlayerSpawn1" type="Spatial" parent="Players"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 73, -10 )
 
-[node name="NPC1" parent="Players" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6538, 73.9605, -0.436207 )
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn1"]
 
-[node name="NPC2" parent="Players" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.34507, 73.9605, -0.436207 )
+[node name="PlayerSpawn2" type="Spatial" parent="Players"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 73, -10 )
 
-[node name="NPC3" parent="Players" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.37984, 73.9605, -0.436207 )
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn2"]
 
-[node name="NPC4" parent="Players" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.52223, 73.9605, -0.436207 )
+[node name="PlayerSpawn3" type="Spatial" parent="Players"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 73, -10 )
 
-[node name="NPC5" parent="Players" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8496, 73.9605, 6.11587 )
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn3"]
 
-[node name="NPC6" parent="Players" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.54084, 73.9605, 6.11587 )
+[node name="PlayerSpawn4" type="Spatial" parent="Players"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 73, -10 )
 
-[node name="NPC7" parent="Players" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.18406, 73.9605, 6.11587 )
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn4"]
 
-[node name="NPC8" parent="Players" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3265, 73.9605, 6.11587 )
+[node name="PlayerSpawn5" type="Spatial" parent="Players"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 73, 0 )
 
-[node name="NPC9" parent="Players" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6538, 74.3501, 11.7805 )
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn5"]
 
-[node name="NPC10" parent="Players" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.34507, 73.9605, 11.7805 )
+[node name="PlayerSpawn6" type="Spatial" parent="Players"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 73, 0 )
 
-[node name="NPC11" parent="Players" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.37984, 73.9605, 11.7805 )
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn6"]
+
+[node name="PlayerSpawn7" type="Spatial" parent="Players"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 73, 0 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn7"]
+
+[node name="PlayerSpawn8" type="Spatial" parent="Players"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 73, 0 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn8"]
+
+[node name="PlayerSpawn9" type="Spatial" parent="Players"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 73, 10 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn9"]
+
+[node name="PlayerSpawn10" type="Spatial" parent="Players"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 73, 10 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn10"]
+
+[node name="PlayerSpawn11" type="Spatial" parent="Players"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 73, 10 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn11"]
+
+[node name="PlayerSpawn12" type="Spatial" parent="Players"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 73, 10 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn12"]
 
 [editable path="Navigation/PathNodes/PathNode0"]
 
