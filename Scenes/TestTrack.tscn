@@ -247,13 +247,13 @@ _data = {
 [sub_resource type="BoxShape" id=53]
 extents = Vector3( 22.5049, 7.66523, 1 )
 
-[sub_resource type="BoxShape" id=55]
+[sub_resource type="BoxShape" id=54]
 extents = Vector3( 54.5578, 4.56957, 42.4315 )
 
-[sub_resource type="BoxShape" id=56]
+[sub_resource type="BoxShape" id=55]
 extents = Vector3( 57.9453, 1, 27.5494 )
 
-[sub_resource type="BoxShape" id=54]
+[sub_resource type="BoxShape" id=56]
 extents = Vector3( 91.6966, 13.3308, 147.998 )
 
 [node name="TestTrack" type="Spatial"]
@@ -629,21 +629,22 @@ function = 1
 
 [node name="CollisionShape" parent="Minimap/Navigation/ModNodes/Pathfind_Mod0a" index="0"]
 transform = Transform( 1, 0, 0, 0, 0.999281, 0.0379169, 0, -0.0379169, 0.999281, -5.09415, 0.892471, -3.79112 )
-shape = SubResource( 55 )
+shape = SubResource( 54 )
 
 [node name="Pathfind_Mod0b" parent="Minimap/Navigation/ModNodes" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.00085, 68.9667, -317.817 )
+function = 1
 
 [node name="CollisionShape" parent="Minimap/Navigation/ModNodes/Pathfind_Mod0b" index="0"]
 transform = Transform( 0.979918, 0, 0.199402, -0.0301858, 0.988475, 0.148342, -0.197104, -0.151382, 0.968624, -43.2418, -35.3252, 51.7318 )
-shape = SubResource( 56 )
+shape = SubResource( 55 )
 
 [node name="Pathfind_Mod2" parent="Minimap/Navigation/ModNodes" instance=ExtResource( 1 )]
 transform = Transform( 0.999341, 0, 0.0362949, 0, 1, 0, -0.0362949, 0, 0.999341, -178.486, 36.8056, -32.6009 )
 function = 1
 
 [node name="CollisionShape" parent="Minimap/Navigation/ModNodes/Pathfind_Mod2" index="0"]
-shape = SubResource( 54 )
+shape = SubResource( 56 )
 
 [node name="Camera" type="Camera" parent="Minimap"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -200, 147.789, -100 )

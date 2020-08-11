@@ -161,8 +161,12 @@ func _input(event) -> void:
 	if event.is_action_pressed("Pause"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			$PauseMenu.visible = true
+			has_control = false
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			$PauseMenu.visible = false
+			has_control = true
 	
 	# Rotate the camera based on mouse movement
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
@@ -237,19 +241,23 @@ func _setup_path_nodes() -> Array:
 		j = 1
 	return path_nodes_array
 	
-func display_start_time(var time_left : float):
-	$HUD/TimerPlaceLabel.text = "%2d" % (time_left + 1)
-		
-func _set_placement(new_placement) -> void:
-	placement = new_placement
-	$HUD/TimerPlaceLabel.text = str(placement)
+func display_start_time(var time_left : float) -> void:
+	$HUD/RaceNotice.text = "%d" % (time_left + 1)
 	
-func _path_node_distance():
+func start_race() -> void:
+	has_control = true
+	$HUD/RaceNotice.visible = false
+		
+func _set_placement(new_placement : int) -> void:
+	placement = new_placement
+	$HUD/PlaceLabel.text = str(placement)
+	
+func _path_node_distance() -> void:
 	var npc_to_path_node_local : Vector3 = current_path_node.to_local(global_transform.origin)
 	var path_node_point : Vector3 = current_path_node.path.curve.get_closest_point(npc_to_path_node_local)
 	path_node_distance = current_path_node.to_global(path_node_point).distance_to(global_transform.origin)
 
-func update_path_node(var new_path_node : PathNode):
+func update_path_node(var new_path_node : PathNode) -> void:
 	if current_path_node.serial == new_path_node.serial:
 		if current_path_node.serial == 0:
 			lap_number += 1

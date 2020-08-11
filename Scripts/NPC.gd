@@ -174,7 +174,7 @@ func _get_cast_point() -> Vector3:
 	
 	return (cast_point1 + cast_point2) * 0.5 - Vector3(0, 1.1, 0)
 	
-func _aim():
+func _aim() -> void:
 	look_at(simple_path[current_goal], global_transform.basis[1])
 
 func _setup_path_nodes() -> Array:
@@ -196,8 +196,11 @@ func _setup_path_nodes() -> Array:
 		i += j
 		j = 1
 	return path_nodes_array
+	
+func start_race() -> void:
+	has_control = true
 		
-func _path_point_distance():
+func _path_point_distance() -> void:
 	var temp_2D_goal = Vector2(simple_path[current_goal].x, simple_path[current_goal].z)
 	var temp_2D_global = Vector2(global_transform.origin.x, global_transform.origin.z)
 #	if simple_path[current_goal].distance_to(global_transform.origin) < 10:
@@ -205,7 +208,7 @@ func _path_point_distance():
 		if current_goal < simple_path.size()-1:
 			current_goal += 1
 
-func update_path_node(var new_path_node : PathNode):
+func update_path_node(var new_path_node : PathNode) -> void:
 	if current_path_node == new_path_node:
 		if current_path_node.serial == 0:
 			lap_number += 1
@@ -223,19 +226,19 @@ func update_path_node(var new_path_node : PathNode):
 		if new_path_node.function == new_path_node.FUNCTION.DEFAULT:
 			_pathfind_next_node()
 			
-func mod_node_update(var new_mod_node : ModNode):
+func mod_node_update(var new_mod_node : ModNode) -> void:
 	match new_mod_node.function:
 		new_mod_node.FUNCTION.NULL:
 			print("NULL!?")
 		new_mod_node.FUNCTION.PATHFIND:
 			_pathfind_next_node()
 
-func _path_node_distance():
+func _path_node_distance() -> void:
 	var npc_to_path_node_local : Vector3 = current_path_node.to_local(global_transform.origin)
 	var path_node_point : Vector3 = current_path_node.path.curve.get_closest_point(npc_to_path_node_local)
 	path_node_distance = current_path_node.to_global(path_node_point).distance_to(global_transform.origin)
 		
-func _pathfind_next_node():
+func _pathfind_next_node() -> void:
 	var npc_to_path_node_local : Vector3 = current_path_node.to_local(global_transform.origin)
 	var path_node_point : Vector3 = current_path_node.path.curve.get_closest_point(npc_to_path_node_local)
 	

@@ -5,12 +5,13 @@ var player = load("res://Scenes/Player.tscn")
 var players : Array
 var path_nodes_size : int
 
+var race_started = false
+
 func _ready() -> void:
 	if Globals.NPC_number != 0:
 		npc = load("res://Scenes/NPC.tscn")
 	_spawn_players()
 	players = get_children()
-	_alert_players()
 	
 func _process(delta) -> void:
 	if get_parent().start_timer.is_stopped():
@@ -34,8 +35,10 @@ func _spawn_players():
 		get_node("PlayerSpawn"+str(spawn)).free()
 	
 func start_race() -> void:
+	race_started = true
 	for p in players:
-		p.has_control = true
+#		p.has_control = true
+		p.start_race()
 	
 func finish_race() -> void:
 	for p in players:

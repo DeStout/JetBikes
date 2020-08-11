@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/MenuFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Assets/Images/LeftTriangle.bmp" type="Texture" id=3]
 [ext_resource path="res://Assets/Images/RightTriangle.bmp" type="Texture" id=4]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 2 )
 
 [node name="MainMenu" type="Control"]
 anchor_left = 0.5
@@ -14,6 +17,7 @@ margin_left = -512.0
 margin_top = -300.0
 margin_right = 512.0
 margin_bottom = 300.0
+theme = SubResource( 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -125,7 +129,6 @@ margin_top = 7.0
 margin_right = 313.0
 margin_bottom = 52.0
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
 text = "Number of laps:"
 align = 1
 __meta__ = {
@@ -138,7 +141,6 @@ margin_top = 48.0
 margin_right = 192.0
 margin_bottom = 93.0
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
 text = "1"
 align = 1
 valign = 1
@@ -196,7 +198,6 @@ margin_top = -16.0
 margin_right = 320.0
 margin_bottom = 29.0
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
 text = "Number of AI:"
 align = 1
 __meta__ = {
@@ -209,7 +210,6 @@ margin_top = 24.0
 margin_right = 192.0
 margin_bottom = 69.0
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
 text = "0"
 align = 1
 valign = 1
