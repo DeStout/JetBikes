@@ -45,3 +45,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0.75 )
 enabled = true
 cast_to = Vector3( 0, -2.1, 0 )
 script = ExtResource( 3 )
+[connection signal="visibility_changed" from="GroundDetect1" to="GroundDetect1" method="_on_GroundDetect1_visibility_changed"]

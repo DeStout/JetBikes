@@ -1,3 +1,4 @@
+class_name NPC
 extends KinematicBody
 
 const GRAVITY : float = 1.5
@@ -25,25 +26,24 @@ var is_on_ground : bool = false
 
 var prev_ground_distance : float = 0
 
+signal race_finished
 var lap_number : int = 0
 var checkpoint_number : int = 0
 var placement : int = 0
 
-var simple_path : PoolVector3Array
-var current_goal : int = 0
-var current_path_node : PathNode
-var local_npc_path : Vector3
-var path_node_point : Vector3
-var path_node_distance : float
-
-onready var navigation : Navigation = get_parent().get_parent().get_node("Navigation")
+onready var navigation : Navigation = get_parent().get_parent().get_node("Minimap/Navigation")
+onready var path_nodes : Array = navigation.get_node("PathNodes").get_children()
 onready var player : Player = get_parent().get_node("Player")
 
+var draw_path : ImmediateGeometry = ImmediateGeometry.new()
+var simple_path : PoolVector3Array
+var current_goal : int = 0
+onready var current_path_node : PathNode = path_nodes[0]
+var path_node_distance : float
+
 func _ready():
-	current_path_node = get_parent().get_parent().get_node("Navigation/PathNodes/PathNode0")
-	_path_node_distance()
-	simple_path = navigation \
-		.get_simple_path(global_transform.origin, current_path_node.center_point + path_node_point, true)
+	path_nodes = _setup_path_nodes()
+	_pathfind_next_node()
 	
 func _process(_delta):
 	if global_transform.origin.distance_to(player.global_transform.origin) < 5:
@@ -52,7 +52,6 @@ func _process(_delta):
 	else:
 		movement_input = Vector2(0, 1)
 		is_braking = false
-	_aim()
 	_path_point_distance()
 	_path_node_distance()
 	
@@ -64,10 +63,6 @@ func _physics_process(delta : float) -> void:
 
 	if is_on_ground and has_control:
 		var ground_normal : Vector3 = _get_ground_normal()
-
-		# Align player Y vector to ground normal
-		if npc_basis[1].dot(ground_normal) > 0:
-			global_transform.basis = npc_basis.slerp(_align_to_normal(ground_normal), delta*4)
 
 		# Apply acceleration/deacceleration along player X vector based on input
 		if !is_braking:
@@ -99,6 +94,11 @@ func _physics_process(delta : float) -> void:
 			else:
 				move_direction -= npc_basis[2].dot(temp_velocity) * npc_basis[2] * DEACCELERATION
 
+		# Align player Y vector to ground normal
+		_aim()
+		if npc_basis[1].dot(ground_normal) > 0:
+			global_transform.basis = npc_basis.slerp(_align_to_normal(ground_normal), delta*4)
+
 		# Hover along surface normal and slide downhill
 		var downhill : Vector3 = Vector3(0, -1, 0).cross(ground_normal).cross(ground_normal)
 		var cast_point : Vector3 = _get_cast_point()
@@ -123,7 +123,7 @@ func _physics_process(delta : float) -> void:
 		prev_ground_distance = ground_distance
 
 	else:
-		global_transform.basis = npc_basis.slerp(_align_to_normal(Vector3(0, 1, 0)), delta*10)
+		global_transform.basis = Quat(npc_basis).slerp(_align_to_normal(Vector3(0, 1, 0)), delta*10)
 		prev_ground_distance = 0
 		move_direction = Vector3(0, -GRAVITY, 0)
 
@@ -140,9 +140,6 @@ func _physics_process(delta : float) -> void:
 	velocity = move_and_slide(velocity, Vector3(0,1,0))
 
 	is_on_ground = false
-	
-func _aim():
-	look_at(simple_path[current_goal], global_transform.basis[1])
 
 # Helper function to align player with the ground normal
 func _align_to_normal(ground_normal : Vector3) -> Basis:
@@ -177,42 +174,83 @@ func _get_cast_point() -> Vector3:
 	
 	return (cast_point1 + cast_point2) * 0.5 - Vector3(0, 1.1, 0)
 	
-func checkpoint_reached(new_checkpoint : Checkpoint):
-	if checkpoint_number == new_checkpoint.serial:
-		if new_checkpoint.serial == 0:
-			lap_number += 1
-			print("Lap: " + str(lap_number))
-		print("Checkpoint: " + str(checkpoint_number) + "\n")
-		checkpoint_number = new_checkpoint.next_serial
+func _aim():
+	look_at(simple_path[current_goal], global_transform.basis[1])
+
+func _setup_path_nodes() -> Array:
+	var path_nodes_array = []
+	var i : int = 0
+	var j : int = 1
+	while i + j <= path_nodes.size():
+		var temp_array = []
+		while i + j <= path_nodes.size() - 1:
+			if path_nodes[i].serial != path_nodes[i + j].serial:
+				break;
+			j += 1
+		if j > 1:
+			for k in range(j):
+				temp_array.append(path_nodes[k+i])
+			path_nodes_array.append(temp_array)
+		else:
+			path_nodes_array.append(path_nodes[i])
+		i += j
+		j = 1
+	return path_nodes_array
 		
 func _path_point_distance():
 	var temp_2D_goal = Vector2(simple_path[current_goal].x, simple_path[current_goal].z)
 	var temp_2D_global = Vector2(global_transform.origin.x, global_transform.origin.z)
 #	if simple_path[current_goal].distance_to(global_transform.origin) < 10:
-	if temp_2D_goal.distance_to(temp_2D_global) < 15:
-		if simple_path.size() - 1 > current_goal:
+	if temp_2D_global.distance_to(temp_2D_goal) < 25:
+		if current_goal < simple_path.size()-1:
 			current_goal += 1
-		else:
-			_pathfind_next_node()
-		
-func _path_node_distance():
-	local_npc_path = global_transform.origin - current_path_node.center_point
-	path_node_point = current_path_node.path.curve.get_closest_point(local_npc_path)
-	path_node_distance = path_node_point.distance_to(local_npc_path)
-	if path_node_distance < 30:
+
+func update_path_node(var new_path_node : PathNode):
+	if current_path_node == new_path_node:
 		if current_path_node.serial == 0:
 			lap_number += 1
-		_pathfind_next_node()
+			if lap_number > Globals.laps_number:
+				emit_signal("race_finished")
+		if typeof(path_nodes[new_path_node.next_serial]) == TYPE_ARRAY:
+			var temp_array = path_nodes[new_path_node.next_serial]
+			if current_path_node.route >= 0:
+				current_path_node = temp_array[current_path_node.route]
+			else:
+				current_path_node = temp_array[randi() % temp_array.size()]
+		else:
+			current_path_node = path_nodes[current_path_node.next_serial]
+		
+		if new_path_node.function == new_path_node.FUNCTION.DEFAULT:
+			_pathfind_next_node()
+			
+func mod_node_update(var new_mod_node : ModNode):
+	match new_mod_node.function:
+		new_mod_node.FUNCTION.NULL:
+			print("NULL!?")
+		new_mod_node.FUNCTION.PATHFIND:
+			_pathfind_next_node()
+
+func _path_node_distance():
+	var npc_to_path_node_local : Vector3 = current_path_node.to_local(global_transform.origin)
+	var path_node_point : Vector3 = current_path_node.path.curve.get_closest_point(npc_to_path_node_local)
+	path_node_distance = current_path_node.to_global(path_node_point).distance_to(global_transform.origin)
 		
 func _pathfind_next_node():
+	var npc_to_path_node_local : Vector3 = current_path_node.to_local(global_transform.origin)
+	var path_node_point : Vector3 = current_path_node.path.curve.get_closest_point(npc_to_path_node_local)
+	
 	simple_path.empty()
-	current_path_node = get_parent().get_parent() \
-		.get_node("Navigation/PathNodes/PathNode" + str(current_path_node.next_serial))
-	simple_path = navigation \
-		.get_simple_path(global_transform.origin, current_path_node.center_point + path_node_point, true)
+	simple_path = navigation.get_simple_path(global_transform.origin, \
+		current_path_node.to_global(path_node_point), true)
 	current_goal = 0
 #	print(name + ": " + current_path_node.name)
 	
+	if Globals.SHOW_NPC_PATHFIND:
+		draw_path.clear()
+		draw_path.begin(Mesh.PRIMITIVE_LINE_STRIP)
+		for p in simple_path:
+			draw_path.add_vertex(p)
+		draw_path.end()
 
 func _interpolate_float(current: float, target: float, amount: float) -> float:
 	current += amount * sign(target - current)

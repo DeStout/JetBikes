@@ -3,6 +3,7 @@ extends Node
 var npc
 var player = load("res://Scenes/Player.tscn")
 var players : Array
+var path_nodes_size : int
 
 func _ready() -> void:
 	if Globals.NPC_number != 0:
@@ -39,6 +40,8 @@ func start_race() -> void:
 func finish_race() -> void:
 	for p in players:
 		p.has_control = false
+	if has_node("Player"):
+		$Player/HUD/LapLabel.text = ("Finished!")
 	
 func _alert_players() -> void:
 	if get_child_count() == players.size():
@@ -48,6 +51,9 @@ func _alert_players() -> void:
 		push_error("Player Tracker child count does not match array size")
 
 func _sort_placement(player1 : KinematicBody, player2 : KinematicBody) -> bool:
+	if !path_nodes_size:
+		path_nodes_size = player.path_nodes.size()
+		
 	if player1.lap_number > player2.lap_number:
 		return true
 	elif player2.lap_number > player1.lap_number:
@@ -56,9 +62,9 @@ func _sort_placement(player1 : KinematicBody, player2 : KinematicBody) -> bool:
 		var player1_serial = player1.current_path_node.serial
 		var player2_serial = player2.current_path_node.serial
 		if player1_serial == 0:
-			player1_serial = 12
+			player1_serial = path_nodes_size
 		if player2_serial == 0:
-			player2_serial = 12
+			player2_serial = path_nodes_size
 			
 		if player1_serial > player2_serial:
 			return true

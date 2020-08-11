@@ -36,27 +36,24 @@ var prev_ground_distance : float = 0
 
 signal race_finished
 var lap_number : int = 0
-var checkpoint_number : int = 0
 var placement : int = 0 setget _set_placement
 
+onready var path_nodes : Array = get_parent().get_parent().get_node("Minimap/Navigation/PathNodes").get_children()
 var current_path_node : PathNode
-var local_player_path : Vector3
-var path_node_point : Vector3
 var path_node_distance : float
 
 func _ready() -> void:
+	path_nodes = _setup_path_nodes()
 	$HUD/LapLabel.text = ("Lap: -/" + str(Globals.laps_number))
-	current_path_node = get_parent().get_parent().get_node("Navigation/PathNodes/PathNode0")
+	current_path_node = path_nodes[0]
 
 func _process(delta : float) -> void:
 	_get_key_input()
 	_move_camera(delta)
-	
 	_path_node_distance()
 
 func _physics_process(delta : float) -> void:
 	if global_transform.origin.y < -70:
-		print(to_global(ground_point))
 		global_transform.origin = ground_point
 	var move_direction : Vector3 = Vector3()
 	var player_basis : Basis = global_transform.basis
@@ -185,8 +182,7 @@ func _move_camera(var delta : float) -> void:
 		var yRot : float = RotationHelper.rotation_degrees.y
 		yRot = yRot + (0 - yRot) * (delta * TURN_SPEED)
 		RotationHelper.rotation_degrees.y = yRot
-		if has_control:
-			rotate_object_local(Vector3(0, 1, 0), deg2rad(yRot * delta * TURN_SPEED))
+		rotate_object_local(Vector3(0, 1, 0), deg2rad(yRot * delta * TURN_SPEED))
 
 # Helper function to align player with the ground normal
 func _align_to_normal(ground_normal : Vector3) -> Basis:
@@ -220,6 +216,26 @@ func _get_cast_point() -> Vector3:
 	var cast_point2 = $GroundDetect2.transform.origin
 	
 	return (cast_point1 + cast_point2) * 0.5 - Vector3(0, 1.1, 0)
+
+func _setup_path_nodes() -> Array:
+	var path_nodes_array = []
+	var i : int = 0
+	var j : int = 1
+	while i + j <= path_nodes.size():
+		var temp_array = []
+		while i + j <= path_nodes.size() - 1:
+			if path_nodes[i].serial != path_nodes[i + j].serial:
+				break;
+			j += 1
+		if j > 1:
+			for k in range(j):
+				temp_array.append(path_nodes[k+i])
+			path_nodes_array.append(temp_array)
+		else:
+			path_nodes_array.append(path_nodes[i])
+		i += j
+		j = 1
+	return path_nodes_array
 	
 func display_start_time(var time_left : float):
 	$HUD/TimerPlaceLabel.text = "%2d" % (time_left + 1)
@@ -228,24 +244,23 @@ func _set_placement(new_placement) -> void:
 	placement = new_placement
 	$HUD/TimerPlaceLabel.text = str(placement)
 	
-func _set_lap_display(new_lap_number) -> void:
-	lap_number = new_lap_number
-	print("yes")
-		
 func _path_node_distance():
-	local_player_path = global_transform.origin - current_path_node.center_point
-	path_node_point = current_path_node.path.curve.get_closest_point(local_player_path)
-	path_node_distance = path_node_point.distance_to(local_player_path)
-	if path_node_distance < 15:
+	var npc_to_path_node_local : Vector3 = current_path_node.to_local(global_transform.origin)
+	var path_node_point : Vector3 = current_path_node.path.curve.get_closest_point(npc_to_path_node_local)
+	path_node_distance = current_path_node.to_global(path_node_point).distance_to(global_transform.origin)
+
+func update_path_node(var new_path_node : PathNode):
+	if current_path_node.serial == new_path_node.serial:
 		if current_path_node.serial == 0:
 			lap_number += 1
 			$HUD/LapLabel.text = ("Lap: " + str(lap_number) + "/" + str(Globals.laps_number))
-			if lap_number == Globals.laps_number + 1:
-				$HUD/LapLabel.text = ("Finished!")
+			if lap_number > Globals.laps_number:
 				emit_signal("race_finished")
-		current_path_node = get_parent().get_parent() \
-			.get_node("Navigation/PathNodes/PathNode" + str(current_path_node.next_serial))
-#		print("Player: " + current_path_node.name)
+				
+		if typeof(path_nodes[new_path_node.next_serial]) == TYPE_ARRAY:
+			current_path_node = path_nodes[new_path_node.next_serial][0]
+		else:
+			current_path_node = path_nodes[current_path_node.next_serial]
 
 func _interpolate_float(current: float, target: float, amount: float) -> float:
 	current += amount * sign(target - current)

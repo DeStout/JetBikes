@@ -1,5 +1,7 @@
 extends Node
 
+var SHOW_NPC_PATHFIND : bool = false
+
 const DEFAULT_LAP_NUMBER : int = 3
 const MIN_LAP_NUMBER : int = 1
 const MAX_LAP_NUMBER : int = 99

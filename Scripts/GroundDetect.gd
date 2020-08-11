@@ -7,4 +7,8 @@ func _ready():
 	
 func _process(delta):
 	if is_colliding():
-		call_deferred("emit_signal", "is_colliding")
+		emit_signal("is_colliding")
+
+
+func _on_GroundDetect1_visibility_changed():
+	pass # Replace with function body.
