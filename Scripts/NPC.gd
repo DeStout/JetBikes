@@ -199,6 +199,9 @@ func _setup_path_nodes() -> Array:
 	
 func start_race() -> void:
 	has_control = true
+	
+func finish_race() -> void:
+	has_control = false
 		
 func _path_point_distance() -> void:
 	var temp_2D_goal = Vector2(simple_path[current_goal].x, simple_path[current_goal].z)

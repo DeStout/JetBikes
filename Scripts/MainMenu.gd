@@ -44,7 +44,7 @@ func _on_NPCDecrease_pressed():
 func _on_Solo_RaceButton_pressed() -> void:
 	Globals.laps_number = solo_lap_amount
 	Globals.NPC_number = solo_NPC_amount
-	get_tree().change_scene("res://Scenes/TestTrack.tscn")
+	Globals.game.start_single_player_game()
 
 func _on_Solo_CancelButton_pressed() -> void:
 	_clear_options()
