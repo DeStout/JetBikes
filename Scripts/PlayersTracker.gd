@@ -14,13 +14,12 @@ func _ready() -> void:
 	players = get_children()
 	
 func _process(delta : float) -> void:
-	players.sort_custom(self, "_sort_placement")
-	_alert_players()
+	if Globals.game.single_player_manager.current_track != null:
+		players.sort_custom(self, "_sort_placement")
+		_alert_players()
 		
 func _spawn_players():
 	player = player.instance()
-	player.connect("race_finished", self, "finish_race")
-	player.connect("update_HUD_lap", self, "update_HUD_lap")
 	add_child(player)
 	player.global_transform.origin = get_node("PlayerSpawn"+str(Globals.NPC_number+1)).global_transform.origin
 	
@@ -28,7 +27,6 @@ func _spawn_players():
 		for NPC_num in range(Globals.NPC_number):
 			var new_NPC = npc.instance()
 			new_NPC.name = "NPC" + str(NPC_num + 1)
-			new_NPC.connect("race_finished", self, "finish_race")
 			add_child(new_NPC)
 			new_NPC.global_transform.origin = get_node("PlayerSpawn"+str(NPC_num+1)).global_transform.origin
 			get_node("PlayerSpawn"+str(NPC_num+1)).free()
@@ -43,7 +41,6 @@ func start_race() -> void:
 func finish_race() -> void:
 	for p in players:
 		p.finish_race()
-	emit_signal("race_finished")
 	
 func _alert_players() -> void:
 	if get_child_count() == players.size():

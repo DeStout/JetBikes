@@ -34,8 +34,6 @@ onready var RotationHelper : Spatial = $BasicVehicle/RotationHelper
 var ground_point : Vector3
 var prev_ground_distance : float = 0
 
-signal race_finished
-signal update_HUD_lap
 var lap_number : int = 0
 var placement : int = 0
 
@@ -157,17 +155,7 @@ func _get_key_input() -> void:
 		if Input.is_action_pressed("Brake"):
 			is_braking = true
 
-func _input(event) -> void:		
-	if event.is_action_pressed("Pause"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			Globals.game.pause_menu.visible = true
-			has_control = false
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			Globals.game.pause_menu.visible = false
-			has_control = true
-	
+func _input(event):
 	# Rotate the camera based on mouse movement
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
@@ -257,10 +245,8 @@ func update_path_node(var new_path_node : PathNode) -> void:
 		if current_path_node.serial == 0:
 			lap_number += 1
 			if lap_number > Globals.laps_number:
-				emit_signal("race_finished")
-			else:
-				emit_signal("update_HUD_lap", lap_number)
-				
+				Globals.game.single_player_manager.finish_race()
+			Globals.game.single_player_manager.set_player_lap(lap_number)
 		if typeof(path_nodes[new_path_node.next_serial]) == TYPE_ARRAY:
 			current_path_node = path_nodes[new_path_node.next_serial][0]
 		else:

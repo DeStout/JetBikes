@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Scenes/Player_Pause.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/SinglePlayerManager.tscn" type="PackedScene" id=3]
 
@@ -11,6 +10,3 @@ script = ExtResource( 2 )
 
 [node name="PauseMenuCanvas" type="CanvasLayer" parent="."]
 layer = 10
-
-[node name="PauseMenu" parent="PauseMenuCanvas" instance=ExtResource( 1 )]
-visible = false

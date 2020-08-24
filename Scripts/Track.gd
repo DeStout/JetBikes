@@ -19,4 +19,4 @@ func start_race() -> void:
 func finish_race() -> void:
 	if race_on_going:
 		race_on_going = false
-		Globals.game.single_player_manager.finish_race()
+		$Players.finish_race()

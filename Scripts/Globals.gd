@@ -13,4 +13,4 @@ const MAX_NPC_NUMBER : int = 11
 var laps_number : int = DEFAULT_LAP_NUMBER
 var NPC_number : int = DEFAULT_NPC_NUMBER
 
-onready var game : Game = get_tree().get_root().get_node("Game")
+onready var game : Game = get_tree().get_current_scene()

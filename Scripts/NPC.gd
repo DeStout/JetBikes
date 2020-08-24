@@ -26,7 +26,6 @@ var is_on_ground : bool = false
 
 var prev_ground_distance : float = 0
 
-signal race_finished
 var lap_number : int = 0
 var checkpoint_number : int = 0
 var placement : int = 0
@@ -216,7 +215,7 @@ func update_path_node(var new_path_node : PathNode) -> void:
 		if current_path_node.serial == 0:
 			lap_number += 1
 			if lap_number > Globals.laps_number:
-				emit_signal("race_finished")
+				Globals.game.single_player_manager.finish_race()
 		if typeof(path_nodes[new_path_node.next_serial]) == TYPE_ARRAY:
 			var temp_array = path_nodes[new_path_node.next_serial]
 			if current_path_node.route >= 0:
