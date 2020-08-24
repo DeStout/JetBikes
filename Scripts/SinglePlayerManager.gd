@@ -15,6 +15,7 @@ func setup_race(var new_track) -> void:
 	
 func _reset_HUD() -> void:
 	$HUD/RaceNotice.text = ""
+	$HUD/RaceNotice.visible = true
 	$HUD/PlaceLabel.text = ""
 	$HUD/LapLabel.text = ("Lap: -/" + str(Globals.laps_number))
 	$HUD.visible = true
@@ -38,11 +39,11 @@ func finish_race() -> void:
 func end_race():
 	$HUD.visible = false
 	$PauseMenu.visible = false
+	$StartTimer.stop()
+	$EndTimer.stop()
 	current_track.queue_free()
 	current_track = null
 	Globals.game.return_to_main_menu()
-	$StartTimer.stop()
-	$EndTimer.stop()
 
 func set_player_placement(new_placement : int) -> void:
 	if current_track.race_on_going:
