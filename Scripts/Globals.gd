@@ -34,10 +34,14 @@ func _apply_master_volume(new_volume):
 	sound_level = new_volume
 	AudioServer.set_bus_volume_db(master_bus, sound_level)
 	if sound_level == MIN_SOUND_LEVEL:
-		mute_sound = true
+		AudioServer.set_bus_mute(master_bus, true)
+	else:
+		AudioServer.set_bus_mute(master_bus, false)
 
 func _apply_music_volume(new_volume):
 	music_level = new_volume
 	AudioServer.set_bus_volume_db(music_bus, music_level)
 	if music_level == MIN_MUSIC_LEVEL:
-		mute_music = true
+		AudioServer.set_bus_mute(music_bus, true)
+	else:
+		AudioServer.set_bus_mute(music_bus, false)

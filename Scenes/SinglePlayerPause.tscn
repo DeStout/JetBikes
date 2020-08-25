@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/SinglePlayerPause.gd" type="Script" id=2]
@@ -17,6 +17,18 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 72
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 36
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 24
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 24
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=5]
@@ -53,7 +65,6 @@ __meta__ = {
 }
 
 [node name="ResumeButton" type="Button" parent="BG/Main"]
-visible = false
 margin_left = 64.0
 margin_top = 64.0
 margin_right = 832.0
@@ -65,7 +76,6 @@ __meta__ = {
 }
 
 [node name="OptionsButton" type="Button" parent="BG/Main"]
-visible = false
 margin_left = 64.0
 margin_top = 192.0
 margin_right = 832.0
@@ -88,6 +98,7 @@ __meta__ = {
 }
 
 [node name="Options" type="Control" parent="BG"]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
@@ -102,24 +113,137 @@ text = "Options"
 align = 1
 valign = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="CancelButton" type="Button" parent="BG/Options"]
-anchor_left = 5.8
-anchor_top = 4.2
-anchor_right = 5.8
-anchor_bottom = 4.2
-margin_left = -168.0
-margin_top = 152.0
-margin_right = 600.0
-margin_bottom = 240.0
+[node name="Main" type="Control" parent="BG/Options"]
+margin_top = 133.0
+margin_right = 896.0
+margin_bottom = 197.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="BG/Options/Main"]
+margin_left = 32.0
+margin_top = 8.0
+margin_right = 298.0
+margin_bottom = 58.0
+custom_fonts/font = SubResource( 6 )
+text = "Sound Volume"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slider" type="HSlider" parent="BG/Options/Main"]
+margin_left = 320.0
+margin_top = 8.0
+margin_right = 768.0
+margin_bottom = 56.0
+min_value = -24.0
+max_value = 0.0
+rounded = true
+tick_count = 20
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="LineEdit" parent="BG/Options/Main"]
+margin_left = 782.0
+margin_right = 864.0
+margin_bottom = 64.0
+custom_fonts/font = SubResource( 7 )
+text = "100"
+align = 1
+max_length = 3
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Music" type="Control" parent="BG/Options"]
+margin_top = 213.0
+margin_right = 896.0
+margin_bottom = 309.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="BG/Options/Music"]
+anchor_top = -0.375
+anchor_bottom = -0.375
+margin_left = 32.0
+margin_top = 43.0
+margin_right = 292.0
+margin_bottom = 93.0
+custom_fonts/font = SubResource( 6 )
+text = "Music Volume"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slider" type="HSlider" parent="BG/Options/Music"]
+anchor_top = -0.375
+anchor_bottom = -0.375
+margin_left = 320.0
+margin_top = 43.0
+margin_right = 768.0
+margin_bottom = 91.0
+min_value = -24.0
+max_value = 0.0
+rounded = true
+tick_count = 20
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="LineEdit" parent="BG/Options/Music"]
+anchor_top = -0.375
+anchor_bottom = -0.375
+margin_left = 782.0
+margin_top = 36.0
+margin_right = 864.0
+margin_bottom = 100.0
+custom_fonts/font = SubResource( 8 )
+text = "100"
+align = 1
+max_length = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ApplyButton" type="Button" parent="BG/Options"]
+margin_left = 64.0
+margin_top = 320.0
+margin_right = 432.0
+margin_bottom = 408.0
 custom_fonts/font = SubResource( 5 )
-text = "Cancel"
+text = "Apply"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseButton" type="Button" parent="BG/Options"]
+margin_left = 464.0
+margin_top = 320.0
+margin_right = 832.0
+margin_bottom = 408.0
+custom_fonts/font = SubResource( 5 )
+text = "Close"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="pressed" from="BG/Main/ResumeButton" to="." method="_toggle_pause"]
 [connection signal="pressed" from="BG/Main/OptionsButton" to="." method="_open_options_menu"]
 [connection signal="pressed" from="BG/Main/QuitButton" to="." method="_quit_race"]
-[connection signal="pressed" from="BG/Options/CancelButton" to="." method="_close_options_menu"]
+[connection signal="value_changed" from="BG/Options/Main/Slider" to="." method="_update_main_sound_values"]
+[connection signal="value_changed" from="BG/Options/Music/Slider" to="." method="_update_music_sound_values"]
+[connection signal="pressed" from="BG/Options/ApplyButton" to="." method="_apply_settings"]
+[connection signal="pressed" from="BG/Options/CloseButton" to="." method="_close_options_menu"]

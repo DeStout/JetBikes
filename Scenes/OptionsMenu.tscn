@@ -264,6 +264,7 @@ __meta__ = {
 [connection signal="value_changed" from="Main/Slider" to="." method="_update_main_sound_values"]
 [connection signal="text_entered" from="Main/Level" to="." method="_update_main_sound_values"]
 [connection signal="value_changed" from="Music/Slider" to="." method="_update_music_sound_values"]
+[connection signal="text_entered" from="Music/Level" to="." method="_update_music_sound_values"]
 [connection signal="pressed" from="NPC/NPCIncrease" to="." method="_increase_NPC_amount"]
 [connection signal="pressed" from="NPC/NPCDecrease" to="." method="_decrease_NPC_amount"]
 [connection signal="pressed" from="Buttons/ApplyButton" to="." method="_apply_settings"]
