@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/MenuFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scenes/SinglePlayerMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/OptionsMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/OnlineMenu.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 2 )
@@ -74,7 +75,7 @@ margin_right = 321.0
 margin_bottom = 148.0
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 2 )
-disabled = true
+toggle_mode = true
 text = "Online Multiplayer"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -107,8 +108,12 @@ __meta__ = {
 [node name="SinglePlayerMenu" parent="MenuFrame" instance=ExtResource( 3 )]
 visible = false
 
+[node name="OnlineMenu" parent="MenuFrame" instance=ExtResource( 5 )]
+visible = false
+
 [node name="OptionsMenu" parent="MenuFrame" instance=ExtResource( 4 )]
 visible = false
-[connection signal="pressed" from="MenuFrame/MainFrame/MainPanel/SoloButton" to="." method="_open_solo_player_menu"]
-[connection signal="pressed" from="MenuFrame/MainFrame/MainPanel/OptionsButton" to="." method="_open_options_menu"]
+[connection signal="pressed" from="MenuFrame/MainFrame/MainPanel/SoloButton" to="." method="_toggle_single_player_menu"]
+[connection signal="pressed" from="MenuFrame/MainFrame/MainPanel/OnlineButton" to="." method="_toggle_online_menu"]
+[connection signal="pressed" from="MenuFrame/MainFrame/MainPanel/OptionsButton" to="." method="_toggle_options_menu"]
 [connection signal="pressed" from="MenuFrame/MainFrame/MainPanel/QuitButton" to="." method="_on_QuitButton_pressed"]

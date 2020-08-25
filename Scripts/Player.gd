@@ -241,6 +241,7 @@ func _path_node_distance() -> void:
 	path_node_distance = current_path_node.to_global(path_node_point).distance_to(global_transform.origin)
 
 func update_path_node(var new_path_node : PathNode) -> void:
+	print(new_path_node.serial)
 	if current_path_node.serial == new_path_node.serial:
 		if current_path_node.serial == 0:
 			lap_number += 1

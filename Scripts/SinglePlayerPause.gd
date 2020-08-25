@@ -5,6 +5,14 @@ func _input(event) -> void:
 		if Globals.game.single_player_manager.current_track != null:
 			_toggle_pause()
 
+func _open_options_menu() -> void:
+	$BG/Main.visible = false
+	$BG/Options.visible = true
+	
+func _close_options_menu() -> void:
+	$BG/Main.visible = true
+	$BG/Options.visible = false
+
 func _toggle_pause():
 	if get_tree().paused:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

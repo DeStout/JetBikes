@@ -21,6 +21,7 @@ func _reset_HUD() -> void:
 	$HUD.visible = true
 
 func track_ready() -> void:
+	$MusicPlayer.play()
 	$StartTimer.start()
 	
 func _start_race() -> void:
@@ -38,6 +39,7 @@ func end_race():
 	$PauseMenu.visible = false
 	$StartTimer.stop()
 	$EndTimer.stop()
+	$MusicPlayer.stop()
 	current_track.queue_free()
 	current_track = null
 	Globals.game.return_to_main_menu()

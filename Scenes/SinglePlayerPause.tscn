@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/SinglePlayerPause.gd" type="Script" id=2]
@@ -12,6 +12,14 @@ size = 48
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
+size = 48
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 72
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
 size = 48
 font_data = ExtResource( 1 )
 
@@ -37,7 +45,15 @@ margin_right = 960.0
 margin_bottom = 536.0
 color = Color( 0.156863, 0.156863, 0.156863, 0.784314 )
 
-[node name="ResumeButton" type="Button" parent="BG"]
+[node name="Main" type="Control" parent="BG"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResumeButton" type="Button" parent="BG/Main"]
+visible = false
 margin_left = 64.0
 margin_top = 64.0
 margin_right = 832.0
@@ -48,19 +64,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionsButton" type="Button" parent="BG"]
+[node name="OptionsButton" type="Button" parent="BG/Main"]
+visible = false
 margin_left = 64.0
 margin_top = 192.0
 margin_right = 832.0
 margin_bottom = 280.0
 custom_fonts/font = SubResource( 2 )
-disabled = true
 text = "Options"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="QuitButton" type="Button" parent="BG"]
+[node name="QuitButton" type="Button" parent="BG/Main"]
 margin_left = 64.0
 margin_top = 320.0
 margin_right = 832.0
@@ -70,5 +86,40 @@ text = "Quit Race"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="BG/ResumeButton" to="." method="_toggle_pause"]
-[connection signal="pressed" from="BG/QuitButton" to="." method="_quit_race"]
+
+[node name="Options" type="Control" parent="BG"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionsLabel" type="Label" parent="BG/Options"]
+margin_right = 896.0
+margin_bottom = 128.0
+custom_fonts/font = SubResource( 4 )
+text = "Options"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CancelButton" type="Button" parent="BG/Options"]
+anchor_left = 5.8
+anchor_top = 4.2
+anchor_right = 5.8
+anchor_bottom = 4.2
+margin_left = -168.0
+margin_top = 152.0
+margin_right = 600.0
+margin_bottom = 240.0
+custom_fonts/font = SubResource( 5 )
+text = "Cancel"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="BG/Main/ResumeButton" to="." method="_toggle_pause"]
+[connection signal="pressed" from="BG/Main/OptionsButton" to="." method="_open_options_menu"]
+[connection signal="pressed" from="BG/Main/QuitButton" to="." method="_quit_race"]
+[connection signal="pressed" from="BG/Options/CancelButton" to="." method="_close_options_menu"]

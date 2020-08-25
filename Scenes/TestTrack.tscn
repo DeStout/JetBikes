@@ -496,7 +496,7 @@ next_serial = 16
 [node name="Path" parent="Minimap/Navigation/PathNodes/PathNode15a" index="0"]
 curve = SubResource( 33 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode15a/Area" index="0"]
+[node name="CollisionShape2" type="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode15a/Area" index="0"]
 shape = SubResource( 34 )
 
 [node name="Path" type="Path" parent="Minimap/Navigation/PathNodes/PathNode15a"]
