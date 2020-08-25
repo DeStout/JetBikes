@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://Scenes/ModNode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/TestTrackBase.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Scenes/PathNode.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/PlayersTracker.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Skyboxes/Cold Sunset Equirect.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Music/NoMessingWithUs.wav" type="AudioStream" id=9]
 
 [sub_resource type="PanoramaSky" id=1]
 panorama = ExtResource( 8 )
@@ -258,11 +257,6 @@ extents = Vector3( 91.6966, 13.3308, 147.998 )
 
 [node name="TestTrack" type="Spatial"]
 script = ExtResource( 3 )
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
-volume_db = -15.0
-mix_target = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )

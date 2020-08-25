@@ -7,7 +7,6 @@ var main_menu
 var test_track_ = load("res://Scenes/TestTrack.tscn")
 
 onready var single_player_manager = $SinglePlayerManager
-onready var pause_menu = $PauseMenuCanvas/PauseMenu
 
 func _ready():
 	return_to_main_menu()

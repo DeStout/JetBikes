@@ -60,38 +60,39 @@ func _physics_process(delta : float) -> void:
 	var temp_velocity : Vector3 = velocity
 	temp_velocity.y = 0
 
-	if is_on_ground and has_control:
+	if is_on_ground:
 		var ground_normal : Vector3 = _get_ground_normal()
 
 		# Apply acceleration/deacceleration along player X vector based on input
-		if !is_braking:
-			if movement_input.x != 0:
-				var delta_move : Vector3 = npc_basis[0] * movement_input.x * STRIFE_ACCELERATION
-				var strife_vel : Vector3 = npc_basis[0].dot(temp_velocity) * temp_velocity.normalized()
-				if abs((strife_vel + delta_move).length()) < MAX_STRIFE_VEL:
-					move_direction += delta_move
-			else:
-				move_direction -= npc_basis[0].dot(temp_velocity) * npc_basis[0].normalized() * DEACCELERATION
-
-			# Apply acceleration/deacceleration along player Z vector based on input
-			if movement_input.y > 0:
-				if !is_boosting:
-					var delta_move : Vector3 = npc_basis[2] * -movement_input.y * FORWARD_ACCELERATION
-					var forward_vel : Vector3 = npc_basis[2].dot(temp_velocity) * temp_velocity.normalized()
-					if abs((forward_vel + delta_move).length()) < MAX_FORWARD_VEL:
+		if has_control:
+			if !is_braking:
+				if movement_input.x != 0:
+					var delta_move : Vector3 = npc_basis[0] * movement_input.x * STRIFE_ACCELERATION
+					var strife_vel : Vector3 = npc_basis[0].dot(temp_velocity) * temp_velocity.normalized()
+					if abs((strife_vel + delta_move).length()) < MAX_STRIFE_VEL:
 						move_direction += delta_move
 				else:
-					var delta_move : Vector3 = npc_basis[2] * -movement_input.y * BOOST_ACCELERATION
-					var boost_vel : Vector3 = npc_basis[2].dot(temp_velocity) * temp_velocity.normalized()
-					if abs((boost_vel + delta_move).length()) < MAX_BOOST_VEL:
+					move_direction -= npc_basis[0].dot(temp_velocity) * npc_basis[0].normalized() * DEACCELERATION
+	
+				# Apply acceleration/deacceleration along player Z vector based on input
+				if movement_input.y > 0:
+					if !is_boosting:
+						var delta_move : Vector3 = npc_basis[2] * -movement_input.y * FORWARD_ACCELERATION
+						var forward_vel : Vector3 = npc_basis[2].dot(temp_velocity) * temp_velocity.normalized()
+						if abs((forward_vel + delta_move).length()) < MAX_FORWARD_VEL:
+							move_direction += delta_move
+					else:
+						var delta_move : Vector3 = npc_basis[2] * -movement_input.y * BOOST_ACCELERATION
+						var boost_vel : Vector3 = npc_basis[2].dot(temp_velocity) * temp_velocity.normalized()
+						if abs((boost_vel + delta_move).length()) < MAX_BOOST_VEL:
+							move_direction += delta_move
+				elif movement_input.y < 0:
+					var delta_move : Vector3 = npc_basis[2] * -movement_input.y * REVERSE_ACCELERATION
+					var reverse_vel : Vector3 = npc_basis[2].dot(temp_velocity) * temp_velocity.normalized()
+					if abs((reverse_vel + delta_move).length()) < MAX_REVERSE_VEL:
 						move_direction += delta_move
-			elif movement_input.y < 0:
-				var delta_move : Vector3 = npc_basis[2] * -movement_input.y * REVERSE_ACCELERATION
-				var reverse_vel : Vector3 = npc_basis[2].dot(temp_velocity) * temp_velocity.normalized()
-				if abs((reverse_vel + delta_move).length()) < MAX_REVERSE_VEL:
-					move_direction += delta_move
-			else:
-				move_direction -= npc_basis[2].dot(temp_velocity) * npc_basis[2] * DEACCELERATION
+				else:
+					move_direction -= npc_basis[2].dot(temp_velocity) * npc_basis[2] * DEACCELERATION
 
 		# Align player Y vector to ground normal
 		_aim()

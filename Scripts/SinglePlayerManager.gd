@@ -20,9 +20,6 @@ func _reset_HUD() -> void:
 	$HUD/LapLabel.text = ("Lap: -/" + str(Globals.laps_number))
 	$HUD.visible = true
 
-func toggle_pause() -> void:
-	get_tree().pause
-
 func track_ready() -> void:
 	$StartTimer.start()
 	

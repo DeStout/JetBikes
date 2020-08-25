@@ -245,7 +245,6 @@ func update_path_node(var new_path_node : PathNode) -> void:
 		if current_path_node.serial == 0:
 			lap_number += 1
 			if lap_number > Globals.laps_number:
-				print("Good job buddy")
 				Globals.game.single_player_manager.finish_race()
 			Globals.game.single_player_manager.set_player_lap(lap_number)
 		if typeof(path_nodes[new_path_node.next_serial]) == TYPE_ARRAY:

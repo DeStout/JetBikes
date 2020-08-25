@@ -5,8 +5,6 @@ var player = load("res://Scenes/Player.tscn")
 var players : Array
 var path_nodes_size : int
 
-signal race_finished
-
 func _ready() -> void:
 	if Globals.NPC_number != 0:
 		npc = load("res://Scenes/NPC.tscn")
@@ -27,8 +25,8 @@ func _spawn_players():
 		for NPC_num in range(Globals.NPC_number):
 			var new_NPC = npc.instance()
 			new_NPC.name = "NPC" + str(NPC_num + 1)
-			add_child(new_NPC)
 			new_NPC.global_transform.origin = get_node("PlayerSpawn"+str(NPC_num+1)).global_transform.origin
+			add_child(new_NPC)
 			get_node("PlayerSpawn"+str(NPC_num+1)).free()
 	
 	for spawn in range(Globals.NPC_number+1, 13):

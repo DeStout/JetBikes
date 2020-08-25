@@ -2,8 +2,8 @@
 
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/MenuFont.tres" type="DynamicFont" id=2]
-[ext_resource path="res://Assets/Images/LeftTriangle.bmp" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/RightTriangle.bmp" type="Texture" id=4]
+[ext_resource path="res://Scenes/SinglePlayerMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/OptionsMenu.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 2 )
@@ -62,6 +62,7 @@ margin_right = 321.0
 margin_bottom = 51.0
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 2 )
+toggle_mode = true
 text = "Single Player"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -85,7 +86,7 @@ margin_right = 321.0
 margin_bottom = 245.0
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 2 )
-disabled = true
+toggle_mode = true
 text = "Options"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -103,197 +104,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SinglePlayerFrame" type="ColorRect" parent="MenuFrame"]
+[node name="SinglePlayerMenu" parent="MenuFrame" instance=ExtResource( 3 )]
 visible = false
-margin_left = 480.0
-margin_top = 32.0
-margin_right = 864.0
-margin_bottom = 440.0
-color = Color( 0.25098, 0.25098, 0.25098, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Laps" type="Control" parent="MenuFrame/SinglePlayerFrame"]
-margin_left = 32.0
-margin_top = 16.0
-margin_right = 352.0
-margin_bottom = 104.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NumLapsLabel" type="Label" parent="MenuFrame/SinglePlayerFrame/Laps"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 313.0
-margin_bottom = 52.0
-size_flags_vertical = 0
-text = "Number of laps:"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NumLapsAmount" type="Label" parent="MenuFrame/SinglePlayerFrame/Laps"]
-margin_left = 128.0
-margin_top = 48.0
-margin_right = 192.0
-margin_bottom = 93.0
-size_flags_vertical = 0
-text = "1"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LapIncrease" type="Button" parent="MenuFrame/SinglePlayerFrame/Laps"]
-margin_left = 176.0
-margin_top = 56.0
-margin_right = 216.0
-margin_bottom = 88.0
-focus_mode = 0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-shortcut_in_tooltip = false
-action_mode = 0
-enabled_focus_mode = 0
-icon = ExtResource( 4 )
-flat = true
-expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LapDecrease" type="Button" parent="MenuFrame/SinglePlayerFrame/Laps"]
-margin_left = 104.0
-margin_top = 56.0
-margin_right = 144.0
-margin_bottom = 88.0
-focus_mode = 0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-shortcut_in_tooltip = false
-action_mode = 0
-enabled_focus_mode = 0
-icon = ExtResource( 3 )
-flat = true
-expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NPC" type="Control" parent="MenuFrame/SinglePlayerFrame"]
-margin_left = 32.0
-margin_top = 128.0
-margin_right = 352.0
-margin_bottom = 224.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NumNPC" type="Label" parent="MenuFrame/SinglePlayerFrame/NPC"]
-margin_top = -16.0
-margin_right = 320.0
-margin_bottom = 29.0
-size_flags_vertical = 0
-text = "Number of AI:"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NumNPCAmount" type="Label" parent="MenuFrame/SinglePlayerFrame/NPC"]
-margin_left = 128.0
-margin_top = 24.0
-margin_right = 192.0
-margin_bottom = 69.0
-size_flags_vertical = 0
-text = "0"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NPCDecrease" type="Button" parent="MenuFrame/SinglePlayerFrame/NPC"]
-margin_left = 104.0
-margin_top = 32.0
-margin_right = 144.0
-margin_bottom = 64.0
-focus_mode = 0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-shortcut_in_tooltip = false
-action_mode = 0
-enabled_focus_mode = 0
-icon = ExtResource( 3 )
-flat = true
-expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NPCIncrease" type="Button" parent="MenuFrame/SinglePlayerFrame/NPC"]
-margin_left = 176.0
-margin_top = 32.0
-margin_right = 216.0
-margin_bottom = 64.0
-focus_mode = 0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-shortcut_in_tooltip = false
-action_mode = 0
-enabled_focus_mode = 0
-icon = ExtResource( 4 )
-flat = true
-expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Buttons" type="GridContainer" parent="MenuFrame/SinglePlayerFrame"]
-margin_left = 32.0
-margin_top = 264.0
-margin_right = 352.0
-margin_bottom = 374.0
-custom_constants/vseparation = 8
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RaceButton" type="Button" parent="MenuFrame/SinglePlayerFrame/Buttons"]
-margin_right = 320.0
-margin_bottom = 51.0
-size_flags_horizontal = 3
-size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
-shortcut_in_tooltip = false
-action_mode = 0
-text = "Race"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CancelButton" type="Button" parent="MenuFrame/SinglePlayerFrame/Buttons"]
-margin_top = 59.0
-margin_right = 320.0
-margin_bottom = 110.0
-size_flags_horizontal = 3
-size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
-shortcut_in_tooltip = false
-action_mode = 0
-text = "Cancel"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-[connection signal="pressed" from="MenuFrame/MainFrame/MainPanel/SoloButton" to="." method="_on_SoloButton_pressed"]
+[node name="OptionsMenu" parent="MenuFrame" instance=ExtResource( 4 )]
+visible = false
+[connection signal="pressed" from="MenuFrame/MainFrame/MainPanel/SoloButton" to="." method="_open_solo_player_menu"]
+[connection signal="pressed" from="MenuFrame/MainFrame/MainPanel/OptionsButton" to="." method="_open_options_menu"]
 [connection signal="pressed" from="MenuFrame/MainFrame/MainPanel/QuitButton" to="." method="_on_QuitButton_pressed"]
-[connection signal="pressed" from="MenuFrame/SinglePlayerFrame/Laps/LapIncrease" to="." method="_on_LapIncrease_pressed"]
-[connection signal="pressed" from="MenuFrame/SinglePlayerFrame/Laps/LapDecrease" to="." method="_on_LapDecrease_pressed"]
-[connection signal="pressed" from="MenuFrame/SinglePlayerFrame/NPC/NPCDecrease" to="." method="_on_NPCDecrease_pressed"]
-[connection signal="pressed" from="MenuFrame/SinglePlayerFrame/NPC/NPCIncrease" to="." method="_on_NPCIncrease_pressed"]
-[connection signal="pressed" from="MenuFrame/SinglePlayerFrame/Buttons/RaceButton" to="." method="_on_Solo_RaceButton_pressed"]
-[connection signal="pressed" from="MenuFrame/SinglePlayerFrame/Buttons/CancelButton" to="." method="_on_Solo_CancelButton_pressed"]
