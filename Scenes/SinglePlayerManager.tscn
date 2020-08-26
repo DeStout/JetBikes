@@ -23,6 +23,7 @@ wait_time = 5.0
 one_shot = true
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
 stream = ExtResource( 4 )
 bus = "Music"
 [connection signal="timeout" from="StartTimer" to="." method="_start_race"]

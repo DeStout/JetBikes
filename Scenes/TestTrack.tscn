@@ -152,7 +152,7 @@ extents = Vector3( 27.106, 7.89502, 1 )
 
 [sub_resource type="Curve3D" id=33]
 _data = {
-"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -29.5742, 0, 0, 0, 0, 0, 0, 0, 0, 29.5742, 0, 0 ),
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -21.1024, 0, 0, 0, 0, 0, 0, 0, 0, 21.1024, 0, 0 ),
 "tilts": PoolRealArray( 0, 0 )
 }
 
@@ -288,6 +288,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 71.754, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.28389, 88.7441, -166.966 )
 visible = false
 function = 1
+serial = 0
 next_serial = 1
 route = -1
 
@@ -300,6 +301,7 @@ shape = SubResource( 5 )
 [node name="PathNode1" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.932115, 0, 0.362162, 0, 1, 0, -0.362162, 0, 0.932115, -60.4097, 25.118, -350.921 )
 visible = false
+function = 0
 serial = 1
 next_serial = 2
 route = -1
@@ -314,6 +316,7 @@ shape = SubResource( 7 )
 [node name="PathNode2" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.778429, 0, 0.627732, 0, 1, 0, -0.627732, 0, 0.778429, -145.646, -1.52588e-05, -509.824 )
 visible = false
+function = 0
 serial = 2
 next_serial = 3
 route = -1
@@ -328,6 +331,7 @@ shape = SubResource( 9 )
 [node name="PathNode3" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.114783, 0.00473698, 0.993379, -0.0358534, 0.999357, -0.000622697, -0.992743, -0.0355446, 0.114879, -280.055, -11.9118, -594.985 )
 visible = false
+function = 0
 serial = 3
 next_serial = 4
 route = -1
@@ -342,6 +346,7 @@ shape = SubResource( 11 )
 [node name="PathNode4" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( -0.52302, -0.0322825, 0.851709, -0.061606, 0.998101, 1.85911e-09, -0.850091, -0.0524703, -0.524016, -504.781, -22.5633, -578.145 )
 visible = false
+function = 0
 serial = 4
 next_serial = 5
 route = -1
@@ -355,6 +360,7 @@ shape = SubResource( 13 )
 [node name="PathNode5" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.999899, 0.0141891, 0, -0.0141891, 0.999899, 0, 0, 0, 1, -555.006, -15.5745, -446.755 )
 visible = false
+function = 0
 serial = 5
 next_serial = 6
 route = -1
@@ -368,6 +374,7 @@ shape = SubResource( 15 )
 [node name="PathNode6" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.996926, -0.0783547, 0, 0.0783547, 0.996926, 0, 0, 0, 1, -553.419, 21.1651, -257.407 )
 visible = false
+function = 0
 serial = 6
 next_serial = 7
 route = -1
@@ -381,6 +388,7 @@ shape = SubResource( 17 )
 [node name="PathNode7" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -552.741, 21.9307, -46.6721 )
 visible = false
+function = 0
 serial = 7
 next_serial = 8
 route = -1
@@ -394,6 +402,7 @@ shape = SubResource( 19 )
 [node name="PathNode8" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( -0.933757, -0.354701, 0.0478037, -0.355107, 0.934826, -1.32288e-09, -0.0446881, -0.0169754, -0.998857, -422.268, 51.7999, -75.6565 )
 visible = false
+function = 0
 serial = 8
 next_serial = 9
 route = -1
@@ -404,6 +413,7 @@ curve = SubResource( 20 )
 [node name="PathNode9" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.979353, 0.0754431, -0.187553, -0.076806, 0.997046, 0, 0.186999, 0.0144052, 0.982255, -450.916, 78.4881, -334.107 )
 visible = false
+function = 0
 serial = 9
 next_serial = 10
 route = -1
@@ -421,6 +431,7 @@ shape = SubResource( 22 )
 [node name="PathNode10" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( -0.433866, 0.0212256, 0.900727, 0.180555, 0.981491, 0.0638416, -0.882701, 0.190329, -0.429668, -369.455, 85.2126, -431.252 )
 visible = false
+function = 0
 serial = 10
 next_serial = 11
 route = -1
@@ -435,6 +446,7 @@ shape = SubResource( 24 )
 [node name="PathNode11" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.727751, -0.0180909, 0.685602, 0.0248509, 0.999691, 0, -0.685391, 0.0170379, 0.727976, -248.909, 93.2618, -385.21 )
 visible = false
+function = 0
 serial = 11
 next_serial = 12
 route = -1
@@ -463,6 +475,7 @@ shape = SubResource( 28 )
 [node name="PathNode13" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.470246, -0.011895, -0.882455, 0.0252871, 0.99968, 0, 0.882173, -0.0223148, 0.470396, -250.901, 39.8693, 145.994 )
 visible = false
+function = 0
 serial = 13
 next_serial = 14
 route = -1
@@ -477,6 +490,7 @@ shape = SubResource( 30 )
 [node name="PathNode14" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.999258, 0.0385099, 0, -0.0385099, 0.999258, 0, 0, 0, 1, -365.746, 30.1963, 228.194 )
 visible = false
+function = 0
 serial = 14
 next_serial = 15
 route = -1
@@ -490,6 +504,7 @@ shape = SubResource( 32 )
 [node name="PathNode15a" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.468946, -0.0166054, 0.88307, 0.0353879, 0.999374, -2.48059e-10, -0.882517, 0.03125, 0.46924, -246.547, 44.3746, 308.903 )
 visible = false
+function = 0
 serial = 15
 next_serial = 16
 
@@ -505,6 +520,7 @@ curve = SubResource( 35 )
 [node name="PathNode15b" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.679914, -0.00938719, 0.733232, 0.0138051, 0.999905, 9.31234e-10, -0.733162, 0.0101223, 0.679979, -283.559, 42.4717, 358.966 )
 visible = false
+function = 0
 serial = 15
 next_serial = 16
 route = 1
@@ -518,6 +534,7 @@ shape = SubResource( 37 )
 [node name="PathNode16a" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.447612, 0.0243515, 0.893896, -0.0543228, 0.998523, -3.47884e-09, -0.892576, -0.048559, 0.448274, -146.048, 51.4148, 370.129 )
 visible = false
+function = 0
 serial = 16
 next_serial = 17
 
@@ -530,6 +547,7 @@ shape = SubResource( 39 )
 [node name="PathNode16b" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.395577, 0, 0.918433, 0, 1, 0, -0.918433, 0, 0.395577, -181.892, 90.1677, 431.316 )
 visible = false
+function = 0
 serial = 16
 next_serial = 17
 route = 1
@@ -543,6 +561,7 @@ shape = SubResource( 41 )
 [node name="PathNode17a" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( -0.173568, -0.0135382, 0.984729, -0.0777631, 0.996972, 0, -0.981747, -0.0765756, -0.174095, -49.6094, 57.6719, 382.506 )
 visible = false
+function = 0
 serial = 17
 next_serial = 18
 
@@ -555,6 +574,7 @@ shape = SubResource( 43 )
 [node name="PathNode17b" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( -0.78188, 0, 0.623429, 0, 1, 0, -0.623429, 0, -0.78188, -40.4517, 99.6053, 387.56 )
 visible = false
+function = 0
 serial = 17
 next_serial = 18
 route = 1
@@ -568,6 +588,7 @@ shape = SubResource( 45 )
 [node name="PathNode18a" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( -0.986686, -0.0619733, 0.150364, -0.062686, 0.998033, -1.54519e-09, -0.150068, -0.0094257, -0.988631, 89.1442, 75.811, 262.397 )
 visible = false
+function = 0
 serial = 18
 next_serial = 19
 
@@ -580,6 +601,7 @@ shape = SubResource( 47 )
 [node name="PathNode18b2" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( -0.947294, 0, 0.320365, 0, 1, 0, -0.320365, 0, -0.947294, 25.4886, 108.421, 247.773 )
 visible = false
+function = 0
 serial = 18
 next_serial = 19
 route = 1
@@ -593,6 +615,7 @@ shape = SubResource( 49 )
 [node name="PathNode19" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( -0.989337, 0.0805387, -0.121349, 0.0811383, 0.996703, 0, 0.120949, -0.00984608, -0.99261, 45.6784, 100.103, 115.696 )
 visible = false
+function = 0
 serial = 19
 next_serial = 20
 route = -1
@@ -606,7 +629,9 @@ shape = SubResource( 51 )
 [node name="PathNode20" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 79.2816, 22.4189 )
 visible = false
+function = 0
 serial = 20
+next_serial = 0
 route = -1
 
 [node name="Path" parent="Minimap/Navigation/PathNodes/PathNode20" index="0"]
