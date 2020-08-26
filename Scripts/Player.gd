@@ -29,7 +29,7 @@ var mouse_horz_sensitivity : float  = 0.1
 var mouse_vert_invert : int = 1
 var mouse_horz_invert : int = -1
 
-onready var RotationHelper : Spatial = $BasicVehicle/RotationHelper
+onready var RotationHelper : Spatial = $TestVehicle/RotationHelper
 
 var ground_point : Vector3
 var prev_ground_distance : float = 0

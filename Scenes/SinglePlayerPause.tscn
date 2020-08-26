@@ -19,8 +19,12 @@ font_data = ExtResource( 1 )
 size = 72
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=9]
 size = 36
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 24
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=7]
@@ -28,10 +32,6 @@ size = 24
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=8]
-size = 24
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=5]
 size = 48
 font_data = ExtResource( 1 )
 
@@ -130,7 +130,7 @@ margin_left = 32.0
 margin_top = 8.0
 margin_right = 298.0
 margin_bottom = 58.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 9 )
 text = "Sound Volume"
 align = 1
 valign = 1
@@ -156,7 +156,7 @@ __meta__ = {
 margin_left = 782.0
 margin_right = 864.0
 margin_bottom = 64.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 text = "100"
 align = 1
 max_length = 3
@@ -180,7 +180,7 @@ margin_left = 32.0
 margin_top = 43.0
 margin_right = 292.0
 margin_bottom = 93.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 9 )
 text = "Music Volume"
 align = 1
 valign = 1
@@ -211,7 +211,7 @@ margin_left = 782.0
 margin_top = 36.0
 margin_right = 864.0
 margin_bottom = 100.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 text = "100"
 align = 1
 max_length = 3
@@ -224,7 +224,7 @@ margin_left = 64.0
 margin_top = 320.0
 margin_right = 432.0
 margin_bottom = 408.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 8 )
 text = "Apply"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -235,7 +235,7 @@ margin_left = 464.0
 margin_top = 320.0
 margin_right = 832.0
 margin_bottom = 408.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 8 )
 text = "Close"
 __meta__ = {
 "_edit_use_anchors_": false
