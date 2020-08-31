@@ -11,7 +11,7 @@ const MIN_NPC_NUMBER : int = 0
 const MAX_NPC_NUMBER : int = 11
 
 const DEFAULT_SOUND_LEVEL : int = 0
-const DEFAULT_MUSIC_LEVEL : int = 0
+const DEFAULT_MUSIC_LEVEL : int = -24
 const MAX_SOUND_LEVEL : int = 0
 const MAX_MUSIC_LEVEL : int = 0
 const MIN_SOUND_LEVEL : int = -24
@@ -29,6 +29,9 @@ var sound_level : int = DEFAULT_SOUND_LEVEL setget _apply_master_volume
 var music_level : int = DEFAULT_MUSIC_LEVEL setget _apply_music_volume
 var mute_sound : bool = false
 var mute_music : bool = false
+
+func _ready():
+	_apply_music_volume(MIN_SOUND_LEVEL)
 
 func _apply_master_volume(new_volume):
 	sound_level = new_volume

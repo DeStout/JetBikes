@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=1]
 
@@ -13,6 +13,12 @@ font_data = ExtResource( 1 )
 [sub_resource type="DynamicFont" id=3]
 size = 96
 font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.776471, 0.254902, 0.254902, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.615686, 0.701961, 0.423529, 1 )
 
 [node name="HUD" type="Control"]
 anchor_right = 1.0
@@ -55,6 +61,36 @@ grow_vertical = 2
 custom_fonts/font = SubResource( 3 )
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BoostBar" type="ProgressBar" parent="."]
+margin_left = 64.0
+margin_top = 512.0
+margin_right = 192.0
+margin_bottom = 528.0
+custom_styles/fg = SubResource( 4 )
+max_value = 250.0
+step = 1.0
+value = 125.0
+rounded = true
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpeedBar" type="ProgressBar" parent="."]
+margin_left = 32.0
+margin_top = 536.0
+margin_right = 408.0
+margin_bottom = 566.0
+custom_styles/fg = SubResource( 5 )
+max_value = 120.0
+step = 1.0
+value = 60.0
+allow_greater = true
+percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }

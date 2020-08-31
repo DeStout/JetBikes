@@ -10,6 +10,8 @@ const DEACCELERATION : float  = 0.025
 const BRAKE_DEACCEL : float  = 0.75
 const AIR_BRAKE_DEACCEL : float  = 0.5
 
+const MAX_SPEED : int = 120
+const MAX_BOOST : int = 250
 const MAX_FORWARD_VEL : int = 60
 const MAX_STRIFE_VEL : int = 35
 const MAX_REVERSE_VEL : int =  50
@@ -17,7 +19,9 @@ const MAX_BOOST_VEL : int = 80
 const TURN_SPEED : int = 8
 
 var movement_input : Vector2 = Vector2.ZERO
-var velocity: Vector3 = Vector3.ZERO
+var velocity : Vector3 = Vector3.ZERO
+var boost : float = 125
+var boost_cost : float = -0.5
 
 var has_control : bool = false
 var is_boosting : bool = false
@@ -87,7 +91,7 @@ func _physics_process(delta : float) -> void:
 					var boost_vel : Vector3 = player_basis[2].dot(temp_velocity) * temp_velocity.normalized()
 					if abs((boost_vel + delta_move).length()) < MAX_BOOST_VEL:
 						move_direction += delta_move
-			elif movement_input.y < 0:
+					_set_boost(boost_cost)
 				var delta_move : Vector3 = player_basis[2] * -movement_input.y * REVERSE_ACCELERATION
 				var reverse_vel : Vector3 = player_basis[2].dot(temp_velocity) * temp_velocity.normalized()
 				if abs((reverse_vel + delta_move).length()) < MAX_REVERSE_VEL:
@@ -130,8 +134,9 @@ func _physics_process(delta : float) -> void:
 		else:
 			velocity.x = _interpolate_float(velocity.x, 0, AIR_BRAKE_DEACCEL)
 			velocity.z = _interpolate_float(velocity.z, 0, AIR_BRAKE_DEACCEL)
-		
+	
 	velocity = move_and_slide(velocity, Vector3(0,1,0))
+	_set_speedometer()
 	
 	is_on_ground = false
 
@@ -150,10 +155,11 @@ func _get_key_input() -> void:
 		if Input.is_action_pressed("Reverse"):
 			movement_input.y -= 1
 			
-		if Input.is_action_pressed("Boost"):
-			is_boosting = true
 		if Input.is_action_pressed("Brake"):
 			is_braking = true
+		else:
+			if Input.is_action_pressed("Boost"):
+				is_boosting = true
 
 func _input(event):
 	# Rotate the camera based on mouse movement
@@ -209,6 +215,18 @@ func _get_cast_point() -> Vector3:
 	
 	return (cast_point1 + cast_point2) * 0.5 - Vector3(0, 1.1, 0)
 
+func _set_speedometer() -> void:
+	var _y_vector : Vector3 = -global_transform.basis[1]
+	var _y_velocity = Vector3(0, velocity.z, 0)
+	_y_velocity = _y_vector.dot(_y_velocity)
+	var modified_velocity : Vector3 = Vector3(velocity.x, _y_velocity, velocity.z)
+	Globals.game.single_player_manager.set_speedometer(clamp(modified_velocity.length(), 0, MAX_SPEED))
+
+func _set_boost(var delta : float) -> void:
+	boost += delta
+	clamp(boost, 0, MAX_BOOST)
+	Globals.game.single_player_manager.set_boost(boost)
+
 func _setup_path_nodes() -> Array:
 	var path_nodes_array = []
 	var i : int = 0
@@ -242,6 +260,7 @@ func _path_node_distance() -> void:
 
 func update_path_node(var new_path_node : PathNode) -> void:
 	if current_path_node.serial == new_path_node.serial:
+		_set_boost(new_path_node.boost_value)
 		if current_path_node.serial == 0:
 			lap_number += 1
 			if lap_number > Globals.laps_number:

@@ -51,3 +51,9 @@ func set_player_placement(new_placement : int) -> void:
 func set_player_lap(new_lap_number : int) -> void:
 	if current_track.race_on_going:
 		$HUD/LapLabel.text = ("Lap: " + str(new_lap_number) + "/" + str(Globals.laps_number))
+		
+func set_speedometer(new_speed : float) -> void:
+	$HUD/SpeedBar.value = new_speed
+
+func set_boost(new_boost : float) -> void:
+	$HUD/BoostBar.value = new_boost

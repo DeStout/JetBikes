@@ -5,9 +5,10 @@ extends Spatial
 enum FUNCTION {DEFAULT, NO_PATHFIND}
 export(FUNCTION) var function = FUNCTION.DEFAULT
 
-export var serial = 0 setget _set_next_serial
-export var next_serial = 0
-export var route = -1
+export var serial : int = 0 setget _set_next_serial
+export var next_serial : int = 0
+export var route : int = -1
+export var boost_value : int = 25
 
 onready var draw : ImmediateGeometry = $ImmediateGeometry
 onready var path : Path = $Path
