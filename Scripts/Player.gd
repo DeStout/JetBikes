@@ -21,7 +21,7 @@ const TURN_SPEED : int = 8
 var movement_input : Vector2 = Vector2.ZERO
 var velocity : Vector3 = Vector3.ZERO
 var boost : float = 125
-var boost_cost : float = -0.5
+var boost_cost : float = -0.8
 
 var has_control : bool = false
 var is_boosting : bool = false
@@ -41,13 +41,9 @@ var prev_ground_distance : float = 0
 var lap_number : int = 0
 var placement : int = 0
 
-onready var path_nodes : Array = get_parent().get_parent().get_node("Minimap/Navigation/PathNodes").get_children()
+var path_nodes : Array
 var current_path_node : PathNode
 var path_node_distance : float
-
-func _ready() -> void:
-	path_nodes = _setup_path_nodes()
-	current_path_node = path_nodes[0]
 
 func _process(delta : float) -> void:
 	_get_key_input()
@@ -81,17 +77,17 @@ func _physics_process(delta : float) -> void:
 				
 			# Apply acceleration/deacceleration along player Z vector based on input
 			if movement_input.y > 0:
-				if !is_boosting:
-					var delta_move : Vector3 = player_basis[2] * -movement_input.y * FORWARD_ACCELERATION
-					var forward_vel : Vector3 = player_basis[2].dot(temp_velocity) * temp_velocity.normalized()
-					if abs((forward_vel + delta_move).length()) < MAX_FORWARD_VEL:
-						move_direction += delta_move
-				else:
+				if is_boosting and boost > 0:
 					var delta_move : Vector3 = player_basis[2] * -movement_input.y * BOOST_ACCELERATION
 					var boost_vel : Vector3 = player_basis[2].dot(temp_velocity) * temp_velocity.normalized()
 					if abs((boost_vel + delta_move).length()) < MAX_BOOST_VEL:
 						move_direction += delta_move
 					_set_boost(boost_cost)
+				else:
+					var delta_move : Vector3 = player_basis[2] * -movement_input.y * FORWARD_ACCELERATION
+					var forward_vel : Vector3 = player_basis[2].dot(temp_velocity) * temp_velocity.normalized()
+					if abs((forward_vel + delta_move).length()) < MAX_FORWARD_VEL:
+						move_direction += delta_move
 				var delta_move : Vector3 = player_basis[2] * -movement_input.y * REVERSE_ACCELERATION
 				var reverse_vel : Vector3 = player_basis[2].dot(temp_velocity) * temp_velocity.normalized()
 				if abs((reverse_vel + delta_move).length()) < MAX_REVERSE_VEL:
@@ -226,26 +222,6 @@ func _set_boost(var delta : float) -> void:
 	boost += delta
 	clamp(boost, 0, MAX_BOOST)
 	Globals.game.single_player_manager.set_boost(boost)
-
-func _setup_path_nodes() -> Array:
-	var path_nodes_array = []
-	var i : int = 0
-	var j : int = 1
-	while i + j <= path_nodes.size():
-		var temp_array = []
-		while i + j <= path_nodes.size() - 1:
-			if path_nodes[i].serial != path_nodes[i + j].serial:
-				break;
-			j += 1
-		if j > 1:
-			for k in range(j):
-				temp_array.append(path_nodes[k+i])
-			path_nodes_array.append(temp_array)
-		else:
-			path_nodes_array.append(path_nodes[i])
-		i += j
-		j = 1
-	return path_nodes_array
 	
 func start_race() -> void:
 	has_control = true
@@ -254,9 +230,10 @@ func finish_race() -> void:
 	has_control = false
 	
 func _path_node_distance() -> void:
-	var npc_to_path_node_local : Vector3 = current_path_node.to_local(global_transform.origin)
-	var path_node_point : Vector3 = current_path_node.path.curve.get_closest_point(npc_to_path_node_local)
-	path_node_distance = current_path_node.to_global(path_node_point).distance_to(global_transform.origin)
+	if Globals.game.single_player_manager.current_track.is_processing():
+		var npc_to_path_node_local : Vector3 = current_path_node.to_local(global_transform.origin)
+		var path_node_point : Vector3 = current_path_node.path.curve.get_closest_point(npc_to_path_node_local)
+		path_node_distance = current_path_node.to_global(path_node_point).distance_to(global_transform.origin)
 
 func update_path_node(var new_path_node : PathNode) -> void:
 	if current_path_node.serial == new_path_node.serial:

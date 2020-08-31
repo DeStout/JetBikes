@@ -709,6 +709,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 77.815, 10 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 77.815, 10 )
 
 [node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn12"]
+[connection signal="ready" from="." to="Players" method="set_player_path_nodes"]
+[connection signal="ready" from="Minimap/Navigation/PathNodes" to="." method="_setup_pathnodes"]
 
 [editable path="Minimap/Navigation/PathNodes/PathNode0"]
 

@@ -31,7 +31,7 @@ var mute_sound : bool = false
 var mute_music : bool = false
 
 func _ready():
-	_apply_music_volume(MIN_SOUND_LEVEL)
+	_apply_music_volume(MIN_SOUND_LEVEL + 1)
 
 func _apply_master_volume(new_volume):
 	sound_level = new_volume

@@ -1,5 +1,7 @@
 extends Spatial
 
+var path_nodes : Array
+
 var race_on_going : bool = false
 
 func _ready() -> void:
@@ -9,6 +11,27 @@ func _ready() -> void:
 		for player in $Players.players:
 			if player is NPC:
 				add_child(player.draw_path)
+
+func _setup_pathnodes():
+	path_nodes = $Minimap/Navigation/PathNodes.get_children()
+	var path_nodes_array = []
+	var i : int = 0
+	var j : int = 1
+	while i + j <= path_nodes.size():
+		var temp_array = []
+		while i + j <= path_nodes.size() - 1:
+			if path_nodes[i].serial != path_nodes[i + j].serial:
+				break;
+			j += 1
+		if j > 1:
+			for k in range(j):
+				temp_array.append(path_nodes[k+i])
+			path_nodes_array.append(temp_array)
+		else:
+			path_nodes_array.append(path_nodes[i])
+		i += j
+		j = 1
+	path_nodes = path_nodes_array
 
 func start_race() -> void:
 	race_on_going = true

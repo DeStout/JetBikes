@@ -12,7 +12,7 @@ func _ready() -> void:
 	players = get_children()
 	
 func _process(delta : float) -> void:
-	if Globals.game.single_player_manager.current_track != null:
+	if Globals.game.single_player_manager.current_track.is_processing():
 		players.sort_custom(self, "_sort_placement")
 		_alert_players()
 		
@@ -77,3 +77,7 @@ func _sort_placement(player1 : KinematicBody, player2 : KinematicBody) -> bool:
 
 func update_HUD_lap(var new_lap_number : int) -> void:
 	Globals.game.single_player_manager.set_player_lap(new_lap_number)
+
+func set_player_path_nodes():
+	player.path_nodes = Globals.game.single_player_manager.current_track.path_nodes
+	player.current_path_node = player.path_nodes[0]
