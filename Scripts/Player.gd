@@ -21,7 +21,7 @@ const TURN_SPEED : int = 8
 var movement_input : Vector2 = Vector2.ZERO
 var velocity : Vector3 = Vector3.ZERO
 var boost : float = 125
-var boost_cost : float = -0.8
+var boost_cost : float = -1.0
 
 var has_control : bool = false
 var is_boosting : bool = false
@@ -220,8 +220,9 @@ func _set_speedometer() -> void:
 
 func _set_boost(var delta : float) -> void:
 	boost += delta
-	clamp(boost, 0, MAX_BOOST)
+	boost = clamp(boost, 0, MAX_BOOST)
 	Globals.game.single_player_manager.set_boost(boost)
+	print("Boost: " + str(boost))
 	
 func start_race() -> void:
 	has_control = true
