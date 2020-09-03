@@ -21,7 +21,7 @@ const TURN_SPEED : int = 8
 var movement_input : Vector2 = Vector2.ZERO
 var velocity : Vector3 = Vector3.ZERO
 var boost : float = 125
-var boost_cost : float = -1.0
+var boost_cost : float = -1.5
 
 var has_control : bool = false
 var is_boosting : bool = false
@@ -222,7 +222,6 @@ func _set_boost(var delta : float) -> void:
 	boost += delta
 	boost = clamp(boost, 0, MAX_BOOST)
 	Globals.game.single_player_manager.set_boost(boost)
-	print("Boost: " + str(boost))
 	
 func start_race() -> void:
 	has_control = true
@@ -231,7 +230,7 @@ func finish_race() -> void:
 	has_control = false
 	
 func _path_node_distance() -> void:
-	if Globals.game.single_player_manager.current_track.is_processing():
+	if Globals.game.single_player_manager.current_track != null:
 		var npc_to_path_node_local : Vector3 = current_path_node.to_local(global_transform.origin)
 		var path_node_point : Vector3 = current_path_node.path.curve.get_closest_point(npc_to_path_node_local)
 		path_node_distance = current_path_node.to_global(path_node_point).distance_to(global_transform.origin)

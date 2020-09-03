@@ -690,7 +690,7 @@ function = 1
 [node name="CollisionShape" parent="Minimap/Navigation/ModNodes/Pathfind_Mod2" index="0"]
 shape = SubResource( 56 )
 
-[node name="Camera" type="Camera" parent="Minimap"]
+[node name="MinimapCamera" type="Camera" parent="Minimap"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -200, 147.789, -100 )
 projection = 1
 size = 1434.79

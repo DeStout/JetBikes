@@ -1,11 +1,14 @@
 extends Spatial
 
 var path_nodes : Array
+onready var minimap : Viewport = $Minimap
+onready var minimap_camera : Camera = $Minimap/MinimapCamera
 
 var race_on_going : bool = false
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Globals.game.single_player_manager.setup_minimap(minimap.get_texture(), minimap_camera, $Players.players)
 	
 	if Globals.SHOW_NPC_PATHFIND:
 		for player in $Players.players:

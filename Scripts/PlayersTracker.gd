@@ -12,7 +12,7 @@ func _ready() -> void:
 	players = get_children()
 	
 func _process(delta : float) -> void:
-	if Globals.game.single_player_manager.current_track.is_processing():
+	if Globals.game.single_player_manager.current_track != null:
 		players.sort_custom(self, "_sort_placement")
 		_alert_players()
 		

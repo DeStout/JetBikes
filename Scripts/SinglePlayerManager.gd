@@ -57,3 +57,8 @@ func set_speedometer(new_speed : float) -> void:
 
 func set_boost(new_boost : float) -> void:
 	$HUD/BoostBar.value = new_boost
+
+func setup_minimap(new_minimap : Texture, new_minimap_camera : Camera, new_players : Array) -> void:
+	$HUD/MinimapContainer/Minimap.texture = new_minimap
+	$HUD/MinimapContainer/Minimap.minimap_camera = new_minimap_camera
+	$HUD/MinimapContainer/Minimap.players = new_players

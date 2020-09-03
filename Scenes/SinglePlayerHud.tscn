@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scripts/Minimap.gd" type="Script" id=2]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -94,3 +95,16 @@ percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MinimapContainer" type="CenterContainer" parent="."]
+margin_left = 800.0
+margin_right = 1056.0
+margin_bottom = 256.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Minimap" type="Sprite" parent="MinimapContainer"]
+centered = false
+flip_v = true
+script = ExtResource( 2 )
