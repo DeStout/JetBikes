@@ -11,16 +11,16 @@ func setup_race(var new_track) -> void:
 	current_track.connect("ready", self, "track_ready")
 	add_child(current_track)
 	
-	_reset_HUD()
-	
 func _reset_HUD() -> void:
 	$HUD/RaceNotice.text = ""
 	$HUD/RaceNotice.visible = true
 	$HUD/PlaceLabel.text = ""
 	$HUD/LapLabel.text = ("Lap: -/" + str(Globals.laps_number))
+	$HUD/BoostBar.value = current_track.get_node("Players").player.boost
 	$HUD.visible = true
 
 func track_ready() -> void:
+	_reset_HUD()
 	$MusicPlayer.play()
 	$StartTimer.start()
 	

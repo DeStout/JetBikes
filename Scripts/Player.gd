@@ -16,7 +16,7 @@ const MAX_FORWARD_VEL : int = 60
 const MAX_STRIFE_VEL : int = 35
 const MAX_REVERSE_VEL : int =  50
 const MAX_BOOST_VEL : int = 80
-const TURN_SPEED : int = 8
+const TURN_SPEED : int = 6
 
 var movement_input : Vector2 = Vector2.ZERO
 var velocity : Vector3 = Vector3.ZERO
@@ -169,6 +169,9 @@ func _input(event):
 			helper_rotation.y = clamp(helper_rotation.y, -30, 30)
 			helper_rotation.z = 0
 			RotationHelper.rotation_degrees = helper_rotation
+			
+			rotate_object_local(Vector3(0, 0, 1), deg2rad(helper_rotation.y * 0.1))
+			RotationHelper.rotate_z(deg2rad(helper_rotation.y * 0.1))
 
 # Turn the character and correct the camera if the camera has been rotated	
 func _move_camera(var delta : float) -> void:

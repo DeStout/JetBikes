@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/GroundDetect.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/TestVehicle.tscn" type="PackedScene" id=4]
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 1, 0.654902, 0, 1 )
 
 [sub_resource type="CapsuleShape" id=2]
@@ -16,13 +16,13 @@ script = ExtResource( 2 )
 
 [node name="TestVehicle" parent="." instance=ExtResource( 4 )]
 transform = Transform( -0.3, 0, -1.16824e-07, 0, 0.3, 0, 1.16824e-07, 0, -0.3, 0, 2.36328, -1.10013 )
-material/0 = SubResource( 3 )
+material/0 = SubResource( 1 )
 
 [node name="RotationHelper" type="Spatial" parent="TestVehicle"]
 transform = Transform( 3.33333, 0, -2.11911e-07, 0, 3.33333, 0, 2.11911e-07, 0, 3.33333, 1.42802e-06, -2.54428, -3.66709 )
 
 [node name="Camera" type="Camera" parent="TestVehicle/RotationHelper"]
-transform = Transform( -1, -8.17108e-08, 3.15429e-07, 0, 0.968047, 0.250769, -3.25841e-07, 0.250769, -0.968047, 1.31542e-06, 2.60131, -4.03701 )
+transform = Transform( -1, -8.17109e-08, 3.1543e-07, 0, 0.968048, 0.250769, -3.25841e-07, 0.250769, -0.968048, 1.76784e-06, 2.96099, -5.42548 )
 visible = false
 current = true
 fov = 90.0
