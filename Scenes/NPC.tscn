@@ -1,26 +1,27 @@
 [gd_scene load_steps=6 format=2]
 
+[ext_resource path="res://Scenes/Vehicle1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/NPC.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/GroundDetect.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/TestVehicle.tscn" type="PackedScene" id=4]
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=1]
+params_cull_mode = 2
 albedo_color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="CapsuleShape" id=2]
+[sub_resource type="CapsuleShape" id=3]
 radius = 0.739985
 height = 1.65191
 
 [node name="NPC" type="KinematicBody"]
 script = ExtResource( 2 )
 
-[node name="TestVehicle" parent="." instance=ExtResource( 4 )]
-transform = Transform( -0.3, 0, -1.16824e-07, 0, 0.3, 0, 1.16824e-07, 0, -0.3, 0, 2.36461, -1.22313 )
-material/0 = SubResource( 3 )
+[node name="Engine" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.814, 0, -1.22911e-07, 0, 0.814, 0, 1.22911e-07, 0, -0.814, 0, 1.887, 0.044 )
+material/0 = SubResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="GroundDetect1" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, -0.75 )

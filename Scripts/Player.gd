@@ -33,7 +33,7 @@ var mouse_horz_sensitivity : float  = 0.1
 var mouse_vert_invert : int = 1
 var mouse_horz_invert : int = -1
 
-onready var RotationHelper : Spatial = $TestVehicle/RotationHelper
+onready var RotationHelper : Spatial = $Vehicle1/RotationHelper
 
 var ground_point : Vector3
 var prev_ground_distance : float = 0
@@ -170,8 +170,8 @@ func _input(event):
 			helper_rotation.z = 0
 			RotationHelper.rotation_degrees = helper_rotation
 			
-			rotate_object_local(Vector3(0, 0, 1), deg2rad(helper_rotation.y * 0.1))
-			RotationHelper.rotate_z(deg2rad(helper_rotation.y * 0.1))
+			var velocity_ratio = clamp(velocity.length() / MAX_FORWARD_VEL, 0.0, 1.0)
+			rotate_object_local(Vector3(0, 0, 1), deg2rad(helper_rotation.y * 0.06 * velocity_ratio))
 
 # Turn the character and correct the camera if the camera has been rotated	
 func _move_camera(var delta : float) -> void:
