@@ -2,26 +2,26 @@ class_name NPC
 extends KinematicBody
 
 const GRAVITY : float = 1.5
-const FORWARD_ACCELERATION : float  = 0.75
-const STRIFE_ACCELERATION : float  = 0.5
-const REVERSE_ACCELERATION : float  = 0.5
-const BOOST_ACCELERATION : float  = 1.0
+const FORWARD_ACCELERATION : float  = 0.85
+const STRIFE_ACCELERATION : float  = 0.65
+const REVERSE_ACCELERATION : float  = 0.65
+const BOOST_ACCELERATION : float  = 1.1
 const DEACCELERATION : float  = 0.025
-const BRAKE_DEACCEL : float  = 0.75
+const BRAKE_DEACCEL : float  = 1.5
 const AIR_BRAKE_DEACCEL : float  = 0.5
 
-const MAX_FORWARD_VEL : int = 60
-const MAX_STRIFE_VEL : int = 35
-const MAX_REVERSE_VEL : int =  50
-const MAX_BOOST_VEL : int = 80
-const TURN_SPEED : int = 8
+const MAX_FORWARD_VEL : int = 90
+const MAX_STRIFE_VEL : int = 50
+const MAX_REVERSE_VEL : int =  75
+const MAX_BOOST_VEL : int = 120
+const TURN_SPEED : int = 6
 
 var movement_input : Vector2 = Vector2.ZERO
 var velocity: Vector3 = Vector3.ZERO
 
 var has_control: bool = false
 var is_boosting : bool = false
-var is_braking : bool = false
+var is_braking : bool = true
 var is_on_ground : bool = false
 
 var prev_ground_distance : float = 0
@@ -50,7 +50,8 @@ func _process(_delta):
 		is_braking = true
 	else:
 		movement_input = Vector2(0, 1)
-		is_braking = false
+		if has_control:
+			is_braking = false
 	_path_point_distance()
 	_path_node_distance()
 	

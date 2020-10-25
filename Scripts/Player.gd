@@ -2,20 +2,20 @@ class_name Player
 extends KinematicBody
 
 const GRAVITY : float = 1.5
-const FORWARD_ACCELERATION : float  = 0.75
-const STRIFE_ACCELERATION : float  = 0.5
-const REVERSE_ACCELERATION : float  = 0.5
-const BOOST_ACCELERATION : float  = 1.0
+const FORWARD_ACCELERATION : float  = 0.85
+const STRIFE_ACCELERATION : float  = 0.65
+const REVERSE_ACCELERATION : float  = 0.65
+const BOOST_ACCELERATION : float  = 1.1
 const DEACCELERATION : float  = 0.025
-const BRAKE_DEACCEL : float  = 0.75
+const BRAKE_DEACCEL : float  = 1.5
 const AIR_BRAKE_DEACCEL : float  = 0.5
 
 const MAX_SPEED : int = 120
 const MAX_BOOST : int = 250
-const MAX_FORWARD_VEL : int = 60
-const MAX_STRIFE_VEL : int = 35
-const MAX_REVERSE_VEL : int =  50
-const MAX_BOOST_VEL : int = 80
+const MAX_FORWARD_VEL : int = 90
+const MAX_STRIFE_VEL : int = 50
+const MAX_REVERSE_VEL : int =  75
+const MAX_BOOST_VEL : int = 120
 const TURN_SPEED : int = 6
 
 var movement_input : Vector2 = Vector2.ZERO
@@ -25,7 +25,7 @@ var boost_cost : float = -1.5
 
 var has_control : bool = false
 var is_boosting : bool = false
-var is_braking : bool = false
+var is_braking : bool = true
 var is_on_ground : bool = false
 
 var mouse_vert_sensitivity : float = 0.1
@@ -88,6 +88,7 @@ func _physics_process(delta : float) -> void:
 					var forward_vel : Vector3 = player_basis[2].dot(temp_velocity) * temp_velocity.normalized()
 					if abs((forward_vel + delta_move).length()) < MAX_FORWARD_VEL:
 						move_direction += delta_move
+			elif movement_input.y < 0:
 				var delta_move : Vector3 = player_basis[2] * -movement_input.y * REVERSE_ACCELERATION
 				var reverse_vel : Vector3 = player_basis[2].dot(temp_velocity) * temp_velocity.normalized()
 				if abs((reverse_vel + delta_move).length()) < MAX_REVERSE_VEL:
@@ -112,7 +113,7 @@ func _physics_process(delta : float) -> void:
 		move_force = clamp(move_force, -11, 11)
 		
 		move_direction += ground_normal * move_force * 1.1
-		move_direction += downhill * -GRAVITY * 0.25
+		move_direction += downhill * -GRAVITY * 0.1
 		
 		prev_ground_distance = ground_distance
 		
@@ -140,7 +141,8 @@ func _physics_process(delta : float) -> void:
 func _get_key_input() -> void:
 	movement_input = Vector2.ZERO
 	is_boosting = false
-	is_braking = false
+	if has_control:
+		is_braking = false
 	if has_control:
 		if Input.is_action_pressed("Accelerate"):
 			movement_input.y += 1
@@ -171,7 +173,7 @@ func _input(event):
 			RotationHelper.rotation_degrees = helper_rotation
 			
 			var velocity_ratio = clamp(velocity.length() / MAX_FORWARD_VEL, 0.0, 1.0)
-			rotate_object_local(Vector3(0, 0, 1), deg2rad(helper_rotation.y * 0.06 * velocity_ratio))
+			rotate_object_local(Vector3(0, 0, 1), deg2rad(helper_rotation.y * 0.04 * velocity_ratio))
 
 # Turn the character and correct the camera if the camera has been rotated	
 func _move_camera(var delta : float) -> void:

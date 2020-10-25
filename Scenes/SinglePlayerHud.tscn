@@ -29,12 +29,13 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [ 800.0 ]
 }
 
 [node name="PlaceLabel" type="Label" parent="."]
-margin_left = 448.0
-margin_right = 576.0
+margin_left = 736.0
+margin_right = 864.0
 margin_bottom = 128.0
 custom_fonts/font = SubResource( 1 )
 align = 1
@@ -55,7 +56,7 @@ __meta__ = {
 }
 
 [node name="RaceNotice" type="Label" parent="."]
-margin_right = 1024.0
+margin_right = 1600.0
 margin_bottom = 448.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -67,10 +68,10 @@ __meta__ = {
 }
 
 [node name="BoostBar" type="ProgressBar" parent="."]
-margin_left = 64.0
-margin_top = 512.0
-margin_right = 192.0
-margin_bottom = 528.0
+margin_left = 96.0
+margin_top = 776.0
+margin_right = 224.0
+margin_bottom = 792.0
 custom_styles/fg = SubResource( 4 )
 max_value = 250.0
 step = 1.0
@@ -82,10 +83,10 @@ __meta__ = {
 }
 
 [node name="SpeedBar" type="ProgressBar" parent="."]
-margin_left = 32.0
-margin_top = 536.0
-margin_right = 408.0
-margin_bottom = 566.0
+margin_left = 64.0
+margin_top = 800.0
+margin_right = 440.0
+margin_bottom = 830.0
 custom_styles/fg = SubResource( 5 )
 max_value = 120.0
 step = 1.0
@@ -97,8 +98,8 @@ __meta__ = {
 }
 
 [node name="MinimapContainer" type="CenterContainer" parent="."]
-margin_left = 800.0
-margin_right = 1056.0
+margin_left = 1344.0
+margin_right = 1600.0
 margin_bottom = 256.0
 __meta__ = {
 "_edit_use_anchors_": false

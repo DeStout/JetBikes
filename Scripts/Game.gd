@@ -4,7 +4,7 @@ extends Node
 var main_menu_ = load("res://Scenes/MainMenu.tscn")
 var main_menu
 
-var test_track_ = load("res://Scenes/TestTrack.tscn")
+var test_track_ = load("res://Scenes/TestTerrain.tscn")
 
 onready var single_player_manager = $SinglePlayerManager
 
