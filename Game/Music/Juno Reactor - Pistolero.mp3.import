@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Juno Reactor - Pistolero.mp3-c01f1c407e8361e93405f76c5a0d09cf.mp3str"
+
+[deps]
+
+source_file="res://Game/Music/Juno Reactor - Pistolero.mp3"
+dest_files=[ "res://.import/Juno Reactor - Pistolero.mp3-c01f1c407e8361e93405f76c5a0d09cf.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

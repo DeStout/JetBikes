@@ -1,0 +1,18 @@
+[remap]
+
+importer="hterrain_packed_texture_importer"
+type="StreamTexture"
+path.s3tc="res://.import/TestTerrain2Base_slot2_albedo_bump.packed_tex-067076ece347cd5d235608ddd4055266.s3tc.stex"
+path.etc2="res://.import/TestTerrain2Base_slot2_albedo_bump.packed_tex-067076ece347cd5d235608ddd4055266.etc2.stex"
+
+[deps]
+
+source_file="res://Levels/TestTerrain2/Assets/Materials/TestTerrain2Base_slot2_albedo_bump.packed_tex"
+dest_files=[ "res://.import/TestTerrain2Base_slot2_albedo_bump.packed_tex-067076ece347cd5d235608ddd4055266.s3tc.stex", "res://.import/TestTerrain2Base_slot2_albedo_bump.packed_tex-067076ece347cd5d235608ddd4055266.etc2.stex" ]
+
+[params]
+
+compress/mode=2
+flags/repeat=1
+flags/filter=true
+flags/mipmaps=true

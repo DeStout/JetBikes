@@ -1,0 +1,66 @@
+Godot Engine v3.3.2.stable.official - https://godotengine.org
+OpenGL ES 3.0 Renderer: GeForce GTX 980 Ti/PCIe/SSE2
+OpenGL ES Batching: ON
+ 
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:744:set_bus_volume_db() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:795:set_bus_mute() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**WARNING**: BaseButton's Enabled Focus Mode property has been deprecated due to redundancy and will be removed in Godot 4.0. Please use Control.set_focus_mode instead.
+   At: scene/gui/base_button.cpp:329:set_enabled_focus_mode() - This method has been deprecated and will be removed in the future.
+adjusttttt
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:744:set_bus_volume_db() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:795:set_bus_mute() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:744:set_bus_volume_db() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:795:set_bus_mute() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+adjusttttt
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:744:set_bus_volume_db() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:795:set_bus_mute() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:744:set_bus_volume_db() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:795:set_bus_mute() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+adjusttttt
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:744:set_bus_volume_db() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:795:set_bus_mute() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:744:set_bus_volume_db() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:795:set_bus_mute() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+adjusttttt
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:744:set_bus_volume_db() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:795:set_bus_mute() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:744:set_bus_volume_db() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:795:set_bus_mute() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+adjusttttt
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:744:set_bus_volume_db() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:795:set_bus_mute() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:744:set_bus_volume_db() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:795:set_bus_mute() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+adjusttttt
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:744:set_bus_volume_db() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:795:set_bus_mute() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:744:set_bus_volume_db() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**ERROR**: Index p_bus = -1 is out of bounds (buses.size() = 1).
+   At: servers/audio_server.cpp:795:set_bus_mute() - Index p_bus = -1 is out of bounds (buses.size() = 1).
+**WARNING**: ObjectDB instances leaked at exit (run with --verbose for details).
+   At: core/object.cpp:2132:cleanup() - ObjectDB instances leaked at exit (run with --verbose for details).

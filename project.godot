@@ -9,127 +9,93 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Spatial",
-"class": "Checkpoint",
-"language": "GDScript",
-"path": "res://Scripts/Checkpoint.gd"
-}, {
 "base": "Node",
 "class": "Game",
 "language": "GDScript",
-"path": "res://Scripts/Game.gd"
+"path": "res://Game/Scripts/Game.gd"
+}, {
+"base": "ResourceFormatLoader",
+"class": "HTerrainDataLoader",
+"language": "GDScript",
+"path": "res://addons/zylann.hterrain/hterrain_resource_loader.gd"
+}, {
+"base": "ResourceFormatSaver",
+"class": "HTerrainDataSaver",
+"language": "GDScript",
+"path": "res://addons/zylann.hterrain/hterrain_resource_saver.gd"
 }, {
 "base": "Area",
 "class": "ModNode",
 "language": "GDScript",
-"path": "res://Scripts/ModNode.gd"
+"path": "res://Levels/General/Scripts/ModNode.gd"
 }, {
 "base": "KinematicBody",
 "class": "NPC",
 "language": "GDScript",
-"path": "res://Scripts/NPC.gd"
+"path": "res://Racers/Scripts/NPC.gd"
 }, {
 "base": "Spatial",
 "class": "PathNode",
 "language": "GDScript",
-"path": "res://Scripts/PathNode.gd"
+"path": "res://Levels/General/Scripts/PathNode.gd"
 }, {
 "base": "KinematicBody",
 "class": "Player",
 "language": "GDScript",
-"path": "res://Scripts/Player.gd"
+"path": "res://Racers/Scripts/Player.gd"
+}, {
+"base": "Spatial",
+"class": "SwingPole",
+"language": "GDScript",
+"path": "res://Levels/General/Scripts/SwingPole.gd"
+}, {
+"base": "Spatial",
+"class": "TrackBasic",
+"language": "GDScript",
+"path": "res://Levels/General/Scripts/Track.gd"
 } ]
 _global_script_class_icons={
-"Checkpoint": "",
 "Game": "",
+"HTerrainDataLoader": "",
+"HTerrainDataSaver": "",
 "ModNode": "",
 "NPC": "",
 "PathNode": "",
-"Player": ""
+"Player": "",
+"SwingPole": "",
+"TrackBasic": ""
 }
 
 [application]
 
 config/name="JetBikes"
-run/main_scene="res://Scenes/Game.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://Game/Scenes/Game.tscn"
 
 [autoload]
 
-Globals="*res://Scripts/Globals.gd"
+Globals="*res://Game/Scripts/Globals.gd"
 
 [display]
 
 window/size/width=1600
-window/size/height=900
+window/size/height=938
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/zylann.hterrain/plugin.cfg" )
 
 [input]
 
-ui_accept={
-"deadzone": 0.5,
-"events": [  ]
-}
-ui_select={
-"deadzone": 0.5,
-"events": [  ]
-}
-ui_cancel={
-"deadzone": 0.5,
-"events": [  ]
-}
-ui_focus_next={
-"deadzone": 0.5,
-"events": [  ]
-}
-ui_focus_prev={
-"deadzone": 0.5,
-"events": [  ]
-}
-ui_left={
-"deadzone": 0.5,
-"events": [  ]
-}
-ui_right={
-"deadzone": 0.5,
-"events": [  ]
-}
-ui_up={
-"deadzone": 0.5,
-"events": [  ]
-}
-ui_down={
-"deadzone": 0.5,
-"events": [  ]
-}
-ui_page_up={
-"deadzone": 0.5,
-"events": [  ]
-}
-ui_page_down={
-"deadzone": 0.5,
-"events": [  ]
-}
-ui_home={
-"deadzone": 0.5,
-"events": [  ]
-}
-ui_end={
-"deadzone": 0.5,
-"events": [  ]
-}
 Accelerate={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
  ]
 }
-Boost={
+Reverse={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"unicode":0,"echo":false,"script":null)
- ]
-}
-Brake={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777238,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
  ]
 }
 Strife_Left={
@@ -142,9 +108,14 @@ Strife_Right={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
  ]
 }
-Reverse={
+Brake={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777238,"unicode":0,"echo":false,"script":null)
+ ]
+}
+Boost={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"unicode":0,"echo":false,"script":null)
  ]
 }
 Pause={
@@ -153,6 +124,11 @@ Pause={
  ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Racers"
+3d_physics/layer_2="LevelGeo"
+
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+quality/filters/msaa=4

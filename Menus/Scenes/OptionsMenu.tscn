@@ -1,0 +1,192 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Menus/Scripts/OptionsMenu.gd" type="Script" id=1]
+[ext_resource path="res://Game/Fonts/MenuFont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Game/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 28
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 24
+font_data = ExtResource( 5 )
+
+[node name="OptionsMenu" type="ColorRect"]
+margin_left = 480.0
+margin_top = 32.0
+margin_right = 864.0
+margin_bottom = 504.0
+color = Color( 0.25098, 0.25098, 0.25098, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionsLabel" type="Label" parent="."]
+margin_right = 384.0
+margin_bottom = 96.0
+custom_fonts/font = SubResource( 1 )
+text = "Options"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SFX" type="Control" parent="."]
+margin_top = 103.0
+margin_right = 384.0
+margin_bottom = 199.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="SFX"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_right = -120.0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 2 )
+text = "SFX Volume"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slider" type="HSlider" parent="SFX"]
+margin_left = 32.0
+margin_top = 49.0
+margin_right = 264.0
+margin_bottom = 65.0
+min_value = -24.0
+max_value = 0.0
+value = -24.0
+rounded = true
+allow_greater = true
+allow_lesser = true
+tick_count = 10
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="LineEdit" parent="SFX"]
+margin_left = 272.0
+margin_top = 33.0
+margin_right = 354.0
+margin_bottom = 77.0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 3 )
+text = "100"
+align = 1
+max_length = 3
+context_menu_enabled = false
+shortcut_keys_enabled = false
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Music" type="Control" parent="."]
+margin_top = 179.0
+margin_right = 384.0
+margin_bottom = 275.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Music"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_right = -120.0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 2 )
+text = "Music Volume"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slider" type="HSlider" parent="Music"]
+margin_left = 32.0
+margin_top = 49.0
+margin_right = 264.0
+margin_bottom = 65.0
+min_value = -48.0
+max_value = -12.0
+value = -48.0
+rounded = true
+allow_greater = true
+allow_lesser = true
+tick_count = 10
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="LineEdit" parent="Music"]
+margin_left = 272.0
+margin_top = 33.0
+margin_right = 354.0
+margin_bottom = 77.0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 3 )
+text = "100"
+align = 1
+max_length = 3
+context_menu_enabled = false
+shortcut_keys_enabled = false
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="GridContainer" parent="."]
+margin_left = 32.0
+margin_top = 328.0
+margin_right = 352.0
+margin_bottom = 438.0
+custom_constants/vseparation = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ApplyButton" type="Button" parent="Buttons"]
+margin_right = 320.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 4 )
+shortcut_in_tooltip = false
+action_mode = 0
+text = "Apply"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CancelButton" type="Button" parent="Buttons"]
+margin_top = 59.0
+margin_right = 320.0
+margin_bottom = 110.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 4 )
+shortcut_in_tooltip = false
+action_mode = 0
+text = "Cancel"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="value_changed" from="SFX/Slider" to="." method="_update_sfx_sound_values"]
+[connection signal="text_entered" from="SFX/Level" to="." method="_update_sfx_sound_values"]
+[connection signal="value_changed" from="Music/Slider" to="." method="_update_music_sound_values"]
+[connection signal="text_entered" from="Music/Level" to="." method="_update_music_sound_values"]
+[connection signal="pressed" from="Buttons/ApplyButton" to="." method="_apply_settings"]

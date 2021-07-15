@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/565598__c-v__diesel-idle-1.wav-d1d9a475b1ef7f416f12663a18de3a52.sample"
+
+[deps]
+
+source_file="res://Racers/SFX/565598__c-v__diesel-idle-1.wav"
+dest_files=[ "res://.import/565598__c-v__diesel-idle-1.wav-d1d9a475b1ef7f416f12663a18de3a52.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=1

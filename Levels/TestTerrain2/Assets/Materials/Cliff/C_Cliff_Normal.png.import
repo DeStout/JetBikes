@@ -1,0 +1,36 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path.s3tc="res://.import/C_Cliff_Normal.png-2002148affe82bd4ff96396f2616c146.s3tc.stex"
+path.etc2="res://.import/C_Cliff_Normal.png-2002148affe82bd4ff96396f2616c146.etc2.stex"
+metadata={
+"imported_formats": [ "s3tc", "etc2" ],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://Levels/TestTerrain2/Assets/Materials/Cliff/C_Cliff_Normal.png"
+dest_files=[ "res://.import/C_Cliff_Normal.png-2002148affe82bd4ff96396f2616c146.s3tc.stex", "res://.import/C_Cliff_Normal.png-2002148affe82bd4ff96396f2616c146.etc2.stex" ]
+
+[params]
+
+compress/mode=2
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=1
+flags/repeat=true
+flags/filter=true
+flags/mipmaps=true
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0
