@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Arrow.glb-f76a8c7fdaf74354569cdd33e2c89ea9.scn"
+path="res://.import/BasicVehicle.glb-855f6bc3528d043410ad1266c13c02dd.scn"
 
 [deps]
 
-source_file="res://Racers/Models/Arrow.glb"
-dest_files=[ "res://.import/Arrow.glb-f76a8c7fdaf74354569cdd33e2c89ea9.scn" ]
+source_file="res://Racers/Assets/Models/BasicVehicle.glb"
+dest_files=[ "res://.import/BasicVehicle.glb-855f6bc3528d043410ad1266c13c02dd.scn" ]
 
 [params]
 
@@ -16,7 +16,7 @@ nodes/root_name="Scene Root"
 nodes/root_scale=1.0
 nodes/custom_script=""
 nodes/storage=0
-nodes/use_legacy_names=false
+nodes/use_legacy_names=true
 materials/location=1
 materials/storage=1
 materials/keep_on_reimport=true

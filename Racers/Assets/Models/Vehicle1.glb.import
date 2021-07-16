@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Rider.glb-96e451bc7d467445e4783db8fbabc985.scn"
+path="res://.import/Vehicle1.glb-61aa2c0831a356a316ceb7e63a95ca08.scn"
 
 [deps]
 
-source_file="res://Racers/Models/Rider.glb"
-dest_files=[ "res://.import/Rider.glb-96e451bc7d467445e4783db8fbabc985.scn" ]
+source_file="res://Racers/Assets/Models/Vehicle1.glb"
+dest_files=[ "res://.import/Vehicle1.glb-61aa2c0831a356a316ceb7e63a95ca08.scn" ]
 
 [params]
 
@@ -16,7 +16,7 @@ nodes/root_name="Scene Root"
 nodes/root_scale=1.0
 nodes/custom_script=""
 nodes/storage=0
-nodes/use_legacy_names=false
+nodes/use_legacy_names=true
 materials/location=1
 materials/storage=1
 materials/keep_on_reimport=true

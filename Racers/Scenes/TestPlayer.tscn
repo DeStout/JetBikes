@@ -5,3 +5,6 @@
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 6 )
+
+[node name="Vehicle1" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )

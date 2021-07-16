@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Levels/General/Scripts/SwingPole.gd" type="Script" id=1]
-
-[sub_resource type="SpatialMaterial" id=2]
+[ext_resource path="res://Levels/TestTerrain/Assets/Sounds/Buzzing.wav" type="AudioStream" id=2]
 
 [sub_resource type="SpatialMaterial" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
 flags_transparent = true
 flags_do_not_receive_shadows = true
 params_cull_mode = 2
@@ -17,11 +18,20 @@ script = ExtResource( 1 )
 use_collision = true
 radius = 0.5
 height = 10.0
-material = SubResource( 2 )
+material = SubResource( 1 )
 
 [node name="Sphere" type="CSGSphere" parent="."]
 transform = Transform( 1, 1.39698e-09, -1.74623e-10, 0, 1, 0, -1.16415e-10, 0, 1, 0, 0, 0 )
 radius = 16.0
 radial_segments = 15
 rings = 15
-material = SubResource( 1 )
+material = SubResource( 2 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 2 )
+unit_db = -5.192
+unit_size = 50.0
+max_db = 0.0
+autoplay = true
+bus = "Level_SFX"
+doppler_tracking = 2

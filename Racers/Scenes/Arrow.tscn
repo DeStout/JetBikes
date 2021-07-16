@@ -33,7 +33,7 @@ omni_range = 6.47125
 
 [node name="OmniLight3" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.97345, 1.24986, 4.1046 )
-light_color = Color( 1, 0.913725, 0, 1 )
+light_color = Color( 1, 0.796078, 0, 1 )
 omni_range = 6.47125
 
 [node name="Camera" type="Camera" parent="."]

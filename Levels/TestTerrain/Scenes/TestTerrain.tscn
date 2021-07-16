@@ -204,7 +204,7 @@ shadow_color = Color( 0.0392157, 0.121569, 0.203922, 1 )
 directional_shadow_max_distance = 1000.0
 
 [node name="Minimap" type="Viewport" parent="."]
-size = Vector2( 256, 256 )
+size = Vector2( 484, 484 )
 transparent_bg = true
 
 [node name="MinimapCamera" type="Camera" parent="Minimap"]
@@ -523,48 +523,61 @@ shape = SubResource( 41 )
 
 [node name="SwingPole0" parent="Minimap/Navigation/SwingPoles" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 323.235, -26.7453, -206.785 )
+sphere_visible = false
 swing_length = 60.0
 swing_strength = 0.07
 
 [node name="SwingPole1" parent="Minimap/Navigation/SwingPoles" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 227.699, 12.0645, 200.164 )
+sphere_visible = false
 swing_length = 65.0
 swing_strength = 0.07
 
 [node name="SwingPole2" parent="Minimap/Navigation/SwingPoles" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44.5702, 46.6516, 208.114 )
+sphere_visible = false
 swing_length = 45.0
 swing_strength = 0.05
 
 [node name="SwingPole3" parent="Minimap/Navigation/SwingPoles" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -97.9669, 96.1228, 265.799 )
+sphere_visible = false
 swing_length = 40.0
 swing_strength = 0.08
 
 [node name="SwingPole4" parent="Minimap/Navigation/SwingPoles" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -352.436, 89.6377, 361.599 )
+sphere_visible = false
 swing_length = 50.0
 swing_strength = 0.08
 
 [node name="SwingPole5" parent="Minimap/Navigation/SwingPoles" instance=ExtResource( 9 )]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -346.879, 97.746, -305.892 )
+sphere_visible = false
 swing_length = 30.0
 swing_strength = 0.11
 
 [node name="SwingPole6" parent="Minimap/Navigation/SwingPoles" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.3702, 24.9587, -387.356 )
+sphere_visible = false
 swing_length = 35.0
 swing_strength = 0.09
 
 [node name="SwingPole7" parent="Minimap/Navigation/SwingPoles" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -282.088, 103.296, -347.838 )
+sphere_visible = false
 swing_length = 35.0
 swing_strength = 0.09
 
 [node name="SwingPole8" parent="Minimap/Navigation/SwingPoles" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -104.098, 23.8046, -32.0923 )
+sphere_visible = false
 swing_length = 60.0
 swing_strength = 0.08
+
+[node name="Sphere" parent="Minimap/Navigation/SwingPoles/SwingPole8" index="1"]
+visible = false
+radius = 60.0
 
 [node name="Players" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -653,3 +666,4 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -58.874
 [connection signal="body_exited" from="Minimap/Navigation/ModNodes/Mod_Node3" to="Minimap/Navigation/ModNodes/Mod_Node3" method="_on_body_exited"]
 
 [editable path="Minimap/Navigation/ModNodes/Mod_Node"]
+[editable path="Minimap/Navigation/SwingPoles/SwingPole8"]

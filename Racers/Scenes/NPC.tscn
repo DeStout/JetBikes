@@ -100,5 +100,7 @@ one_shot = true
 [node name="VisibilityTimer" type="Timer" parent="."]
 wait_time = 0.2
 
+[connection signal="is_colliding" from="GroundDetect1" to="." method="_is_on_ground"]
+[connection signal="is_colliding" from="GroundDetect2" to="." method="_is_on_ground"]
 [connection signal="timeout" from="CrashTimer" to="." method="_crash"]
 [connection signal="timeout" from="VisibilityTimer" to="." method="_on_VisibilityTimer_timeout"]

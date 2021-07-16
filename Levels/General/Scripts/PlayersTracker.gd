@@ -40,6 +40,7 @@ func setup_players(track_navigation, path_nodes, swing_poles):
 	player.path_nodes = path_nodes
 	player.swing_poles = swing_poles
 	player.current_path_node = path_nodes[0]
+	player.HUD.get_node("Debug").visible = Globals.SHOW_DEBUG_PANEL
 	
 	for npc_temp in players:
 		if npc_temp is NPC:

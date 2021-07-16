@@ -2,17 +2,17 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Vehicle1.glb-c1a37a4e141cdb1edeaabe6ab024c414.scn"
+path="res://.import/TestVehicle1.glb-edbd75e3706e5035675dde374b60d78d.scn"
 
 [deps]
 
-source_file="res://Racers/Models/Vehicle1.glb"
-dest_files=[ "res://.import/Vehicle1.glb-c1a37a4e141cdb1edeaabe6ab024c414.scn" ]
+source_file="res://Racers/Assets/Models/TestVehicle1.glb"
+dest_files=[ "res://.import/TestVehicle1.glb-edbd75e3706e5035675dde374b60d78d.scn" ]
 
 [params]
 
-nodes/root_type="Spatial"
-nodes/root_name="Scene Root"
+nodes/root_type="MeshInstance"
+nodes/root_name="Vehicle"
 nodes/root_scale=1.0
 nodes/custom_script=""
 nodes/storage=0

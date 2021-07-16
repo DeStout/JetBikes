@@ -77,8 +77,9 @@ Globals="*res://Game/Scripts/Globals.gd"
 
 [display]
 
-window/size/width=1600
-window/size/height=938
+window/size/width=2560
+window/size/height=1440
+window/size/fullscreen=true
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 

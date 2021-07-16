@@ -27,6 +27,12 @@ const MAX_CAM_FOV : float = 65.0
 const MIN_CAM_DIST : float = 7.0
 const MAX_CAM_DIST : float = 15.0
 
+const MOUSE_VERT_SENSITIVITY : float = 0.1
+const MOUSE_HORZ_SENSITIVITY : float  = 0.1
+
+const FREE_ROTATE_VERT_SENSITIVITY : float = 0.05
+const FREE_ROTATE_HORZ_SENSITIVITY : float = 0.05
+
 var movement_input : Vector2 = Vector2.ZERO
 var velocity : Vector3 = Vector3.ZERO
 var prev_velocity : Vector3 = Vector3.ZERO
@@ -41,10 +47,9 @@ var is_boosting : bool = false
 var is_braking : bool = true
 var is_on_ground : bool = false
 var is_swinging : bool = false
+var is_free_rotating : bool = false
 var is_crashed : bool = false
 
-var mouse_vert_sensitivity : float = 0.1
-var mouse_horz_sensitivity : float  = 0.1
 var mouse_vert_invert : int = 1
 var mouse_horz_invert : int = -1
 
@@ -130,28 +135,33 @@ func _physics_process(delta : float) -> void:
 		ground_point = _get_ground_point()
 		
 		var ground_distance : float = clamp(cast_point.length() - ground_point.length(), \
-			($GroundDetect1.cast_to.length() - 0.1) * -0.499, \
-			($GroundDetect1.cast_to.length() - 0.1) * 0.499)
+			($KinematicCollisionShape/GroundDetect1.cast_to.length() - 0.1) * -0.499, \
+			($KinematicCollisionShape/GroundDetect1.cast_to.length() - 0.1) * 0.499)
 		var prev_move_distance : float = ground_distance - prev_ground_distance
-		if ground_distance == 0:
-			ground_distance = 0.001
+		
 		if prev_move_distance == 0:
 			prev_move_distance = 0.001
+		if ground_distance == 0:
+			ground_distance = 0.001
+			
 		var move_force : float = 1 / (ground_distance / (prev_move_distance)) - ground_distance
 		move_force = clamp(move_force, -11, 11)
 		
 		move_direction += ground_normal * move_force * 1.1
-		move_direction += downhill * -Globals.GRAVITY * 0.1
+		move_direction += downhill * -Globals.GRAVITY * 0.25
 		
 		prev_ground_distance = ground_distance
 		
-	# Realign UP if not on the ground
+		HUD.set_debug_line(0, "Ground Distance: " + str(ground_distance))
+		HUD.set_debug_line(1, "Move Force: " + str(move_force))
+		HUD.set_debug_line(2, "Move Direction: " + str(move_direction))
+#		HUD.set_debug_line(3, "Ground Distance: " + str(ground_distance))
+
 	else:
-		global_transform.basis = player_basis.slerp(_align_to_normal(Vector3(0, 1, 0)), delta*2).orthonormalized()
 		prev_ground_distance = 0
 		move_direction = Vector3(0, -Globals.GRAVITY, 0)
-	move_direction += _check_kinematic_collision()
-	
+		
+#	move_direction += _check_kinematic_collision()
 	velocity += move_direction
 	
 	if is_braking:
@@ -191,40 +201,56 @@ func _get_key_input() -> void:
 				is_boosting = true
 
 func _input(event):
-	# Rotate the camera based on mouse movement
-	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		if event is InputEventMouseMotion:
-			RotationHelper.rotate_x(-deg2rad(event.relative.y * mouse_vert_invert * mouse_vert_sensitivity))
-			RotationHelper.rotate_y(deg2rad(event.relative.x * mouse_horz_invert * mouse_horz_sensitivity))
-			
-			var helper_rotation : Vector3 = RotationHelper.rotation_degrees
-			helper_rotation.x = clamp(helper_rotation.x, -10, 10)
-			helper_rotation.y = clamp(helper_rotation.y, -30, 30)
-			helper_rotation.z = 0
-			RotationHelper.rotation_degrees = helper_rotation
-			
-			var velocity_ratio = clamp(velocity.length() / MAX_FORWARD_VEL, 0.0, 1.0)
-			$Vehicle1.rotate_object_local(Vector3(0, 0, 1), -deg2rad(helper_rotation.y * 0.08 * velocity_ratio))
-			var vehicle_rotation : Vector3 = $Vehicle1.rotation_degrees
-			vehicle_rotation.z = clamp(vehicle_rotation.z, -45, 45)
-			$Vehicle1.rotation_degrees = vehicle_rotation
-			
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:	
 		if event is InputEventMouseButton:
 			if event.button_index == 1:
 				is_swinging = event.is_pressed()
+			if event.button_index == 2:
+				is_free_rotating = event.is_pressed()
+		
+		# Rotate the camera based on mouse movement
+		if event is InputEventMouseMotion:
+			if is_free_rotating and !is_on_ground:
+				$Engine.rotate_x(deg2rad(event.relative.y * mouse_vert_invert * FREE_ROTATE_VERT_SENSITIVITY))
+				$Engine.rotate_z(deg2rad(event.relative.x * mouse_horz_invert * FREE_ROTATE_HORZ_SENSITIVITY))
+				$KinematicCollisionShape.rotate_x(deg2rad(event.relative.y * mouse_vert_invert * FREE_ROTATE_VERT_SENSITIVITY))
+				$KinematicCollisionShape.rotate_z(deg2rad(event.relative.x * mouse_horz_invert * FREE_ROTATE_HORZ_SENSITIVITY))
+			else:
+				RotationHelper.rotate_x(-deg2rad(event.relative.y * mouse_vert_invert * MOUSE_VERT_SENSITIVITY))
+				RotationHelper.rotate_y(deg2rad(event.relative.x * mouse_horz_invert * MOUSE_HORZ_SENSITIVITY))
+				
+				var helper_rotation : Vector3 = RotationHelper.rotation_degrees
+				helper_rotation.x = clamp(helper_rotation.x, -10, 10)
+				helper_rotation.y = clamp(helper_rotation.y, -30, 30)
+				helper_rotation.z = 0
+				RotationHelper.rotation_degrees = helper_rotation
+				
+				# Rotate vehicle model based on turning sharpness
+				var velocity_ratio = clamp(velocity.length() / MAX_FORWARD_VEL, 0.0, 1.0)
+				$Engine.rotate_object_local(Vector3(0, 0, 1), -deg2rad(helper_rotation.y * 0.08 * velocity_ratio))
+				var vehicle_rotation : Vector3 = $Engine.rotation_degrees
+				vehicle_rotation.z = clamp(vehicle_rotation.z, -45, 45)
+				$Engine.rotation_degrees = vehicle_rotation
 
-# Turn the character and correct the camera if the camera has been rotated	
+# Return Camera, Engine, and Collision back to default values
 func _rotate_default(var delta : float) -> void:
 	if RotationHelper.rotation_degrees.y != 0:
 		var yRot : float = RotationHelper.rotation_degrees.y
 		yRot = yRot + (0 - yRot) * (delta * TURN_SPEED)
 		RotationHelper.rotation_degrees.y = yRot
 		rotate_object_local(Vector3(0, 1, 0), deg2rad(yRot * delta * TURN_SPEED))
-	if $Vehicle1.rotation_degrees.z != 0:
-		var zRot : float = $Vehicle1.rotation_degrees.z
-		zRot = zRot + (0 - zRot) * (delta * TURN_SPEED * 0.3)
-		$Vehicle1.rotation_degrees.z = zRot
-		
+	
+	if is_on_ground:
+		if $Engine.rotation != Vector3(0, PI, 0):
+			var engineRot : Vector3 = $Engine.rotation
+			engineRot = engineRot + (Vector3(0, PI, 0) - engineRot) * (delta * TURN_SPEED * 0.6)
+			$Engine.rotation = engineRot
+		if $KinematicCollisionShape.rotation_degrees != Vector3(0, 0, 0):
+			var engineRot : Vector3 = $KinematicCollisionShape.rotation_degrees
+			engineRot = engineRot + (Vector3.ZERO - engineRot) * (delta * TURN_SPEED * 0.6)
+			$KinematicCollisionShape.rotation_degrees = engineRot
+	
+	
 func _pitch_sfx():
 	var temp_velocity : Vector2 = Vector2(velocity.x, velocity.z)
 	sfx_pitch = ((temp_velocity.length() * MAX_SFX_PITCH) / MAX_SPEED) + MIN_SFX_PITCH
@@ -249,30 +275,36 @@ func _align_to_normal(ground_normal : Vector3) -> Basis:
 	return result.orthonormalized()
 
 # Called by signal if $GroundDetects are colliding
-func _is_on_ground() -> void:
-	if !is_on_ground:
+#func _is_on_ground() -> void:
+#	if !is_on_ground:
+#		is_on_ground = true
+
+func check_ray_collision(ray_detect : RayCast):
+	if ray_detect.type == "Ground":
 		is_on_ground = true
+	elif ray_detect.type == "Side":
+		if ray_detect.global_transform.basis.z.dot(Vector3.DOWN) < -0.33:
+			is_crashed = true
 	
 # Return the average vector of the normals of the surface the $GroundDetects are colliding with
 func _get_ground_normal() -> Vector3:
-	var ground_normal1 : Vector3 = $GroundDetect1.get_collision_normal()
-	var ground_normal2 : Vector3 = $GroundDetect2.get_collision_normal()
+	var ground_normal1 : Vector3 = $KinematicCollisionShape/GroundDetect1.get_collision_normal()
+	var ground_normal2 : Vector3 = $KinematicCollisionShape/GroundDetect2.get_collision_normal()
 	return (ground_normal1 + ground_normal2) * 0.5
 
 # Average the collision point of the $GroundDetects and return the local coordinates
 func _get_ground_point() -> Vector3:
-	var ground_point1 : Vector3 = $GroundDetect1.get_collision_point()
-	var ground_point2 : Vector3 = $GroundDetect2.get_collision_point()
+	var ground_point1 : Vector3 = $KinematicCollisionShape/GroundDetect1.get_collision_point()
+	var ground_point2 : Vector3 = $KinematicCollisionShape/GroundDetect2.get_collision_point()
 	
 	return to_local((ground_point1 + ground_point2) * 0.5)
 
 # Average and return center points of the $GroundCollisions
 func _get_cast_point() -> Vector3:
-	var cast_point1 = $GroundDetect1.transform.origin
-	var cast_point2 = $GroundDetect2.transform.origin
+	var cast_point1 = to_local($KinematicCollisionShape/GroundDetect1.global_transform.origin)
+	var cast_point2 = to_local($KinematicCollisionShape/GroundDetect2.global_transform.origin)
 	
 	return (cast_point1 + cast_point2) * 0.5 - Vector3(0, 1.1, 0)
-#	return (cast_point1 + cast_point2) * 0.5 - Vector3(0, 1.6, 0)
 
 func _set_speedometer() -> void:
 	var _y_vector : Vector3 = -global_transform.basis[1]
@@ -406,11 +438,16 @@ func _crash_finished():
 	has_control = true
 	set_collision_layer_bit(0, true)
 	$VisibilityTimer.stop()
-	$Vehicle1.visible = true
+	$Engine.visible = true
 	$Particles.emitting = true
 
 func _crash():
 	if !$CrashTimer.time_left:
+		global_transform.origin = navigation.get_closest_point(to_global(ground_point))
+		global_transform.basis.y = Vector3.UP
+		$Engine.rotation = Vector3(0, PI, 0)
+		$KinematicCollisionShape.rotation = Vector3(0, 0, 0)
+		
 		velocity = Vector3.ZERO
 		has_control = false
 		set_collision_layer_bit(0, false)
@@ -419,7 +456,7 @@ func _crash():
 		$Particles.emitting = false
 
 func _on_VisibilityTimer_timeout():
-	$Vehicle1.visible = !$Vehicle1.visible
+	$Engine.visible = !$Engine.visible
 
 func _interpolate_float(current: float, target: float, amount: float) -> float:
 	current += amount * sign(target - current)

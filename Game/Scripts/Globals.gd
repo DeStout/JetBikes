@@ -1,6 +1,7 @@
 extends Node
 
 var SHOW_NPC_PATHFIND : bool = false
+var SHOW_DEBUG_PANEL : bool = false
 
 var test_track_ : PackedScene = load("res://Levels/TestTrack/Scenes/TestTrack.tscn")
 var test_terrain_ : PackedScene = load("res://Levels/TestTerrain/Scenes/TestTerrain.tscn")

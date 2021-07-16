@@ -10,8 +10,9 @@ func _process(delta) -> void:
 
 func setup_race(var new_track) -> void:
 	current_track = new_track.instance()
-	current_track.connect("ready", self, "track_ready")
-	current_track.connect("race_finished", self, "finish_race")
+	if current_track is TrackBasic:
+		current_track.connect("ready", self, "track_ready")
+		current_track.connect("race_finished", self, "finish_race")
 	add_child(current_track)
 
 func track_ready() -> void:
