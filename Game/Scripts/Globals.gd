@@ -16,11 +16,11 @@ var level_dict : Dictionary = {
 var level_dict_keys : Array = level_dict.keys()
 var DEFAULT_LEVEL = 0
 
-const DEFAULT_LAP_NUMBER : int = 99
+const DEFAULT_LAP_NUMBER : int = 3
 const MIN_LAP_NUMBER : int = 1
 const MAX_LAP_NUMBER : int = 99
 
-const DEFAULT_NPC_NUMBER : int = 11
+const DEFAULT_NPC_NUMBER : int = 2
 const MIN_NPC_NUMBER : int = 0
 const MAX_NPC_NUMBER : int = 11
 
