@@ -25,7 +25,7 @@ map_scale = Vector3( 5, 5, 5 )
 _terrain_data = ExtResource( 1 )
 chunk_size = 32
 collision_enabled = true
-collision_layer = 1
+collision_layer = 2
 collision_mask = 1
 shader_type = "Classic4Lite"
 custom_shader = null
@@ -45,16 +45,16 @@ visible = false
 [node name="RockGeneral1" parent="Spatial" instance=ExtResource( 7 )]
 transform = Transform( 0.0965401, 0.0230672, 0.620345, 0.194949, -0.597167, -0.0081333, 0.589368, 0.193751, -0.0989239, 2458.14, 165.164, 34.8168 )
 
-[node name="RockGeneral4" parent="Spatial" instance=ExtResource( 7 )]
-transform = Transform( 0.29153, 0.0876872, 0.549547, 0.194949, -0.597167, -0.0081333, 0.521234, 0.174305, -0.304323, 2126.63, 165.164, 34.8168 )
+[node name="RockGeneral2" parent="Spatial" instance=ExtResource( 7 )]
+transform = Transform( -0.028913, -0.0115571, -0.627464, 0.268243, -0.568086, -0.00189695, -0.567353, -0.268001, 0.0310794, 1802.93, 165.164, 428.646 )
 
 [node name="RockGeneral3" parent="Spatial" instance=ExtResource( 7 )]
 transform = Transform( -0.435105, -0.331822, 0.308639, 0.377276, -0.502272, -0.00813329, 0.251052, 0.179715, 0.547134, 2644.5, 165.164, 514.822 )
 
-[node name="RockGeneral2" parent="Spatial" instance=ExtResource( 7 )]
-transform = Transform( -0.028913, -0.0115571, -0.627464, 0.268243, -0.568086, -0.00189695, -0.567353, -0.268001, 0.0310794, 1802.93, 165.164, 428.646 )
+[node name="RockGeneral4" parent="Spatial" instance=ExtResource( 7 )]
+transform = Transform( 0.29153, 0.0876872, 0.549547, 0.194949, -0.597167, -0.0081333, 0.521234, 0.174305, -0.304323, 2126.63, 165.164, 34.8168 )
 
-[node name="RockFormation" parent="Spatial" instance=ExtResource( 9 )]
+[node name="RockFormation1" parent="Spatial" instance=ExtResource( 9 )]
 transform = Transform( 5.06399, 0, -6.21881, -1.47675, 7.79043, -1.20252, 6.04093, 1.90443, 4.91914, 2431.94, 76.6669, 145.331 )
 
 [node name="RockFormation2" parent="Spatial" instance=ExtResource( 9 )]

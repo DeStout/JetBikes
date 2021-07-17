@@ -135,13 +135,6 @@ func _physics_process(delta : float) -> void:
 		move_direction += downhill * -Globals.GRAVITY * 0.25
 
 		prev_ground_distance = ground_distance
-		
-		if name == "NPC1":
-			var HUD = get_parent().get_node("Player").HUD
-			HUD.set_debug_line(3, "")
-			HUD.set_debug_line(4, "Ground Distance: " + str(ground_distance))
-			HUD.set_debug_line(5, "Move Force: " + str(move_force))
-			HUD.set_debug_line(6, "Move Direction: " + str(move_direction))
 
 	else:
 		global_transform.basis = npc_basis.slerp(_align_to_normal(Vector3(0, 1, 0)), delta*10).orthonormalized()

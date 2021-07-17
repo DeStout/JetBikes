@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://Levels/General/Scripts/Track.gd" type="Script" id=1]
 [ext_resource path="res://Levels/General/Scripts/PlayersTracker.gd" type="Script" id=2]
@@ -8,7 +8,8 @@
 [ext_resource path="res://Levels/Skyboxes/Cold Sunset Equirect.png" type="Texture" id=6]
 [ext_resource path="res://Levels/TestTerrain/Assets/Materials/GroundWetRocks/GroundWetRocks.tres" type="Material" id=7]
 [ext_resource path="res://Levels/General/Scripts/ModNode.gd" type="Script" id=8]
-[ext_resource path="res://Levels/General/Scenes/SwingPole.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Levels/General/Scripts/SwingPole.gd" type="Script" id=10]
+[ext_resource path="res://Levels/General/Sounds/Buzzing.wav" type="AudioStream" id=11]
 
 [sub_resource type="PanoramaSky" id=1]
 panorama = ExtResource( 6 )
@@ -27,7 +28,7 @@ filter/filter_walkable_low_height_spans = true
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 12.5, 24.6268, 1 )
 
-[sub_resource type="Curve3D" id=42]
+[sub_resource type="Curve3D" id=5]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -13.032, 0, 0, 0, 0, 0, 0, 0, 0, 13.032, 0, 0 ),
 "tilts": PoolRealArray( 0, 0 )
@@ -36,7 +37,7 @@ _data = {
 [sub_resource type="BoxShape" id=6]
 extents = Vector3( 13.032, 7.92069, 1 )
 
-[sub_resource type="Curve3D" id=43]
+[sub_resource type="Curve3D" id=7]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -7.52728, 0, 0, 0, 0, 0, 0, 0, 0, 7.52728, 0, 0 ),
 "tilts": PoolRealArray( 0, 0 )
@@ -45,7 +46,7 @@ _data = {
 [sub_resource type="BoxShape" id=8]
 extents = Vector3( 7.52728, 6.76986, 1 )
 
-[sub_resource type="Curve3D" id=44]
+[sub_resource type="Curve3D" id=9]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -15.5728, 0, 0, 0, 0, 0, 0, 0, 0, 15.5728, 0, 0 ),
 "tilts": PoolRealArray( 0, 0 )
@@ -54,7 +55,7 @@ _data = {
 [sub_resource type="BoxShape" id=10]
 extents = Vector3( 15.5728, 10.647, 1 )
 
-[sub_resource type="Curve3D" id=45]
+[sub_resource type="Curve3D" id=11]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -38.1446, 0, 0, 0, 0, 0, 0, 0, 0, 38.1446, 0, 0 ),
 "tilts": PoolRealArray( 0, 0 )
@@ -63,7 +64,7 @@ _data = {
 [sub_resource type="BoxShape" id=12]
 extents = Vector3( 38.1446, 23.5524, 1 )
 
-[sub_resource type="Curve3D" id=46]
+[sub_resource type="Curve3D" id=13]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -11.7176, 0, 0, 0, 0, 0, 0, 0, 0, 11.7176, 0, 0 ),
 "tilts": PoolRealArray( 0, 0 )
@@ -72,7 +73,7 @@ _data = {
 [sub_resource type="BoxShape" id=14]
 extents = Vector3( 11.7176, 15.7707, 1 )
 
-[sub_resource type="Curve3D" id=47]
+[sub_resource type="Curve3D" id=15]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -13.2628, 0, 0, 0, 0, 0, 0, 0, 0, 13.2628, 0, 0 ),
 "tilts": PoolRealArray( 0, 0 )
@@ -81,7 +82,7 @@ _data = {
 [sub_resource type="BoxShape" id=16]
 extents = Vector3( 13.2628, 15.5312, 1 )
 
-[sub_resource type="Curve3D" id=48]
+[sub_resource type="Curve3D" id=17]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -11.8217, 0, 0, 0, 0, 0, 0, 0, 0, 11.8217, 0, 0 ),
 "tilts": PoolRealArray( 0, 0 )
@@ -90,7 +91,7 @@ _data = {
 [sub_resource type="BoxShape" id=18]
 extents = Vector3( 11.8217, 14.5488, 1 )
 
-[sub_resource type="Curve3D" id=49]
+[sub_resource type="Curve3D" id=19]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -13.6296, 0, 0, 0, 0, 0, 0, 0, 0, 13.6296, 0, 0 ),
 "tilts": PoolRealArray( 0, 0 )
@@ -99,7 +100,7 @@ _data = {
 [sub_resource type="BoxShape" id=20]
 extents = Vector3( 13.6296, 15.7885, 1 )
 
-[sub_resource type="Curve3D" id=50]
+[sub_resource type="Curve3D" id=21]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -18.5709, 0, 0, 0, 0, 0, 0, 0, 0, 18.5709, 0, 0 ),
 "tilts": PoolRealArray( 0, 0 )
@@ -108,7 +109,7 @@ _data = {
 [sub_resource type="BoxShape" id=22]
 extents = Vector3( 18.5709, 20.3395, 1 )
 
-[sub_resource type="Curve3D" id=51]
+[sub_resource type="Curve3D" id=23]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -9.8288, 0, 0, 0, 0, 0, 0, 0, 0, 9.8288, 0, 0 ),
 "tilts": PoolRealArray( 0, 0 )
@@ -117,7 +118,7 @@ _data = {
 [sub_resource type="BoxShape" id=24]
 extents = Vector3( 9.8288, 19.7664, 1 )
 
-[sub_resource type="Curve3D" id=52]
+[sub_resource type="Curve3D" id=25]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -21.0287, 0, 0, 0, 0, 0, 0, 0, 0, 21.0287, 0, 0 ),
 "tilts": PoolRealArray( 0, 0 )
@@ -126,7 +127,7 @@ _data = {
 [sub_resource type="BoxShape" id=26]
 extents = Vector3( 21.0287, 12.3713, 1 )
 
-[sub_resource type="Curve3D" id=53]
+[sub_resource type="Curve3D" id=27]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -9.98598, 0, 0, 0, 0, 0, 0, 0, 0, 9.98598, 0, 0 ),
 "tilts": PoolRealArray( 0, 0 )
@@ -135,7 +136,7 @@ _data = {
 [sub_resource type="BoxShape" id=28]
 extents = Vector3( 9.98598, 11.2635, 1 )
 
-[sub_resource type="Curve3D" id=54]
+[sub_resource type="Curve3D" id=29]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -18.0935, 0, 0, 0, 0, 0, 0, 0, 0, 18.0935, 0, 0 ),
 "tilts": PoolRealArray( 0, 0 )
@@ -144,7 +145,7 @@ _data = {
 [sub_resource type="BoxShape" id=30]
 extents = Vector3( 18.0935, 14.9833, 1 )
 
-[sub_resource type="Curve3D" id=55]
+[sub_resource type="Curve3D" id=31]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -16.2327, 0, 0, 0, 0, 0, 0, 0, 0, 16.2327, 0, 0 ),
 "tilts": PoolRealArray( 0, 0 )
@@ -153,7 +154,7 @@ _data = {
 [sub_resource type="BoxShape" id=32]
 extents = Vector3( 16.2327, 7.47464, 1 )
 
-[sub_resource type="Curve3D" id=56]
+[sub_resource type="Curve3D" id=33]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -29.7716, 0, 0, 0, 0, 0, 0, 0, 0, 29.7716, 0, 0 ),
 "tilts": PoolRealArray( 0, 0 )
@@ -162,7 +163,7 @@ _data = {
 [sub_resource type="BoxShape" id=34]
 extents = Vector3( 29.7716, 20.0355, 1 )
 
-[sub_resource type="Curve3D" id=57]
+[sub_resource type="Curve3D" id=35]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -27.8104, 0, 0, 0, 0, 0, 0, 0, 0, 27.8104, 0, 0 ),
 "tilts": PoolRealArray( 0, 0 )
@@ -171,7 +172,7 @@ _data = {
 [sub_resource type="BoxShape" id=36]
 extents = Vector3( 27.8104, 21.9178, 1 )
 
-[sub_resource type="Curve3D" id=58]
+[sub_resource type="Curve3D" id=37]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -10.8316, 0, 0, 0, 0, 0, 0, 0, 0, 10.8316, 0, 0 ),
 "tilts": PoolRealArray( 0, 0 )
@@ -188,6 +189,49 @@ extents = Vector3( 85.4961, 8.71641, 15.4869 )
 
 [sub_resource type="BoxShape" id=41]
 extents = Vector3( 179.618, 20.2682, 102.829 )
+
+[sub_resource type="SpatialMaterial" id=42]
+
+[sub_resource type="SpatialMaterial" id=43]
+flags_transparent = true
+flags_do_not_receive_shadows = true
+params_cull_mode = 2
+albedo_color = Color( 1, 1, 1, 0.113725 )
+
+[sub_resource type="SphereShape" id=44]
+radius = 60.0
+
+[sub_resource type="SphereShape" id=45]
+radius = 65.0
+
+[sub_resource type="SphereShape" id=46]
+radius = 45.0
+
+[sub_resource type="SphereShape" id=47]
+radius = 40.0
+
+[sub_resource type="SphereShape" id=48]
+radius = 45.0
+
+[sub_resource type="SphereShape" id=49]
+radius = 35.0
+
+[sub_resource type="SphereShape" id=50]
+radius = 35.0
+
+[sub_resource type="SphereShape" id=51]
+radius = 35.0
+
+[sub_resource type="SpatialMaterial" id=52]
+
+[sub_resource type="SpatialMaterial" id=53]
+flags_transparent = true
+flags_do_not_receive_shadows = true
+params_cull_mode = 2
+albedo_color = Color( 1, 1, 1, 0.113725 )
+
+[sub_resource type="SphereShape" id=54]
+radius = 60.0
 
 [node name="TestTerrain" type="Spatial"]
 script = ExtResource( 1 )
@@ -243,7 +287,7 @@ next_serial = 1
 boost_value = 50
 
 [node name="Path" type="Path" parent="Minimap/Navigation/PathNodes/PathNode0"]
-curve = SubResource( 42 )
+curve = SubResource( 5 )
 
 [node name="Area" type="Area" parent="Minimap/Navigation/PathNodes/PathNode0"]
 
@@ -259,7 +303,7 @@ next_serial = 2
 route = 0
 
 [node name="Path" type="Path" parent="Minimap/Navigation/PathNodes/PathNode1a"]
-curve = SubResource( 43 )
+curve = SubResource( 7 )
 
 [node name="Area" type="Area" parent="Minimap/Navigation/PathNodes/PathNode1a"]
 
@@ -274,7 +318,7 @@ next_serial = 2
 route = 1
 
 [node name="Path" type="Path" parent="Minimap/Navigation/PathNodes/PathNode1b"]
-curve = SubResource( 44 )
+curve = SubResource( 9 )
 
 [node name="Area" type="Area" parent="Minimap/Navigation/PathNodes/PathNode1b"]
 
@@ -289,7 +333,7 @@ next_serial = 3
 
 [node name="Path" type="Path" parent="Minimap/Navigation/PathNodes/PathNode2"]
 visible = false
-curve = SubResource( 45 )
+curve = SubResource( 11 )
 
 [node name="Area" type="Area" parent="Minimap/Navigation/PathNodes/PathNode2"]
 
@@ -304,7 +348,7 @@ next_serial = 4
 route = 0
 
 [node name="Path" type="Path" parent="Minimap/Navigation/PathNodes/PathNode3a"]
-curve = SubResource( 46 )
+curve = SubResource( 13 )
 
 [node name="Area" type="Area" parent="Minimap/Navigation/PathNodes/PathNode3a"]
 
@@ -320,7 +364,7 @@ next_serial = 4
 route = 1
 
 [node name="Path" type="Path" parent="Minimap/Navigation/PathNodes/PathNode3b"]
-curve = SubResource( 47 )
+curve = SubResource( 15 )
 
 [node name="Area" type="Area" parent="Minimap/Navigation/PathNodes/PathNode3b"]
 
@@ -336,7 +380,7 @@ next_serial = 5
 route = 0
 
 [node name="Path" type="Path" parent="Minimap/Navigation/PathNodes/PathNode4a"]
-curve = SubResource( 48 )
+curve = SubResource( 17 )
 
 [node name="Area" type="Area" parent="Minimap/Navigation/PathNodes/PathNode4a"]
 
@@ -351,7 +395,7 @@ next_serial = 5
 route = 1
 
 [node name="Path" type="Path" parent="Minimap/Navigation/PathNodes/PathNode4b"]
-curve = SubResource( 49 )
+curve = SubResource( 19 )
 
 [node name="Area" type="Area" parent="Minimap/Navigation/PathNodes/PathNode4b"]
 
@@ -367,7 +411,7 @@ next_serial = 6
 
 [node name="Path" type="Path" parent="Minimap/Navigation/PathNodes/PathNode5"]
 visible = false
-curve = SubResource( 50 )
+curve = SubResource( 21 )
 
 [node name="Area" type="Area" parent="Minimap/Navigation/PathNodes/PathNode5"]
 
@@ -381,7 +425,7 @@ serial = 6
 next_serial = 7
 
 [node name="Path" type="Path" parent="Minimap/Navigation/PathNodes/PathNode6"]
-curve = SubResource( 51 )
+curve = SubResource( 23 )
 
 [node name="Area" type="Area" parent="Minimap/Navigation/PathNodes/PathNode6"]
 
@@ -397,7 +441,7 @@ route = 0
 
 [node name="Path" type="Path" parent="Minimap/Navigation/PathNodes/PathNode7a"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.133148, -4.83199, -1.70462 )
-curve = SubResource( 52 )
+curve = SubResource( 25 )
 
 [node name="Area" type="Area" parent="Minimap/Navigation/PathNodes/PathNode7a"]
 
@@ -413,7 +457,7 @@ route = 1
 
 [node name="Path" type="Path" parent="Minimap/Navigation/PathNodes/PathNode7b"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50095, 0, -12.1195 )
-curve = SubResource( 53 )
+curve = SubResource( 27 )
 
 [node name="Area" type="Area" parent="Minimap/Navigation/PathNodes/PathNode7b"]
 
@@ -428,7 +472,7 @@ next_serial = 9
 
 [node name="Path" type="Path" parent="Minimap/Navigation/PathNodes/PathNode8"]
 transform = Transform( 1, -3.42843e-08, 1.49012e-08, -2.68628e-08, 1, 0, 1.11759e-08, 0, 1, -1.88906, -7.59682, -0.222809 )
-curve = SubResource( 54 )
+curve = SubResource( 29 )
 
 [node name="Area" type="Area" parent="Minimap/Navigation/PathNodes/PathNode8"]
 
@@ -442,7 +486,7 @@ serial = 9
 next_serial = 10
 
 [node name="Path" type="Path" parent="Minimap/Navigation/PathNodes/PathNode9"]
-curve = SubResource( 55 )
+curve = SubResource( 31 )
 
 [node name="Area" type="Area" parent="Minimap/Navigation/PathNodes/PathNode9"]
 
@@ -456,7 +500,7 @@ serial = 10
 next_serial = 11
 
 [node name="Path" type="Path" parent="Minimap/Navigation/PathNodes/PathNode10"]
-curve = SubResource( 56 )
+curve = SubResource( 33 )
 
 [node name="Area" type="Area" parent="Minimap/Navigation/PathNodes/PathNode10"]
 
@@ -471,7 +515,7 @@ serial = 11
 next_serial = 12
 
 [node name="Path" type="Path" parent="Minimap/Navigation/PathNodes/PathNode11"]
-curve = SubResource( 57 )
+curve = SubResource( 35 )
 
 [node name="Area" type="Area" parent="Minimap/Navigation/PathNodes/PathNode11"]
 
@@ -485,7 +529,7 @@ function = 1
 serial = 12
 
 [node name="Path" type="Path" parent="Minimap/Navigation/PathNodes/PathNode12"]
-curve = SubResource( 58 )
+curve = SubResource( 37 )
 
 [node name="Area" type="Area" parent="Minimap/Navigation/PathNodes/PathNode12"]
 
@@ -521,63 +565,302 @@ shape = SubResource( 41 )
 
 [node name="SwingPoles" type="Node" parent="Minimap/Navigation"]
 
-[node name="SwingPole0" parent="Minimap/Navigation/SwingPoles" instance=ExtResource( 9 )]
+[node name="SwingPole0" type="Area" parent="Minimap/Navigation/SwingPoles"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 323.235, -26.7453, -206.785 )
+script = ExtResource( 10 )
 sphere_visible = false
 swing_length = 60.0
 swing_strength = 0.07
 
-[node name="SwingPole1" parent="Minimap/Navigation/SwingPoles" instance=ExtResource( 9 )]
+[node name="Pole" type="CSGCylinder" parent="Minimap/Navigation/SwingPoles/SwingPole0"]
+use_collision = true
+radius = 0.5
+height = 10.0
+material = SubResource( 42 )
+
+[node name="Sphere" type="CSGSphere" parent="Minimap/Navigation/SwingPoles/SwingPole0"]
+transform = Transform( 1, 1.39698e-09, -1.74623e-10, 0, 1, 0, -1.16415e-10, 0, 1, 0, 0, 0 )
+visible = false
+radius = 60.0
+radial_segments = 15
+rings = 15
+material = SubResource( 43 )
+
+[node name="InfluenceArea" type="CollisionShape" parent="Minimap/Navigation/SwingPoles/SwingPole0"]
+shape = SubResource( 44 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Minimap/Navigation/SwingPoles/SwingPole0"]
+stream = ExtResource( 11 )
+unit_db = -5.192
+unit_size = 50.0
+max_db = 0.0
+autoplay = true
+bus = "Level_SFX"
+doppler_tracking = 2
+
+[node name="SwingPole1" type="Area" parent="Minimap/Navigation/SwingPoles"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 227.699, 12.0645, 200.164 )
+script = ExtResource( 10 )
 sphere_visible = false
 swing_length = 65.0
 swing_strength = 0.07
 
-[node name="SwingPole2" parent="Minimap/Navigation/SwingPoles" instance=ExtResource( 9 )]
+[node name="Pole" type="CSGCylinder" parent="Minimap/Navigation/SwingPoles/SwingPole1"]
+use_collision = true
+radius = 0.5
+height = 10.0
+material = SubResource( 42 )
+
+[node name="Sphere" type="CSGSphere" parent="Minimap/Navigation/SwingPoles/SwingPole1"]
+transform = Transform( 1, 1.39698e-09, -1.74623e-10, 0, 1, 0, -1.16415e-10, 0, 1, 0, 0, 0 )
+visible = false
+radius = 65.0
+radial_segments = 15
+rings = 15
+material = SubResource( 43 )
+
+[node name="InfluenceArea" type="CollisionShape" parent="Minimap/Navigation/SwingPoles/SwingPole1"]
+shape = SubResource( 45 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Minimap/Navigation/SwingPoles/SwingPole1"]
+stream = ExtResource( 11 )
+unit_db = -5.192
+unit_size = 50.0
+max_db = 0.0
+autoplay = true
+bus = "Level_SFX"
+doppler_tracking = 2
+
+[node name="SwingPole2" type="Area" parent="Minimap/Navigation/SwingPoles"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44.5702, 46.6516, 208.114 )
+script = ExtResource( 10 )
 sphere_visible = false
 swing_length = 45.0
 swing_strength = 0.05
 
-[node name="SwingPole3" parent="Minimap/Navigation/SwingPoles" instance=ExtResource( 9 )]
+[node name="Pole" type="CSGCylinder" parent="Minimap/Navigation/SwingPoles/SwingPole2"]
+use_collision = true
+radius = 0.5
+height = 10.0
+material = SubResource( 42 )
+
+[node name="Sphere" type="CSGSphere" parent="Minimap/Navigation/SwingPoles/SwingPole2"]
+transform = Transform( 1, 1.39698e-09, -1.74623e-10, 0, 1, 0, -1.16415e-10, 0, 1, 0, 0, 0 )
+visible = false
+radius = 45.0
+radial_segments = 15
+rings = 15
+material = SubResource( 43 )
+
+[node name="InfluenceArea" type="CollisionShape" parent="Minimap/Navigation/SwingPoles/SwingPole2"]
+shape = SubResource( 46 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Minimap/Navigation/SwingPoles/SwingPole2"]
+stream = ExtResource( 11 )
+unit_db = -5.192
+unit_size = 50.0
+max_db = 0.0
+autoplay = true
+bus = "Level_SFX"
+doppler_tracking = 2
+
+[node name="SwingPole3" type="Area" parent="Minimap/Navigation/SwingPoles"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -97.9669, 96.1228, 265.799 )
+script = ExtResource( 10 )
 sphere_visible = false
 swing_length = 40.0
 swing_strength = 0.08
 
-[node name="SwingPole4" parent="Minimap/Navigation/SwingPoles" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -352.436, 89.6377, 361.599 )
-sphere_visible = false
-swing_length = 50.0
-swing_strength = 0.08
+[node name="Pole" type="CSGCylinder" parent="Minimap/Navigation/SwingPoles/SwingPole3"]
+use_collision = true
+radius = 0.5
+height = 10.0
+material = SubResource( 42 )
 
-[node name="SwingPole5" parent="Minimap/Navigation/SwingPoles" instance=ExtResource( 9 )]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -346.879, 97.746, -305.892 )
+[node name="Sphere" type="CSGSphere" parent="Minimap/Navigation/SwingPoles/SwingPole3"]
+transform = Transform( 1, 1.39698e-09, -1.74623e-10, 0, 1, 0, -1.16415e-10, 0, 1, 0, 0, 0 )
+visible = false
+radius = 40.0
+radial_segments = 15
+rings = 15
+material = SubResource( 43 )
+
+[node name="InfluenceArea" type="CollisionShape" parent="Minimap/Navigation/SwingPoles/SwingPole3"]
+shape = SubResource( 47 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Minimap/Navigation/SwingPoles/SwingPole3"]
+stream = ExtResource( 11 )
+unit_db = -5.192
+unit_size = 50.0
+max_db = 0.0
+autoplay = true
+bus = "Level_SFX"
+doppler_tracking = 2
+
+[node name="SwingPole4" type="Area" parent="Minimap/Navigation/SwingPoles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -348.011, 79.8901, 369.605 )
+script = ExtResource( 10 )
 sphere_visible = false
-swing_length = 30.0
+swing_length = 45.0
+swing_strength = 0.03
+
+[node name="Pole" type="CSGCylinder" parent="Minimap/Navigation/SwingPoles/SwingPole4"]
+use_collision = true
+radius = 0.5
+height = 10.0
+material = SubResource( 42 )
+
+[node name="Sphere" type="CSGSphere" parent="Minimap/Navigation/SwingPoles/SwingPole4"]
+transform = Transform( 1, 1.39698e-09, -1.74623e-10, 0, 1, 0, -1.16415e-10, 0, 1, 0, 0, 0 )
+visible = false
+radius = 45.0
+radial_segments = 15
+rings = 15
+material = SubResource( 43 )
+
+[node name="InfluenceArea" type="CollisionShape" parent="Minimap/Navigation/SwingPoles/SwingPole4"]
+shape = SubResource( 48 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Minimap/Navigation/SwingPoles/SwingPole4"]
+stream = ExtResource( 11 )
+unit_db = -5.192
+unit_size = 50.0
+max_db = 0.0
+autoplay = true
+bus = "Level_SFX"
+doppler_tracking = 2
+
+[node name="SwingPole5" type="Area" parent="Minimap/Navigation/SwingPoles"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -356.132, 95.6571, -330.093 )
+script = ExtResource( 10 )
+sphere_visible = false
+swing_length = 35.0
 swing_strength = 0.11
 
-[node name="SwingPole6" parent="Minimap/Navigation/SwingPoles" instance=ExtResource( 9 )]
+[node name="Pole" type="CSGCylinder" parent="Minimap/Navigation/SwingPoles/SwingPole5"]
+use_collision = true
+radius = 0.5
+height = 10.0
+material = SubResource( 42 )
+
+[node name="Sphere" type="CSGSphere" parent="Minimap/Navigation/SwingPoles/SwingPole5"]
+transform = Transform( 1, 1.39698e-09, -1.74623e-10, 0, 1, 0, -1.16415e-10, 0, 1, 0, 0, 0 )
+visible = false
+radius = 35.0
+radial_segments = 15
+rings = 15
+material = SubResource( 43 )
+
+[node name="InfluenceArea" type="CollisionShape" parent="Minimap/Navigation/SwingPoles/SwingPole5"]
+shape = SubResource( 49 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Minimap/Navigation/SwingPoles/SwingPole5"]
+stream = ExtResource( 11 )
+unit_db = -5.192
+unit_size = 50.0
+max_db = 0.0
+autoplay = true
+bus = "Level_SFX"
+doppler_tracking = 2
+
+[node name="SwingPole6" type="Area" parent="Minimap/Navigation/SwingPoles"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.3702, 24.9587, -387.356 )
+script = ExtResource( 10 )
 sphere_visible = false
 swing_length = 35.0
 swing_strength = 0.09
 
-[node name="SwingPole7" parent="Minimap/Navigation/SwingPoles" instance=ExtResource( 9 )]
+[node name="Pole" type="CSGCylinder" parent="Minimap/Navigation/SwingPoles/SwingPole6"]
+use_collision = true
+radius = 0.5
+height = 10.0
+material = SubResource( 42 )
+
+[node name="Sphere" type="CSGSphere" parent="Minimap/Navigation/SwingPoles/SwingPole6"]
+transform = Transform( 1, 1.39698e-09, -1.74623e-10, 0, 1, 0, -1.16415e-10, 0, 1, 0, 0, 0 )
+visible = false
+radius = 35.0
+radial_segments = 15
+rings = 15
+material = SubResource( 43 )
+
+[node name="InfluenceArea" type="CollisionShape" parent="Minimap/Navigation/SwingPoles/SwingPole6"]
+shape = SubResource( 50 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Minimap/Navigation/SwingPoles/SwingPole6"]
+stream = ExtResource( 11 )
+unit_db = -5.192
+unit_size = 50.0
+max_db = 0.0
+autoplay = true
+bus = "Level_SFX"
+doppler_tracking = 2
+
+[node name="SwingPole7" type="Area" parent="Minimap/Navigation/SwingPoles"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -282.088, 103.296, -347.838 )
+script = ExtResource( 10 )
 sphere_visible = false
 swing_length = 35.0
 swing_strength = 0.09
 
-[node name="SwingPole8" parent="Minimap/Navigation/SwingPoles" instance=ExtResource( 9 )]
+[node name="Pole" type="CSGCylinder" parent="Minimap/Navigation/SwingPoles/SwingPole7"]
+use_collision = true
+radius = 0.5
+height = 10.0
+material = SubResource( 42 )
+
+[node name="Sphere" type="CSGSphere" parent="Minimap/Navigation/SwingPoles/SwingPole7"]
+transform = Transform( 1, 1.39698e-09, -1.74623e-10, 0, 1, 0, -1.16415e-10, 0, 1, 0, 0, 0 )
+visible = false
+radius = 35.0
+radial_segments = 15
+rings = 15
+material = SubResource( 43 )
+
+[node name="InfluenceArea" type="CollisionShape" parent="Minimap/Navigation/SwingPoles/SwingPole7"]
+shape = SubResource( 51 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Minimap/Navigation/SwingPoles/SwingPole7"]
+stream = ExtResource( 11 )
+unit_db = -5.192
+unit_size = 50.0
+max_db = 0.0
+autoplay = true
+bus = "Level_SFX"
+doppler_tracking = 2
+
+[node name="SwingPole8" type="Area" parent="Minimap/Navigation/SwingPoles"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -104.098, 23.8046, -32.0923 )
+script = ExtResource( 10 )
 sphere_visible = false
 swing_length = 60.0
 swing_strength = 0.08
 
-[node name="Sphere" parent="Minimap/Navigation/SwingPoles/SwingPole8" index="1"]
+[node name="Pole" type="CSGCylinder" parent="Minimap/Navigation/SwingPoles/SwingPole8"]
+use_collision = true
+radius = 0.5
+height = 10.0
+material = SubResource( 52 )
+
+[node name="Sphere" type="CSGSphere" parent="Minimap/Navigation/SwingPoles/SwingPole8"]
+transform = Transform( 1, 1.39698e-09, -1.74623e-10, 0, 1, 0, -1.16415e-10, 0, 1, 0, 0, 0 )
 visible = false
 radius = 60.0
+radial_segments = 15
+rings = 15
+material = SubResource( 53 )
+
+[node name="InfluenceArea" type="CollisionShape" parent="Minimap/Navigation/SwingPoles/SwingPole8"]
+shape = SubResource( 54 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Minimap/Navigation/SwingPoles/SwingPole8"]
+stream = ExtResource( 11 )
+unit_db = -5.192
+unit_size = 50.0
+max_db = 0.0
+autoplay = true
+bus = "Level_SFX"
+doppler_tracking = 2
 
 [node name="Players" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -664,6 +947,23 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -58.874
 [connection signal="body_exited" from="Minimap/Navigation/ModNodes/Mod_Node2" to="Minimap/Navigation/ModNodes/Mod_Node2" method="_on_body_exited"]
 [connection signal="body_entered" from="Minimap/Navigation/ModNodes/Mod_Node3" to="Minimap/Navigation/ModNodes/Mod_Node3" method="_on_body_entered"]
 [connection signal="body_exited" from="Minimap/Navigation/ModNodes/Mod_Node3" to="Minimap/Navigation/ModNodes/Mod_Node3" method="_on_body_exited"]
+[connection signal="body_entered" from="Minimap/Navigation/SwingPoles/SwingPole0" to="Minimap/Navigation/SwingPoles/SwingPole0" method="_racer_within_influence"]
+[connection signal="body_exited" from="Minimap/Navigation/SwingPoles/SwingPole0" to="Minimap/Navigation/SwingPoles/SwingPole0" method="_racer_without_influence"]
+[connection signal="body_entered" from="Minimap/Navigation/SwingPoles/SwingPole1" to="Minimap/Navigation/SwingPoles/SwingPole1" method="_racer_within_influence"]
+[connection signal="body_exited" from="Minimap/Navigation/SwingPoles/SwingPole1" to="Minimap/Navigation/SwingPoles/SwingPole1" method="_racer_without_influence"]
+[connection signal="body_entered" from="Minimap/Navigation/SwingPoles/SwingPole2" to="Minimap/Navigation/SwingPoles/SwingPole2" method="_racer_within_influence"]
+[connection signal="body_exited" from="Minimap/Navigation/SwingPoles/SwingPole2" to="Minimap/Navigation/SwingPoles/SwingPole2" method="_racer_without_influence"]
+[connection signal="body_entered" from="Minimap/Navigation/SwingPoles/SwingPole3" to="Minimap/Navigation/SwingPoles/SwingPole3" method="_racer_within_influence"]
+[connection signal="body_exited" from="Minimap/Navigation/SwingPoles/SwingPole3" to="Minimap/Navigation/SwingPoles/SwingPole3" method="_racer_without_influence"]
+[connection signal="body_entered" from="Minimap/Navigation/SwingPoles/SwingPole4" to="Minimap/Navigation/SwingPoles/SwingPole4" method="_racer_within_influence"]
+[connection signal="body_exited" from="Minimap/Navigation/SwingPoles/SwingPole4" to="Minimap/Navigation/SwingPoles/SwingPole4" method="_racer_without_influence"]
+[connection signal="body_entered" from="Minimap/Navigation/SwingPoles/SwingPole5" to="Minimap/Navigation/SwingPoles/SwingPole5" method="_racer_within_influence"]
+[connection signal="body_exited" from="Minimap/Navigation/SwingPoles/SwingPole5" to="Minimap/Navigation/SwingPoles/SwingPole5" method="_racer_without_influence"]
+[connection signal="body_entered" from="Minimap/Navigation/SwingPoles/SwingPole6" to="Minimap/Navigation/SwingPoles/SwingPole6" method="_racer_within_influence"]
+[connection signal="body_exited" from="Minimap/Navigation/SwingPoles/SwingPole6" to="Minimap/Navigation/SwingPoles/SwingPole6" method="_racer_without_influence"]
+[connection signal="body_entered" from="Minimap/Navigation/SwingPoles/SwingPole7" to="Minimap/Navigation/SwingPoles/SwingPole7" method="_racer_within_influence"]
+[connection signal="body_exited" from="Minimap/Navigation/SwingPoles/SwingPole7" to="Minimap/Navigation/SwingPoles/SwingPole7" method="_racer_without_influence"]
+[connection signal="body_entered" from="Minimap/Navigation/SwingPoles/SwingPole8" to="Minimap/Navigation/SwingPoles/SwingPole8" method="_racer_within_influence"]
+[connection signal="body_exited" from="Minimap/Navigation/SwingPoles/SwingPole8" to="Minimap/Navigation/SwingPoles/SwingPole8" method="_racer_without_influence"]
 
 [editable path="Minimap/Navigation/ModNodes/Mod_Node"]
-[editable path="Minimap/Navigation/SwingPoles/SwingPole8"]

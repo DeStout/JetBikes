@@ -12,7 +12,7 @@ func _ready() -> void:
 #	Globals.game.single_player_manager.setup_minimap(minimap.get_texture(), minimap_camera, $Players.players)
 	
 	$Players.connect("race_finished", self, "finish_race")
-	$Players.setup_players($Minimap/Navigation, path_nodes, $Minimap/Navigation/SwingPoles.get_children())
+	$Players.setup_players($Minimap/Navigation, path_nodes)
 	$Players.player.HUD.setup_minimap(minimap.get_texture(), minimap_camera, $Players.players)
 	
 	if Globals.SHOW_NPC_PATHFIND:

@@ -25,6 +25,7 @@ mesh = SubResource( 1 )
 material/0 = null
 
 [node name="Body" type="StaticBody" parent="."]
+collision_layer = 2
 
 [node name="Shape" type="CollisionShape" parent="Body"]
 shape = SubResource( 2 )

@@ -1,7 +1,6 @@
 extends Node
 
 var SHOW_NPC_PATHFIND : bool = false
-var SHOW_DEBUG_PANEL : bool = false
 
 var test_track_ : PackedScene = load("res://Levels/TestTrack/Scenes/TestTrack.tscn")
 var test_terrain_ : PackedScene = load("res://Levels/TestTerrain/Scenes/TestTerrain.tscn")
@@ -14,20 +13,20 @@ var level_dict : Dictionary = {
 	"new_canyon" : new_canyon_
 	}
 var level_dict_keys : Array = level_dict.keys()
-var DEFAULT_LEVEL = 0
+var DEFAULT_LEVEL = 1
 
 const DEFAULT_LAP_NUMBER : int = 3
 const MIN_LAP_NUMBER : int = 1
 const MAX_LAP_NUMBER : int = 99
 
-const DEFAULT_NPC_NUMBER : int = 2
+const DEFAULT_NPC_NUMBER : int = 11
 const MIN_NPC_NUMBER : int = 0
 const MAX_NPC_NUMBER : int = 11
 
 const DEFAULT_SFX_LEVEL : int = -20
 #const DEFAULT_SFX_LEVEL : int = -24
-#const DEFAULT_MUSIC_LEVEL : int = -30
-const DEFAULT_MUSIC_LEVEL : int = -48
+const DEFAULT_MUSIC_LEVEL : int = -30
+#const DEFAULT_MUSIC_LEVEL : int = -48
 const MIN_SFX_LEVEL : int = -24
 const MAX_SFX_LEVEL : int = 0
 const MIN_MUSIC_LEVEL : int = -48

@@ -6,7 +6,7 @@
 [ext_resource path="res://Racers/SFX/346034__insintesi__jet-engine-1.wav" type="AudioStream" id=4]
 [ext_resource path="res://Racers/SFX/565598__c-v__diesel-idle-1.wav" type="AudioStream" id=5]
 [ext_resource path="res://Game/Scenes/SinglePlayerHUD.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Racers/Scenes/Vehicle1.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Racers/Scenes/Bike02.tscn" type="PackedScene" id=7]
 
 [sub_resource type="SpatialMaterial" id=1]
 params_cull_mode = 2

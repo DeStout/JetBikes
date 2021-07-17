@@ -151,11 +151,6 @@ func _physics_process(delta : float) -> void:
 		move_direction += downhill * -Globals.GRAVITY * 0.25
 		
 		prev_ground_distance = ground_distance
-		
-		HUD.set_debug_line(0, "Ground Distance: " + str(ground_distance))
-		HUD.set_debug_line(1, "Move Force: " + str(move_force))
-		HUD.set_debug_line(2, "Move Direction: " + str(move_direction))
-#		HUD.set_debug_line(3, "Ground Distance: " + str(ground_distance))
 
 	else:
 		prev_ground_distance = 0
@@ -227,7 +222,7 @@ func _input(event):
 				
 				# Rotate vehicle model based on turning sharpness
 				var velocity_ratio = clamp(velocity.length() / MAX_FORWARD_VEL, 0.0, 1.0)
-				$Engine.rotate_object_local(Vector3(0, 0, 1), -deg2rad(helper_rotation.y * 0.08 * velocity_ratio))
+				$Engine.rotate_object_local(Vector3(0, 0, 1), deg2rad(helper_rotation.y * 0.08 * velocity_ratio))
 				var vehicle_rotation : Vector3 = $Engine.rotation_degrees
 				vehicle_rotation.z = clamp(vehicle_rotation.z, -45, 45)
 				$Engine.rotation_degrees = vehicle_rotation
@@ -241,13 +236,13 @@ func _rotate_default(var delta : float) -> void:
 		rotate_object_local(Vector3(0, 1, 0), deg2rad(yRot * delta * TURN_SPEED))
 	
 	if is_on_ground:
-		if $Engine.rotation != Vector3(0, PI, 0):
-			var engineRot : Vector3 = $Engine.rotation
-			engineRot = engineRot + (Vector3(0, PI, 0) - engineRot) * (delta * TURN_SPEED * 0.6)
-			$Engine.rotation = engineRot
+		if $Engine.rotation_degrees != Vector3(0, 0, 0):
+			var engineRot : Vector3 = $Engine.rotation_degrees
+			engineRot = engineRot + (Vector3(0, 0, 0) - engineRot) * (delta * TURN_SPEED * 0.8)
+			$Engine.rotation_degrees = engineRot
 		if $KinematicCollisionShape.rotation_degrees != Vector3(0, 0, 0):
 			var engineRot : Vector3 = $KinematicCollisionShape.rotation_degrees
-			engineRot = engineRot + (Vector3.ZERO - engineRot) * (delta * TURN_SPEED * 0.6)
+			engineRot = engineRot + (Vector3.ZERO - engineRot) * (delta * TURN_SPEED * 0.8)
 			$KinematicCollisionShape.rotation_degrees = engineRot
 	
 	
@@ -283,7 +278,7 @@ func check_ray_collision(ray_detect : RayCast):
 	if ray_detect.type == "Ground":
 		is_on_ground = true
 	elif ray_detect.type == "Side":
-		if ray_detect.global_transform.basis.z.dot(Vector3.DOWN) < -0.33:
+		if ray_detect.global_transform.basis.z.dot(Vector3.DOWN) < -0.66:
 			is_crashed = true
 	
 # Return the average vector of the normals of the surface the $GroundDetects are colliding with
@@ -317,8 +312,8 @@ func _set_arrow_angle() -> void:
 	var vec2_path = Vector2(to_local(current_path_node.global_transform.origin).x, to_local(current_path_node.global_transform.origin).z).normalized()
 	HUD.set_arrow_angle(-(vec2_path.angle() + (PI/2)))
 
-func _set_boost(var delta : float) -> void:
-	boost += delta
+func _set_boost(var delta_boost : float) -> void:
+	boost += delta_boost
 	boost = clamp(boost, 0, MAX_BOOST)
 	HUD.set_boost(boost)
 	
@@ -385,14 +380,28 @@ func _emit_trail_particles():
 		$Particles.emitting = true
 	else:
 		$Particles.emitting = false
+
+func add_remove_swing_pole(swing_pole : SwingPole):
+	if swing_poles.has(swing_pole):
+		swing_poles.erase(swing_pole)
+	else:
+		swing_poles.append(swing_pole)
 	
 func _check_swing_poles(delta : float):
+	if is_swinging and !swing_poles.empty() and boost > 0:
+		var closest_pole : SwingPole = swing_poles.front()
+		for swing_pole in swing_poles:
+			if global_transform.origin.distance_to(swing_pole.global_transform.origin) < \
+					global_transform.origin.distance_to(closest_pole.global_transform.origin):
+				closest_pole = swing_pole
+		_swing(closest_pole, delta)
+	
 #	var temp_pole_array : Array
-	for swing_pole in swing_poles:
-		if global_transform.origin.distance_to(swing_pole.global_transform.origin) < swing_pole.swing_length:
-#			temp_pole_array.append(swing_pole)
-			if is_swinging and boost > 0:
-				_swing(swing_pole, delta)
+#	for swing_pole in swing_poles:
+#		if global_transform.origin.distance_to(swing_pole.global_transform.origin) < swing_pole.swing_length:
+##			temp_pole_array.append(swing_pole)
+#			if is_swinging and boost > 0:
+#				_swing(swing_pole, delta)
 
 func _swing(swing_pole : SwingPole, delta : float):
 	var swing_distance = global_transform.origin.distance_to(swing_pole.global_transform.origin)
@@ -435,7 +444,8 @@ func _check_crash():
 		
 func _crash_finished():
 	is_crashed = false
-	has_control = true
+	if Globals.race_on_going == true:
+		has_control = true
 	set_collision_layer_bit(0, true)
 	$VisibilityTimer.stop()
 	$Engine.visible = true
