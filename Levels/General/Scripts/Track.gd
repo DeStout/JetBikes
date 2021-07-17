@@ -1,6 +1,7 @@
 extends Spatial
-class_name TrackBasic
+class_name Track
 
+signal track_ready
 signal race_finished
 
 var path_nodes : Array
@@ -19,6 +20,8 @@ func _ready() -> void:
 		for player in $Players.players:
 			if player is NPC:
 				add_child(player.draw_path)
+	
+	emit_signal("track_ready", $Players.player.pause_menu)
 
 # Called by PathNodes once it is ready
 func _setup_pathnodes():

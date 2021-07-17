@@ -50,7 +50,7 @@ _global_script_classes=[ {
 "path": "res://Levels/General/Scripts/SwingPole.gd"
 }, {
 "base": "Spatial",
-"class": "TrackBasic",
+"class": "Track",
 "language": "GDScript",
 "path": "res://Levels/General/Scripts/Track.gd"
 } ]
@@ -63,7 +63,7 @@ _global_script_class_icons={
 "PathNode": "",
 "Player": "",
 "SwingPole": "",
-"TrackBasic": ""
+"Track": ""
 }
 
 [application]

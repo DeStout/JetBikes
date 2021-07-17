@@ -1,23 +1,25 @@
-extends CanvasLayer
+extends Node
 
 signal return_to_main
 
 var current_track = null
 	
 func _process(delta) -> void:
-	if $StartTimer.time_left and current_track is TrackBasic:
+	if $StartTimer.time_left and current_track is Track:
 		current_track.get_node("Players").player.HUD.set_race_notice("%d" % ($StartTimer.time_left + 1), true)
 
 func setup_race(var new_track) -> void:
 	current_track = new_track.instance()
-	if current_track is TrackBasic:
-		current_track.connect("ready", self, "track_ready")
+	if current_track is Track:
 		current_track.connect("race_finished", self, "finish_race")
+	current_track.connect("track_ready", self, "track_ready")
 	add_child(current_track)
 
-func track_ready() -> void:
+func track_ready(pause_menu : Control) -> void:
+	pause_menu.connect("end_race", self, "end_race")
 	$MusicPlayer.play()
-	$StartTimer.start()
+	if current_track is Track:
+		$StartTimer.start()
 	
 func _start_race() -> void:
 	current_track.start_race()
@@ -25,8 +27,7 @@ func _start_race() -> void:
 func finish_race() -> void:
 	$EndTimer.start()
 
-func _end_race():
-	$PauseMenu.visible = false
+func end_race():
 	$StartTimer.stop()
 	$EndTimer.stop()
 	$MusicPlayer.stop()

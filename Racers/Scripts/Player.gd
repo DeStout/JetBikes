@@ -56,6 +56,7 @@ var mouse_horz_invert : int = -1
 onready var RotationHelper : Spatial = $RotationHelper
 onready var camera : Camera = $RotationHelper/Camera
 onready var HUD : Control = $RotationHelper/Camera/HUD
+onready var pause_menu : Control = $RotationHelper/Camera/PauseMenu
 
 var ground_point : Vector3
 var prev_ground_distance : float = 0
@@ -71,7 +72,6 @@ var swing_poles : Array
 
 func _process(delta : float) -> void:
 	_get_key_input()
-	_rotate_default(delta)
 	if current_path_node != null:
 		_path_node_distance()
 		_set_arrow_angle()
@@ -80,6 +80,7 @@ func _process(delta : float) -> void:
 	_emit_trail_particles()
 
 func _physics_process(delta : float) -> void:
+	_rotate_default(delta)
 	_check_swing_poles(delta)
 	_check_out_of_bounds()
 	_check_crash()
