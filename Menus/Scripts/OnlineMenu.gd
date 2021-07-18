@@ -1,14 +1,14 @@
-extends ColorRect
+extends Control
 
 func _host():
-	$HostOptions/JoinBox.pressed = false
-	$HostOptions/HostBox.pressed = true
+	$HostJoin/JoinBox.pressed = false
+	$HostJoin/HostBox.pressed = true
 	$Buttons/RaceButton.disabled = false
 	$Buttons/RaceButton.text = "Host"
 
 func _join():
-	$HostOptions/HostBox.pressed = false
-	$HostOptions/JoinBox.pressed = true
+	$HostJoin/HostBox.pressed = false
+	$HostJoin/JoinBox.pressed = true
 	$Buttons/RaceButton.disabled = false
 	$Buttons/RaceButton.text = "Join"
 

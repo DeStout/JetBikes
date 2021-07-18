@@ -1,34 +1,131 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Menus/Scripts/OnlineMenu.gd" type="Script" id=1]
 [ext_resource path="res://Game/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Game/Fonts/MenuFont.tres" type="DynamicFont" id=4]
 
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 3 )
-
 [sub_resource type="DynamicFont" id=2]
 size = 48
 font_data = ExtResource( 3 )
 
-[node name="OnlineMenu" type="ColorRect"]
-margin_left = 480.0
-margin_top = 32.0
-margin_right = 864.0
-margin_bottom = 504.0
-color = Color( 0.25098, 0.25098, 0.25098, 1 )
+[sub_resource type="DynamicFont" id=4]
+size = 36
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 36
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 36
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 36
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+font_data = ExtResource( 3 )
+
+[node name="OnlineMenu" type="Control"]
+visible = false
+anchor_left = 0.289
+anchor_top = 0.457
+anchor_right = 0.701
+anchor_bottom = 0.829
+margin_left = 64.374
+margin_top = 32.416
+margin_right = -65.2937
+margin_bottom = -15.6481
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": false,
-"_edit_vertical_guides_": [ 666.405 ]
+"_edit_use_anchors_": false
 }
+
+[node name="OnlineLabel" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -708.0
+margin_bottom = -373.0
+custom_fonts/font = SubResource( 2 )
+text = "Online"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HostJoin" type="HBoxContainer" parent="."]
+anchor_top = 0.127
+anchor_right = 0.569
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.12
+margin_right = -16.168
+margin_bottom = -272.0
+grow_vertical = 2
+custom_constants/separation = 32
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HostBox" type="CheckBox" parent="HostJoin"]
+margin_right = 115.0
+margin_bottom = 96.0
+focus_mode = 0
+custom_fonts/font = SubResource( 4 )
+enabled_focus_mode = 0
+text = "Host"
+
+[node name="JoinBox" type="CheckBox" parent="HostJoin"]
+margin_left = 147.0
+margin_right = 247.0
+margin_bottom = 96.0
+focus_mode = 0
+custom_fonts/font = SubResource( 5 )
+enabled_focus_mode = 0
+text = "Join"
+align = 2
+
+[node name="IPAdress" type="GridContainer" parent="."]
+anchor_top = 0.127
+anchor_right = 0.569
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 112.12
+margin_right = -16.168
+margin_bottom = -144.0
+custom_constants/hseparation = 12
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="IPAdress"]
+margin_right = 464.0
+margin_bottom = 50.0
+custom_fonts/font = SubResource( 9 )
+text = "IP Address:"
+
+[node name="TextEdit" type="LineEdit" parent="IPAdress"]
+margin_top = 54.0
+margin_right = 464.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 10 )
+text = "76.91.198.218"
+max_length = 15
+context_menu_enabled = false
+clear_button_enabled = true
+placeholder_text = "IP Address"
+caret_blink = true
 
 [node name="OptimistLabel" type="Label" parent="."]
 visible = false
-margin_top = 64.0
-margin_right = 384.0
-margin_bottom = 264.0
-custom_fonts/font = SubResource( 1 )
+anchor_top = 0.127
+anchor_right = 0.569
+anchor_bottom = 1.0
+margin_top = 224.12
+margin_right = -16.168
+custom_fonts/font = SubResource( 3 )
 text = "It's good to be an optimist"
 align = 1
 valign = 1
@@ -39,88 +136,21 @@ __meta__ = {
 
 [node name="Timer" type="Timer" parent="OptimistLabel"]
 
-[node name="OnlineLabel" type="Label" parent="."]
-margin_right = 384.0
-margin_bottom = 96.0
-custom_fonts/font = SubResource( 2 )
-text = "Online"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HostOptions" type="GridContainer" parent="."]
-margin_left = 86.073
-margin_top = 88.0
-margin_right = 293.073
-margin_bottom = 141.0
-custom_constants/hseparation = 12
-columns = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HostBox" type="CheckBox" parent="HostOptions"]
-margin_right = 105.0
-margin_bottom = 53.0
-focus_mode = 0
-custom_fonts/font = ExtResource( 4 )
-enabled_focus_mode = 0
-text = "Host"
-
-[node name="JoinBox" type="CheckBox" parent="HostOptions"]
-margin_left = 117.0
-margin_right = 207.0
-margin_bottom = 53.0
-focus_mode = 0
-custom_fonts/font = ExtResource( 4 )
-enabled_focus_mode = 0
-text = "Join"
-align = 2
-
-[node name="HostOptions2" type="GridContainer" parent="."]
-margin_left = 32.0
-margin_top = 189.0
-margin_right = 352.0
-margin_bottom = 293.0
-custom_constants/hseparation = 12
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="HostOptions2"]
-margin_right = 320.0
-margin_bottom = 45.0
-custom_fonts/font = ExtResource( 4 )
-text = "IP Address:"
-
-[node name="TextEdit" type="LineEdit" parent="HostOptions2"]
-margin_top = 49.0
-margin_right = 320.0
-margin_bottom = 104.0
-size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 4 )
-text = "76.91.198.218"
-max_length = 15
-context_menu_enabled = false
-clear_button_enabled = true
-placeholder_text = "IP Address"
-caret_blink = true
-
 [node name="Buttons" type="GridContainer" parent="."]
-margin_left = 32.0
-margin_top = 328.0
-margin_right = 352.0
-margin_bottom = 438.0
+anchor_left = 0.569
+anchor_top = 0.127
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -0.167999
+margin_top = 290.12
 custom_constants/vseparation = 8
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RaceButton" type="Button" parent="Buttons"]
-margin_right = 320.0
-margin_bottom = 51.0
+margin_right = 376.0
+margin_bottom = 94.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
@@ -131,21 +161,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CancelButton" type="Button" parent="Buttons"]
-margin_top = 59.0
-margin_right = 320.0
-margin_bottom = 110.0
-size_flags_horizontal = 3
-size_flags_vertical = 0
-custom_fonts/font = ExtResource( 4 )
-shortcut_in_tooltip = false
-action_mode = 0
-text = "Cancel"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
+[connection signal="pressed" from="HostJoin/HostBox" to="." method="_host"]
+[connection signal="pressed" from="HostJoin/JoinBox" to="." method="_join"]
 [connection signal="timeout" from="OptimistLabel/Timer" to="." method="_unoptimist"]
-[connection signal="pressed" from="HostOptions/HostBox" to="." method="_host"]
-[connection signal="pressed" from="HostOptions/JoinBox" to="." method="_join"]
 [connection signal="pressed" from="Buttons/RaceButton" to="." method="_optimist"]

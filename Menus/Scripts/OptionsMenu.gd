@@ -1,4 +1,4 @@
-extends ColorRect
+extends Control
 
 func _ready():
 	$SFX/Slider.min_value = Globals.MIN_SFX_LEVEL

@@ -1,19 +1,12 @@
 extends Control
 
 onready var single_player_menu : Control = $MenuFrame/SinglePlayerMenu
-onready var online_menu : ColorRect = $MenuFrame/OnlineMenu_old
+onready var online_menu : Control = $MenuFrame/OnlineMenu
 onready var controls_menu : Control = $MenuFrame/ControlsMenu
-onready var options_menu : ColorRect = $MenuFrame/OptionsMenu_old
-
-#const MAIN_MENU_DEFAULT_POSITION : int = 256
-#const MAIN_MENU_OPTIONS_POSITION : int = 32
+onready var options_menu : Control = $MenuFrame/OptionsMenu
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-#	single_player_menu.get_node("Buttons/CancelButton").connect("pressed", self, "return_to_main")
-	online_menu.get_node("Buttons/CancelButton").connect("pressed", self, "return_to_main")
-#	controls_menu.get_node("Buttons/CancelButton").connect("pressed", self, "return_to_main")
-	options_menu.get_node("Buttons/CancelButton").connect("pressed", self, "return_to_main")
 	
 func _toggle_single_player_menu() -> void:
 	if $MenuFrame/MainFrame/MainPanel/SoloButton.pressed:
@@ -22,7 +15,6 @@ func _toggle_single_player_menu() -> void:
 		$MenuFrame/MainFrame/MainPanel/OnlineButton.pressed = false
 		$MenuFrame/MainFrame/MainPanel/ControlsButton.pressed = false
 		$MenuFrame/MainFrame/MainPanel/OptionsButton.pressed = false
-#		$MenuFrame/MainFrame.rect_position.x = MAIN_MENU_OPTIONS_POSITION
 	else:
 		return_to_main()
 	
@@ -33,7 +25,6 @@ func _toggle_online_menu() -> void:
 		$MenuFrame/MainFrame/MainPanel/SoloButton.pressed = false
 		$MenuFrame/MainFrame/MainPanel/ControlsButton.pressed = false
 		$MenuFrame/MainFrame/MainPanel/OptionsButton.pressed = false
-#		$MenuFrame/MainFrame.rect_position.x = MAIN_MENU_OPTIONS_POSITION
 	else:
 		return_to_main()
 	
@@ -44,7 +35,6 @@ func _toggle_controls_menu() -> void:
 		$MenuFrame/MainFrame/MainPanel/SoloButton.pressed = false
 		$MenuFrame/MainFrame/MainPanel/OnlineButton.pressed = false
 		$MenuFrame/MainFrame/MainPanel/OptionsButton.pressed = false
-#		$MenuFrame/MainFrame.rect_position.x = MAIN_MENU_OPTIONS_POSITION
 	else:
 		return_to_main()
 	
@@ -55,7 +45,6 @@ func _toggle_options_menu() -> void:
 		$MenuFrame/MainFrame/MainPanel/SoloButton.pressed = false
 		$MenuFrame/MainFrame/MainPanel/OnlineButton.pressed = false
 		$MenuFrame/MainFrame/MainPanel/ControlsButton.pressed = false
-#		$MenuFrame/MainFrame.rect_position.x = MAIN_MENU_OPTIONS_POSITION
 	else:
 		return_to_main()
 	
@@ -65,7 +54,6 @@ func return_to_main():
 	$MenuFrame/MainFrame/MainPanel/OnlineButton.pressed = false
 	$MenuFrame/MainFrame/MainPanel/ControlsButton.pressed = false
 	$MenuFrame/MainFrame/MainPanel/OptionsButton.pressed = false
-#	$MenuFrame/MainFrame.rect_position.x = MAIN_MENU_DEFAULT_POSITION
 
 func _on_QuitButton_pressed() -> void:
 	get_tree().quit()

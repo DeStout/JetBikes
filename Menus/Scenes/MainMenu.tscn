@@ -1,23 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Menus/Scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Game/Fonts/MenuFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Menus/Scenes/SinglePlayerMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Menus/Scenes/OptionsMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Menus/Scenes/OnlineMenu.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Game/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://Menus/Scenes/ControlsMenu.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=4]
-size = 48
-font_data = ExtResource( 8 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 32
-extra_spacing_top = 5
-font_data = ExtResource( 8 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -53,9 +44,9 @@ __meta__ = {
 [node name="MainFrame" type="ColorRect" parent="MenuFrame"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 704.0
+margin_left = 703.0
 margin_top = 64.0
-margin_right = -728.0
+margin_right = -728.232
 margin_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -83,7 +74,7 @@ __meta__ = {
 }
 
 [node name="SoloButton" type="Button" parent="MenuFrame/MainFrame/MainPanel"]
-margin_right = 871.0
+margin_right = 872.0
 margin_bottom = 94.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -98,10 +89,11 @@ __meta__ = {
 
 [node name="OnlineButton" type="Button" parent="MenuFrame/MainFrame/MainPanel"]
 margin_top = 126.0
-margin_right = 871.0
+margin_right = 872.0
 margin_bottom = 220.0
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 2 )
+disabled = true
 toggle_mode = true
 text = "Online Multiplayer"
 __meta__ = {
@@ -110,7 +102,7 @@ __meta__ = {
 
 [node name="ControlsButton" type="Button" parent="MenuFrame/MainFrame/MainPanel"]
 margin_top = 252.0
-margin_right = 871.0
+margin_right = 872.0
 margin_bottom = 346.0
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 2 )
@@ -122,7 +114,7 @@ __meta__ = {
 
 [node name="OptionsButton" type="Button" parent="MenuFrame/MainFrame/MainPanel"]
 margin_top = 378.0
-margin_right = 871.0
+margin_right = 872.0
 margin_bottom = 472.0
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 2 )
@@ -133,12 +125,11 @@ __meta__ = {
 }
 
 [node name="QuitPanel" type="GridContainer" parent="MenuFrame/MainFrame"]
-anchor_top = 0.455
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 64.0
-margin_top = 487.28
-margin_right = -64.0
+margin_top = 1026.0
+margin_right = -65.0
 margin_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -165,74 +156,16 @@ __meta__ = {
 [node name="SinglePlayerMenu" parent="MenuFrame" instance=ExtResource( 3 )]
 visible = false
 
-[node name="SinglePlayerLabel" parent="MenuFrame/SinglePlayerMenu" index="0"]
-anchor_left = 0.001
-margin_left = 62.9992
+[node name="OnlineMenu" parent="MenuFrame" instance=ExtResource( 5 )]
 
-[node name="RaceButton" parent="MenuFrame/SinglePlayerMenu/Buttons" index="0"]
-margin_right = 374.0
-margin_bottom = 94.0
-
-[node name="ControlsMenu" type="Control" parent="MenuFrame"]
+[node name="ControlsMenu" parent="MenuFrame" instance=ExtResource( 6 )]
 visible = false
-anchor_left = 0.29
-anchor_top = 0.457
-anchor_right = 0.7
-anchor_bottom = 0.829
-margin_left = -0.057312
-margin_top = 0.415955
-margin_right = 1.13757
-margin_bottom = 0.351929
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_right = 1.1377
 
-[node name="SinglePlayerLabel" type="Label" parent="MenuFrame/ControlsMenu"]
-anchor_right = 1.0
-anchor_bottom = 0.998
-margin_left = 64.0
-margin_top = 32.0
-margin_right = -712.0
-margin_bottom = -390.02
-custom_fonts/font = SubResource( 4 )
-text = "Controls"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ControlsLabel" type="Label" parent="MenuFrame/ControlsMenu"]
-anchor_top = 0.18
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 128.0
-margin_top = 8.0
-margin_right = -64.0
-margin_bottom = -32.0
-custom_fonts/font = SubResource( 3 )
-text = "Mouse - Steer
-WASD - Movement
-Shift - Boost
-Ctrl - Brake
-Left Click - Swing
-Right Click - Free Rotate
-Esc - Pause Menu"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="OnlineMenu_old" parent="MenuFrame" instance=ExtResource( 5 )]
-visible = false
-
-[node name="OptionsMenu_old" parent="MenuFrame" instance=ExtResource( 4 )]
-visible = false
+[node name="OptionsMenu" parent="MenuFrame" instance=ExtResource( 4 )]
 
 [connection signal="pressed" from="MenuFrame/MainFrame/MainPanel/SoloButton" to="." method="_toggle_single_player_menu"]
 [connection signal="pressed" from="MenuFrame/MainFrame/MainPanel/OnlineButton" to="." method="_toggle_online_menu"]
 [connection signal="pressed" from="MenuFrame/MainFrame/MainPanel/ControlsButton" to="." method="_toggle_controls_menu"]
 [connection signal="pressed" from="MenuFrame/MainFrame/MainPanel/OptionsButton" to="." method="_toggle_options_menu"]
 [connection signal="pressed" from="MenuFrame/MainFrame/QuitPanel/QuitButton" to="." method="_on_QuitButton_pressed"]
-
-[editable path="MenuFrame/SinglePlayerMenu"]

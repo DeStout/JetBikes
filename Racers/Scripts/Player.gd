@@ -315,6 +315,8 @@ func _set_arrow_angle() -> void:
 
 func _set_boost(var delta_boost : float) -> void:
 	boost += delta_boost
+	if Globals.INFINITE_BOOST:
+		boost = MAX_BOOST
 	boost = clamp(boost, 0, MAX_BOOST)
 	HUD.set_boost(boost)
 	
@@ -389,20 +391,16 @@ func add_remove_swing_pole(swing_pole : SwingPole):
 		swing_poles.append(swing_pole)
 	
 func _check_swing_poles(delta : float):
-	if is_swinging and !swing_poles.empty() and boost > 0:
+	if !swing_poles.empty():
 		var closest_pole : SwingPole = swing_poles.front()
 		for swing_pole in swing_poles:
 			if global_transform.origin.distance_to(swing_pole.global_transform.origin) < \
 					global_transform.origin.distance_to(closest_pole.global_transform.origin):
 				closest_pole = swing_pole
-		_swing(closest_pole, delta)
-	
-#	var temp_pole_array : Array
-#	for swing_pole in swing_poles:
-#		if global_transform.origin.distance_to(swing_pole.global_transform.origin) < swing_pole.swing_length:
-##			temp_pole_array.append(swing_pole)
-#			if is_swinging and boost > 0:
-#				_swing(swing_pole, delta)
+		if is_swinging and boost > 0:
+			_swing(closest_pole, delta)
+		else:
+			closest_pole.set_laser_line()
 
 func _swing(swing_pole : SwingPole, delta : float):
 	var swing_distance = global_transform.origin.distance_to(swing_pole.global_transform.origin)
@@ -411,13 +409,15 @@ func _swing(swing_pole : SwingPole, delta : float):
 	
 	if (global_transform.origin + velocity * delta).distance_to(swing_pole.global_transform.origin) > swing_pole.swing_length:
 		var delta_origin = global_transform.origin + velocity * delta
-#		print((delta_origin).distance_to(swing_pole.global_transform.origin))
 		var new_dest : Vector3 = (delta_origin).direction_to(swing_pole.global_transform.origin)
 		new_dest *= swing_pole.swing_length
 		delta_velocity = (global_transform.origin - new_dest) - delta_origin
 		
 	velocity += (swing_pole.global_transform.origin - global_transform.origin) * pull_strength
 	velocity -= delta_velocity
+	
+	swing_pole.set_laser_line($Engine.global_transform.origin)
+	
 	_set_boost(swing_cost)
 
 func _check_kinematic_collision():

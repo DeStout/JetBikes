@@ -6,26 +6,27 @@
 [ext_resource path="res://Menus/Scripts/SinglePlayerMenu.gd" type="Script" id=4]
 [ext_resource path="res://Game/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=5]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=8]
 size = 48
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=9]
 size = 36
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=10]
 size = 28
 font_data = ExtResource( 5 )
 
 [node name="SinglePlayerMenu" type="Control"]
 anchor_left = 0.289
-anchor_top = 0.457
+anchor_top = 0.049
 anchor_right = 0.701
-anchor_bottom = 0.83
-margin_top = 0.415955
-margin_right = -0.832031
-margin_bottom = 0.039917
+anchor_bottom = 0.951
+margin_left = 0.605957
+margin_top = 535.712
+margin_right = -0.0637207
+margin_bottom = -159.712
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -34,11 +35,11 @@ __meta__ = {
 [node name="SinglePlayerLabel" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 0.998
-margin_left = 64.0
+margin_left = 64.0002
 margin_top = 32.0
 margin_right = -471.0
 margin_bottom = -444.822
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 8 )
 text = "Single Player Options"
 align = 1
 valign = 1
@@ -47,13 +48,14 @@ __meta__ = {
 }
 
 [node name="Level" type="Control" parent="."]
+anchor_left = 0.064
 anchor_top = 0.18
 anchor_right = 0.56
-anchor_bottom = 0.998
-margin_left = 32.0
-margin_top = 32.0
-margin_right = -32.0
-margin_bottom = -256.022
+anchor_bottom = 1.0
+margin_left = -0.064003
+margin_top = 0.159996
+margin_right = -0.559998
+margin_bottom = -264.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -65,12 +67,12 @@ __meta__ = {
 [node name="LevelLabel" type="Label" parent="Level"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = 0.0200043
+margin_top = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 9 )
 text = "Level Select"
 align = 1
 __meta__ = {
@@ -78,14 +80,14 @@ __meta__ = {
 }
 
 [node name="LevelName" type="Label" parent="Level"]
-anchor_top = 0.286
+anchor_top = 0.353
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -0.0262794
-margin_bottom = 0.0200043
+margin_top = -0.00800323
+margin_right = 0.000976563
 size_flags_horizontal = 0
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 10 )
 text = "test_track"
 align = 1
 valign = 1
@@ -94,18 +96,18 @@ __meta__ = {
 }
 
 [node name="LevelLeft" type="Button" parent="Level"]
-anchor_top = 0.286
-anchor_right = 1.0
+anchor_top = 0.353
+anchor_right = 0.258
 anchor_bottom = 1.0
-margin_left = 88.0
-margin_top = -0.0262794
-margin_right = -333.0
-margin_bottom = 27.02
-grow_horizontal = 0
+margin_left = 48.0
+margin_top = 7.992
+margin_right = 16.0322
+margin_bottom = 16.0
+grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 0.75, 0.75 )
 focus_mode = 0
-size_flags_horizontal = 8
+size_flags_horizontal = 3
 size_flags_vertical = 0
 shortcut_in_tooltip = false
 action_mode = 0
@@ -119,18 +121,19 @@ __meta__ = {
 }
 
 [node name="LevelRight" type="Button" parent="Level"]
-anchor_top = 0.286
+anchor_left = 0.742
+anchor_top = 0.353
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 352.0
-margin_top = -0.0262794
-margin_right = -20.0
-margin_bottom = 80.02
+margin_left = 7.96869
+margin_top = 7.992
+margin_right = -23.999
+margin_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_scale = Vector2( 0.5, 0.5 )
+rect_scale = Vector2( 0.75, 0.75 )
 focus_mode = 0
-size_flags_horizontal = 8
+size_flags_horizontal = 3
 size_flags_vertical = 3
 shortcut_in_tooltip = false
 action_mode = 0
@@ -144,13 +147,14 @@ __meta__ = {
 }
 
 [node name="Laps" type="Control" parent="."]
+anchor_left = 0.064
 anchor_top = 0.18
 anchor_right = 0.56
-anchor_bottom = 0.998
-margin_left = 32.0
-margin_top = 143.98
-margin_right = -32.0
-margin_bottom = -144.042
+anchor_bottom = 1.0
+margin_left = -0.064003
+margin_top = 136.16
+margin_right = -32.56
+margin_bottom = -144.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -167,7 +171,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 9 )
 text = "Number of Laps"
 align = 1
 __meta__ = {
@@ -175,14 +179,16 @@ __meta__ = {
 }
 
 [node name="NumLaps" type="Label" parent="Laps"]
-anchor_top = 0.286
+anchor_top = 0.333
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 5.97372
-margin_bottom = 0.0200195
+anchor_bottom = 1.067
+margin_left = 6.10352e-05
+margin_top = 0.0400009
+margin_right = 6.10352e-05
+margin_bottom = -0.0400085
 size_flags_horizontal = 0
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 10 )
 text = "3"
 align = 1
 valign = 1
@@ -191,13 +197,13 @@ __meta__ = {
 }
 
 [node name="LapsDecrease" type="Button" parent="Laps"]
-anchor_top = 0.286
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 118.0
-margin_top = -0.0262756
-margin_right = -301.0
-margin_bottom = 27.02
+anchor_top = 0.333
+anchor_right = 0.276
+anchor_bottom = 1.068
+margin_left = 48.0
+margin_top = 8.04
+margin_right = 15.936
+margin_bottom = 15.84
 grow_horizontal = 0
 grow_vertical = 2
 rect_scale = Vector2( 0.75, 0.75 )
@@ -216,16 +222,17 @@ __meta__ = {
 }
 
 [node name="LapsIncrease" type="Button" parent="Laps"]
-anchor_top = 0.286
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 320.0
-margin_top = -0.0262756
-margin_right = -64.0
-margin_bottom = 80.02
+anchor_left = 0.793
+anchor_top = 0.333
+anchor_right = 1.069
+anchor_bottom = 1.067
+margin_left = 8.04797
+margin_top = 8.04
+margin_right = -24.016
+margin_bottom = 15.96
 grow_horizontal = 2
 grow_vertical = 2
-rect_scale = Vector2( 0.5, 0.5 )
+rect_scale = Vector2( 0.75, 0.75 )
 focus_mode = 0
 size_flags_horizontal = 8
 size_flags_vertical = 3
@@ -241,13 +248,14 @@ __meta__ = {
 }
 
 [node name="NPCs" type="Control" parent="."]
+anchor_left = 0.064
 anchor_top = 0.18
 anchor_right = 0.56
-anchor_bottom = 0.998
-margin_left = 32.0
-margin_top = 256.23
-margin_right = -32.0
-margin_bottom = -31.792
+anchor_bottom = 1.0
+margin_left = -0.064003
+margin_top = 256.16
+margin_right = -31.56
+margin_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -258,13 +266,13 @@ __meta__ = {
 
 [node name="NPCsLabel" type="Label" parent="NPCs"]
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = 0.0200043
+anchor_bottom = 1.143
+margin_bottom = -0.0160065
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 9 )
 text = "Number of NPCs"
 align = 1
 __meta__ = {
@@ -272,15 +280,15 @@ __meta__ = {
 }
 
 [node name="NumNPCs" type="Label" parent="NPCs"]
-anchor_top = 0.286
+anchor_top = 0.357
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 5.97372
-margin_bottom = 0.0200195
+anchor_bottom = 1.143
+margin_top = 0.0159988
+margin_bottom = -0.0160065
 size_flags_horizontal = 0
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 3 )
-text = "3"
+custom_fonts/font = SubResource( 10 )
+text = "11"
 align = 1
 valign = 1
 __meta__ = {
@@ -288,13 +296,13 @@ __meta__ = {
 }
 
 [node name="NPCDecrease" type="Button" parent="NPCs"]
-anchor_top = 0.286
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 118.0
-margin_top = -0.0262756
-margin_right = -301.0
-margin_bottom = 27.02
+anchor_top = 0.357
+anchor_right = 0.275
+anchor_bottom = 1.143
+margin_left = 48.0001
+margin_top = 8.016
+margin_right = 16.1251
+margin_bottom = 13.984
 grow_horizontal = 0
 grow_vertical = 2
 rect_scale = Vector2( 0.75, 0.75 )
@@ -313,16 +321,17 @@ __meta__ = {
 }
 
 [node name="NPCIncrease" type="Button" parent="NPCs"]
-anchor_top = 0.286
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 320.0
-margin_top = -0.0262756
-margin_right = -64.0
-margin_bottom = 80.02
+anchor_left = 0.791
+anchor_top = 0.357
+anchor_right = 1.067
+anchor_bottom = 1.143
+margin_left = 8.185
+margin_top = 8.016
+margin_right = -24.155
+margin_bottom = 15.984
 grow_horizontal = 2
 grow_vertical = 2
-rect_scale = Vector2( 0.5, 0.5 )
+rect_scale = Vector2( 0.75, 0.75 )
 focus_mode = 0
 size_flags_horizontal = 8
 size_flags_vertical = 3
@@ -338,14 +347,14 @@ __meta__ = {
 }
 
 [node name="Buttons" type="GridContainer" parent="."]
-anchor_left = 0.561
+anchor_left = 0.559
 anchor_top = 0.18
-anchor_right = 1.0
-anchor_bottom = 1.001
-margin_left = 0.76886
-margin_top = 314.386
-margin_right = -63.8879
-margin_bottom = -64.0
+anchor_right = 0.999
+anchor_bottom = 1.0
+margin_left = 0.4422
+margin_top = 290.16
+margin_right = -62.9969
+margin_bottom = -15.9999
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -356,7 +365,7 @@ __meta__ = {
 }
 
 [node name="RaceButton" type="Button" parent="Buttons"]
-margin_right = 398.0
+margin_right = 377.0
 margin_bottom = 94.0
 size_flags_horizontal = 3
 size_flags_vertical = 0

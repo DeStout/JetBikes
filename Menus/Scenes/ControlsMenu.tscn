@@ -1,30 +1,36 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Game/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Game/Fonts/MenuFont.tres" type="DynamicFont" id=2]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 22
+size = 32
 extra_spacing_top = 5
 font_data = ExtResource( 1 )
 
-[node name="OptionsMenu" type="ColorRect"]
-margin_left = 480.0
-margin_top = 32.0
-margin_right = 864.0
-margin_bottom = 504.0
-color = Color( 0.25098, 0.25098, 0.25098, 1 )
+[node name="ControlsMenu" type="Control"]
+anchor_left = 0.29
+anchor_top = 0.457
+anchor_right = 0.7
+anchor_bottom = 0.829
+margin_left = -0.057312
+margin_top = 0.415955
+margin_right = 1.13757
+margin_bottom = 0.351929
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionsLabel" type="Label" parent="."]
-margin_right = 384.0
-margin_bottom = 96.0
+[node name="SinglePlayerLabel" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 0.998
+margin_left = 64.0
+margin_top = 32.0
+margin_right = -712.0
+margin_bottom = -390.02
 custom_fonts/font = SubResource( 1 )
 text = "Controls"
 align = 1
@@ -34,9 +40,13 @@ __meta__ = {
 }
 
 [node name="ControlsLabel" type="Label" parent="."]
-margin_top = 67.0
-margin_right = 384.0
-margin_bottom = 387.0
+anchor_top = 0.18
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 128.0
+margin_top = 8.0
+margin_right = -64.0
+margin_bottom = -32.0
 custom_fonts/font = SubResource( 2 )
 text = "Mouse - Steer
 WASD - Movement
@@ -45,31 +55,7 @@ Ctrl - Brake
 Left Click - Swing
 Right Click - Free Rotate
 Esc - Pause Menu"
-align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Buttons" type="GridContainer" parent="."]
-margin_left = 32.0
-margin_top = 387.0
-margin_right = 352.0
-margin_bottom = 438.0
-custom_constants/vseparation = 8
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CancelButton" type="Button" parent="Buttons"]
-margin_right = 320.0
-margin_bottom = 51.0
-size_flags_horizontal = 3
-size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
-shortcut_in_tooltip = false
-action_mode = 0
-text = "Cancel"
 __meta__ = {
 "_edit_use_anchors_": false
 }

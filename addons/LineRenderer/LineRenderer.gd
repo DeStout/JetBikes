@@ -1,6 +1,10 @@
 extends ImmediateGeometry
 
-export var points = [Vector3(0,0,0),Vector3(0,5,0)]
+const LASER_DEFAULT_POSITION = Vector3.ZERO
+
+onready var sfx_player : AudioStreamPlayer = $SFXPlayer
+
+export var points = [LASER_DEFAULT_POSITION, LASER_DEFAULT_POSITION]
 export var startThickness = 0.1
 export var endThickness = 0.1
 export var cornerSmooth = 5
@@ -12,9 +16,6 @@ export var scaleTexture = true
 
 var camera
 var cameraOrigin
-
-func _ready():
-	pass
 
 func _process(delta):
 	if points.size() < 2:
@@ -109,6 +110,11 @@ func _process(delta):
 		nextThickness = lerp(startThickness, endThickness, progress + progressStep);
 	
 	end()
+		
+
+func play_sfx(is_playing : bool):
+	sfx_player.playing = is_playing
+
 
 func cap(center, pivot, thickness, smoothing):
 	var orthogonal = (cameraOrigin - center).cross(center - pivot).normalized() * thickness;
@@ -152,4 +158,3 @@ func corner(center, start, end, smoothing):
 		add_vertex(array[i]);
 		set_uv(Vector2(0.5, 0.5))
 		add_vertex(center);
-		
