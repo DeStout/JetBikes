@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/DieselEngine.wav-a6d7e5a07a085a28461a0e9dd11e561c.sample"
+
+[deps]
+
+source_file="res://Racers/General/Bike/Assets/SFX/DieselEngine.wav"
+dest_files=[ "res://.import/DieselEngine.wav-a6d7e5a07a085a28461a0e9dd11e561c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=1

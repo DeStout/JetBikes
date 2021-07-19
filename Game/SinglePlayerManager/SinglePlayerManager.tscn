@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/SinglePlayerManager/SinglePlayerManager.gd" type="Script" id=1]
+[ext_resource path="res://Game/Music/Juno Reactor - Pistolero.mp3" type="AudioStream" id=4]
+
+[node name="SinglePlayerManager" type="Node"]
+script = ExtResource( 1 )
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="EndTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 4 )
+bus = "Music"
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+bus = "SFX"
+
+[connection signal="timeout" from="StartTimer" to="." method="_start_race"]
+[connection signal="timeout" from="EndTimer" to="." method="end_race"]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/JetEngine.wav-25ee2010c21c404b6b7baa4bbb504acc.sample"
+
+[deps]
+
+source_file="res://Racers/General/Bike/Assets/SFX/JetEngine.wav"
+dest_files=[ "res://.import/JetEngine.wav-25ee2010c21c404b6b7baa4bbb504acc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=1

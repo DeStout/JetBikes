@@ -1,0 +1,151 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Racers/General/HUD/Minimap.gd" type="Script" id=2]
+[ext_resource path="res://Racers/General/HUD/Arrow/Arrow.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Racers/SinglePlayer_Player/HUD/SinglePlayerHUD.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 125
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 150
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.776471, 0.254902, 0.254902, 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 22
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.615686, 0.701961, 0.423529, 1 )
+
+[sub_resource type="ViewportTexture" id=7]
+viewport_path = NodePath("ArrowView")
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+margin_right = -640.0
+margin_bottom = 1280.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [ 1279.6, 179.281 ]
+}
+
+[node name="LapLabel" type="Label" parent="."]
+margin_top = 1.0
+margin_right = 360.0
+margin_bottom = 123.0
+custom_fonts/font = SubResource( 1 )
+text = "Lap: ~/3"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlaceLabel" type="Label" parent="."]
+margin_left = 63.2063
+margin_top = 69.7399
+margin_right = 297.206
+margin_bottom = 274.74
+custom_fonts/font = SubResource( 2 )
+text = "12"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RaceNotice" type="Label" parent="."]
+margin_top = 1.0
+margin_right = 2560.0
+margin_bottom = 1000.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 3 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="BoostBar" type="ProgressBar" parent="."]
+margin_left = 96.2808
+margin_top = 1300.4
+margin_right = 312.281
+margin_bottom = 1329.4
+custom_styles/fg = SubResource( 4 )
+max_value = 250.0
+step = 1.0
+value = 125.0
+rounded = true
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BoostLabel" type="Label" parent="BoostBar"]
+margin_right = 83.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 5 )
+text = "Boost"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SpeedBar" type="ProgressBar" parent="."]
+margin_left = 63.0
+margin_top = 1338.0
+margin_right = 552.0
+margin_bottom = 1376.0
+custom_styles/fg = SubResource( 6 )
+max_value = 180.0
+step = 1.0
+value = 60.0
+allow_greater = true
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ArrowView" type="Viewport" parent="."]
+size = Vector2( 256, 256 )
+own_world = true
+transparent_bg = true
+msaa = 4
+render_direct_to_screen = true
+
+[node name="Arrow" parent="ArrowView" instance=ExtResource( 3 )]
+transform = Transform( 0.539403, 0, -0.842048, 0, 1, 0, 0.842048, 0, 0.539403, 0, 0, 0 )
+
+[node name="Arrow" type="Sprite" parent="."]
+position = Vector2( 1279.6, 123 )
+scale = Vector2( 1.19519, -1.19519 )
+texture = SubResource( 7 )
+region_rect = Rect2( 0, 0, 256, 256 )
+
+[node name="Minimap" type="Sprite" parent="."]
+position = Vector2( 2144, 32 )
+centered = false
+flip_v = true
+script = ExtResource( 2 )

@@ -3,15 +3,17 @@ extends Node
 signal race_finished
 
 var npc
-var player = load("res://Racers/Scenes/Player.tscn")
+var player = load("res://Racers/SinglePlayer_Player/Player.tscn")
+var crash_bike = load("res://Racers/General/Bike/Assets/Models/CrashBike.tscn")
 var players : Array
 var path_nodes_size : int
 
 func _ready() -> void:
 	if Globals.NPC_number != 0:
-		npc = load("res://Racers/Scenes/NPC.tscn")
+		npc = load("res://Racers/SinglePlayer_NPC/NPC.tscn")
 	_spawn_players()
 	players = get_children()
+	players.erase($CrashBikes)
 	
 func _process(delta : float) -> void:
 	players.sort_custom(self, "_sort_placement")
@@ -19,8 +21,11 @@ func _process(delta : float) -> void:
 		
 func _spawn_players():
 	player = player.instance()
+	crash_bike = crash_bike.instance()
 	player.connect("finished_race", self, "finish_race")
+	player.crash_bike = crash_bike
 	add_child(player)
+	$CrashBikes.add_child(crash_bike)
 	player.global_transform = get_node("PlayerSpawn"+str(Globals.NPC_number+1)).global_transform
 	
 	if Globals.NPC_number > 0:

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Racers/General/Bike/Assets/Models/Vehicle1.tres" type="ArrayMesh" id=1]
+[ext_resource path="res://Racers/General/Racer/Racer.tscn" type="PackedScene" id=2]
+
+[node name="Engine" type="MeshInstance"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+mesh = ExtResource( 1 )
+material/0 = null
+
+[node name="Root" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.02, 0, -4.44089e-16, 0, 0.02, 0, 4.44089e-16, 0, 0.02, 6.56279e-08, -1.11578, -0.750695 )
