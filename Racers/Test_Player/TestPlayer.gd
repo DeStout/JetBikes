@@ -3,7 +3,7 @@ extends Player
 var _spawn_point : Transform
 
 func _ready():
-	has_control = true;
+	has_control = true
 	HUD.get_node("Arrow").visible = false
 	_spawn_point = global_transform
 

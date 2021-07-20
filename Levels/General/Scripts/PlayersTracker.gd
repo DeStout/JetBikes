@@ -21,12 +21,13 @@ func _process(delta : float) -> void:
 		
 func _spawn_players():
 	player = player.instance()
-	crash_bike = crash_bike.instance()
 	player.connect("finished_race", self, "finish_race")
-	player.crash_bike = crash_bike
 	add_child(player)
-	$CrashBikes.add_child(crash_bike)
 	player.global_transform = get_node("PlayerSpawn"+str(Globals.NPC_number+1)).global_transform
+	
+	crash_bike = crash_bike.instance()
+	player.crash_bike = crash_bike
+	$CrashBikes.add_child(crash_bike)
 	
 	if Globals.NPC_number > 0:
 		for NPC_num in range(Globals.NPC_number):
@@ -62,7 +63,7 @@ func finish_race() -> void:
 		racer.finish_race()
 	
 func _alert_players() -> void:
-	if get_child_count() == players.size():
+	if get_child_count() - 1 == players.size():
 		for new_placement in range(players.size()):
 			players[new_placement].placement = new_placement + 1
 			if players[new_placement] is Player:

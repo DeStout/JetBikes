@@ -9,7 +9,7 @@ export var is_checkpoint = true
 export var serial : int = 0 setget _set_next_serial
 export var next_serial : int = 0
 export var route : int = -1
-export var boost_value : int = 25
+export var boost_value : int = 40
 
 onready var path : Path = $Path
 var box_shape_extents : Vector3

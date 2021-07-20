@@ -13,6 +13,7 @@ extents = Vector3( 21.1024, 7.43182, 1 )
 
 [node name="PathNode" type="Spatial"]
 script = ExtResource( 1 )
+boost_value = 25
 
 [node name="Path" type="Path" parent="."]
 curve = SubResource( 1 )

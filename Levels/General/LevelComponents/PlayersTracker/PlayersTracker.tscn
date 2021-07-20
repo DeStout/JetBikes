@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Levels/General/Scripts/PlayersTracker.gd" type="Script" id=1]
+
+[node name="Players" type="Node"]
+script = ExtResource( 1 )
+
+[node name="PlayerSpawn1" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -28.8746, -33.6195, 20.3638 )
+
+[node name="CSGSphere" type="CSGSphere" parent="PlayerSpawn1"]
+
+[node name="PlayerSpawn2" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -28.9499, -33.6195, 27.7573 )
+
+[node name="CSGSphere" type="CSGSphere" parent="PlayerSpawn2"]
+
+[node name="PlayerSpawn3" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -28.8746, -33.6195, 35.0584 )
+
+[node name="CSGSphere" type="CSGSphere" parent="PlayerSpawn3"]
+
+[node name="PlayerSpawn4" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -38.8746, -33.6195, 20.3638 )
+
+[node name="CSGSphere" type="CSGSphere" parent="PlayerSpawn4"]
+
+[node name="PlayerSpawn5" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -38.9499, -33.6195, 27.7573 )
+
+[node name="CSGSphere" type="CSGSphere" parent="PlayerSpawn5"]
+
+[node name="PlayerSpawn6" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -38.8746, -33.6195, 35.0584 )
+
+[node name="CSGSphere" type="CSGSphere" parent="PlayerSpawn6"]
+
+[node name="PlayerSpawn7" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -48.8746, -33.6195, 20.3638 )
+
+[node name="CSGSphere" type="CSGSphere" parent="PlayerSpawn7"]
+
+[node name="PlayerSpawn8" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -48.9499, -33.6195, 27.7573 )
+
+[node name="CSGSphere" type="CSGSphere" parent="PlayerSpawn8"]
+
+[node name="PlayerSpawn9" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -48.8746, -33.6195, 35.0584 )
+
+[node name="CSGSphere" type="CSGSphere" parent="PlayerSpawn9"]
+
+[node name="PlayerSpawn10" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -58.8746, -33.6195, 20.3638 )
+
+[node name="CSGSphere" type="CSGSphere" parent="PlayerSpawn10"]
+
+[node name="PlayerSpawn11" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -58.9499, -33.6195, 27.7573 )
+
+[node name="CSGSphere" type="CSGSphere" parent="PlayerSpawn11"]
+
+[node name="PlayerSpawn12" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -58.8746, -33.6195, 35.0584 )
+
+[node name="CSGSphere" type="CSGSphere" parent="PlayerSpawn12"]
+
+[node name="CrashBikes" type="Node" parent="."]

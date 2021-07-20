@@ -43,6 +43,7 @@ var swing_cost : float = -1.0
 var sfx_pitch : float = MIN_SFX_PITCH
 
 var has_control : bool = false
+var has_cam_control : bool = true
 var is_boosting : bool = false
 var is_braking : bool = true
 var is_on_ground : bool = false
@@ -78,6 +79,7 @@ func _process(delta : float) -> void:
 		_path_node_distance()
 		_set_arrow_angle()
 	_pitch_sfx()
+#	_set_boost_sfx()
 	_adjust_cam_fov_dist()
 	_emit_trail_particles()
 
@@ -213,7 +215,7 @@ func _input(event):
 				$Engine.rotate_z(deg2rad(event.relative.x * mouse_horz_invert * FREE_ROTATE_HORZ_SENSITIVITY))
 				$KinematicCollisionShape.rotate_x(deg2rad(event.relative.y * mouse_vert_invert * FREE_ROTATE_VERT_SENSITIVITY))
 				$KinematicCollisionShape.rotate_z(deg2rad(event.relative.x * mouse_horz_invert * FREE_ROTATE_HORZ_SENSITIVITY))
-			else:
+			elif has_cam_control:
 				RotationHelper.rotate_x(-deg2rad(event.relative.y * mouse_vert_invert * MOUSE_VERT_SENSITIVITY))
 				RotationHelper.rotate_y(deg2rad(event.relative.x * mouse_horz_invert * MOUSE_HORZ_SENSITIVITY))
 				
@@ -232,11 +234,12 @@ func _input(event):
 
 # Return Camera, Engine, and Collision back to default values
 func _rotate_default(var delta : float) -> void:
-	if RotationHelper.rotation_degrees.y != 0:
-		var yRot : float = RotationHelper.rotation_degrees.y
-		yRot = yRot + (0 - yRot) * (delta * TURN_SPEED)
-		RotationHelper.rotation_degrees.y = yRot
-		rotate_object_local(Vector3(0, 1, 0), deg2rad(yRot * delta * TURN_SPEED))
+	if has_cam_control:
+		if RotationHelper.rotation_degrees.y != 0:
+			var yRot : float = RotationHelper.rotation_degrees.y
+			yRot = yRot + (0 - yRot) * (delta * TURN_SPEED)
+			RotationHelper.rotation_degrees.y = yRot
+			rotate_object_local(Vector3(0, 1, 0), deg2rad(yRot * delta * TURN_SPEED))
 	
 	if is_on_ground:
 		if $Engine.rotation_degrees != Vector3(0, 0, 0):
@@ -255,6 +258,12 @@ func _pitch_sfx():
 	sfx_pitch = clamp(sfx_pitch, MIN_SFX_PITCH, MAX_SFX_PITCH)
 	$Audio_Jet.pitch_scale = sfx_pitch
 	$Audio_Diesel.pitch_scale = sfx_pitch
+
+#func _set_boost_sfx():
+#	if is_boosting:
+#		$Audio_Boost.play()
+#	else:
+#		$Audio_Boost.stop()
 
 func _adjust_cam_fov_dist():
 	var temp_velocity : Vector2 = Vector2(velocity.x, velocity.z)
@@ -446,21 +455,23 @@ func _check_crash():
 	
 func _crash():
 	if !$CrashTimer.time_left:
-		_set_crash_bike()
+		crash_bike.set_crash(self)
 		
 		has_control = false
+		has_cam_control = false
 		visible = false
 		global_transform.origin = navigation.get_closest_point(to_global(ground_point))
 		global_transform.basis.y = Vector3.UP
 		$Engine.rotation = Vector3(0, 0, 0)
 		$KinematicCollisionShape.rotation = Vector3(0, 0, 0)
-		set_collision_layer_bit(0, false)
+		$KinematicCollisionShape.disabled = true
 		$Particles.emitting = false
 		
 		$CrashTimer.start()
 #		$VisibilityTimer.start()
 	
 	velocity = Vector3.ZERO
+	camera.look_at(crash_bike.global_transform.origin, Vector3.UP)
 
 #func _crash():
 #	if !$CrashTimer.time_left:
@@ -478,30 +489,29 @@ func _crash():
 		
 func _crash_finished():
 	is_crashed = false
+	$RotationHelper/Camera.transform = $RotationHelper/Camera.default_cam_transform
+	look_at(current_path_node.global_transform.origin, Vector3.UP)
 	visible = true
 	if Globals.race_on_going == true:
 		has_control = true
-	set_collision_layer_bit(0, true)
+		has_cam_control = true
+#	set_collision_layer_bit(0, true)
+	$KinematicCollisionShape.disabled = false
 #	$VisibilityTimer.stop()
 #	$Engine.visible = true
 	$Particles.emitting = true
-	_remove_crash_bike()
+	crash_bike.remove_crash()
 
-func _set_crash_bike():
-	crash_bike.global_transform = global_transform
-	set_collision_layer_bit(0, true)
-	crash_bike.visible = true
-	crash_bike.apply_central_impulse(velocity)
+#func _set_crash_bike():
+#	crash_bike.global_transform = $Engine.global_transform
+##	set_collision_layer_bit(0, true)
+#	crash_bike.visible = true
+#	crash_bike.apply_central_impulse(velocity*2)
 
-func _remove_crash_bike():
-	crash_bike.global_transform.origin = Vector3.ZERO
-	set_collision_layer_bit(0, false)
-	crash_bike.visible = false
-
-#func _crash_finished():
-#	is_crashed = false
-#	if Globals.race_on_going:
-#		has_control = true
+#func _remove_crash_bike():
+#	crash_bike.global_transform.origin = Vector3.ZERO
+##	set_collision_layer_bit(0, false)
+#	crash_bike.visible = false
 
 func _on_VisibilityTimer_timeout():
 	$Engine.visible = !$Engine.visible
