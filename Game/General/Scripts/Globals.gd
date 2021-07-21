@@ -24,10 +24,10 @@ const DEFAULT_NPC_NUMBER : int = 11
 const MIN_NPC_NUMBER : int = 0
 const MAX_NPC_NUMBER : int = 11
 
-#const DEFAULT_SFX_LEVEL : int = -20
-const DEFAULT_SFX_LEVEL : int = -24
-#const DEFAULT_MUSIC_LEVEL : int = -30
-const DEFAULT_MUSIC_LEVEL : int = -48
+const DEFAULT_SFX_LEVEL : int = -20
+#const DEFAULT_SFX_LEVEL : int = -24
+const DEFAULT_MUSIC_LEVEL : int = -30
+#const DEFAULT_MUSIC_LEVEL : int = -48
 const MIN_SFX_LEVEL : int = -24
 const MAX_SFX_LEVEL : int = 0
 const MIN_MUSIC_LEVEL : int = -48
@@ -38,6 +38,7 @@ onready var music_bus : int = AudioServer.get_bus_index("Music")
 onready var sfx_bus : int = AudioServer.get_bus_index("SFX")
 onready var player_bus : int = AudioServer.get_bus_index("Player_SFX")
 onready var npc_bus : int = AudioServer.get_bus_index("NPC_SFX")
+onready var level_bus : int = AudioServer.get_bus_index("Level_SFX")
 
 const GRAVITY = 2.5
 

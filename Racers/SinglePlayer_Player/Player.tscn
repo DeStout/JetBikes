@@ -179,7 +179,7 @@ doppler_tracking = 2
 [node name="Audio_Boost" type="AudioStreamPlayer3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 stream = ExtResource( 13 )
-unit_db = -3.0
+unit_db = -5.0
 unit_size = 15.0
 bus = "Player_SFX"
 doppler_tracking = 2

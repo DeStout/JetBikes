@@ -79,7 +79,7 @@ func _process(delta : float) -> void:
 		_path_node_distance()
 		_set_arrow_angle()
 	_pitch_sfx()
-	_set_boost_sfx()
+#	_set_boost_sfx()
 	_adjust_cam_fov_dist()
 	_emit_trail_particles()
 
@@ -201,8 +201,10 @@ func _get_key_input() -> void:
 			if Input.is_action_just_pressed("Boost"):
 				if boost > 0:
 					is_boosting = true
+					_set_boost_sfx()
 			elif Input.is_action_just_released("Boost"):
 				is_boosting = false
+				_set_boost_sfx()
 			
 
 func _input(event):
@@ -341,6 +343,7 @@ func finish_race() -> void:
 	has_control = false
 	is_boosting = false
 	is_swinging = false
+	_set_boost_sfx()
 	
 func _path_node_distance() -> void:
 	var npc_to_path_node_local : Vector3 = current_path_node.to_local(global_transform.origin)
@@ -471,6 +474,7 @@ func _crash():
 		$Engine.rotation = Vector3(0, 0, 0)
 		$KinematicCollisionShape.rotation = Vector3(0, 0, 0)
 		$KinematicCollisionShape.disabled = true
+		_set_boost_sfx()
 		$Particles.emitting = false
 		$CrashTimer.start()
 #		$VisibilityTimer.start()
