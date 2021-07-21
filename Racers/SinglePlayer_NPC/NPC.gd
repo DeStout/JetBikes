@@ -111,7 +111,8 @@ func _physics_process(delta : float) -> void:
 		# Align NPC Y vector to ground normal
 		_aim()
 		if npc_basis[1].dot(ground_normal) > 0:
-			global_transform.basis = npc_basis.slerp(_align_to_normal(ground_normal), delta*4)
+			var npc_quat = npc_basis.get_rotation_quat()
+			global_transform.basis = Basis(npc_quat.slerp(_align_to_normal(ground_normal), delta*4))
 
 		# Hover along surface normal and slide downhill
 		var downhill : Vector3 = Vector3(0, -1, 0).cross(ground_normal).cross(ground_normal)
@@ -163,13 +164,13 @@ func _pitch_sfx():
 	$Audio_Jet.pitch_scale = sfx_pitch
 	$Audio_Diesel.pitch_scale = sfx_pitch
 
-# Helper function to align NPC with the ground normal
-func _align_to_normal(ground_normal : Vector3) -> Basis:
+# Helper function to align player with the ground normal
+func _align_to_normal(ground_normal : Vector3) -> Quat:
 	var result : Basis = Basis()
-	result.x = ground_normal.cross(global_transform.basis.z)
-	result.y = ground_normal
-	result.z = global_transform.basis.x.cross(ground_normal)
-	return result.orthonormalized()
+	result.y = ground_normal.normalized()
+	result.x = ground_normal.cross(global_transform.basis.z).normalized()
+	result.z = result.x.cross(result.y).normalized()
+	return result.orthonormalized().get_rotation_quat()
 
 # Called by signal if $GroundDetects are colliding
 func _is_on_ground() -> void:
@@ -180,7 +181,7 @@ func _is_on_ground() -> void:
 func _get_ground_normal() -> Vector3:
 	var ground_normal1 : Vector3 = $GroundDetect1.get_collision_normal()
 	var ground_normal2 : Vector3 = $GroundDetect2.get_collision_normal()
-	return (ground_normal1 + ground_normal2) * 0.5
+	return ((ground_normal1 + ground_normal2) * 0.5).normalized()
 
 # Average the collision point of the $GroundDetects and return the local coordinates
 func _get_ground_point() -> Vector3:

@@ -79,7 +79,7 @@ func _process(delta : float) -> void:
 		_path_node_distance()
 		_set_arrow_angle()
 	_pitch_sfx()
-#	_set_boost_sfx()
+	_set_boost_sfx()
 	_adjust_cam_fov_dist()
 	_emit_trail_particles()
 
@@ -101,7 +101,8 @@ func _physics_process(delta : float) -> void:
 		
 		# Align player Y vector to ground normal
 		if player_basis[1].dot(ground_normal) > 0:
-			global_transform.basis = player_basis.slerp(_align_to_normal(ground_normal), delta*4).orthonormalized()
+			var player_quat = player_basis.get_rotation_quat()
+			global_transform.basis = Basis(player_quat.slerp(_align_to_normal(ground_normal), delta*4))
 		
 		# Apply acceleration/deacceleration along player X vector based on input
 		if !is_braking:
@@ -181,9 +182,7 @@ func _physics_process(delta : float) -> void:
 # Track what keyboard input is being pressed
 func _get_key_input() -> void:
 	movement_input = Vector2.ZERO
-	is_boosting = false
-	if has_control:
-		is_braking = false
+		
 	if has_control:
 		if Input.is_action_pressed("Accelerate"):
 			movement_input.y += 1
@@ -194,17 +193,24 @@ func _get_key_input() -> void:
 		if Input.is_action_pressed("Reverse"):
 			movement_input.y -= 1
 			
-		if Input.is_action_pressed("Brake"):
+		if Input.is_action_just_pressed("Brake"):
 			is_braking = true
+		elif Input.is_action_just_released("Brake"):
+			is_braking = false
 		else:
-			if Input.is_action_pressed("Boost"):
-				is_boosting = true
+			if Input.is_action_just_pressed("Boost"):
+				if boost > 0:
+					is_boosting = true
+			elif Input.is_action_just_released("Boost"):
+				is_boosting = false
+			
 
 func _input(event):
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:	
 		if event is InputEventMouseButton:
-			if event.button_index == 1:
-				is_swinging = event.is_pressed()
+			if has_control:
+				if event.button_index == 1:
+					is_swinging = event.is_pressed()
 			if event.button_index == 2:
 				is_free_rotating = event.is_pressed()
 		
@@ -259,11 +265,8 @@ func _pitch_sfx():
 	$Audio_Jet.pitch_scale = sfx_pitch
 	$Audio_Diesel.pitch_scale = sfx_pitch
 
-#func _set_boost_sfx():
-#	if is_boosting:
-#		$Audio_Boost.play()
-#	else:
-#		$Audio_Boost.stop()
+func _set_boost_sfx():
+	$Audio_Boost.set_playing(is_boosting)
 
 func _adjust_cam_fov_dist():
 	var temp_velocity : Vector2 = Vector2(velocity.x, velocity.z)
@@ -274,17 +277,12 @@ func _adjust_cam_fov_dist():
 	camera.transform.origin.z = clamp(camera.transform.origin.z, MIN_CAM_DIST, MAX_CAM_DIST)
 
 # Helper function to align player with the ground normal
-func _align_to_normal(ground_normal : Vector3) -> Basis:
+func _align_to_normal(ground_normal : Vector3) -> Quat:
 	var result : Basis = Basis()
-	result.x = ground_normal.cross(global_transform.basis.z)
-	result.y = ground_normal
-	result.z = global_transform.basis.x.cross(ground_normal)
-	return result.orthonormalized()
-
-# Called by signal if $GroundDetects are colliding
-#func _is_on_ground() -> void:
-#	if !is_on_ground:
-#		is_on_ground = true
+	result.y = ground_normal.normalized()
+	result.x = ground_normal.cross(global_transform.basis.z).normalized()
+	result.z = result.x.cross(result.y).normalized()
+	return result.orthonormalized().get_rotation_quat()
 
 func check_ray_collision(ray_detect : RayCast):
 	if ray_detect.type == "Ground":
@@ -297,7 +295,7 @@ func check_ray_collision(ray_detect : RayCast):
 func _get_ground_normal() -> Vector3:
 	var ground_normal1 : Vector3 = $KinematicCollisionShape/GroundDetect1.get_collision_normal()
 	var ground_normal2 : Vector3 = $KinematicCollisionShape/GroundDetect2.get_collision_normal()
-	return (ground_normal1 + ground_normal2) * 0.5
+	return ((ground_normal1 + ground_normal2) * 0.5).normalized()
 
 # Average the collision point of the $GroundDetects and return the local coordinates
 func _get_ground_point() -> Vector3:
@@ -329,15 +327,20 @@ func _set_boost(var delta_boost : float) -> void:
 	if Globals.INFINITE_BOOST:
 		boost = MAX_BOOST
 	boost = clamp(boost, 0, MAX_BOOST)
+	if boost == 0:
+		is_boosting = 0
 	HUD.set_boost(boost)
 	
 func start_race() -> void:
 	HUD.set_race_notice()
 	has_control = true
+	is_braking = false
 	
 func finish_race() -> void:
 	HUD.set_race_notice("Finished!", true)
 	has_control = false
+	is_boosting = false
+	is_swinging = false
 	
 func _path_node_distance() -> void:
 	var npc_to_path_node_local : Vector3 = current_path_node.to_local(global_transform.origin)
@@ -457,16 +460,18 @@ func _crash():
 	if !$CrashTimer.time_left:
 		crash_bike.set_crash(self)
 		
+		visible = false
 		has_control = false
 		has_cam_control = false
-		visible = false
+		is_swinging = false
+		is_boosting = false
+		
 		global_transform.origin = navigation.get_closest_point(to_global(ground_point))
 		global_transform.basis.y = Vector3.UP
 		$Engine.rotation = Vector3(0, 0, 0)
 		$KinematicCollisionShape.rotation = Vector3(0, 0, 0)
 		$KinematicCollisionShape.disabled = true
 		$Particles.emitting = false
-		
 		$CrashTimer.start()
 #		$VisibilityTimer.start()
 	

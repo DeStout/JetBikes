@@ -29,13 +29,13 @@ func _set_swing_length(new_sphere_size : float):
 
 
 # Functionality Shit
-func set_laser_line(laser_to : Vector3 = to_global(laser_line.LASER_DEFAULT_POSITION)):		
+func set_laser_line(laser_to : Vector3 = to_global(laser_line.LASER_DEFAULT_POSITION)):
 	laser_line.points[1] = to_local(laser_to)
 	
-	if laser_to != to_global(laser_line.LASER_DEFAULT_POSITION):
-		laser_line.play_sfx(true)
-	else:
-		laser_line.play_sfx(false)
+#	if laser_to != to_global(laser_line.LASER_DEFAULT_POSITION):
+#		laser_line.play_sfx(true)
+#	else:
+#		laser_line.play_sfx(false)
 	
 func _racer_within_influence(body):
 	if body.has_method("add_remove_swing_pole"):

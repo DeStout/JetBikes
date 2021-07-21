@@ -2,8 +2,6 @@ extends ImmediateGeometry
 
 const LASER_DEFAULT_POSITION = Vector3.ZERO
 
-onready var sfx_player : AudioStreamPlayer = $SFXPlayer
-
 export var points = [LASER_DEFAULT_POSITION, LASER_DEFAULT_POSITION]
 export var startThickness = 0.1
 export var endThickness = 0.1
@@ -110,10 +108,6 @@ func _process(delta):
 		nextThickness = lerp(startThickness, endThickness, progress + progressStep);
 	
 	end()
-		
-
-func play_sfx(is_playing : bool):
-	sfx_player.playing = is_playing
 
 
 func cap(center, pivot, thickness, smoothing):
