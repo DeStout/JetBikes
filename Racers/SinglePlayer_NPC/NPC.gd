@@ -216,9 +216,10 @@ func _set_audio_sfx(var sfx_effect : int) -> void:
 		AudioServer.set_bus_effect_enabled(Globals.npc_bus, sfx_effect, !effect_enabled)
 
 func _path_node_distance() -> void:
-	var npc_to_path_node_local : Vector3 = current_path_node.to_local(global_transform.origin)
-	var path_node_point : Vector3 = current_path_node.path.curve.get_closest_point(npc_to_path_node_local)
-	path_node_distance = current_path_node.to_global(path_node_point).distance_to(global_transform.origin)
+#	var npc_to_path_node_local : Vector3 = current_path_node.to_local(global_transform.origin)
+#	var path_node_point : Vector3 = current_path_node.path.curve.get_closest_point(npc_to_path_node_local)
+#	path_node_distance = current_path_node.to_global(path_node_point).distance_to(global_transform.origin)
+	path_node_distance = current_path_node.get_closest_point_distance(global_transform.origin)
 		
 func _path_point_distance() -> void:
 	var temp_2D_goal = Vector2(simple_path[current_goal].x, simple_path[current_goal].z)
@@ -248,12 +249,12 @@ func update_path_node(var new_path_node : PathNode) -> void:
 			pathfind_next_node()
 		
 func pathfind_next_node() -> void:
-	var npc_to_path_node_local : Vector3 = current_path_node.to_local(global_transform.origin)
-	var path_node_point : Vector3 = current_path_node.path.curve.get_closest_point(npc_to_path_node_local)
+#	var npc_to_path_node_local : Vector3 = current_path_node.to_local(global_transform.origin)
+#	var path_node_point : Vector3 = current_path_node.path.curve.get_closest_point(npc_to_path_node_local)
+	var path_node_point : Vector3 = current_path_node.get_closest_point(global_transform.origin)
 	
 	simple_path.empty()
-	simple_path = navigation.get_simple_path(global_transform.origin, \
-		current_path_node.to_global(path_node_point), true)
+	simple_path = navigation.get_simple_path(global_transform.origin, path_node_point, true)
 	current_goal = 0
 	
 	if Globals.SHOW_NPC_PATHFIND:
@@ -316,13 +317,13 @@ func _crash():
 	velocity = Vector3.ZERO
 	has_control = !has_control
 	if has_control:
-		set_collision_layer_bit(0, true)
+#		set_collision_layer_bit(0, true)
 		set_collision_mask_bit(0, true)
 		$VisibilityTimer.stop()
 		$Engine.visible = true
 #		_unmute_player_sfx()
 	else:
-		set_collision_layer_bit(0, false)
+#		set_collision_layer_bit(0, false)
 		set_collision_mask_bit(0, false)
 		$CrashTimer.start()
 		$VisibilityTimer.start()

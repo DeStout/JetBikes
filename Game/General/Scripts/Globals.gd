@@ -1,6 +1,6 @@
 extends Node
 
-var SHOW_NPC_PATHFIND : bool = false
+var SHOW_NPC_PATHFIND : bool = true
 var INFINITE_BOOST : bool = false
 
 var test_track_ : PackedScene = load("res://Levels/TestTrack/TestTrack.tscn")

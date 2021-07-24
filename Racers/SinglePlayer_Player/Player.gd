@@ -102,7 +102,7 @@ func _physics_process(delta : float) -> void:
 		# Align player Y vector to ground normal
 		if player_basis[1].dot(ground_normal) > 0:
 			var player_quat = player_basis.get_rotation_quat()
-			global_transform.basis = Basis(player_quat.slerp(_align_to_normal(ground_normal), delta*4))
+			global_transform.basis = Basis(player_quat.slerp(_align_to_normal(ground_normal), delta*12))
 		
 		# Apply acceleration/deacceleration along player X vector based on input
 		if !is_braking:
@@ -321,8 +321,9 @@ func _set_speedometer() -> void:
 	HUD.set_speedometer(clamp(modified_velocity.length(), 0, MAX_SPEED))
 
 func _set_arrow_angle() -> void:
-	var vec2_path = Vector2(to_local(current_path_node.global_transform.origin).x, to_local(current_path_node.global_transform.origin).z).normalized()
-	HUD.set_arrow_angle(-(vec2_path.angle() + (PI/2)))
+	var closest_path_node_point : Vector3 = current_path_node.get_closest_point(global_transform.origin)
+	var vec2_path : Vector2 = Vector2(to_local(closest_path_node_point).x, to_local(closest_path_node_point).z).normalized()
+	HUD.set_arrow_angle(-(vec2_path.angle() + (PI / 2)))
 
 func _set_boost(var delta_boost : float) -> void:
 	boost += delta_boost
@@ -346,9 +347,7 @@ func finish_race() -> void:
 	_set_boost_sfx()
 	
 func _path_node_distance() -> void:
-	var npc_to_path_node_local : Vector3 = current_path_node.to_local(global_transform.origin)
-	var path_node_point : Vector3 = current_path_node.path.curve.get_closest_point(npc_to_path_node_local)
-	path_node_distance = current_path_node.to_global(path_node_point).distance_to(global_transform.origin)
+	path_node_distance = current_path_node.get_closest_point_distance(global_transform.origin)
 
 func update_path_node(var new_path_node : PathNode) -> void:
 	if current_path_node.serial == new_path_node.serial:

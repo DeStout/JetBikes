@@ -17,7 +17,6 @@ func _process(delta):
 			playing = true
 		pitch_scale += delta * acceleration * DELTA_PITCH
 		pitch_scale = clamp(pitch_scale, MIN_PITCH, MAX_PITCH)
-		print(pitch_scale)
 
 		if is_equal_approx(pitch_scale, MIN_PITCH):
 			if pitch_scale == MIN_PITCH:
