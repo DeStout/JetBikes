@@ -1,16 +1,18 @@
 extends Node
 
-var SHOW_NPC_PATHFIND : bool = true
+var SHOW_NPC_PATHFIND : bool = false
 var INFINITE_BOOST : bool = false
 
 var test_track_ : PackedScene = load("res://Levels/TestTrack/TestTrack.tscn")
 var test_terrain_ : PackedScene = load("res://Levels/TestTerrain/TestTerrain.tscn")
-var test_terrain2_ : PackedScene = load("res://Levels/TestTerrain2/TestTerrain2.tscn")
+#var test_terrain2_ : PackedScene = load("res://Levels/TestTerrain2/TestTerrain2.tscn")
+#var test_terrain3_ : PackedScene = load("res://Levels/TestTerrain3/TestTerrain3.tscn")
 #var new_canyon_ : PackedScene = load("res://Levels/NewCanyon/NewCanyon.tscn")
 var level_dict : Dictionary = {
 	"test_track" : test_track_,
 	"test_terrain" : test_terrain_,
-	"test_terrain2" : test_terrain2_
+#	"test_terrain2" : test_terrain2_,
+#	"test_terrain3" : test_terrain3_
 #	,"new_canyon" : new_canyon_
 	}
 var level_dict_keys : Array = level_dict.keys()
@@ -42,7 +44,7 @@ onready var level_bus : int = AudioServer.get_bus_index("Level_SFX")
 
 const GRAVITY = 2.5
 
-var level : int = DEFAULT_LEVEL
+var level : int = -1
 var laps_number : int = DEFAULT_LAP_NUMBER
 var NPC_number : int = DEFAULT_NPC_NUMBER
 var race_on_going : bool = false

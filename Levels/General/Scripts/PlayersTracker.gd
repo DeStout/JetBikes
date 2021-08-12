@@ -57,10 +57,11 @@ func start_race() -> void:
 	for racer in players:
 		racer.start_race()
 	
-func finish_race() -> void:
+func finish_race(winner) -> void:
 	emit_signal("race_finished")
 	for racer in players:
 		racer.finish_race()
+	player.HUD.set_race_notice("Finished!\n" + winner.name + " wins!", true)
 	
 func _alert_players() -> void:
 	if get_child_count() - 1 == players.size():

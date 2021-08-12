@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Racers/General/Bike/Assets/Models/Bike04.glb" type="PackedScene" id=1]
+
+[node name="Bike04" instance=ExtResource( 1 )]

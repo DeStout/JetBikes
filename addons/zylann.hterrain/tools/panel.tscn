@@ -63,6 +63,7 @@ ratio = 1.0
 
 [node name="Minimap" parent="HSplitContainer/HSplitContainer/MinimapContainer" instance=ExtResource( 5 )]
 margin_bottom = 100.0
+
 [connection signal="edit_pressed" from="HSplitContainer/HSplitContainer/HSplitContainer/TextureEditor" to="." method="_on_TextureEditor_edit_pressed"]
 [connection signal="import_pressed" from="HSplitContainer/HSplitContainer/HSplitContainer/TextureEditor" to="." method="_on_TextureEditor_import_pressed"]
 [connection signal="texture_selected" from="HSplitContainer/HSplitContainer/HSplitContainer/TextureEditor" to="." method="_on_TextureEditor_texture_selected"]

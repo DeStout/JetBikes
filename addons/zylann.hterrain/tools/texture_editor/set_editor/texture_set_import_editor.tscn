@@ -273,6 +273,7 @@ margin_bottom = 464.0
 rect_min_size = Vector2( 0, 8 )
 
 [node name="DialogFitter" parent="." instance=ExtResource( 1 )]
+
 [connection signal="item_selected" from="Import/HS/VB/SlotsList" to="." method="_on_SlotsList_item_selected"]
 [connection signal="pressed" from="Import/HS/VB/HB/AddSlotButton" to="." method="_on_AddSlotButton_pressed"]
 [connection signal="pressed" from="Import/HS/VB/HB/RemoveSlotButton" to="." method="_on_RemoveSlotButton_pressed"]

@@ -36,5 +36,6 @@ margin_top = 174.0
 margin_right = 128.0
 margin_bottom = 194.0
 text = "Clear"
+
 [connection signal="pressed" from="LoadButton" to="." method="_on_LoadButton_pressed"]
 [connection signal="pressed" from="ClearButton" to="." method="_on_ClearButton_pressed"]

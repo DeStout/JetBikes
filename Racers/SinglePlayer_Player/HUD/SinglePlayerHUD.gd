@@ -28,10 +28,3 @@ func set_arrow_angle(new_angle : float):
 func set_race_notice(new_text = "", is_visible = false):
 	$RaceNotice.text = new_text
 	$RaceNotice.visible = is_visible
-
-func set_debug_line(item_index, new_text = ""):
-	if Globals.SHOW_DEBUG_PANEL:
-		if $Debug.get_item_count() == item_index:
-			$Debug.add_item(str(new_text), null, false)
-		else:
-			$Debug.set_item_text(item_index, str(new_text))

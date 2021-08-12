@@ -3,12 +3,16 @@ extends Player
 var _spawn_point : Transform
 
 func _ready():
-	has_control = true
+	if Globals.level == -1:
+		pause_menu.connect("end_race", get_tree(), "quit")
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	HUD.get_node("Arrow").visible = false
 	_spawn_point = global_transform
+	
+	start_race()
 
 func _process(delta):
-	_set_boost(50 * delta)
+	_set_boost(75 * delta)
 	
 func _check_out_of_bounds():
 	if global_transform.origin.y < -70:

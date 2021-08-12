@@ -10,7 +10,6 @@ onready var minimap_camera : Camera = $Minimap/MinimapCamera
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-#	Globals.game.single_player_manager.setup_minimap(minimap.get_texture(), minimap_camera, $Players.players)
 	
 	$Players.connect("race_finished", self, "finish_race")
 	$Players.setup_players($Minimap/Navigation, path_nodes)

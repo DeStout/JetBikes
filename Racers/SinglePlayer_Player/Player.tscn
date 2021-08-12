@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Menus/PauseMenu/SinglePlayerPause.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Racers/SinglePlayer_Player/Player.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Racers/SinglePlayer_Player/Camera.gd" type="Script" id=12]
 [ext_resource path="res://Racers/General/Bike/Assets/SFX/Boost.wav" type="AudioStream" id=13]
 [ext_resource path="res://Racers/SinglePlayer_Player/AudioBoost.gd" type="Script" id=14]
+[ext_resource path="res://Racers/General/Bike/Assets/Models/Bike04.tscn" type="PackedScene" id=15]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.75
@@ -43,20 +44,46 @@ material = SubResource( 3 )
 size = Vector2( 2, 2 )
 
 [node name="Player" type="KinematicBody"]
-collision_mask = 7
+collision_mask = 15
 script = ExtResource( 2 )
 
-[node name="Engine" parent="." instance=ExtResource( 9 )]
+[node name="Engine" parent="." instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
-[node name="Seat" parent="Engine" index="0"]
-material/0 = ExtResource( 3 )
-
-[node name="WindShield" parent="Engine" index="1"]
+[node name="WindShield" parent="Engine" index="0"]
 material/0 = ExtResource( 11 )
+
+[node name="SteeringColumn" parent="Engine" index="1"]
+material/0 = ExtResource( 3 )
 
 [node name="Racer" parent="Engine" instance=ExtResource( 10 )]
 transform = Transform( -0.02, 0, -1.74846e-09, 0, 0.02, 0, 1.74846e-09, 0, -0.02, 0, -1.10989, 0.751 )
+
+[node name="SpotLight_L" type="SpotLight" parent="Engine"]
+transform = Transform( 0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -0.3, 0.0999999, -2.26459 )
+visible = false
+light_color = Color( 0.635294, 0.913725, 1, 1 )
+light_energy = 2.0
+spot_range = 30.0
+spot_angle = 25.0
+
+[node name="SpotLight_R" type="SpotLight" parent="Engine"]
+transform = Transform( 0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 0.3, 0.0999999, -2.26459 )
+visible = false
+light_color = Color( 0.635294, 0.913725, 1, 1 )
+light_energy = 2.0
+spot_range = 30.0
+spot_angle = 25.0
+
+[node name="Engine_old" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+visible = false
+
+[node name="Seat" parent="Engine_old" index="0"]
+material/0 = ExtResource( 3 )
+
+[node name="WindShield" parent="Engine_old" index="1"]
+material/0 = ExtResource( 11 )
 
 [node name="KinematicCollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
@@ -66,7 +93,7 @@ shape = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.65, -0.75 )
 enabled = true
 cast_to = Vector3( 0, -2.1, 0 )
-collision_mask = 6
+collision_mask = 14
 script = ExtResource( 8 )
 type = "Ground"
 
@@ -74,7 +101,7 @@ type = "Ground"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.65, 0.75 )
 enabled = true
 cast_to = Vector3( 0, -2.1, 0 )
-collision_mask = 6
+collision_mask = 14
 script = ExtResource( 8 )
 type = "Ground"
 
@@ -146,7 +173,7 @@ type = "Side"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22729, 0 )
 
 [node name="Camera" type="Camera" parent="RotationHelper"]
-transform = Transform( 1, 0, 0, 0, 0.946766, 0.321921, 0, -0.321921, 0.946766, 0, 8.683, 16.439 )
+transform = Transform( 1, 0, 0, 0, 0.946767, 0.321921, 0, -0.321921, 0.946767, 0, 8.683, 16.439 )
 doppler_tracking = 2
 current = true
 fov = 50.0
@@ -185,7 +212,7 @@ bus = "Player_SFX"
 doppler_tracking = 2
 script = ExtResource( 14 )
 
-[node name="Particles" type="Particles" parent="."]
+[node name="GroundParticles" type="Particles" parent="."]
 generate_lightmap = false
 amount = 300
 lifetime = 2.0
@@ -202,6 +229,9 @@ one_shot = true
 [node name="VisibilityTimer" type="Timer" parent="."]
 wait_time = 0.2
 
+[node name="CSGSphere" type="CSGSphere" parent="."]
+radius = 0.75
+
 [connection signal="is_colliding" from="KinematicCollisionShape/GroundDetect1" to="." method="check_ray_collision"]
 [connection signal="is_colliding" from="KinematicCollisionShape/GroundDetect2" to="." method="check_ray_collision"]
 [connection signal="is_colliding" from="KinematicCollisionShape/UpDetect1" to="." method="check_ray_collision"]
@@ -216,3 +246,4 @@ wait_time = 0.2
 [connection signal="timeout" from="VisibilityTimer" to="." method="_on_VisibilityTimer_timeout"]
 
 [editable path="Engine"]
+[editable path="Engine_old"]

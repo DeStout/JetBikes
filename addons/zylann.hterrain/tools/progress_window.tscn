@@ -3,7 +3,6 @@
 [ext_resource path="res://addons/zylann.hterrain/tools/progress_window.gd" type="Script" id=1]
 
 [node name="WindowDialog" type="WindowDialog" index="0"]
-
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -26,7 +25,6 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Rect" ]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." index="1"]
-
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -45,7 +43,6 @@ alignment = 0
 _sections_unfolded = [ "Anchor", "Margin" ]
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer" index="0"]
-
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -66,5 +63,3 @@ value = 0.0
 exp_edit = false
 rounded = false
 percent_visible = true
-
-

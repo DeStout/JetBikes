@@ -185,5 +185,6 @@ script = ExtResource( 3 )
 range = Vector2( 0, 90 )
 
 [node name="Temp" type="Node" parent="."]
+
 [connection signal="pressed" from="BrushShapeButton" to="." method="_on_BrushShapeButton_pressed"]
 [connection signal="pressed" from="GridContainer/HB/FlattenHeightPickButton" to="." method="_on_FlattenHeightPickButton_pressed"]

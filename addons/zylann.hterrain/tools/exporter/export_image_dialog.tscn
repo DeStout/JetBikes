@@ -156,6 +156,7 @@ margin_left = 257.0
 margin_right = 311.0
 margin_bottom = 20.0
 text = "Cancel"
+
 [connection signal="text_changed" from="VB/Grid/OutputPath/HeightmapPathLineEdit" to="." method="_on_HeightmapPathLineEdit_text_changed"]
 [connection signal="pressed" from="VB/Grid/OutputPath/HeightmapPathBrowseButton" to="." method="_on_HeightmapPathBrowseButton_pressed"]
 [connection signal="item_selected" from="VB/Grid/FormatSelector" to="." method="_on_FormatSelector_item_selected"]

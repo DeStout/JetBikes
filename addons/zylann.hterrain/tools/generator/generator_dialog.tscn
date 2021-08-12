@@ -83,6 +83,7 @@ margin_left = 555.0
 margin_right = 609.0
 margin_bottom = 20.0
 text = "Cancel"
+
 [connection signal="property_changed" from="VBoxContainer/Editor/Settings/Inspector" to="." method="_on_Inspector_property_changed"]
 [connection signal="dragged" from="VBoxContainer/Editor/Preview/TerrainPreview" to="." method="_on_TerrainPreview_dragged"]
 [connection signal="pressed" from="VBoxContainer/Choices/ApplyButton" to="." method="_on_ApplyButton_pressed"]

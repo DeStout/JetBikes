@@ -42,6 +42,7 @@ margin_top = 5.0
 margin_right = 179.0
 margin_bottom = 19.0
 text = "Textures"
+
 [connection signal="item_activated" from="TextureList" to="." method="_on_TextureList_item_activated"]
 [connection signal="item_selected" from="TextureList" to="." method="_on_TextureList_item_selected"]
 [connection signal="pressed" from="HBoxContainer/EditButton" to="." method="_on_EditButton_pressed"]

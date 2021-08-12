@@ -14,12 +14,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Game.gd"
 }, {
-"base": "ResourceFormatLoader",
+"base": "Reference",
 "class": "HTerrainDataLoader",
 "language": "GDScript",
 "path": "res://addons/zylann.hterrain/hterrain_resource_loader.gd"
 }, {
-"base": "ResourceFormatSaver",
+"base": "Reference",
 "class": "HTerrainDataSaver",
 "language": "GDScript",
 "path": "res://addons/zylann.hterrain/hterrain_resource_saver.gd"
@@ -73,7 +73,6 @@ run/main_scene="res://Game/Game.tscn"
 
 [autoload]
 
-Console="*res://addons/Debug Console/console.tscn"
 Globals="*res://Game/General/Scripts/Globals.gd"
 
 [display]
@@ -87,7 +86,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/zylann.hterrain/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/waterways/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
 
 [input]
 
@@ -189,6 +188,7 @@ debug={
 3d_physics/layer_1="Racers"
 3d_physics/layer_2="LevelGeo"
 3d_physics/layer_3="LevelModels"
+3d_physics/layer_4="Water"
 
 [rendering]
 

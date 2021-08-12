@@ -1,8 +1,0 @@
-{
-	"contains_albedo": true,
-	"resolution": 512,
-	"src": {
-		"a": "res://Levels/TestTerrain2/Assets/Materials/Rock037/Rock037_2K_Displacement.png",
-		"rgb": "res://Levels/TestTerrain2/Assets/Materials/Rock037/Rock037_2K_Color.png"
-	}
-}

@@ -3,7 +3,6 @@
 [ext_resource path="res://addons/zylann.hterrain/tools/generate_mesh_dialog.gd" type="Script" id=1]
 
 [node name="GenerateMeshDialog" type="WindowDialog" index="0"]
-
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -26,7 +25,6 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Rect" ]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." index="1"]
-
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -45,7 +43,6 @@ alignment = 0
 _sections_unfolded = [ "Margin" ]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" index="0"]
-
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -61,7 +58,6 @@ size_flags_vertical = 1
 alignment = 0
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer" index="0"]
-
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -81,7 +77,6 @@ lines_skipped = 0
 max_lines_visible = -1
 
 [node name="LODSpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer" index="1"]
-
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -108,7 +103,6 @@ suffix = ""
 _sections_unfolded = [ "Size Flags" ]
 
 [node name="PreviewLabel" type="Label" parent="VBoxContainer" index="1"]
-
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -128,7 +122,6 @@ lines_skipped = 0
 max_lines_visible = -1
 
 [node name="Spacer" type="Control" parent="VBoxContainer" index="2"]
-
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -146,7 +139,6 @@ size_flags_vertical = 1
 _sections_unfolded = [ "Rect" ]
 
 [node name="Label" type="Label" parent="VBoxContainer" index="3"]
-
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -168,7 +160,6 @@ max_lines_visible = -1
 _sections_unfolded = [ "custom_colors" ]
 
 [node name="Buttons" type="HBoxContainer" parent="VBoxContainer" index="4"]
-
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -187,7 +178,6 @@ alignment = 1
 _sections_unfolded = [ "custom_constants" ]
 
 [node name="Generate" type="Button" parent="VBoxContainer/Buttons" index="0"]
-
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -211,7 +201,6 @@ flat = false
 align = 1
 
 [node name="Cancel" type="Button" parent="VBoxContainer/Buttons" index="1"]
-
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -235,9 +224,5 @@ flat = false
 align = 1
 
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/LODSpinBox" to="." method="_on_LODSpinBox_value_changed"]
-
 [connection signal="pressed" from="VBoxContainer/Buttons/Generate" to="." method="_on_Generate_pressed"]
-
 [connection signal="pressed" from="VBoxContainer/Buttons/Cancel" to="." method="_on_Cancel_pressed"]
-
-

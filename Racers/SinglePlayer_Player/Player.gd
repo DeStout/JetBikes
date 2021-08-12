@@ -58,6 +58,7 @@ onready var RotationHelper : Spatial = $RotationHelper
 onready var camera : Camera = $RotationHelper/Camera
 onready var HUD : Control = $RotationHelper/Camera/HUD
 onready var pause_menu : Control = $RotationHelper/Camera/PauseMenu
+onready var ground_particles : Particles = $GroundParticles
 
 var ground_point : Vector3
 var prev_ground_distance : float = 0
@@ -102,7 +103,7 @@ func _physics_process(delta : float) -> void:
 		# Align player Y vector to ground normal
 		if player_basis[1].dot(ground_normal) > 0:
 			var player_quat = player_basis.get_rotation_quat()
-			global_transform.basis = Basis(player_quat.slerp(_align_to_normal(ground_normal), delta*12))
+			global_transform.basis = Basis(player_quat.slerp(_align_to_normal(ground_normal), delta*6))
 		
 		# Apply acceleration/deacceleration along player X vector based on input
 		if !is_braking:
@@ -289,6 +290,7 @@ func _align_to_normal(ground_normal : Vector3) -> Quat:
 func check_ray_collision(ray_detect : RayCast):
 	if ray_detect.type == "Ground":
 		is_on_ground = true
+		
 	elif ray_detect.type == "Side":
 		if ray_detect.global_transform.basis.z.dot(Vector3.DOWN) < -0.66:
 			is_crashed = true
@@ -324,6 +326,8 @@ func _set_arrow_angle() -> void:
 	var closest_path_node_point : Vector3 = current_path_node.get_closest_point(global_transform.origin)
 	var vec2_path : Vector2 = Vector2(to_local(closest_path_node_point).x, to_local(closest_path_node_point).z).normalized()
 	HUD.set_arrow_angle(-(vec2_path.angle() + (PI / 2)))
+	
+	$CSGSphere.global_transform.origin = closest_path_node_point
 
 func _set_boost(var delta_boost : float) -> void:
 	boost += delta_boost
@@ -340,7 +344,6 @@ func start_race() -> void:
 	is_braking = false
 	
 func finish_race() -> void:
-	HUD.set_race_notice("Finished!", true)
 	has_control = false
 	is_boosting = false
 	is_swinging = false
@@ -355,7 +358,7 @@ func update_path_node(var new_path_node : PathNode) -> void:
 		if current_path_node.serial == 0:
 			lap_number += 1
 			if lap_number > Globals.laps_number:
-				emit_signal("finished_race")
+				emit_signal("finished_race", self)
 			HUD.set_lap(lap_number)
 		if typeof(path_nodes[new_path_node.next_serial]) == TYPE_ARRAY:
 			current_path_node = path_nodes[new_path_node.next_serial][0]
@@ -396,9 +399,9 @@ func _mute_player_sfx():
 
 func _emit_trail_particles():
 	if is_on_ground:
-		$Particles.emitting = true
+		ground_particles.emitting = true
 	else:
-		$Particles.emitting = false
+		ground_particles.emitting = false
 
 func add_remove_swing_pole(swing_pole : SwingPole):
 	if swing_poles.has(swing_pole):
@@ -474,26 +477,12 @@ func _crash():
 		$KinematicCollisionShape.rotation = Vector3(0, 0, 0)
 		$KinematicCollisionShape.disabled = true
 		_set_boost_sfx()
-		$Particles.emitting = false
+		ground_particles.emitting = false
 		$CrashTimer.start()
 #		$VisibilityTimer.start()
 	
 	velocity = Vector3.ZERO
 	camera.look_at(crash_bike.global_transform.origin, Vector3.UP)
-
-#func _crash():
-#	if !$CrashTimer.time_left:
-#		global_transform.origin = navigation.get_closest_point(to_global(ground_point))
-#		global_transform.basis.y = Vector3.UP
-#		$Engine.rotation = Vector3(0, 0, 0)
-#		$KinematicCollisionShape.rotation = Vector3(0, 0, 0)
-#
-#		velocity = Vector3.ZERO
-#		has_control = false
-#		set_collision_layer_bit(0, false)
-#		$CrashTimer.start()
-#		$VisibilityTimer.start()
-#		$Particles.emitting = false
 		
 func _crash_finished():
 	is_crashed = false
@@ -507,19 +496,8 @@ func _crash_finished():
 	$KinematicCollisionShape.disabled = false
 #	$VisibilityTimer.stop()
 #	$Engine.visible = true
-	$Particles.emitting = true
+	ground_particles.emitting = true
 	crash_bike.remove_crash()
-
-#func _set_crash_bike():
-#	crash_bike.global_transform = $Engine.global_transform
-##	set_collision_layer_bit(0, true)
-#	crash_bike.visible = true
-#	crash_bike.apply_central_impulse(velocity*2)
-
-#func _remove_crash_bike():
-#	crash_bike.global_transform.origin = Vector3.ZERO
-##	set_collision_layer_bit(0, false)
-#	crash_bike.visible = false
 
 func _on_VisibilityTimer_timeout():
 	$Engine.visible = !$Engine.visible
