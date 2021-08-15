@@ -290,7 +290,6 @@ transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -135.311, 37.1528, 64.4653 )
 
 [node name="PathNode0" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.28389, 88.7441, -166.966 )
-function = 1
 next_serial = 1
 boost_value = 50
 
@@ -587,19 +586,23 @@ shape = SubResource( 53 )
 
 [node name="Pathfind_Mod0a" parent="Minimap/Navigation/ModNodes" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 0.8699, 0.493228, 0, -0.493228, 0.8699, -23.2334, 58.0272, -213.963 )
+visible = false
 function = 1
 
 [node name="CollisionShape" parent="Minimap/Navigation/ModNodes/Pathfind_Mod0a" index="0"]
 transform = Transform( 1, 0, 0, 0, 0.999281, 0.0379169, 0, -0.0379169, 0.999281, -5.09415, 0.892471, -3.79112 )
 shape = SubResource( 54 )
+disabled = true
 
 [node name="Pathfind_Mod0b" parent="Minimap/Navigation/ModNodes" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.00085, 68.9667, -317.817 )
+visible = false
 function = 1
 
 [node name="CollisionShape" parent="Minimap/Navigation/ModNodes/Pathfind_Mod0b" index="0"]
 transform = Transform( 0.979918, 0, 0.199402, -0.0301858, 0.988475, 0.148342, -0.197104, -0.151382, 0.968624, -43.2418, -35.3252, 51.7318 )
 shape = SubResource( 55 )
+disabled = true
 
 [node name="Pathfind_Mod2" parent="Minimap/Navigation/ModNodes" instance=ExtResource( 1 )]
 transform = Transform( 0.999341, 0, 0.0362949, 0, 1, 0, -0.0362949, 0, 0.999341, -178.486, 36.8056, -32.6009 )

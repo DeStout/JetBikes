@@ -7,8 +7,3 @@
 script = ExtResource( 2 )
 
 [node name="Lobby" parent="." instance=ExtResource( 1 )]
-script = null
-
-[connection signal="pressed" from="Lobby/MenuFrame/LobbyFrame/CancelPanel/CancelButton" to="." method="_on_CancelButton_pressed"]
-
-[editable path="Lobby"]

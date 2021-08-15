@@ -163,4 +163,4 @@ __meta__ = {
 [connection signal="pressed" from="HostJoin/HostBox" to="." method="_host"]
 [connection signal="pressed" from="HostJoin/JoinBox" to="." method="_join"]
 [connection signal="timeout" from="OptimistLabel/Timer" to="." method="_unoptimist"]
-[connection signal="pressed" from="Buttons/RaceButton" to="." method="_optimist"]
+[connection signal="pressed" from="Buttons/RaceButton" to="." method="_setup_online_lobby"]

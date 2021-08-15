@@ -1,14 +1,44 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Menus/LobbyMenu/LobbyMenu.gd" type="Script" id=1]
 [ext_resource path="res://Game/Assets/Fonts/MenuFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Menus/MainMenu/Assets/Sprites/LeftTriangle.bmp" type="Texture" id=4]
+[ext_resource path="res://Menus/MainMenu/Assets/Sprites/RightTriangle.bmp" type="Texture" id=5]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 96
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 48
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 36
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 26
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 48
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 36
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 28
 font_data = ExtResource( 3 )
 
 [node name="Lobby" type="Control"]
@@ -31,9 +61,9 @@ anchor_left = -0.026
 anchor_top = -0.049
 anchor_right = 1.026
 anchor_bottom = 1.049
-margin_left = 64.0
+margin_left = 63.232
 margin_top = 64.288
-margin_right = -63.2319
+margin_right = -64.0
 margin_bottom = -64.2881
 grow_horizontal = 2
 grow_vertical = 2
@@ -45,9 +75,9 @@ __meta__ = {
 [node name="LobbyFrame" type="ColorRect" parent="MenuFrame"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 703.0
+margin_left = 704.0
 margin_top = 64.0
-margin_right = -728.232
+margin_right = -727.232
 margin_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -58,29 +88,737 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MainPanel" type="GridContainer" parent="MenuFrame/LobbyFrame"]
+[node name="TitlePanel" type="MarginContainer" parent="MenuFrame/LobbyFrame"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 64.0
-margin_top = 64.0
-margin_right = -63.7681
-margin_bottom = -224.0
+margin_top = 32.0
+margin_right = -65.0
+margin_bottom = -1020.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 11
-size_flags_vertical = 3
-custom_constants/vseparation = 32
+size_flags_horizontal = 7
+size_flags_vertical = 14
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="MenuFrame/LobbyFrame/MainPanel"]
-margin_right = 651.0
+[node name="Label" type="Label" parent="MenuFrame/LobbyFrame/TitlePanel"]
+margin_right = 871.0
 margin_bottom = 132.0
 custom_fonts/font = SubResource( 2 )
 text = "Online Lobby"
 
-[node name="CancelPanel" type="GridContainer" parent="MenuFrame/LobbyFrame"]
+[node name="RacerSettingsPanel" type="Control" parent="MenuFrame/LobbyFrame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_top = 192.0
+margin_right = -65.0
+margin_bottom = -792.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 7
+size_flags_vertical = 14
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RacerSettings" type="Label" parent="MenuFrame/LobbyFrame/RacerSettingsPanel"]
+anchor_right = 1.001
+anchor_bottom = 1.032
+margin_left = 1.0
+margin_top = -8.0
+margin_right = -512.871
+margin_bottom = -147.4
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 3 )
+text = "Racer Settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RacerName" type="Label" parent="MenuFrame/LobbyFrame/RacerSettingsPanel"]
+anchor_right = 1.001
+anchor_bottom = 1.032
+margin_left = 1.0
+margin_top = 96.0
+margin_right = -555.871
+margin_bottom = -85.168
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 4 )
+text = "Racer Name:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="MenuFrame/LobbyFrame/RacerSettingsPanel"]
+anchor_top = -0.033
+anchor_right = 1.001
+anchor_bottom = 1.033
+margin_left = 1.0
+margin_top = 151.92
+margin_right = -302.871
+margin_bottom = -48.92
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 5 )
+max_length = 24
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorPicker" type="ColorPickerButton" parent="MenuFrame/LobbyFrame/RacerSettingsPanel"]
+anchor_right = 1.001
+anchor_bottom = 1.0
+margin_left = 689.0
+margin_top = 16.0
+margin_right = 1.12897
+size_flags_horizontal = 10
+disabled = true
+toggle_mode = false
+shortcut_in_tooltip = false
+align = 0
+color = Color( 0, 0.882353, 1, 1 )
+edit_alpha = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator" parent="MenuFrame/LobbyFrame"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 17.0
+margin_top = 392.0
+margin_right = -15.0
+margin_bottom = -760.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+custom_constants/separation = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RacersPanel" type="Control" parent="MenuFrame/LobbyFrame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_top = 408.0
+margin_right = -64.0
+margin_bottom = -480.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 11
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Racers" type="Label" parent="MenuFrame/LobbyFrame/RacersPanel"]
+anchor_right = 1.001
+anchor_bottom = 1.032
+margin_left = 1.0
+margin_right = -512.872
+margin_bottom = -329.288
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 3 )
+text = "Racers"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemList" type="ItemList" parent="MenuFrame/LobbyFrame/RacersPanel"]
+anchor_right = 1.001
+anchor_bottom = 1.0
+margin_top = 64.0
+margin_right = -0.87207
+margin_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 6 )
+custom_constants/vseparation = 0
+max_columns = 4
+same_column_width = true
+fixed_column_width = 209
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator2" type="HSeparator" parent="MenuFrame/LobbyFrame"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 17.0
+margin_top = 704.0
+margin_right = -15.0
+margin_bottom = -448.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+custom_constants/separation = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HostSettingsPanel" type="Control" parent="MenuFrame/LobbyFrame"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 65.0
+margin_top = 736.0
+margin_right = -63.0
+margin_bottom = -152.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RaceSettings" type="Label" parent="MenuFrame/LobbyFrame/HostSettingsPanel"]
+anchor_right = 1.0
+anchor_bottom = 0.998
+margin_top = -16.0
+margin_right = -537.0
+margin_bottom = -244.408
+custom_fonts/font = SubResource( 7 )
+text = "Race Settings"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Control" parent="MenuFrame/LobbyFrame/HostSettingsPanel"]
+anchor_top = 0.162
+anchor_right = 1.0
+anchor_bottom = 0.919
+margin_left = -1.0
+margin_top = 0.0480003
+margin_right = -441.0
+margin_bottom = -115.024
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelLabel" type="Label" parent="MenuFrame/LobbyFrame/HostSettingsPanel/Level"]
+anchor_top = 0.073
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 0.0429993
+margin_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 8 )
+text = "Level Select"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelName" type="Label" parent="MenuFrame/LobbyFrame/HostSettingsPanel/Level"]
+anchor_top = 0.353
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 9.523
+margin_bottom = 3.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 9 )
+text = "test_track"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelLeft" type="Button" parent="MenuFrame/LobbyFrame/HostSettingsPanel/Level"]
+anchor_top = 0.353
+anchor_right = 0.258
+anchor_bottom = 1.0
+margin_left = 48.0
+margin_top = 7.992
+margin_right = 16.0322
+margin_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.75, 0.75 )
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+shortcut_in_tooltip = false
+action_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 4 )
+flat = true
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelRight" type="Button" parent="MenuFrame/LobbyFrame/HostSettingsPanel/Level"]
+anchor_left = 0.742
+anchor_top = 0.353
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 7.96869
+margin_top = 7.992
+margin_right = -23.999
+margin_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.75, 0.75 )
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+shortcut_in_tooltip = false
+action_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 5 )
+flat = true
+align = 0
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Laps" type="Control" parent="MenuFrame/LobbyFrame/HostSettingsPanel"]
+anchor_top = 0.162
+anchor_right = 1.0
+anchor_bottom = 0.919
+margin_left = -1.0
+margin_top = 120.048
+margin_right = -441.0
+margin_bottom = -0.0240173
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LapsLabel" type="Label" parent="MenuFrame/LobbyFrame/HostSettingsPanel/Laps"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 0.0200043
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 8 )
+text = "Number of Laps"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NumLaps" type="Label" parent="MenuFrame/LobbyFrame/HostSettingsPanel/Laps"]
+anchor_top = 0.333
+anchor_right = 1.0
+anchor_bottom = 1.067
+margin_left = 6.10352e-05
+margin_top = 0.0400009
+margin_right = 6.10352e-05
+margin_bottom = -0.0400085
+size_flags_horizontal = 0
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 9 )
+text = "3"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LapsDecrease" type="Button" parent="MenuFrame/LobbyFrame/HostSettingsPanel/Laps"]
+anchor_top = 0.353
+anchor_right = 0.258
+anchor_bottom = 1.0
+margin_left = 48.0
+margin_top = -4.712
+margin_right = 16.0322
+margin_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.75, 0.75 )
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+shortcut_in_tooltip = false
+action_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 4 )
+flat = true
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LapsIncrease" type="Button" parent="MenuFrame/LobbyFrame/HostSettingsPanel/Laps"]
+anchor_left = 0.742
+anchor_top = 0.353
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 7.96869
+margin_top = -4.712
+margin_right = -23.999
+margin_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.75, 0.75 )
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+shortcut_in_tooltip = false
+action_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 5 )
+flat = true
+align = 0
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NPCs" type="Control" parent="MenuFrame/LobbyFrame/HostSettingsPanel"]
+anchor_top = 0.162
+anchor_right = 0.999
+anchor_bottom = 0.919
+margin_left = 463.0
+margin_top = 0.0480003
+margin_right = -0.128052
+margin_bottom = -112.024
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NPCsLabel" type="Label" parent="MenuFrame/LobbyFrame/HostSettingsPanel/NPCs"]
+anchor_top = 0.071
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 0.0479999
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 8 )
+text = "Number of NPCs"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NumNPCs" type="Label" parent="MenuFrame/LobbyFrame/HostSettingsPanel/NPCs"]
+anchor_top = 0.357
+anchor_right = 1.0
+anchor_bottom = 1.143
+margin_top = 8.016
+margin_bottom = -16.016
+size_flags_horizontal = 0
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 9 )
+text = "11"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NPCsDecrease" type="Button" parent="MenuFrame/LobbyFrame/HostSettingsPanel/NPCs"]
+anchor_top = 0.353
+anchor_right = 0.258
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_top = -0.801502
+margin_right = 8.03221
+margin_bottom = 20.7345
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.75, 0.75 )
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+shortcut_in_tooltip = false
+action_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 4 )
+flat = true
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NPScIncrease" type="Button" parent="MenuFrame/LobbyFrame/HostSettingsPanel/NPCs"]
+anchor_left = 0.742
+anchor_top = 0.353
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 17.7767
+margin_top = -0.801502
+margin_right = -14.191
+margin_bottom = 20.7345
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.75, 0.75 )
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+shortcut_in_tooltip = false
+action_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 5 )
+flat = true
+align = 0
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="Control" parent="MenuFrame/LobbyFrame/HostSettingsPanel"]
+anchor_top = 0.162
+anchor_right = 0.999
+anchor_bottom = 0.919
+margin_left = 471.0
+margin_top = 128.048
+margin_right = -0.128052
+margin_bottom = -2.02402
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RaceButton" type="Button" parent="MenuFrame/LobbyFrame/HostSettingsPanel/Buttons"]
+margin_right = 400.0
+margin_bottom = 94.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+disabled = true
+shortcut_in_tooltip = false
+action_mode = 0
+text = "Race"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ClientSettingsPanel" type="Control" parent="MenuFrame/LobbyFrame"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 65.0
+margin_top = 736.0
+margin_right = -63.0
+margin_bottom = -152.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RaceSettings" type="Label" parent="MenuFrame/LobbyFrame/ClientSettingsPanel"]
+anchor_right = 1.0
+anchor_bottom = 0.998
+margin_top = -16.0
+margin_right = -537.0
+margin_bottom = -244.408
+custom_fonts/font = SubResource( 7 )
+text = "Race Settings"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Control" parent="MenuFrame/LobbyFrame/ClientSettingsPanel"]
+anchor_top = 0.162
+anchor_right = 1.0
+anchor_bottom = 0.919
+margin_left = -1.0
+margin_top = 0.0480003
+margin_right = -441.0
+margin_bottom = -115.024
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelLabel" type="Label" parent="MenuFrame/LobbyFrame/ClientSettingsPanel/Level"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 8 )
+text = "Level Select"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelName" type="Label" parent="MenuFrame/LobbyFrame/ClientSettingsPanel/Level"]
+anchor_top = 0.353
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 9.523
+margin_bottom = 3.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 9 )
+text = "test_track"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Laps" type="Control" parent="MenuFrame/LobbyFrame/ClientSettingsPanel"]
+anchor_top = 0.162
+anchor_right = 1.0
+anchor_bottom = 0.919
+margin_left = -1.0
+margin_top = 120.048
+margin_right = -441.0
+margin_bottom = -0.0240173
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LapsLabel" type="Label" parent="MenuFrame/LobbyFrame/ClientSettingsPanel/Laps"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 0.0200043
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 8 )
+text = "Number of Laps"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NumLaps" type="Label" parent="MenuFrame/LobbyFrame/ClientSettingsPanel/Laps"]
+anchor_top = 0.333
+anchor_right = 1.0
+anchor_bottom = 1.067
+margin_top = 5.368
+margin_bottom = -6.968
+size_flags_horizontal = 0
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 9 )
+text = "3"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NPCs" type="Control" parent="MenuFrame/LobbyFrame/ClientSettingsPanel"]
+anchor_top = 0.162
+anchor_right = 0.999
+anchor_bottom = 0.919
+margin_left = 463.0
+margin_top = 0.0480003
+margin_right = -0.128052
+margin_bottom = -112.024
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NPCsLabel" type="Label" parent="MenuFrame/LobbyFrame/ClientSettingsPanel/NPCs"]
+anchor_right = 1.0
+anchor_bottom = 1.143
+margin_top = 8.0
+margin_bottom = -16.016
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 8 )
+text = "Number of NPCs"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NumNPCs" type="Label" parent="MenuFrame/LobbyFrame/ClientSettingsPanel/NPCs"]
+anchor_top = 0.357
+anchor_right = 1.0
+anchor_bottom = 1.143
+margin_top = 8.016
+margin_bottom = -16.016
+size_flags_horizontal = 0
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 9 )
+text = "11"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="Control" parent="MenuFrame/LobbyFrame/ClientSettingsPanel"]
+anchor_top = 0.162
+anchor_right = 0.999
+anchor_bottom = 0.919
+margin_left = 471.0
+margin_top = 128.048
+margin_right = -0.128052
+margin_bottom = -2.02402
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReadyButton" type="Button" parent="MenuFrame/LobbyFrame/ClientSettingsPanel/Buttons"]
+margin_right = 400.0
+margin_bottom = 94.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+toggle_mode = true
+shortcut_in_tooltip = false
+action_mode = 0
+text = "Ready"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CancelPanel" type="Control" parent="MenuFrame/LobbyFrame"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 64.0
@@ -91,10 +829,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 7
 size_flags_vertical = 14
-custom_constants/vseparation = 23
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CancelButton" type="Button" parent="MenuFrame/LobbyFrame/CancelPanel"]
 margin_right = 871.0
@@ -109,4 +843,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="button_down" from="MenuFrame/LobbyFrame/HostSettingsPanel/Level/LevelLeft" to="." method="_level_select_left"]
+[connection signal="button_down" from="MenuFrame/LobbyFrame/HostSettingsPanel/Level/LevelRight" to="." method="_level_select_right"]
+[connection signal="button_down" from="MenuFrame/LobbyFrame/HostSettingsPanel/Laps/LapsDecrease" to="." method="_decrease_lap_amount"]
+[connection signal="button_down" from="MenuFrame/LobbyFrame/HostSettingsPanel/Laps/LapsIncrease" to="." method="_increase_lap_amount"]
+[connection signal="button_down" from="MenuFrame/LobbyFrame/HostSettingsPanel/NPCs/NPCsDecrease" to="." method="_decrease_NPC_amount"]
+[connection signal="button_down" from="MenuFrame/LobbyFrame/HostSettingsPanel/NPCs/NPScIncrease" to="." method="_increase_NPC_amount"]
 [connection signal="pressed" from="MenuFrame/LobbyFrame/CancelPanel/CancelButton" to="." method="_on_CancelButton_pressed"]
