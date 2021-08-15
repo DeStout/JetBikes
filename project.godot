@@ -29,7 +29,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Levels/General/LevelComponents/ModNode/ModNode.gd"
 }, {
-"base": "KinematicBody",
+"base": "Racer",
 "class": "NPC",
 "language": "GDScript",
 "path": "res://Racers/SinglePlayer_NPC/NPC.gd"
@@ -39,10 +39,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Levels/General/LevelComponents/PathNode/PathNode.gd"
 }, {
-"base": "KinematicBody",
+"base": "Racer",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Racers/SinglePlayer_Player/Player.gd"
+}, {
+"base": "KinematicBody",
+"class": "Racer",
+"language": "GDScript",
+"path": "res://Racers/General/Racer/Racer.gd"
 }, {
 "base": "Area",
 "class": "SwingPole",
@@ -62,6 +67,7 @@ _global_script_class_icons={
 "NPC": "",
 "PathNode": "",
 "Player": "",
+"Racer": "",
 "SwingPole": "",
 "Track": ""
 }
@@ -189,6 +195,11 @@ debug={
 3d_physics/layer_2="LevelGeo"
 3d_physics/layer_3="LevelModels"
 3d_physics/layer_4="Water"
+
+[physics]
+
+common/physics_fps=45
+3d/active_soft_world=false
 
 [rendering]
 

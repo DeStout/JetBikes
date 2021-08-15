@@ -1,0 +1,112 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Menus/LobbyMenu/LobbyMenu.gd" type="Script" id=1]
+[ext_resource path="res://Game/Assets/Fonts/MenuFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 96
+font_data = ExtResource( 3 )
+
+[node name="Lobby" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_top = 64.0
+margin_right = -64.0
+margin_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource( 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuFrame" type="ColorRect" parent="."]
+anchor_left = -0.026
+anchor_top = -0.049
+anchor_right = 1.026
+anchor_bottom = 1.049
+margin_left = 64.0
+margin_top = 64.288
+margin_right = -63.2319
+margin_bottom = -64.2881
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.141176, 0.141176, 0.141176, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LobbyFrame" type="ColorRect" parent="MenuFrame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 703.0
+margin_top = 64.0
+margin_right = -728.232
+margin_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.25098, 0.25098, 0.25098, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainPanel" type="GridContainer" parent="MenuFrame/LobbyFrame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_top = 64.0
+margin_right = -63.7681
+margin_bottom = -224.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 11
+size_flags_vertical = 3
+custom_constants/vseparation = 32
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MenuFrame/LobbyFrame/MainPanel"]
+margin_right = 651.0
+margin_bottom = 132.0
+custom_fonts/font = SubResource( 2 )
+text = "Online Lobby"
+
+[node name="CancelPanel" type="GridContainer" parent="MenuFrame/LobbyFrame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_top = 1026.0
+margin_right = -65.0
+margin_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 7
+size_flags_vertical = 14
+custom_constants/vseparation = 23
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CancelButton" type="Button" parent="MenuFrame/LobbyFrame/CancelPanel"]
+margin_right = 871.0
+margin_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+custom_fonts/font = ExtResource( 2 )
+text = "Cancel"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="MenuFrame/LobbyFrame/CancelPanel/CancelButton" to="." method="_on_CancelButton_pressed"]

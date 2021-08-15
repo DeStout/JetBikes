@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Racer.glb-951f3e9d8575711c86e4de62c509acc8.scn"
+path="res://.import/RacerModel.glb-e1f86a1300e03c80ab85d37d258edce7.scn"
 
 [deps]
 
-source_file="res://Racers/General/Racer/Racer.glb"
-dest_files=[ "res://.import/Racer.glb-951f3e9d8575711c86e4de62c509acc8.scn" ]
+source_file="res://Racers/General/Bike/Assets/Models/RacerModel.glb"
+dest_files=[ "res://.import/RacerModel.glb-e1f86a1300e03c80ab85d37d258edce7.scn" ]
 
 [params]
 

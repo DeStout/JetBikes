@@ -1,7 +1,7 @@
 [gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://Levels/General/Scripts/Track.gd" type="Script" id=1]
-[ext_resource path="res://Levels/General/LevelComponents/PlayersTracker/PlayersTracker.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Levels/General/Scripts/PlayersTracker.gd" type="Script" id=2]
 [ext_resource path="res://Levels/General/LevelComponents/ModNode/ModNode.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Levels/General/LevelComponents/PathNode/PathNode.gd" type="Script" id=4]
 [ext_resource path="res://Levels/TestTerrain/TestTerrainBase.tscn" type="PackedScene" id=5]
@@ -562,9 +562,72 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -103.92, 26.3225, -36.2501 )
 sphere_visible = false
 swing_length = 65.0
 
-[node name="Players" parent="." instance=ExtResource( 2 )]
+[node name="Players" type="Node" parent="."]
+script = ExtResource( 2 )
 
-[connection signal="ready" from="Minimap/Navigation/PathNodes" to="." method="_setup_pathnodes"]
+[node name="PlayerSpawn1" type="Spatial" parent="Players"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -28.8746, -33.6195, 20.3638 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn1"]
+
+[node name="PlayerSpawn2" type="Spatial" parent="Players"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -28.9499, -33.6195, 27.7573 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn2"]
+
+[node name="PlayerSpawn3" type="Spatial" parent="Players"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -28.8746, -33.6195, 35.0584 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn3"]
+
+[node name="PlayerSpawn4" type="Spatial" parent="Players"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -38.8746, -33.6195, 20.3638 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn4"]
+
+[node name="PlayerSpawn5" type="Spatial" parent="Players"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -38.9499, -33.6195, 27.7573 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn5"]
+
+[node name="PlayerSpawn6" type="Spatial" parent="Players"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -38.8746, -33.6195, 35.0584 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn6"]
+
+[node name="PlayerSpawn7" type="Spatial" parent="Players"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -48.8746, -33.6195, 20.3638 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn7"]
+
+[node name="PlayerSpawn8" type="Spatial" parent="Players"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -48.9499, -33.6195, 27.7573 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn8"]
+
+[node name="PlayerSpawn9" type="Spatial" parent="Players"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -48.8746, -33.6195, 35.0584 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn9"]
+
+[node name="PlayerSpawn10" type="Spatial" parent="Players"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -58.8746, -33.6195, 20.3638 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn10"]
+
+[node name="PlayerSpawn11" type="Spatial" parent="Players"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -58.9499, -33.6195, 27.7573 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn11"]
+
+[node name="PlayerSpawn12" type="Spatial" parent="Players"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -58.8746, -33.6195, 35.0584 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn12"]
+
+[node name="CrashBikes" type="Node" parent="Players"]
+
+[connection signal="ready" from="Minimap/Navigation/PathNodes" to="." method="setup_pathnodes"]
 [connection signal="body_entered" from="Minimap/Navigation/PathNodes/PathNode0/Area" to="Minimap/Navigation/PathNodes/PathNode0" method="_on_Area_body_entered"]
 [connection signal="body_entered" from="Minimap/Navigation/PathNodes/PathNode1a/Area" to="Minimap/Navigation/PathNodes/PathNode1a" method="_on_Area_body_entered"]
 [connection signal="body_entered" from="Minimap/Navigation/PathNodes/PathNode1b/Area" to="Minimap/Navigation/PathNodes/PathNode1b" method="_on_Area_body_entered"]

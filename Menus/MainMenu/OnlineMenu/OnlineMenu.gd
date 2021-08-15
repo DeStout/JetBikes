@@ -1,5 +1,7 @@
 extends Control
 
+signal setup_online_multiplayer_lobby
+
 func _host():
 	$HostJoin/JoinBox.pressed = false
 	$HostJoin/HostBox.pressed = true
@@ -15,6 +17,7 @@ func _join():
 func _optimist():
 	$OptimistLabel.visible = true
 	$OptimistLabel/Timer.start(0.3)
+	emit_signal("setup_online_multiplayer_lobby")
 	
 func _unoptimist():
 	$OptimistLabel.visible = false

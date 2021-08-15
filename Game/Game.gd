@@ -12,10 +12,11 @@ func _ready():
 	randomize()
 	
 	main_menu.single_player_menu.connect("setup_single_player_race", self, "start_single_player_game")
+	main_menu.online_menu.connect("setup_online_multiplayer_lobby", self, "setup_online_multiplayer_lobby")
 	
 	single_player_manager = single_player_manager_.instance()
 	single_player_manager.connect("return_to_main", self, "return_to_main_menu")
-	online_multiplayer_manager = single_player_manager_.instance()
+	online_multiplayer_manager = online_multiplayer_manager_.instance()
 	online_multiplayer_manager.connect("return_to_main", self, "return_to_main_menu")
 	
 func start_single_player_game():
@@ -23,6 +24,11 @@ func start_single_player_game():
 	
 	add_child(single_player_manager)
 	single_player_manager.setup_race(Globals.level_dict[Globals.level_dict_keys[Globals.level]])
+
+func setup_online_multiplayer_lobby():
+	remove_child(main_menu)
+	
+	add_child(online_multiplayer_manager)
 
 func return_to_main_menu():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

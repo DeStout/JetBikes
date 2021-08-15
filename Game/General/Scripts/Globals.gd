@@ -26,10 +26,10 @@ const DEFAULT_NPC_NUMBER : int = 11
 const MIN_NPC_NUMBER : int = 0
 const MAX_NPC_NUMBER : int = 11
 
-const DEFAULT_SFX_LEVEL : int = -20
-#const DEFAULT_SFX_LEVEL : int = -24
-const DEFAULT_MUSIC_LEVEL : int = -30
-#const DEFAULT_MUSIC_LEVEL : int = -48
+#const DEFAULT_SFX_LEVEL : int = -20
+const DEFAULT_SFX_LEVEL : int = -24
+#const DEFAULT_MUSIC_LEVEL : int = -30
+const DEFAULT_MUSIC_LEVEL : int = -48
 const MIN_SFX_LEVEL : int = -24
 const MAX_SFX_LEVEL : int = 0
 const MIN_MUSIC_LEVEL : int = -48

@@ -6,15 +6,19 @@ func _ready():
 	visible = false
 	global_transform.origin = DEFAULT_POSITION
 
-func set_crash(player : Player):
-	global_transform = player.get_node("Engine").global_transform
+func set_materials(bike_mat, windshield_mat):
+	$SteeringColumn.set_surface_material(0, bike_mat)
+	$WindShield.set_surface_material(0, windshield_mat)
+
+func set_crash(racer : Racer):
+	if racer.has_node("Engine"):
+		global_transform = racer.get_node("Engine").global_transform
 #	set_collision_layer_bit(0, true)
 	$CollisionShape.disabled = false
 	visible = true
-	apply_central_impulse(player.velocity)
+	apply_central_impulse(racer.velocity)
 	
 func remove_crash():
 	global_transform.origin = DEFAULT_POSITION
-#	set_collision_layer_bit(0, false)
 	$CollisionShape.disabled = true
 	visible = false

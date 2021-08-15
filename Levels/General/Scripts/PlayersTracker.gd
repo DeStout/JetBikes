@@ -25,9 +25,7 @@ func _spawn_players():
 	add_child(player)
 	player.global_transform = get_node("PlayerSpawn"+str(Globals.NPC_number+1)).global_transform
 	
-	crash_bike = crash_bike.instance()
-	player.crash_bike = crash_bike
-	$CrashBikes.add_child(crash_bike)
+	_setup_crash_bike(player)
 	
 	if Globals.NPC_number > 0:
 		for NPC_num in range(Globals.NPC_number):
@@ -37,9 +35,21 @@ func _spawn_players():
 			new_NPC.connect("finished_race", self, "finish_race")
 			add_child(new_NPC)
 			get_node("PlayerSpawn"+str(NPC_num+1)).free()
+
+			_setup_crash_bike(new_NPC)
 	
 	for spawn in range(Globals.NPC_number+1, 13):
 		get_node("PlayerSpawn"+str(spawn)).free()
+
+func _setup_crash_bike(racer : Racer):
+	racer.crash_bike = crash_bike.instance()
+	if racer is Player:
+		racer.crash_bike.set_materials(load("res://Racers/SinglePlayer_Player/Materials/M_PlayerBike.tres"), \
+			load("res://Racers/SinglePlayer_Player/Materials/M_PlayerWindshield.tres"))
+	elif racer is NPC:
+		racer.crash_bike.set_materials(load("res://Racers/SinglePlayer_NPC/Materials/M_NPCBike.tres"), \
+			load("res://Racers/SinglePlayer_NPC/Materials/M_NPCWindshield.tres"))
+	$CrashBikes.add_child(racer.crash_bike)
 
 func setup_players(track_navigation, path_nodes):
 	player.navigation = track_navigation
