@@ -6,12 +6,14 @@ var target_speed : int = Racer.MAX_FORWARD_VEL
 var draw_path : ImmediateGeometry = ImmediateGeometry.new()
 var simple_path : PoolVector3Array
 var current_goal : int = 0
-	
+
+
 func _process(_delta):
 	movement_input = Vector2(0, 1)
 	if path_nodes != null:
 		_path_point_distance()
-	
+
+
 func _physics_process(delta : float) -> void:	
 	var move_direction : Vector3 = Vector3()
 	var npc_basis : Basis = global_transform.basis
@@ -111,9 +113,11 @@ func _physics_process(delta : float) -> void:
 func _aim() -> void:
 	look_at(simple_path[current_goal], global_transform.basis[1])
 
+
 func _set_target_speed(new_target_speed : int) -> void:
 	target_speed = new_target_speed
-		
+
+
 func _path_point_distance() -> void:
 	var temp_2D_goal = Vector2(simple_path[current_goal].x, simple_path[current_goal].z)
 	var temp_2D_global = Vector2(global_transform.origin.x, global_transform.origin.z)
@@ -122,6 +126,7 @@ func _path_point_distance() -> void:
 			current_goal += 1
 	elif temp_2D_global.distance_to(temp_2D_goal) > 20:
 		pathfind_next_node()
+
 
 func update_path_node(new_path_node : PathNode) -> void:
 	if current_path_node == new_path_node:
@@ -140,7 +145,8 @@ func update_path_node(new_path_node : PathNode) -> void:
 		
 		if new_path_node.function == new_path_node.FUNCTION.DEFAULT:
 			pathfind_next_node()
-		
+
+
 func pathfind_next_node() -> void:
 	var path_node_point : Vector3 = current_path_node.get_closest_point(global_transform.origin)
 	

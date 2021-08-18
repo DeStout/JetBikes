@@ -240,9 +240,9 @@ func update_path_node(new_path_node : PathNode) -> void:
 			current_path_node = path_nodes[current_path_node.next_serial]
 			
 func _crash():
-	._crash()
 	if !$CrashTimer.time_left:
 		has_cam_control = false
+	._crash()
 	camera.look_at(crash_bike.global_transform.origin, Vector3.UP)
 
 func _crash_finished():

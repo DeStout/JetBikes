@@ -4,7 +4,7 @@
 [ext_resource path="res://Levels/General/Scripts/PlayersTracker.gd" type="Script" id=2]
 [ext_resource path="res://Levels/General/LevelComponents/ModNode/ModNode.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Levels/General/LevelComponents/PathNode/PathNode.gd" type="Script" id=4]
-[ext_resource path="res://Levels/TestTerrain/TestTerrainBase.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Levels/TestTerrain/TestTerrainBase_v2.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Levels/General/Skyboxes/Cold Sunset Equirect.png" type="Texture" id=6]
 [ext_resource path="res://Levels/TestTerrain/Assets/Materials/GroundWetRocks/GroundWetRocks.tres" type="Material" id=7]
 [ext_resource path="res://Levels/General/LevelComponents/ModNode/ModNode.gd" type="Script" id=8]
@@ -25,7 +25,7 @@ filter/ledge_spans = true
 filter/filter_walkable_low_height_spans = true
 
 [sub_resource type="BoxShape" id=4]
-extents = Vector3( 12.5, 24.6268, 1 )
+extents = Vector3( 11.5, 19, 1 )
 
 [sub_resource type="Curve3D" id=5]
 _data = {
@@ -221,17 +221,18 @@ __meta__ = {
 [node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Minimap/Navigation"]
 navmesh = SubResource( 3 )
 
-[node name="TestTerrainBase" parent="Minimap/Navigation/NavigationMeshInstance" instance=ExtResource( 5 )]
+[node name="TestTerrain" parent="Minimap/Navigation/NavigationMeshInstance" instance=ExtResource( 5 )]
+material/0 = ExtResource( 7 )
 
-[node name="CSGBox" type="CSGBox" parent="Minimap/Navigation/NavigationMeshInstance/TestTerrainBase"]
-transform = Transform( 0.970662, 0, -0.240448, 0, 1, 0, 0.240448, 0, 0.970662, -84.2894, 27.3076, 6.9473 )
-material_override = ExtResource( 7 )
-width = 25.0
-height = 49.2453
+[node name="CSGBox" type="CSGBox" parent="Minimap/Navigation/NavigationMeshInstance/TestTerrain"]
+transform = Transform( 0.964491, 0.0794481, -0.251884, -0.082095, 0.996625, -3.07967e-09, 0.251033, 0.0206784, 0.967757, -85.8451, 25.6212, 6.53677 )
+width = 23.0
+height = 38.0
+material = ExtResource( 7 )
 
-[node name="StaticBody" type="StaticBody" parent="Minimap/Navigation/NavigationMeshInstance/TestTerrainBase/CSGBox"]
+[node name="Area" type="Area" parent="Minimap/Navigation/NavigationMeshInstance/TestTerrain/CSGBox"]
 
-[node name="CollisionShape" type="CollisionShape" parent="Minimap/Navigation/NavigationMeshInstance/TestTerrainBase/CSGBox/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="Minimap/Navigation/NavigationMeshInstance/TestTerrain/CSGBox/Area"]
 shape = SubResource( 4 )
 
 [node name="PathNodes" type="Node" parent="Minimap/Navigation"]

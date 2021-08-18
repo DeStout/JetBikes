@@ -4,7 +4,7 @@
 [ext_resource path="res://Menus/MainMenu/SinglePlayerMenu/SinglePlayerMenu.gd" type="Script" id=2]
 [ext_resource path="res://Menus/MainMenu/Assets/Sprites/LeftTriangle.bmp" type="Texture" id=3]
 [ext_resource path="res://Menus/MainMenu/Assets/Sprites/RightTriangle.bmp" type="Texture" id=4]
-[ext_resource path="res://Game/Assets/Fonts/MenuFont.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Menus/Assets/MenuFont.tres" type="DynamicFont" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -365,7 +365,7 @@ __meta__ = {
 }
 
 [node name="RaceButton" type="Button" parent="Buttons"]
-margin_right = 377.0
+margin_right = 400.0
 margin_bottom = 94.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -373,6 +373,24 @@ custom_fonts/font = ExtResource( 5 )
 shortcut_in_tooltip = false
 action_mode = 0
 text = "Race"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorPicker" type="ColorPickerButton" parent="."]
+anchor_right = 1.001
+anchor_bottom = 1.0
+margin_left = 675.554
+margin_top = 121.728
+margin_right = -179.55
+margin_bottom = -233.728
+size_flags_horizontal = 10
+disabled = true
+toggle_mode = false
+shortcut_in_tooltip = false
+align = 0
+color = Color( 0, 0.882353, 1, 1 )
+edit_alpha = false
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -35,9 +35,9 @@ var has_control : bool = false
 var is_boosting : bool = false
 var is_braking : bool = true
 var is_on_ground : bool = false
+var is_crashed : bool = false
 var is_swinging : bool = false
 var is_free_rotating : bool = false
-var is_crashed : bool = false
 
 onready var ground_particles : Particles = $GroundParticles
 
@@ -173,7 +173,6 @@ func _crash_finished():
 		has_control = true
 	$CollisionShape.disabled = false
 #	$VisibilityTimer.stop()
-#	$Engine.visible = true
 	ground_particles.emitting = true
 	crash_bike.remove_crash()
 
@@ -204,8 +203,8 @@ func _check_swing_poles(delta : float):
 				closest_pole = swing_pole
 		if is_swinging and boost > 0:
 			_swing(closest_pole, delta)
-		else:
-			closest_pole.set_laser_line()
+#		else:
+#			closest_pole.set_laser_line()
 
 func _swing(swing_pole : SwingPole, delta : float):
 	var swing_distance = global_transform.origin.distance_to(swing_pole.global_transform.origin)

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Menus/MainMenu/OptionsMenu/OptionsMenu.gd" type="Script" id=2]
-[ext_resource path="res://Game/Assets/Fonts/MenuFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Menus/Assets/MenuFont.tres" type="DynamicFont" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -96,9 +96,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 120.0
 margin_top = -0.0320015
-min_value = -24.0
-max_value = 0.0
-value = -24.0
+min_value = -48.0
+max_value = -12.0
+value = -40.0
 rounded = true
 allow_greater = true
 allow_lesser = true
@@ -158,9 +158,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 120.0
 margin_top = -0.0320015
-min_value = -24.0
-max_value = 0.0
-value = -24.0
+min_value = -48.0
+max_value = -12.0
+value = -40.0
 rounded = true
 allow_greater = true
 allow_lesser = true

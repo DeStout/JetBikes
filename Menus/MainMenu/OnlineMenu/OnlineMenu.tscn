@@ -2,18 +2,18 @@
 
 [ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Menus/MainMenu/OnlineMenu/OnlineMenu.gd" type="Script" id=2]
-[ext_resource path="res://Game/Assets/Fonts/MenuFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Menus/Assets/MenuFont.tres" type="DynamicFont" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
-size = 36
+[sub_resource type="DynamicFont" id=7]
+size = 64
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
-size = 36
+size = 64
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=4]
@@ -58,41 +58,44 @@ anchor_top = 0.127
 anchor_right = 0.569
 anchor_bottom = 1.0
 margin_left = 16.0
-margin_top = 16.12
-margin_right = -16.168
-margin_bottom = -272.0
+margin_top = 16.0728
+margin_right = -16.3547
+margin_bottom = -186.616
 grow_vertical = 2
 custom_constants/separation = 32
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HostBox" type="CheckBox" parent="HostJoin"]
-margin_right = 115.0
-margin_bottom = 137.0
+margin_left = 62.0
+margin_right = 243.0
+margin_bottom = 223.0
 focus_mode = 0
-custom_fonts/font = SubResource( 2 )
-enabled_focus_mode = 0
+custom_fonts/font = SubResource( 7 )
 text = "Host"
+align = 1
+expand_icon = true
 
 [node name="JoinBox" type="CheckBox" parent="HostJoin"]
-margin_left = 147.0
-margin_right = 247.0
-margin_bottom = 137.0
+margin_left = 275.0
+margin_right = 431.0
+margin_bottom = 223.0
 focus_mode = 0
 custom_fonts/font = SubResource( 3 )
-enabled_focus_mode = 0
 text = "Join"
-align = 2
+align = 1
+expand_icon = true
 
 [node name="IPAdress" type="GridContainer" parent="."]
 anchor_top = 0.127
 anchor_right = 0.569
 anchor_bottom = 1.0
-margin_left = 16.0
-margin_top = 112.12
-margin_right = -16.168
-margin_bottom = -144.0
+margin_left = 11.7859
+margin_top = 231.577
+margin_right = -20.5687
+margin_bottom = -50.1119
 custom_constants/hseparation = 12
 __meta__ = {
 "_edit_use_anchors_": false

@@ -1,5 +1,5 @@
-extends Area
 tool
+extends Area
 class_name SwingPole
 
 export var sphere_visible : bool = true setget _set_sphere_visible
@@ -14,6 +14,7 @@ func _ready():
 	$InfluenceArea.shape = influence_sphere
 	influence_sphere.radius = swing_length
 	$Sphere.radius = swing_length
+
 
 # Tool Shit
 func _set_sphere_visible(new_visible : bool):

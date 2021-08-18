@@ -1,10 +1,12 @@
 extends Control
 
+
 func _ready():
 	$SFX/Slider.min_value = Globals.MIN_SFX_LEVEL
 	$SFX/Slider.max_value = Globals.MAX_SFX_LEVEL
 	$Music/Slider.min_value = Globals.MIN_MUSIC_LEVEL
 	$Music/Slider.max_value = Globals.MAX_MUSIC_LEVEL
+
 
 func _update_sfx_sound_values(new_value):
 	if new_value is float:
@@ -16,6 +18,7 @@ func _update_sfx_sound_values(new_value):
 				return
 		$SFX/Level.text = str($SFX/Slider.value)
 
+
 func _update_music_sound_values(new_value):
 	if new_value is float:
 		$Music/Level.text = str(_convert_decibal_to_percent(new_value, $Music/Slider))
@@ -26,17 +29,18 @@ func _update_music_sound_values(new_value):
 				return
 		$Music/Level.text = str($Music/Slider.value)
 
+
 func _apply_settings():
 	Globals.sfx_level = $SFX/Slider.value
 	Globals.music_level = $Music/Slider.value
-#	print("Options : " + str($SFX/Slider.value))
-#	print("Options : " + str($Music/Slider.value))
+
 
 func reset_settings():
 	$SFX/Slider.value = Globals.sfx_level
 	$SFX/Level.text = str(_convert_decibal_to_percent(Globals.sfx_level, $SFX/Slider))
 	$Music/Slider.value = Globals.music_level
 	$Music/Level.text = str(_convert_decibal_to_percent(Globals.music_level, $Music/Slider))
+
 
 func _convert_decibal_to_percent(new_value : float, slider : Slider) -> int:
 	return int(((new_value + abs(slider.min_value)) / abs(slider.min_value)) * 100)

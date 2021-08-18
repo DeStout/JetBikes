@@ -79,7 +79,8 @@ run/main_scene="res://Game/Game.tscn"
 
 [autoload]
 
-Globals="*res://Game/General/Scripts/Globals.gd"
+Globals="*res://Game/Singletons/Globals.gd"
+Network="*res://Game/Singletons/Network.gd"
 
 [display]
 
