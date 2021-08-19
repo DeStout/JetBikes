@@ -1,7 +1,7 @@
 extends Racer
 class_name NPC
 
-var target_speed : int = Racer.MAX_FORWARD_VEL
+var target_speed : int = MAX_FORWARD_VEL
 
 var draw_path : ImmediateGeometry = ImmediateGeometry.new()
 var simple_path : PoolVector3Array

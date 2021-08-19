@@ -2,7 +2,7 @@ extends Node
 
 
 var SHOW_NPC_PATHFIND : bool = false
-var INFINITE_BOOST : bool = true
+var INFINITE_BOOST : bool = false
 
 var test_track_ : PackedScene = load("res://Levels/TestTrack/TestTrack.tscn")
 var test_terrain_ : PackedScene = load("res://Levels/TestTerrain/TestTerrain.tscn")

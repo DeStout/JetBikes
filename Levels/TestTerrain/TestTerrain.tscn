@@ -508,7 +508,7 @@ shape = SubResource( 39 )
 transform = Transform( 0.942326, 0.2879, 0.170691, -0.292188, 0.956361, -5.53408e-08, -0.163242, -0.0498739, 0.985325, -195.518, 78.8086, -374.819 )
 script = ExtResource( 8 )
 function = 2
-value = 55
+value = 40
 
 [node name="CollisionShape" type="CollisionShape" parent="Minimap/Navigation/ModNodes/Mod_Node2"]
 shape = SubResource( 40 )
