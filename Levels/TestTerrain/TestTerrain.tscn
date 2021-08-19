@@ -230,9 +230,11 @@ width = 30.0
 height = 38.0
 material = ExtResource( 7 )
 
-[node name="Area" type="Area" parent="Minimap/Navigation/NavigationMeshInstance/TestTerrain/CSGBox"]
+[node name="Body" type="StaticBody" parent="Minimap/Navigation/NavigationMeshInstance/TestTerrain/CSGBox"]
+transform = Transform( 1, -4.65661e-09, 0, 4.65661e-09, 1, 1.86265e-09, -1.49012e-08, -1.86265e-09, 1, 0, 0, 0 )
+collision_layer = 2
 
-[node name="CollisionShape" type="CollisionShape" parent="Minimap/Navigation/NavigationMeshInstance/TestTerrain/CSGBox/Area"]
+[node name="Shape" type="CollisionShape" parent="Minimap/Navigation/NavigationMeshInstance/TestTerrain/CSGBox/Body"]
 transform = Transform( 1, -1.30385e-08, 0, 1.21072e-08, 1, 3.72529e-09, -1.49012e-08, -3.72529e-09, 1, 0, 0, 0 )
 shape = SubResource( 4 )
 

@@ -8,7 +8,7 @@
 size = 48
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=2]
 size = 64
 font_data = ExtResource( 1 )
 
@@ -71,9 +71,9 @@ __meta__ = {
 [node name="HostBox" type="CheckBox" parent="HostJoin"]
 margin_left = 62.0
 margin_right = 243.0
-margin_bottom = 223.0
+margin_bottom = 222.0
 focus_mode = 0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 2 )
 text = "Host"
 align = 1
 expand_icon = true
@@ -81,7 +81,7 @@ expand_icon = true
 [node name="JoinBox" type="CheckBox" parent="HostJoin"]
 margin_left = 275.0
 margin_right = 431.0
-margin_bottom = 223.0
+margin_bottom = 222.0
 focus_mode = 0
 custom_fonts/font = SubResource( 3 )
 text = "Join"
@@ -107,7 +107,7 @@ margin_bottom = 50.0
 custom_fonts/font = SubResource( 4 )
 text = "IP Address:"
 
-[node name="TextEdit" type="LineEdit" parent="IPAdress"]
+[node name="IPText" type="LineEdit" parent="IPAdress"]
 margin_top = 54.0
 margin_right = 494.0
 margin_bottom = 114.0

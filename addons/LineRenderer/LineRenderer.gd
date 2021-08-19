@@ -2,7 +2,7 @@ extends ImmediateGeometry
 
 const LASER_DEFAULT_POSITION = Vector3.ZERO
 
-export var points = [LASER_DEFAULT_POSITION, LASER_DEFAULT_POSITION]
+export var points = []
 export var startThickness = 0.1
 export var endThickness = 0.1
 export var cornerSmooth = 5
@@ -14,6 +14,14 @@ export var scaleTexture = true
 
 var camera
 var cameraOrigin
+
+
+func _ready():
+	points = [LASER_DEFAULT_POSITION, LASER_DEFAULT_POSITION]
+	
+	
+func set_laser_line(laser_to : Vector3 = to_global(LASER_DEFAULT_POSITION)):
+	points[1] = to_local(laser_to)
 
 
 func _process(delta):

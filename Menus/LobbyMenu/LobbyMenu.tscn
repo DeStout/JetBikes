@@ -1,13 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Menus/LobbyMenu/LobbyMenu.gd" type="Script" id=1]
 [ext_resource path="res://Menus/Assets/MenuFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Menus/MainMenu/Assets/Sprites/LeftTriangle.bmp" type="Texture" id=4]
 [ext_resource path="res://Menus/MainMenu/Assets/Sprites/RightTriangle.bmp" type="Texture" id=5]
-
-[sub_resource type="Theme" id=1]
-default_font = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 96
@@ -50,7 +47,6 @@ margin_right = -64.0
 margin_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource( 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -176,11 +172,10 @@ anchor_bottom = 1.0
 margin_left = 689.0
 margin_top = 16.0
 margin_right = 1.12897
-size_flags_horizontal = 10
-disabled = true
-toggle_mode = false
+size_flags_horizontal = 0
+size_flags_vertical = 0
 shortcut_in_tooltip = false
-align = 0
+align = 2
 color = Color( 0, 0.882353, 1, 1 )
 edit_alpha = false
 __meta__ = {

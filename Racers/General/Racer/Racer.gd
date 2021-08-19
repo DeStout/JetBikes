@@ -216,6 +216,7 @@ func _check_kinematic_collision():
 func add_remove_swing_pole(swing_pole : SwingPole):
 	if swing_poles.has(swing_pole):
 		swing_poles.erase(swing_pole)
+		$LaserLine.set_laser_line()
 	else:
 		swing_poles.append(swing_pole)
 
@@ -229,8 +230,8 @@ func _check_swing_poles(delta : float):
 				closest_pole = swing_pole
 		if is_swinging and boost > 0:
 			_swing(closest_pole, delta)
-#		else:
-#			closest_pole.set_laser_line()
+		else:
+			$LaserLine.set_laser_line()
 
 
 func _swing(swing_pole : SwingPole, delta : float):
@@ -247,7 +248,8 @@ func _swing(swing_pole : SwingPole, delta : float):
 	velocity += (swing_pole.global_transform.origin - global_transform.origin) * pull_strength
 	velocity -= delta_velocity
 	
-	swing_pole.set_laser_line($EngineRotationHelper/Engine.global_transform.origin)
+#	swing_pole.set_laser_line($EngineRotationHelper/Engine.global_transform.origin)
+	$LaserLine.set_laser_line(swing_pole.global_transform.origin)
 	
 	_set_boost(swing_cost)
 

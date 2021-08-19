@@ -1,5 +1,7 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
+[ext_resource path="res://addons/LineRenderer/LineRenderer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/LineRenderer/line.png" type="Texture" id=2]
 [ext_resource path="res://Racers/SinglePlayer_Player/AudioBoost.gd" type="Script" id=5]
 [ext_resource path="res://Racers/General/Bike/Scripts/DetectRay.gd" type="Script" id=6]
 [ext_resource path="res://Racers/General/Bike/Assets/Models/RacerModel.tscn" type="PackedScene" id=7]
@@ -35,6 +37,12 @@ albedo_texture = ExtResource( 12 )
 [sub_resource type="QuadMesh" id=4]
 material = SubResource( 3 )
 size = Vector2( 2, 2 )
+
+[sub_resource type="SpatialMaterial" id=5]
+flags_transparent = true
+flags_unshaded = true
+albedo_color = Color( 1, 0.254902, 0.447059, 0.262745 )
+albedo_texture = ExtResource( 2 )
 
 [node name="Racer" type="KinematicBody"]
 collision_mask = 15
@@ -175,6 +183,10 @@ one_shot = true
 
 [node name="VisibilityTimer" type="Timer" parent="."]
 wait_time = 0.2
+
+[node name="LaserLine" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+material_override = SubResource( 5 )
 
 [connection signal="is_colliding" from="CollisionShape/GroundDetect1" to="." method="check_ray_collision"]
 [connection signal="is_colliding" from="CollisionShape/GroundDetect2" to="." method="check_ray_collision"]
