@@ -39,10 +39,12 @@ size = Vector2( 2, 2 )
 [node name="Racer" type="KinematicBody"]
 collision_mask = 15
 
-[node name="Engine" parent="." instance=ExtResource( 8 )]
+[node name="EngineRotationHelper" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
-[node name="RacerModel" parent="Engine" instance=ExtResource( 7 )]
+[node name="Engine" parent="EngineRotationHelper" instance=ExtResource( 8 )]
+
+[node name="RacerModel" parent="EngineRotationHelper/Engine" instance=ExtResource( 7 )]
 transform = Transform( -0.02, 0, -1.74846e-09, 0, 0.02, 0, 1.74846e-09, 0, -0.02, 0, -1.10989, 0.751 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
@@ -187,4 +189,4 @@ wait_time = 0.2
 [connection signal="timeout" from="CrashTimer" to="." method="_crash_finished"]
 [connection signal="timeout" from="VisibilityTimer" to="." method="_on_VisibilityTimer_timeout"]
 
-[editable path="Engine"]
+[editable path="EngineRotationHelper/Engine"]

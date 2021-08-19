@@ -11,8 +11,8 @@ func set_materials(bike_mat, windshield_mat):
 	$WindShield.set_surface_material(0, windshield_mat)
 
 func set_crash(racer : Racer):
-	if racer.has_node("Engine"):
-		global_transform = racer.get_node("Engine").global_transform
+	if racer.has_node("EngineRotationHelper/Engine"):
+		global_transform = racer.get_node("EngineRotationHelper/Engine").global_transform
 #	set_collision_layer_bit(0, true)
 	$CollisionShape.disabled = false
 	visible = true

@@ -8,10 +8,10 @@
 [node name="Racer" instance=ExtResource( 3 )]
 script = ExtResource( 2 )
 
-[node name="WindShield" parent="Engine" index="0"]
+[node name="WindShield" parent="EngineRotationHelper/Engine" index="0"]
 material/0 = ExtResource( 1 )
 
-[node name="SteeringColumn" parent="Engine" index="1"]
+[node name="SteeringColumn" parent="EngineRotationHelper/Engine" index="1"]
 material/0 = ExtResource( 8 )
 
-[editable path="Engine"]
+[editable path="EngineRotationHelper/Engine"]

@@ -1,10 +1,12 @@
 extends Racer
 class_name Player
 
-onready var rotation_helper : Spatial = $RotationHelper
-onready var camera : Camera = $RotationHelper/Camera
-onready var HUD : Control = $RotationHelper/Camera/HUD
-onready var pause_menu : Control = $RotationHelper/Camera/PauseMenu
+onready var engine_rot_help : Spatial = $EngineRotationHelper
+onready var engine : Spatial = $EngineRotationHelper/Engine
+onready var cam_rot_help : Spatial = $CamRotationHelper
+onready var camera : Camera = $CamRotationHelper/Camera
+onready var HUD : Control = $CamRotationHelper/Camera/HUD
+onready var pause_menu : Control = $CamRotationHelper/Camera/PauseMenu
 
 const MIN_CAM_FOV : float = 45.0
 const MAX_CAM_FOV : float = 65.0
@@ -22,14 +24,17 @@ var has_cam_control : bool = true
 var mouse_vert_invert : int = 1
 var mouse_horz_invert : int = -1
 
+
 func _process(delta : float) -> void:
 	_get_key_input()
 	if current_path_node != null:
 		_set_arrow_angle()
 	_adjust_cam_fov_dist()
 
+
 func _physics_process(delta : float) -> void:
 	_rotate_default(delta)
+#	_check_free_rotating()
 	
 	var move_direction : Vector3 = Vector3()
 	var player_basis : Basis = global_transform.basis
@@ -37,6 +42,7 @@ func _physics_process(delta : float) -> void:
 	temp_velocity.y = 0
 	
 	if is_on_ground:
+		
 		var ground_normal : Vector3 = _get_ground_normal()
 		
 		# Align player Y vector to ground normal
@@ -99,10 +105,17 @@ func _physics_process(delta : float) -> void:
 		prev_ground_distance = ground_distance
 
 	else:
+#		if !is_free_rotating:
+		var player_quat = player_basis.get_rotation_quat()
+		global_transform.basis = Basis(player_quat.slerp(_align_to_normal(Vector3.UP), delta*3))
+#		elif engine_rot_help.rotation != Vector3.ZERO:
+#		var rot_help_quat = cam_rot_help.global_transform.basis.get_rotation_quat()
+#		cam_rot_help.global_transform.basis = \
+#			Basis(rot_help_quat.slerp(_align_to_normal(Vector3.UP), delta*6))
+			
 		prev_ground_distance = 0
 		move_direction = Vector3(0, -Globals.GRAVITY, 0)
-		
-#	move_direction += _check_kinematic_collision()
+	
 	velocity += move_direction
 	
 	if is_braking:
@@ -118,6 +131,7 @@ func _physics_process(delta : float) -> void:
 	_set_speedometer()
 	
 	is_on_ground = false
+
 
 # Track what keyboard input is being pressed
 func _get_key_input() -> void:
@@ -146,57 +160,69 @@ func _get_key_input() -> void:
 				is_boosting = false
 				_set_boost_sfx()
 
+
 func _input(event):
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:	
 		if event is InputEventMouseButton:
 			if has_control:
 				if event.button_index == 1:
 					is_swinging = event.is_pressed()
-			if event.button_index == 2:
-				is_free_rotating = event.is_pressed()
+				if event.button_index == 2:
+					is_free_rotating = event.pressed
 		
 		# Rotate the camera based on mouse movement
 		if event is InputEventMouseMotion:
 			if is_free_rotating and !is_on_ground:
-				$Engine.rotate_x(deg2rad(event.relative.y * mouse_vert_invert * FREE_ROTATE_VERT_SENSITIVITY))
-				$Engine.rotate_z(deg2rad(event.relative.x * mouse_horz_invert * FREE_ROTATE_HORZ_SENSITIVITY))
+				if engine.rotation != Vector3.ZERO:
+					engine_rot_help.rotation += engine.rotation
+					$CollisionShape.rotation += engine.rotation
+					engine.rotation = Vector3.ZERO
+				engine_rot_help.rotate_x(deg2rad(event.relative.y * mouse_vert_invert * FREE_ROTATE_VERT_SENSITIVITY))
+				engine_rot_help.rotate_z(deg2rad(event.relative.x * mouse_horz_invert * FREE_ROTATE_HORZ_SENSITIVITY))
 				$CollisionShape.rotate_x(deg2rad(event.relative.y * mouse_vert_invert * FREE_ROTATE_VERT_SENSITIVITY))
 				$CollisionShape.rotate_z(deg2rad(event.relative.x * mouse_horz_invert * FREE_ROTATE_HORZ_SENSITIVITY))
 			elif has_cam_control:
-				rotation_helper.rotate_x(-deg2rad(event.relative.y * mouse_vert_invert * MOUSE_VERT_SENSITIVITY))
-				rotation_helper.rotate_y(deg2rad(event.relative.x * mouse_horz_invert * MOUSE_HORZ_SENSITIVITY))
+				cam_rot_help.rotate_x(-deg2rad(event.relative.y * mouse_vert_invert * MOUSE_VERT_SENSITIVITY))
+				cam_rot_help.rotate_y(deg2rad(event.relative.x * mouse_horz_invert * MOUSE_HORZ_SENSITIVITY))
 				
-				var helper_rotation : Vector3 =rotation_helper.rotation_degrees
+				var helper_rotation : Vector3 = cam_rot_help.rotation_degrees
 				helper_rotation.x = clamp(helper_rotation.x, -10, 10)
 				helper_rotation.y = clamp(helper_rotation.y, -30, 30)
 				helper_rotation.z = 0
-				rotation_helper.rotation_degrees = helper_rotation
+				cam_rot_help.rotation_degrees = helper_rotation
 				
 				# Rotate vehicle model based on turning sharpness
 				var velocity_ratio = clamp(velocity.length() / MAX_FORWARD_VEL, 0.0, 1.0)
-				$Engine.rotate_object_local(Vector3(0, 0, 1), deg2rad(helper_rotation.y * 0.08 * velocity_ratio))
-				var vehicle_rotation : Vector3 = $Engine.rotation_degrees
+				engine.rotate_object_local(Vector3(0, 0, 1), deg2rad(helper_rotation.y * 0.08 * velocity_ratio))
+				var vehicle_rotation : Vector3 = engine.rotation_degrees
 				vehicle_rotation.z = clamp(vehicle_rotation.z, -45, 45)
-				$Engine.rotation_degrees = vehicle_rotation
+				engine.rotation_degrees = vehicle_rotation
+
 
 # Return Camera, Engine, and Collision back to default values
 func _rotate_default(delta : float) -> void:
 	if has_cam_control:
-		if rotation_helper.rotation_degrees.y != 0:
-			var yRot : float =rotation_helper.rotation_degrees.y
+		if cam_rot_help.rotation_degrees.y != 0:
+			var yRot : float = cam_rot_help.rotation_degrees.y
 			yRot = yRot + (0 - yRot) * (delta * TURN_SPEED)
-			rotation_helper.rotation_degrees.y = yRot
-			rotate_object_local(Vector3(0, 1, 0), deg2rad(yRot * delta * TURN_SPEED))
+			cam_rot_help.rotation_degrees.y = yRot
+			rotate_object_local(Vector3.UP, deg2rad(yRot * delta * TURN_SPEED))
+	
+	if engine.rotation_degrees != Vector3.ZERO:
+		var engineRot : Vector3 = engine.rotation_degrees
+		engineRot = engineRot + (Vector3.ZERO - engineRot) * (delta * TURN_SPEED * 0.8)
+		engine.rotation_degrees = engineRot
 	
 	if is_on_ground:
-		if $Engine.rotation_degrees != Vector3(0, 0, 0):
-			var engineRot : Vector3 = $Engine.rotation_degrees
-			engineRot = engineRot + (Vector3(0, 0, 0) - engineRot) * (delta * TURN_SPEED * 0.8)
-			$Engine.rotation_degrees = engineRot
-		if $CollisionShape.rotation_degrees != Vector3(0, 0, 0):
+		if engine_rot_help.rotation_degrees != Vector3.ZERO:
+			var engineRot : Vector3 = engine_rot_help.rotation_degrees
+			engineRot = engineRot + (Vector3.ZERO - engineRot) * (delta * TURN_SPEED * 0.8)
+			engine_rot_help.rotation_degrees = engineRot
+		if $CollisionShape.rotation_degrees != Vector3.ZERO:
 			var engineRot : Vector3 = $CollisionShape.rotation_degrees
 			engineRot = engineRot + (Vector3.ZERO - engineRot) * (delta * TURN_SPEED * 0.8)
 			$CollisionShape.rotation_degrees = engineRot
+
 
 func _adjust_cam_fov_dist():
 	var temp_velocity : Vector2 = Vector2(velocity.x, velocity.z)
@@ -206,6 +232,7 @@ func _adjust_cam_fov_dist():
 	camera.fov = clamp(camera.fov, MIN_CAM_FOV, MAX_CAM_FOV)
 	camera.transform.origin.z = clamp(camera.transform.origin.z, MIN_CAM_DIST, MAX_CAM_DIST)
 
+
 func _set_speedometer() -> void:
 	var _y_vector : Vector3 = -global_transform.basis[1]
 	var _y_velocity = Vector3(0, velocity.z, 0)
@@ -213,18 +240,22 @@ func _set_speedometer() -> void:
 	var modified_velocity : Vector3 = Vector3(velocity.x, _y_velocity, velocity.z)
 	HUD.set_speedometer(clamp(modified_velocity.length(), 0, MAX_SPEED))
 
+
 func _set_arrow_angle() -> void:
 	var closest_path_node_point : Vector3 = current_path_node.get_closest_point(global_transform.origin)
 	var vec2_path : Vector2 = Vector2(to_local(closest_path_node_point).x, to_local(closest_path_node_point).z).normalized()
 	HUD.set_arrow_angle(-(vec2_path.angle() + (PI / 2)))
 
+
 func _set_boost(delta_boost : float) -> void:
 	._set_boost(delta_boost)
 	HUD.set_boost(boost)
-	
+
+
 func start_race() -> void:
 	.start_race()
 	HUD.set_race_notice()
+
 
 func update_path_node(new_path_node : PathNode) -> void:
 	if current_path_node.serial == new_path_node.serial:
@@ -238,21 +269,25 @@ func update_path_node(new_path_node : PathNode) -> void:
 			current_path_node = path_nodes[new_path_node.next_serial][0]
 		else:
 			current_path_node = path_nodes[current_path_node.next_serial]
-			
+
+
 func _crash():
 	if !$CrashTimer.time_left:
 		has_cam_control = false
 	._crash()
 	camera.look_at(crash_bike.global_transform.origin, Vector3.UP)
 
+
 func _crash_finished():
 	._crash_finished()
-	$RotationHelper/Camera.transform = $RotationHelper/Camera.default_cam_transform
+	camera.transform = camera.default_cam_transform
 	if Globals.race_on_going == true:
 		has_cam_control = true
 
+
 func _mute_player_sfx():
 	AudioServer.set_bus_mute(Globals.player_bus, true)
+
 
 func _unmute_player_sfx():
 	AudioServer.set_bus_mute(Globals.player_bus, false)

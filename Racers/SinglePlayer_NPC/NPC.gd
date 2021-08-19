@@ -89,7 +89,8 @@ func _physics_process(delta : float) -> void:
 		prev_ground_distance = ground_distance
 
 	else:
-		global_transform.basis = npc_basis.slerp(_align_to_normal(Vector3(0, 1, 0)), delta*10).orthonormalized()
+		var npc_quat = npc_basis.get_rotation_quat()
+		global_transform.basis = Basis(npc_quat.slerp(_align_to_normal(Vector3.UP), delta*4))
 		prev_ground_distance = 0
 		move_direction = Vector3(0, -Globals.GRAVITY, 0)
 	move_direction += _check_kinematic_collision()
@@ -119,12 +120,15 @@ func _set_target_speed(new_target_speed : int) -> void:
 
 
 func _path_point_distance() -> void:
-	var temp_2D_goal = Vector2(simple_path[current_goal].x, simple_path[current_goal].z)
-	var temp_2D_global = Vector2(global_transform.origin.x, global_transform.origin.z)
-	if temp_2D_global.distance_to(temp_2D_goal) < 15:
-		if current_goal < simple_path.size()-1:
-			current_goal += 1
-	elif temp_2D_global.distance_to(temp_2D_goal) > 20:
+	if simple_path.size() > 0:
+		var temp_2D_goal = Vector2(simple_path[current_goal].x, simple_path[current_goal].z)
+		var temp_2D_global = Vector2(global_transform.origin.x, global_transform.origin.z)
+		if temp_2D_global.distance_to(temp_2D_goal) < 15:
+			if current_goal < simple_path.size()-1:
+				current_goal += 1
+		elif temp_2D_global.distance_to(temp_2D_goal) > 20:
+			pathfind_next_node()
+	else:
 		pathfind_next_node()
 
 

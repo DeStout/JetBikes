@@ -15,6 +15,7 @@ export var scaleTexture = true
 var camera
 var cameraOrigin
 
+
 func _process(delta):
 	if points.size() < 2:
 		return
@@ -130,7 +131,8 @@ func cap(center, pivot, thickness, smoothing):
 		add_vertex(array[i]);
 		set_uv(Vector2(0.5, 0.5))
 		add_vertex(center);
-		
+
+
 func corner(center, start, end, smoothing):
 	var array = []
 	for i in range(smoothing + 1):

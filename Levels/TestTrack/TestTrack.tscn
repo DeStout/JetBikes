@@ -131,7 +131,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape" id=28]
-extents = Vector3( 58.7658, 6.5942, 1 )
+extents = Vector3( 58.766, 9.026, 1 )
 
 [sub_resource type="Curve3D" id=29]
 _data = {
@@ -426,7 +426,7 @@ curve = SubResource( 25 )
 shape = SubResource( 26 )
 
 [node name="PathNode12" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
-transform = Transform( 0.994456, -0.0864789, -0.059829, 0.0866341, 0.99624, 3.0374e-10, 0.0596041, -0.00518324, 0.998209, -179.295, 141.372, -192.643 )
+transform = Transform( 0.994456, -0.0864789, -0.059829, 0.0866341, 0.99624, 3.0374e-10, 0.0596041, -0.00518324, 0.998209, -176.796, 138.803, -184.907 )
 function = 1
 serial = 12
 next_serial = 13
@@ -605,7 +605,7 @@ shape = SubResource( 55 )
 disabled = true
 
 [node name="Pathfind_Mod2" parent="Minimap/Navigation/ModNodes" instance=ExtResource( 1 )]
-transform = Transform( 0.999341, 0, 0.0362949, 0, 1, 0, -0.0362949, 0, 0.999341, -178.486, 36.8056, -32.6009 )
+transform = Transform( 0.999341, 0, 0.0362949, 0, 1, 0, -0.0362949, 0, 0.999341, -178.486, 24.4127, -32.6009 )
 function = 1
 
 [node name="CollisionShape" parent="Minimap/Navigation/ModNodes/Pathfind_Mod2" index="0"]
