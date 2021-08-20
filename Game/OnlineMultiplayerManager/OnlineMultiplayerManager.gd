@@ -18,8 +18,7 @@ func _ready():
 
 
 func setup_lobby_network(is_host : bool):
-	var connection : int = OK
-	
+	var connection : int = FAILED
 	if is_host:
 		connection = Network.init_host()
 	else:
@@ -52,7 +51,6 @@ func _peer_disconnected(dead_peer_ID : int) -> void:
 
 func _connected_to_server() -> void:
 	print("Connected to Server: " + str(Network.self_data.network_ID))
-	_lobby.update_lobby("Connected to Server")
 
 
 func _server_connection_failed() -> void:
@@ -62,6 +60,7 @@ func _server_connection_failed() -> void:
 
 func _server_disconnected() -> void:
 	print("Server Disconnected - Returning to Main Menu")
+	Network.close_network_connection()
 	emit_signal("return_to_main")
 
 

@@ -28,7 +28,8 @@ func update_lobby_info(update_type : String) -> void:
 	
 	racer_list.clear()
 	for player in Network.player_list:
-		racer_name.placeholder_text = Network.player_list[player].placeholder_name
+		if player == get_tree().get_network_unique_id():
+			racer_name.placeholder_text = Network.player_list[player].placeholder_name
 		
 		if Network.player_list[player].player_name != "":
 			racer_list.add_item(Network.player_list[player].player_name, null, false)

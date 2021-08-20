@@ -3,8 +3,11 @@ extends LobbyMenu
 onready var level_name = $MenuFrame/LobbyFrame/ClientSettingsPanel/Level/LevelName
 onready var num_laps = $MenuFrame/LobbyFrame/ClientSettingsPanel/Laps/NumLaps
 onready var num_npcs = $MenuFrame/LobbyFrame/ClientSettingsPanel/NPCs/NumNPCs
-
 onready var ready_button = $MenuFrame/LobbyFrame/ClientSettingsPanel/Buttons/ReadyButton
+
+
+func _ready():
+	update_lobby_info("Lobby Created")
 
 
 func _toggle_racer_ready(racer_ready : bool):

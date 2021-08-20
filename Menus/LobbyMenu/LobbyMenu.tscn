@@ -154,7 +154,7 @@ margin_bottom = -48.92
 size_flags_horizontal = 0
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 4 )
-max_length = 24
+max_length = 14
 __meta__ = {
 "_edit_use_anchors_": false
 }

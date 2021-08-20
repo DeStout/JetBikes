@@ -9,6 +9,8 @@ const _DEFAULT_IP : String = "127.0.0.1"
 var _upnp : UPNP = UPNP.new()
 var _IP_address : String = "127.0.0.1"
 
+var max_npc_num : int = 11
+
 class PlayerData:
 
 	var network_ID : int = 0
@@ -34,7 +36,6 @@ class PlayerData:
 		color = new_player_data.color
 		is_ready = new_player_data.is_ready
 
-
 var player_list = {}
 var self_data : PlayerData = PlayerData.new()
 
@@ -59,7 +60,7 @@ func init_host() -> int:
 		player_list[1] = self_data
 	
 		print("IP Address: " + _IP_address)
-		
+	
 	print("Server Connection Code: " + str(connection))
 	return connection
 
@@ -82,6 +83,8 @@ func add_peer(new_peer_ID : int) -> void:
 	new_peer_data.placeholder_name = "Player" + str(player_list.size()+1)
 	player_list[new_peer_ID] = new_peer_data
 	
+	max_npc_num -= 1
+	
 	emit_signal("update_lobby", "Peer Added")
 
 
@@ -90,6 +93,8 @@ func give_new_peer_player_data(new_peer_ID : int) -> void:
 	for player in player_list:
 		temp_list[player] = player_list[player].data_to_dict()
 	rpc_id(new_peer_ID, "fill_player_list", temp_list)
+	rpc_id(new_peer_ID, "update_race_info", Globals.multiplayer_level, \
+		Globals.multiplayer_laps_number, Globals.multiplayer_NPC_number)
 
 
 remote func fill_player_list(new_player_list):
@@ -142,8 +147,19 @@ remotesync func update_race_info(new_level_select : int, new_laps_amount : int, 
 
 func remove_peer(dead_peer_ID : int) -> void:
 	player_list.erase(dead_peer_ID)
+	update_placeholder_names()
+	
+	max_npc_num += 1
 	
 	emit_signal("update_lobby", "Peer Removed")
+
+
+func update_placeholder_names():
+	var player_num = 2
+	for player in player_list:
+		if player != 1:
+			player_list[player].placeholder_name = "Player" + str(player_num)
+			player_num += 1
 
 
 func close_network_connection() -> void:
@@ -151,7 +167,7 @@ func close_network_connection() -> void:
 	_reset_network()
 
 
-func _clear_network_peer() -> void:
+remote func _clear_network_peer() -> void:
 	if get_tree().network_peer != null:
 		get_tree().network_peer.close_connection()
 		get_tree().set_network_peer(null)
