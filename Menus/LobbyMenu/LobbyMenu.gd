@@ -24,7 +24,7 @@ func _racer_color_changed(new_color : Color) -> void:
 
 
 func update_lobby_info(update_type : String) -> void:
-	print("Updating Lobby: " + update_type)
+#	print("Updating Lobby: " + update_type)
 	
 	racer_list.clear()
 	for player in Network.player_list:
@@ -35,6 +35,9 @@ func update_lobby_info(update_type : String) -> void:
 			racer_list.add_item(Network.player_list[player].player_name, null, false)
 		else:
 			racer_list.add_item(Network.player_list[player].placeholder_name, null, false)
+			
+		racer_list.set_item_custom_fg_color(racer_list.get_item_count()-1, \
+			Network.player_list[player].color)
 			
 		if Network.player_list[player].is_ready:
 			racer_list.add_item("Ready", null, false)

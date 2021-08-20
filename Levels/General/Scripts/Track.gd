@@ -22,7 +22,6 @@ func _ready() -> void:
 				add_child(player.draw_path)
 	
 	emit_signal("track_ready", $Players.player.pause_menu)
-#	$Camera.current = true
 
 
 # Called by $Minimap/Naviation/PathNodes ready signal once it is ready

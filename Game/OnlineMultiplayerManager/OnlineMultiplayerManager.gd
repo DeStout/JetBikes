@@ -6,8 +6,12 @@ var host_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/HostLobby.tscn")
 var client_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/ClientLobby.tscn")
 var _lobby : Control
 
+var current_track : Track = null
+
 
 func _ready():
+	Network.connect("setup_race", self, "setup_online_multiplayer_race")
+	
 	# Called by Host and Client
 	get_tree().connect("network_peer_connected", self, "_peer_connected")
 	get_tree().connect("network_peer_disconnected", self, "_peer_disconnected")
@@ -15,6 +19,47 @@ func _ready():
 	get_tree().connect("connected_to_server", self, "_connected_to_server")
 	get_tree().connect("connection_failed", self, "_server_connection_failed")
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
+
+
+func _process(delta) -> void:
+	if $StartTimer.time_left and current_track is Track:
+		current_track.get_node("Players").player.HUD.set_race_notice("%d" % ($StartTimer.time_left + 1), true)
+
+
+func setup_online_multiplayer_race():
+	remove_child(_lobby)
+	
+	current_track = Globals.level_dict[Globals.level_dict_keys[Globals.multiplayer_level]].instance()
+	current_track.connect("track_ready", self, "track_ready")
+	if current_track is Track:
+		current_track.connect("race_finished", self, "finish_race")
+	add_child(current_track)
+
+
+func track_ready(pause_menu : Control) -> void:
+	pause_menu.connect("end_race", self, "end_race")
+	$MusicPlayer.play()
+	if current_track is Track:
+		$StartTimer.start()
+
+
+func _start_race() -> void:
+	current_track.start_race()
+
+
+func finish_race() -> void:
+	$EndTimer.start()
+
+
+func end_race():
+	$StartTimer.stop()
+	$EndTimer.stop()
+	$MusicPlayer.stop()
+	current_track.queue_free()
+	current_track = null
+	
+	add_child(_lobby)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func setup_lobby_network(is_host : bool):

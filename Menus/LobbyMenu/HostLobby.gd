@@ -18,6 +18,10 @@ func _ready():
 	update_lobby_info("Lobby Created")
 
 
+func _setup_race():
+	Network.setup_online_multiplayer_race()
+
+
 func update_lobby_info(update_type : String):
 	.update_lobby_info(update_type)
 	

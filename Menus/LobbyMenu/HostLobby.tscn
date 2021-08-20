@@ -406,3 +406,4 @@ __meta__ = {
 [connection signal="button_down" from="MenuFrame/LobbyFrame/HostSettingsPanel/Laps/LapsIncrease" to="." method="_increase_lap_amount"]
 [connection signal="button_down" from="MenuFrame/LobbyFrame/HostSettingsPanel/NPCs/NPCsDecrease" to="." method="_decrease_NPC_amount"]
 [connection signal="button_down" from="MenuFrame/LobbyFrame/HostSettingsPanel/NPCs/NPScIncrease" to="." method="_increase_NPC_amount"]
+[connection signal="pressed" from="MenuFrame/LobbyFrame/HostSettingsPanel/Buttons/RaceButton" to="." method="_setup_race"]

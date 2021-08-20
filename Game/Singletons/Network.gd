@@ -1,6 +1,7 @@
 extends Node
 
 signal update_lobby
+signal setup_race
 
 const _DEFAULT_PORT : int = 34500
 const _MAX_CONNECTIONS : int = 12
@@ -38,6 +39,13 @@ class PlayerData:
 
 var player_list = {}
 var self_data : PlayerData = PlayerData.new()
+
+
+remotesync func setup_online_multiplayer_race() -> void:
+	if get_tree().get_rpc_sender_id() == 0:
+		rpc("setup_online_multiplayer_race")
+	else:
+		emit_signal("setup_race")
 
 
 func set_IP_address(new_IP_address : String) -> void:
