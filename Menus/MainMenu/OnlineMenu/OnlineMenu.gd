@@ -22,5 +22,5 @@ func _join():
 
 
 func _setup_online_lobby():
-	Network.set_IP_adress($IPAdress/IPText.text)
+	Network.set_IP_address($IPAdress/IPText.text)
 	emit_signal("setup_online_lobby", is_host)

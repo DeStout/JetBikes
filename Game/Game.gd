@@ -3,9 +3,9 @@ extends Node
 
 onready var main_menu = $MainMenu
 
-var single_player_manager_ = load("res://Game/SinglePlayerManager/SinglePlayerManager.tscn")
+var single_player_manager_ = preload("res://Game/SinglePlayerManager/SinglePlayerManager.tscn")
 var single_player_manager
-var online_multiplayer_manager_ = load("res://Game/OnlineMultiplayerManager/OnlineMultiplayerManager.tscn")
+var online_multiplayer_manager_ = preload("res://Game/OnlineMultiplayerManager/OnlineMultiplayerManager.tscn")
 var online_multiplayer_manager
 
 

@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/zylann.hterrain/hterrain_resource_saver.gd"
 }, {
+"base": "Control",
+"class": "LobbyMenu",
+"language": "GDScript",
+"path": "res://Menus/LobbyMenu/LobbyMenu.gd"
+}, {
 "base": "Area",
 "class": "ModNode",
 "language": "GDScript",
@@ -63,6 +68,7 @@ _global_script_class_icons={
 "Game": "",
 "HTerrainDataLoader": "",
 "HTerrainDataSaver": "",
+"LobbyMenu": "",
 "ModNode": "",
 "NPC": "",
 "PathNode": "",

@@ -2,7 +2,7 @@ extends Node
 
 
 var SHOW_NPC_PATHFIND : bool = false
-var INFINITE_BOOST : bool = true
+var INFINITE_BOOST : bool = false
 
 var test_track_ : PackedScene = load("res://Levels/TestTrack/TestTrack.tscn")
 var test_terrain_ : PackedScene = load("res://Levels/TestTerrain/TestTerrain.tscn")
@@ -45,9 +45,14 @@ onready var level_bus : int = AudioServer.get_bus_index("Level_SFX")
 
 const GRAVITY = 2.5
 
-var level : int = -1
+var level : int = DEFAULT_LEVEL
 var laps_number : int = DEFAULT_LAP_NUMBER
 var NPC_number : int = DEFAULT_NPC_NUMBER
+var multiplayer_level : int = DEFAULT_LEVEL
+var multiplayer_laps_number : int = DEFAULT_LAP_NUMBER
+var multiplayer_NPC_number : int = DEFAULT_NPC_NUMBER
+
+
 var race_on_going : bool = false
 
 var sfx_level : float = DEFAULT_SFX_LEVEL setget _apply_sfx_volume

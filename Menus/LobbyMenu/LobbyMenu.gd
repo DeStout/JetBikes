@@ -1,75 +1,47 @@
+class_name LobbyMenu
 extends Control
 
 signal return_to_main
 
-onready var level_setting = $MenuFrame/LobbyFrame/HostSettingsPanel/Level/LevelName
-onready var laps_setting = $MenuFrame/LobbyFrame/HostSettingsPanel/Laps/NumLaps
-onready var NPCs_setting = $MenuFrame/LobbyFrame/HostSettingsPanel/NPCs/NumNPCs
-onready var cancel_button = $MenuFrame/LobbyFrame/CancelPanel/CancelButton
+onready var racer_name : LineEdit = $MenuFrame/LobbyFrame/RacerSettingsPanel/RacerName
+onready var vehicle_color : ColorPickerButton = $MenuFrame/LobbyFrame/RacerSettingsPanel/VehicleColor
+onready var racer_list : ItemList = $MenuFrame/LobbyFrame/ListPanel/RacersList
 
-var multiplayer_lap_amount : int = Globals.DEFAULT_LAP_NUMBER
-var multiplayer_NPC_amount : int = Globals.DEFAULT_NPC_NUMBER
-var level_select : int = Globals.DEFAULT_LEVEL
+onready var cancel_button : Button = $MenuFrame/LobbyFrame/CancelPanel/CancelButton
 
 
-func _ready():
-	level_setting.text = Globals.level_dict_keys[Globals.DEFAULT_LEVEL]
-	laps_setting.text = str(multiplayer_lap_amount)
-	NPCs_setting.text = str(multiplayer_NPC_amount)
+func _ready() -> void:
+	Network.connect("update_lobby", self, "update_lobby_info")
+	connect("return_to_main", Network, "close_network_connection")
 
 
-func setup(is_host : bool):
-	if is_host:
-		$MenuFrame/LobbyFrame/TitlePanel/Label.text = "Host Lobby"
-		$MenuFrame/LobbyFrame/HostSettingsPanel.visible = true
-		$MenuFrame/LobbyFrame/ClientSettingsPanel.visible = false
-	else:
-		$MenuFrame/LobbyFrame/TitlePanel/Label.text = "Client Lobby"
-		$MenuFrame/LobbyFrame/HostSettingsPanel.visible = false
-		$MenuFrame/LobbyFrame/ClientSettingsPanel.visible = true
+func _racer_name_changed(new_text : String) -> void:
+	Network.update_player_info(new_text, vehicle_color.color)
 
 
-func _level_select_left():
-	level_select -= 1
-	if level_select < 0:
-		level_select = Globals.level_dict_keys.size() - 1
-	level_setting.text = Globals.level_dict_keys[level_select]
+func _racer_color_changed(new_color : Color) -> void:
+	Network.update_player_info(racer_name.text, new_color)
 
 
-func _level_select_right():
-	level_select += 1
-	if level_select > Globals.level_dict_keys.size() - 1:
-		level_select = 0
-	level_setting.text = Globals.level_dict_keys[level_select]
+func update_lobby_info(update_type : String) -> void:
+	print("Updating Lobby: " + update_type)
+	
+	racer_list.clear()
+	for player in Network.player_list:
+		racer_name.placeholder_text = Network.player_list[player].placeholder_name
+		
+		if Network.player_list[player].player_name != "":
+			racer_list.add_item(Network.player_list[player].player_name, null, false)
+		else:
+			racer_list.add_item(Network.player_list[player].placeholder_name, null, false)
+			
+		if Network.player_list[player].is_ready:
+			racer_list.add_item("Ready", null, false)
+		else:
+			racer_list.add_item("", null, false)
+			
+		racer_list.set_item_selectable(racer_list.get_item_count()-1, 0)
 
 
-func _decrease_lap_amount():
-	multiplayer_lap_amount -= 1
-	if multiplayer_lap_amount < Globals.MIN_LAP_NUMBER:
-		multiplayer_lap_amount = Globals.MAX_LAP_NUMBER
-	laps_setting.text = str(multiplayer_lap_amount)
-
-
-func _increase_lap_amount():
-	multiplayer_lap_amount += 1
-	if multiplayer_lap_amount > Globals.MAX_LAP_NUMBER:
-		multiplayer_lap_amount = Globals.MIN_LAP_NUMBER
-	laps_setting.text = str(multiplayer_lap_amount)
-
-
-func _decrease_NPC_amount():
-	multiplayer_NPC_amount -= 1
-	if multiplayer_NPC_amount < Globals.MIN_NPC_NUMBER:
-		multiplayer_NPC_amount = Globals.MAX_NPC_NUMBER
-	NPCs_setting.text = str(multiplayer_NPC_amount)
-
-
-func _increase_NPC_amount():
-	multiplayer_NPC_amount += 1
-	if multiplayer_NPC_amount > Globals.MAX_NPC_NUMBER:
-		multiplayer_NPC_amount = Globals.MIN_NPC_NUMBER
-	NPCs_setting.text = str(multiplayer_NPC_amount)
-
-
-func _on_CancelButton_pressed():
+func _on_CancelButton_pressed() -> void:
 	emit_signal("return_to_main")
