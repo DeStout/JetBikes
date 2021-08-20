@@ -385,11 +385,10 @@ margin_top = 121.728
 margin_right = -179.55
 margin_bottom = -233.728
 size_flags_horizontal = 10
-disabled = true
 toggle_mode = false
 shortcut_in_tooltip = false
 align = 0
-color = Color( 0, 0.882353, 1, 1 )
+color = Color( 0.184314, 0.788235, 1, 1 )
 edit_alpha = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -402,3 +401,4 @@ __meta__ = {
 [connection signal="button_down" from="NPCs/NPCDecrease" to="." method="_decrease_NPC_amount"]
 [connection signal="button_down" from="NPCs/NPCIncrease" to="." method="_increase_NPC_amount"]
 [connection signal="pressed" from="Buttons/RaceButton" to="." method="_start_race"]
+[connection signal="color_changed" from="ColorPicker" to="." method="_select_color"]

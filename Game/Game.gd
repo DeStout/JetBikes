@@ -40,9 +40,8 @@ func return_to_main_menu():
 	
 	if has_node(single_player_manager.name):
 		remove_child(single_player_manager)
-#		get_node("SinglePlayerManager").queue_free()
+		
 	if has_node(online_multiplayer_manager.name):
 		remove_child(online_multiplayer_manager)
-#		get_node("OnlineMultiplayerManager").queue_free()
 
 	add_child(main_menu)

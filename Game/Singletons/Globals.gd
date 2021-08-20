@@ -55,6 +55,8 @@ var music_level : float = DEFAULT_MUSIC_LEVEL setget _apply_music_volume
 var mute_sound : bool = false
 var mute_music : bool = false
 
+var player_color : Color = Color("#2fc9ff")
+
 
 func _ready():
 	_apply_sfx_volume(DEFAULT_SFX_LEVEL)

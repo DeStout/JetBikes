@@ -24,19 +24,23 @@ func _spawn_players():
 	player.connect("finished_race", self, "finish_race")
 	add_child(player)
 	player.global_transform = get_node("PlayerSpawn"+str(Globals.NPC_number+1)).global_transform
+	player.set_racer_color(Globals.player_color)
 	
 	_setup_crash_bike(player)
 	
 	if Globals.NPC_number > 0:
 		for NPC_num in range(Globals.NPC_number):
 			var new_NPC = npc.instance()
-			new_NPC.name = "NPC" + str(NPC_num + 1)
-			new_NPC.global_transform = get_node("PlayerSpawn"+str(NPC_num+1)).global_transform
 			new_NPC.connect("finished_race", self, "finish_race")
 			add_child(new_NPC)
-			get_node("PlayerSpawn"+str(NPC_num+1)).free()
+			
+			new_NPC.name = "NPC" + str(NPC_num + 1)
+			new_NPC.global_transform = get_node("PlayerSpawn"+str(NPC_num+1)).global_transform
+			new_NPC.set_racer_color(Color(randf(), randf(), randf()))
 
 			_setup_crash_bike(new_NPC)
+			
+			get_node("PlayerSpawn"+str(NPC_num+1)).free()
 	
 	for spawn in range(Globals.NPC_number+1, 13):
 		get_node("PlayerSpawn"+str(spawn)).free()

@@ -10,6 +10,7 @@ func _ready():
 	$Level/LevelName.text = Globals.level_dict_keys[Globals.DEFAULT_LEVEL]
 	$Laps/NumLaps.text = str(solo_lap_amount)
 	$NPCs/NumNPCs.text = str(solo_NPC_amount)
+	$ColorPicker.color = Globals.player_color
 
 func _level_select_left():
 	level_select -= 1
@@ -46,6 +47,9 @@ func _increase_NPC_amount():
 	if solo_NPC_amount > Globals.MAX_NPC_NUMBER:
 		solo_NPC_amount = Globals.MIN_NPC_NUMBER
 	$NPCs/NumNPCs.text = str(solo_NPC_amount)
+
+func _select_color(new_color : Color) -> void:
+	Globals.player_color = new_color
 
 func _start_race():
 	Globals.level = level_select

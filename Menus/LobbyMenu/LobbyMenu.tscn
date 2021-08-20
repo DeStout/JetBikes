@@ -6,35 +6,35 @@
 [ext_resource path="res://Menus/MainMenu/Assets/Sprites/LeftTriangle.bmp" type="Texture" id=4]
 [ext_resource path="res://Menus/MainMenu/Assets/Sprites/RightTriangle.bmp" type="Texture" id=5]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 96
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 48
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 36
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=4]
-size = 36
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=5]
 size = 32
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=5]
 size = 26
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=6]
 size = 48
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=7]
 size = 36
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=8]
 size = 28
 font_data = ExtResource( 3 )
 
@@ -102,7 +102,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="MenuFrame/LobbyFrame/TitlePanel"]
 margin_right = 871.0
 margin_bottom = 132.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "Online Lobby"
 
 [node name="RacerSettingsPanel" type="Control" parent="MenuFrame/LobbyFrame"]
@@ -129,7 +129,7 @@ margin_right = -512.871
 margin_bottom = -147.4
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "Racer Settings"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -144,7 +144,7 @@ margin_right = -555.871
 margin_bottom = -85.168
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "Racer Name:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -160,7 +160,7 @@ margin_right = -302.871
 margin_bottom = -48.92
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 max_length = 24
 __meta__ = {
 "_edit_use_anchors_": false
@@ -220,7 +220,7 @@ margin_right = -512.872
 margin_bottom = -329.288
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "Racers"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -236,7 +236,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 5 )
 custom_constants/vseparation = 0
 max_columns = 4
 same_column_width = true
@@ -278,7 +278,7 @@ anchor_bottom = 0.998
 margin_top = -16.0
 margin_right = -537.0
 margin_bottom = -244.408
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 text = "Race Settings"
 align = 1
 valign = 1
@@ -312,7 +312,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 text = "Level Select"
 align = 1
 __meta__ = {
@@ -327,7 +327,7 @@ margin_top = 9.523
 margin_bottom = 3.0
 size_flags_horizontal = 0
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 8 )
 text = "test_track"
 align = 1
 valign = 1
@@ -410,7 +410,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 text = "Number of Laps"
 align = 1
 __meta__ = {
@@ -427,7 +427,7 @@ margin_right = 6.10352e-05
 margin_bottom = -0.0400085
 size_flags_horizontal = 0
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 8 )
 text = "3"
 align = 1
 valign = 1
@@ -511,7 +511,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 text = "Number of NPCs"
 align = 1
 __meta__ = {
@@ -526,7 +526,7 @@ margin_top = 8.016
 margin_bottom = -16.016
 size_flags_horizontal = 0
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 8 )
 text = "11"
 align = 1
 valign = 1
@@ -633,7 +633,7 @@ anchor_bottom = 0.998
 margin_top = -16.0
 margin_right = -537.0
 margin_bottom = -244.408
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 text = "Race Settings"
 align = 1
 valign = 1
@@ -665,7 +665,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 text = "Level Select"
 align = 1
 __meta__ = {
@@ -680,7 +680,7 @@ margin_top = 9.523
 margin_bottom = 3.0
 size_flags_horizontal = 0
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 8 )
 text = "test_track"
 align = 1
 valign = 1
@@ -712,7 +712,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 text = "Number of Laps"
 align = 1
 __meta__ = {
@@ -727,7 +727,7 @@ margin_top = 5.368
 margin_bottom = -6.968
 size_flags_horizontal = 0
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 8 )
 text = "3"
 align = 1
 valign = 1
@@ -760,7 +760,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 text = "Number of NPCs"
 align = 1
 __meta__ = {
@@ -775,7 +775,7 @@ margin_top = 8.016
 margin_bottom = -16.016
 size_flags_horizontal = 0
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 8 )
 text = "11"
 align = 1
 valign = 1
