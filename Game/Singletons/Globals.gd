@@ -6,15 +6,9 @@ var INFINITE_BOOST : bool = false
 
 var test_track_ : PackedScene = load("res://Levels/TestTrack/TestTrack.tscn")
 var test_terrain_ : PackedScene = load("res://Levels/TestTerrain/TestTerrain.tscn")
-#var test_terrain2_ : PackedScene = load("res://Levels/TestTerrain2/TestTerrain2.tscn")
-#var test_terrain3_ : PackedScene = load("res://Levels/TestTerrain3/TestTerrain3.tscn")
-#var new_canyon_ : PackedScene = load("res://Levels/NewCanyon/NewCanyon.tscn")
 var level_dict : Dictionary = {
 	"test_track" : test_track_,
-	"test_terrain" : test_terrain_,
-#	"test_terrain2" : test_terrain2_,
-#	"test_terrain3" : test_terrain3_
-#	,"new_canyon" : new_canyon_
+	"test_terrain" : test_terrain_
 	}
 var level_dict_keys : Array = level_dict.keys()
 var DEFAULT_LEVEL = 1
@@ -48,9 +42,6 @@ const GRAVITY = 2.5
 var level : int = DEFAULT_LEVEL
 var laps_number : int = DEFAULT_LAP_NUMBER
 var NPC_number : int = DEFAULT_NPC_NUMBER
-var multiplayer_level : int = DEFAULT_LEVEL
-var multiplayer_laps_number : int = DEFAULT_LAP_NUMBER
-var multiplayer_NPC_number : int = DEFAULT_NPC_NUMBER
 
 
 var race_on_going : bool = false

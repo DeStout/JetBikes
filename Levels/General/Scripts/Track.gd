@@ -1,7 +1,6 @@
-extends Spatial
 class_name Track
+extends Spatial
 
-signal track_ready
 signal return_to_main
 
 onready var path_nodes : Array

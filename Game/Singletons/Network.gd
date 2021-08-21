@@ -1,15 +1,17 @@
 extends Node
 
 signal update_lobby
-signal setup_race
 
-const _DEFAULT_PORT : int = 34500
 const _MAX_CONNECTIONS : int = 12
+const _DEFAULT_PORT : int = 34500
 const _DEFAULT_IP : String = "127.0.0.1"
+var _IP_address : String = _DEFAULT_IP
 
 var _upnp : UPNP = UPNP.new()
-var _IP_address : String = "127.0.0.1"
 
+var multiplayer_level : int = Globals.DEFAULT_LEVEL
+var multiplayer_laps_number : int = Globals.DEFAULT_LAP_NUMBER
+var multiplayer_NPC_number : int = Globals.DEFAULT_NPC_NUMBER
 var max_npc_num : int = 11
 
 class PlayerData:
@@ -44,8 +46,21 @@ var self_data : PlayerData = PlayerData.new()
 remotesync func setup_online_multiplayer_race() -> void:
 	if get_tree().get_rpc_sender_id() == 0:
 		rpc("setup_online_multiplayer_race")
+	else:			
+		rpc("setup_race")
+
+
+remotesync func track_ready() -> void:
+	if get_tree().get_rpc_sender_id() == 0:
+		self_data.is_ready = true
+		rpc("track_ready")
 	else:
-		emit_signal("setup_race")
+		player_list[get_tree().get_rpc_sender_id()].is_ready = true
+		if get_tree().is_network_server():
+			for player in player_list:
+				if !player_list[player].is_ready:
+					break
+				rpc("begin_race")
 
 
 func set_IP_address(new_IP_address : String) -> void:
@@ -101,8 +116,8 @@ func give_new_peer_player_data(new_peer_ID : int) -> void:
 	for player in player_list:
 		temp_list[player] = player_list[player].data_to_dict()
 	rpc_id(new_peer_ID, "fill_player_list", temp_list)
-	rpc_id(new_peer_ID, "update_race_info", Globals.multiplayer_level, \
-		Globals.multiplayer_laps_number, Globals.multiplayer_NPC_number)
+	rpc_id(new_peer_ID, "update_race_info", Network.multiplayer_level, \
+		Network.multiplayer_laps_number, Network.multiplayer_NPC_number)
 
 
 remote func fill_player_list(new_player_list):
@@ -111,7 +126,7 @@ remote func fill_player_list(new_player_list):
 		player_data.dict_to_data(new_player_list[player])
 		player_list[player] = player_data
 
-		if player == self_data.network_ID:
+		if player == get_tree().get_network_unique_id():
 			self_data = player_data
 
 	emit_signal("update_lobby", "New Peer Player List")
@@ -134,7 +149,7 @@ remotesync func update_player_info(new_player_name : String, new_player_color : 
 remotesync func update_player_ready(player_ready : bool) -> void:
 	if get_tree().get_rpc_sender_id() == 0:
 		self_data.is_ready = player_ready
-		player_list[self_data.network_ID].is_ready = player_ready
+		player_list[get_tree().get_network_unique_id()].is_ready = player_ready
 		rpc("update_player_ready", player_ready)
 	else:
 		player_list[get_tree().get_rpc_sender_id()].is_ready = player_ready
@@ -146,9 +161,9 @@ remotesync func update_race_info(new_level_select : int, new_laps_amount : int, 
 	if get_tree().get_rpc_sender_id() == 0:
 		rpc("update_race_info", new_level_select, new_laps_amount, new_npc_amount)
 	else:
-		Globals.multiplayer_level = new_level_select
-		Globals.multiplayer_laps_number = new_laps_amount
-		Globals.multiplayer_NPC_number = new_npc_amount
+		Network.multiplayer_level = new_level_select
+		Network.multiplayer_laps_number = new_laps_amount
+		Network.multiplayer_NPC_number = new_npc_amount
 		
 		emit_signal("update_lobby", "Race Info")
 
