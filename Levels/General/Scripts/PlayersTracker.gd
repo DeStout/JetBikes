@@ -3,22 +3,25 @@ extends Node
 signal race_finished
 
 var npc
-var player = load("res://Racers/SinglePlayer_Player/Player.tscn")
-var crash_bike = load("res://Racers/General/Bike/Assets/Models/CrashBike.tscn")
+var player = preload("res://Racers/SinglePlayer_Player/Player.tscn")
+var crash_bike = preload("res://Racers/General/Bike/Assets/Models/CrashBike.tscn")
 var players : Array
-var path_nodes_size : int
+var path_nodes_size : int = 0
+
 
 func _ready() -> void:
 	if Globals.NPC_number != 0:
-		npc = load("res://Racers/SinglePlayer_NPC/NPC.tscn")
+		npc = preload("res://Racers/SinglePlayer_NPC/NPC.tscn")
 	_spawn_players()
 	players = get_children()
 	players.erase($CrashBikes)
-	
+
+
 func _process(delta : float) -> void:
 	players.sort_custom(self, "_sort_placement")
 	_alert_players()
-		
+
+
 func _spawn_players():
 	player = player.instance()
 	player.connect("finished_race", self, "finish_race")
@@ -45,6 +48,7 @@ func _spawn_players():
 	for spawn in range(Globals.NPC_number+1, 13):
 		get_node("PlayerSpawn"+str(spawn)).free()
 
+
 func _setup_crash_bike(racer : Racer):
 	racer.crash_bike = crash_bike.instance()
 	if racer is Player:
@@ -55,7 +59,10 @@ func _setup_crash_bike(racer : Racer):
 			load("res://Racers/SinglePlayer_NPC/Materials/M_NPCWindshield.tres"))
 	$CrashBikes.add_child(racer.crash_bike)
 
+
 func setup_players(track_navigation, path_nodes):
+	path_nodes_size = path_nodes.size()
+	
 	player.navigation = track_navigation
 	player.path_nodes = path_nodes
 	player.current_path_node = path_nodes[0]
@@ -66,18 +73,21 @@ func setup_players(track_navigation, path_nodes):
 			npc_temp.path_nodes = path_nodes
 			npc_temp.current_path_node = path_nodes[0]
 			npc_temp.pathfind_next_node()
-	
+
+
 func start_race() -> void:
 	for racer in players:
 		racer.start_race()
-	
+
+
 func finish_race(winner) -> void:
 	if Globals.race_on_going:
 		player.HUD.set_race_notice("Finished!\n" + winner.name + " wins!", true)
 	for racer in players:
 		racer.finish_race()
 	emit_signal("race_finished")
-	
+
+
 func _alert_players() -> void:
 	if get_child_count() - 1 == players.size():
 		for new_placement in range(players.size()):
@@ -87,10 +97,8 @@ func _alert_players() -> void:
 	else:
 		push_error("Player Tracker child count does not match array size")
 
-func _sort_placement(player1 : KinematicBody, player2 : KinematicBody) -> bool:
-	if !path_nodes_size:
-		path_nodes_size = player.path_nodes.size()
-		
+
+func _sort_placement(player1 : KinematicBody, player2 : KinematicBody) -> bool:		
 	if player1.lap_number > player2.lap_number:
 		return true
 	elif player2.lap_number > player1.lap_number:

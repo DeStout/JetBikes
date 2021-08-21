@@ -1,29 +1,83 @@
+tool
 extends Spatial
 class_name PathNode
-tool
+
+
+export var box_visible : bool = false setget _set_box_visible
 
 enum FUNCTION {DEFAULT, NO_PATHFIND}
 export(FUNCTION) var function = FUNCTION.DEFAULT
 export var is_checkpoint = true
+export var boost_value : int = 25
+
+export var width : float = 20.0 setget _update_box_width
+export var height : float = 7.5 setget _update_box_height
 
 export var serial : int = 0 setget _set_next_serial
 export var next_serial : int = 0
 export var route : int = -1
-export var boost_value : int = 40
 
+var box_shape : BoxShape
 var node_points : Array = [Vector3.ZERO, Vector3.ZERO]
-var box_shape_extents : Vector3
 
-func _ready():
-	if Engine.editor_hint:
-		if !is_instance_valid($Area/CollisionShape.shape):
-			$Area/CollisionShape.shape = BoxShape.new()
-	$Area/CollisionShape.shape.connect("changed", self, "_update")
-		
-	box_shape_extents = $Area/CollisionShape.shape.extents
+
+func _ready() -> void:
+	box_shape = BoxShape.new()
+	$Area/CollisionShape.shape = box_shape
+	box_shape.extents.x = width
+	box_shape.extents.y = height
+	$Box.width = width * 2
+	$Box.height = height * 2
 	
+	box_shape.connect("changed", self, "_update")
 	_update()
 
+
+func _set_box_visible(new_box_visible : bool) -> void:
+	box_visible = new_box_visible
+	if has_node("Box"):
+		$Box.visible = new_box_visible
+
+
+func _update_box_width(new_box_width : float) -> void:
+	width = new_box_width
+	if has_node("Box") and box_shape != null:
+		box_shape.extents.x = new_box_width
+		$Box.width = new_box_width * 2
+
+
+func _update_box_height(new_box_height : float) -> void:
+	height = new_box_height
+	if has_node("Box") and box_shape != null:
+		box_shape.extents.y = new_box_height
+		$Box.height = new_box_height * 2
+
+
+func _set_next_serial(new_serial : int) -> void:
+	serial = new_serial
+	update_next_serial(true)
+
+
+func update_next_serial(first : int) -> void:
+	if Engine.is_editor_hint():
+		next_serial = 0
+		if get_parent():
+			for sib_serial in get_parent().get_children():
+				if sib_serial.serial > serial:
+					next_serial = serial + 1
+					return
+				if first:
+					sib_serial.update_next_serial(false)
+				property_list_changed_notify()
+
+
+func _update() -> void:
+	node_points[0] = Vector3(box_shape.extents.x, 0, 0)
+	node_points[1] = Vector3(-box_shape.extents.x, 0, 0)
+
+#
+# Functionality Shit
+#
 # Given a global point, return the closest global point inside the PathNode
 func get_closest_point(point_to : Vector3) -> Vector3:
 	point_to = to_local(point_to)
@@ -44,31 +98,14 @@ func get_closest_point(point_to : Vector3) -> Vector3:
 	node_points[0].y + intersection_length * node_vector.y, \
 	node_points[0].z + intersection_length * node_vector.z)
 	return to_global(closest_point)
-	
+
+
 # Given a global point, return the distance to the closest global point inside the PathNode
 func get_closest_point_distance(point_to : Vector3) -> float:
 	return get_closest_point(point_to).distance_to(point_to)
-	
-func _set_next_serial(new_serial):
-	serial = new_serial
-	update_next_serial(true)
-		
-func update_next_serial(first):
-	if Engine.is_editor_hint():
-		next_serial = 0
-		if get_parent():
-			for sib_serial in get_parent().get_children():
-				if sib_serial.serial > serial:
-					next_serial = serial + 1
-					return
-				if first:
-					sib_serial.update_next_serial(false)
-				property_list_changed_notify()
-				
-func _update():
-	node_points[0] = Vector3(box_shape_extents[0], 0, 0)
-	node_points[1] = Vector3(-box_shape_extents[0], 0, 0)
 
-func _on_Area_body_entered(body):
+
+func _on_Area_body_entered(body) -> void:
+	
 	if body.has_method("update_path_node"):
 		body.update_path_node(self)
