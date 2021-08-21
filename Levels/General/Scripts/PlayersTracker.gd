@@ -98,7 +98,7 @@ func _alert_players() -> void:
 		push_error("Player Tracker child count does not match array size")
 
 
-func _sort_placement(player1 : KinematicBody, player2 : KinematicBody) -> bool:		
+func _sort_placement(player1 : KinematicBody, player2 : KinematicBody) -> bool:
 	if player1.lap_number > player2.lap_number:
 		return true
 	elif player2.lap_number > player1.lap_number:

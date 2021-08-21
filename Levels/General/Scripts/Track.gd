@@ -20,22 +20,22 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	$Players.connect("race_finished", self, "finish_race")
-	$Players.setup_players($Minimap/Navigation, path_nodes)
+	$Players.setup_players($Navigation, path_nodes)
 	$Players.player.HUD.setup_minimap(minimap.get_texture(), minimap_camera, $Players.players)
 	$Players.player.pause_menu.connect("end_race", self, "end_race")
 	
 	$MusicPlayer.play()
-	$StartEndTimer.start()
+	$StartTimer.start()
 
 
 func _process(delta) -> void:
-	if $StartEndTimer.time_left and Globals.race_on_going:
-		$Players.player.HUD.set_race_notice("%d" % ($StartEndTimer.time_left + 1), true)
+	if $StartTimer.time_left:
+		$Players.player.HUD.set_race_notice("%d" % ($StartTimer.time_left + 1), true)
 
 
 # Called by $Minimap/Naviation/PathNodes' ready signal
 func setup_pathnodes():
-	path_nodes = $Minimap/Navigation/PathNodes.get_children()
+	path_nodes = $PathNodes.get_children()
 	
 	if path_nodes.size() > 0:
 		var path_nodes_array = []
@@ -60,14 +60,13 @@ func setup_pathnodes():
 
 func start_race() -> void:
 	Globals.race_on_going = true
-	$Players.player.HUD.set_race_notice("", false)
+	$Players.player.HUD.set_race_notice()
 	$Players.start_race()
 
 
 func finish_race() -> void:
 	Globals.race_on_going = false
-	$StartEndTimer.connect("timeout", self, "end_race")
-	$StartEndTimer.start()
+	$EndTimer.start()
 
 
 func end_race():

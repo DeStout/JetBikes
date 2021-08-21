@@ -8,7 +8,7 @@ export var box_visible : bool = false setget _set_box_visible
 enum FUNCTION {DEFAULT, NO_PATHFIND}
 export(FUNCTION) var function = FUNCTION.DEFAULT
 export var is_checkpoint = true
-export var boost_value : int = 25
+export var boost_value : int = 50
 
 export var width : float = 20.0 setget _update_box_width
 export var height : float = 7.5 setget _update_box_height
@@ -44,6 +44,7 @@ func _update_box_width(new_box_width : float) -> void:
 	if has_node("Box") and box_shape != null:
 		box_shape.extents.x = new_box_width
 		$Box.width = new_box_width * 2
+		_update()
 
 
 func _update_box_height(new_box_height : float) -> void:
@@ -51,6 +52,7 @@ func _update_box_height(new_box_height : float) -> void:
 	if has_node("Box") and box_shape != null:
 		box_shape.extents.y = new_box_height
 		$Box.height = new_box_height * 2
+		_update()
 
 
 func _set_next_serial(new_serial : int) -> void:
@@ -106,6 +108,5 @@ func get_closest_point_distance(point_to : Vector3) -> float:
 
 
 func _on_Area_body_entered(body) -> void:
-	
 	if body.has_method("update_path_node"):
 		body.update_path_node(self)

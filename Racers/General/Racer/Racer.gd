@@ -27,9 +27,9 @@ var sfx_pitch : float = MIN_SFX_PITCH
 var movement_input : Vector2 = Vector2.ZERO
 var velocity : Vector3 = Vector3.ZERO
 var prev_velocity : Vector3 = Vector3.ZERO
-var boost : float = 125
-var boost_cost : float = -1.5
-var swing_cost : float = -1.0
+var boost : float = 125.0
+var boost_cost : float = -1.0
+var swing_cost : float = -0.66
 
 var has_control : bool = false
 var is_boosting : bool = false
