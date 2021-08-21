@@ -29,7 +29,7 @@ func _ready() -> void:
 
 
 func _process(delta) -> void:
-	if $StartEndTimer.time_left and $StartEndTimer.is_visible == true:
+	if $StartEndTimer.time_left and Globals.race_on_going:
 		$Players.player.HUD.set_race_notice("%d" % ($StartEndTimer.time_left + 1), true)
 
 
@@ -60,13 +60,13 @@ func setup_pathnodes():
 
 func start_race() -> void:
 	Globals.race_on_going = true
+	$Players.player.HUD.set_race_notice("", false)
 	$Players.start_race()
 
 
 func finish_race() -> void:
+	Globals.race_on_going = false
 	$StartEndTimer.connect("timeout", self, "end_race")
-	if Globals.race_on_going:
-		Globals.race_on_going = false
 	$StartEndTimer.start()
 
 

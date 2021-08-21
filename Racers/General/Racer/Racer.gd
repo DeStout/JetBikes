@@ -296,6 +296,11 @@ func set_racer_color(new_color : Color) -> void:
 		windshield_material.albedo_color.a = 90.0 / 255.0
 
 
+func get_racer_color() -> Color:
+	var bike_material = $EngineRotationHelper/Engine/SteeringColumn.get_surface_material(0)
+	return bike_material.albedo_color
+
+
 func _set_audio_sfx(sfx_effect):
 	var effect_enabled : bool = AudioServer.is_bus_effect_enabled(Globals.player_bus, sfx_effect)
 	AudioServer.set_bus_effect_enabled(Globals.player_bus, sfx_effect, !effect_enabled)

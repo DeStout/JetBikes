@@ -34,7 +34,6 @@ func _process(delta : float) -> void:
 
 func _physics_process(delta : float) -> void:
 	_rotate_default(delta)
-#	_check_free_rotating()
 	
 	var move_direction : Vector3 = Vector3()
 	var player_basis : Basis = global_transform.basis
@@ -48,7 +47,7 @@ func _physics_process(delta : float) -> void:
 		# Align player Y vector to ground normal
 		if player_basis[1].dot(ground_normal) > 0:
 			var player_quat = player_basis.get_rotation_quat()
-			global_transform.basis = Basis(player_quat.slerp(_align_to_normal(ground_normal), delta*6))
+			global_transform.basis = Basis(player_quat.slerp(_align_to_normal(ground_normal), delta*4))
 		
 		# Apply acceleration/deacceleration along player X vector based on input
 		if !is_braking:
@@ -107,7 +106,7 @@ func _physics_process(delta : float) -> void:
 	else:
 #		if !is_free_rotating:
 		var player_quat = player_basis.get_rotation_quat()
-		global_transform.basis = Basis(player_quat.slerp(_align_to_normal(Vector3.UP), delta*3))
+		global_transform.basis = Basis(player_quat.slerp(_align_to_normal(Vector3.UP), delta*2))
 #		elif engine_rot_help.rotation != Vector3.ZERO:
 #		var rot_help_quat = cam_rot_help.global_transform.basis.get_rotation_quat()
 #		cam_rot_help.global_transform.basis = \
