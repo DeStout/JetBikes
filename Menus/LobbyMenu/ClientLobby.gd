@@ -18,5 +18,5 @@ func update_lobby_info(update_type : String) -> void:
 	.update_lobby_info(update_type)
 	
 	level_name.text = Globals.level_dict_keys[Network.multiplayer_level]
-	num_laps.text = str(Network.multiplayer_laps_number)
-	num_npcs.text = str(Network.multiplayer_NPC_number)
+	num_laps.text = str(Network.multiplayer_lap_amount)
+	num_npcs.text = str(Network.multiplayer_npc_amount)

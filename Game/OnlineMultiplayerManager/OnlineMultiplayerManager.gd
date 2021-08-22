@@ -6,10 +6,12 @@ var host_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/HostLobby.tscn")
 var client_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/ClientLobby.tscn")
 var _lobby : Control
 
-var current_track : Track = null
+var _multiplayer_track : Track = null
 
 
 func _ready():
+	Network.connect("setup_track", self, "setup_track")
+	
 	# Called by Host and Client
 	get_tree().connect("network_peer_connected", self, "_peer_connected")
 	get_tree().connect("network_peer_disconnected", self, "_peer_disconnected")
@@ -19,12 +21,24 @@ func _ready():
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
 
 
-remote func setup_race():
+func setup_track():
 	Network.update_player_ready(false)
-	remove_child(_lobby)
 	
-	current_track = Globals.level_dict[Globals.level_dict_keys[Network.multiplayer_level]].instance()
-	add_child(current_track)
+	_multiplayer_track = Network.level_dict[Network.level_dict_keys[Network.multiplayer_level]].instance()
+	_multiplayer_track.connect("return_to_lobby", self, "return_to_lobby")
+	
+	remove_child(_lobby)
+	add_child(_multiplayer_track)
+
+
+func return_to_lobby():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	if _multiplayer_track != null:
+		remove_child(_multiplayer_track)
+		_multiplayer_track = null
+		
+		add_child(_lobby)
 
 
 func setup_lobby_network(is_host : bool):

@@ -64,6 +64,7 @@ func _process(delta):
 
 
 func _physics_process(delta):
+	_check_ray_collision()
 	_check_swing_poles(delta)
 	_check_out_of_bounds()
 	_check_crash()
@@ -71,13 +72,17 @@ func _physics_process(delta):
 		_crash()
 
 
-func check_ray_collision(ray_detect : RayCast):
-	if ray_detect.type == "Ground":
-		is_on_ground = true
-		
-	elif ray_detect.type == "Side":
-		if ray_detect.global_transform.basis.z.dot(Vector3.DOWN) < -0.66:
-			is_crashed = true
+func _check_ray_collision():
+	for ray_detect in $CollisionShape.get_children():
+		if ray_detect.type == "Ground":
+			if ray_detect.is_colliding():
+				is_on_ground = true
+			else:
+				is_on_ground = false
+			
+		elif ray_detect.type == "Side" and ray_detect.is_colliding():
+			if ray_detect.global_transform.basis.z.dot(Vector3.DOWN) < -0.66:
+				is_crashed = true
 
 
 # Return the average vector of the normals of the surface the $GroundDetects are colliding with

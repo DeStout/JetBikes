@@ -1,6 +1,6 @@
 [gd_scene load_steps=51 format=2]
 
-[ext_resource path="res://Levels/General/Scripts/Track.gd" type="Script" id=1]
+[ext_resource path="res://Levels/General/Track.gd" type="Script" id=1]
 [ext_resource path="res://Levels/General/LevelComponents/PathNode/PathNode.gd" type="Script" id=2]
 [ext_resource path="res://Levels/General/LevelComponents/ModNode/ModNode.gd" type="Script" id=3]
 [ext_resource path="res://Levels/General/Scripts/PlayersTracker.gd" type="Script" id=4]

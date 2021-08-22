@@ -1,8 +1,6 @@
 class_name Track
 extends Spatial
 
-signal return_to_main
-
 onready var path_nodes : Array
 onready var minimap : Viewport = $Minimap
 onready var minimap_camera : Camera = $Minimap/MinimapCamera
@@ -24,7 +22,6 @@ func _ready() -> void:
 	$Players.player.pause_menu.connect("end_race", self, "end_race")
 	
 	$MusicPlayer.play()
-	$StartTimer.start()
 
 
 func _process(delta) -> void:
@@ -70,5 +67,3 @@ func finish_race() -> void:
 
 func end_race():
 	$MusicPlayer.stop()
-	emit_signal("return_to_main")
-	queue_free()

@@ -1,6 +1,8 @@
 extends Node
 
 signal update_lobby
+signal setup_track
+signal start_timer_start
 
 const _MAX_CONNECTIONS : int = 12
 const _DEFAULT_PORT : int = 34500
@@ -9,9 +11,17 @@ var _IP_address : String = _DEFAULT_IP
 
 var _upnp : UPNP = UPNP.new()
 
+var test_track_ : PackedScene = load("res://Levels/TestTrack/MultiplayerTestTrack.tscn")
+var test_terrain_ : PackedScene = load("res://Levels/TestTerrain/MultiplayerTestTerrain.tscn")
+var level_dict : Dictionary = {
+	"test_track" : test_track_,
+	"test_terrain" : test_terrain_
+	}
+var level_dict_keys : Array = level_dict.keys()
+
 var multiplayer_level : int = Globals.DEFAULT_LEVEL
-var multiplayer_laps_number : int = Globals.DEFAULT_LAP_NUMBER
-var multiplayer_NPC_number : int = Globals.DEFAULT_NPC_NUMBER
+var multiplayer_lap_amount : int = Globals.DEFAULT_LAP_NUMBER
+var multiplayer_npc_amount : int = Globals.DEFAULT_NPC_NUMBER
 var max_npc_num : int = 11
 
 class PlayerData:
@@ -43,11 +53,15 @@ var player_list = {}
 var self_data : PlayerData = PlayerData.new()
 
 
+#
+# Race Methods
+#
 remotesync func setup_online_multiplayer_race() -> void:
 	if get_tree().get_rpc_sender_id() == 0:
 		rpc("setup_online_multiplayer_race")
-	else:			
-		rpc("setup_race")
+	else:
+		# Signal to OnlineMultiplayerManager
+		emit_signal("setup_track")
 
 
 remotesync func track_ready() -> void:
@@ -60,9 +74,13 @@ remotesync func track_ready() -> void:
 			for player in player_list:
 				if !player_list[player].is_ready:
 					break
-				rpc("begin_race")
+			# Signal to current Track
+			emit_signal("start_timer_start")
 
 
+#
+# Lobby Methods
+#
 func set_IP_address(new_IP_address : String) -> void:
 	_IP_address = new_IP_address
 
@@ -117,7 +135,7 @@ func give_new_peer_player_data(new_peer_ID : int) -> void:
 		temp_list[player] = player_list[player].data_to_dict()
 	rpc_id(new_peer_ID, "fill_player_list", temp_list)
 	rpc_id(new_peer_ID, "update_race_info", Network.multiplayer_level, \
-		Network.multiplayer_laps_number, Network.multiplayer_NPC_number)
+		Network.multiplayer_lap_amount, Network.multiplayer_npc_amount)
 
 
 remote func fill_player_list(new_player_list):
@@ -162,8 +180,8 @@ remotesync func update_race_info(new_level_select : int, new_laps_amount : int, 
 		rpc("update_race_info", new_level_select, new_laps_amount, new_npc_amount)
 	else:
 		Network.multiplayer_level = new_level_select
-		Network.multiplayer_laps_number = new_laps_amount
-		Network.multiplayer_NPC_number = new_npc_amount
+		Network.multiplayer_lap_amount = new_laps_amount
+		Network.multiplayer_npc_amount = new_npc_amount
 		
 		emit_signal("update_lobby", "Race Info")
 
@@ -190,7 +208,7 @@ func close_network_connection() -> void:
 	_reset_network()
 
 
-remote func _clear_network_peer() -> void:
+func _clear_network_peer() -> void:
 	if get_tree().network_peer != null:
 		get_tree().network_peer.close_connection()
 		get_tree().set_network_peer(null)

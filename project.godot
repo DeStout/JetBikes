@@ -62,7 +62,7 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "Track",
 "language": "GDScript",
-"path": "res://Levels/General/Scripts/Track.gd"
+"path": "res://Levels/General/Track.gd"
 } ]
 _global_script_class_icons={
 "Game": "",

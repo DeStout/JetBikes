@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Levels/General/Scripts/Track.gd" type="Script" id=1]
+[ext_resource path="res://Levels/General/Track.gd" type="Script" id=1]
 [ext_resource path="res://Levels/General/Scripts/PlayersTracker.gd" type="Script" id=4]
 
 [node name="Track" type="Spatial"]

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Levels/General/LevelComponents/ModNode/ModNode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Levels/TestTrack/TestTrackBase.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Levels/General/Scripts/Track.gd" type="Script" id=3]
+[ext_resource path="res://Levels/General/Track.gd" type="Script" id=3]
 [ext_resource path="res://Levels/General/LevelComponents/PathNode/PathNode.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Levels/General/LevelComponents/Halfpipe/Halfpipe.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Levels/General/Scripts/PlayersTracker.gd" type="Script" id=7]
