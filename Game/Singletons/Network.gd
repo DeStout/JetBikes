@@ -4,7 +4,7 @@ signal update_lobby
 signal setup_track
 signal start_timer_start
 
-const _MAX_CONNECTIONS : int = 12
+const MAX_CONNECTIONS : int = 12
 const _DEFAULT_PORT : int = 34500
 const _DEFAULT_IP : String = "127.0.0.1"
 var _IP_address : String = _DEFAULT_IP
@@ -31,14 +31,21 @@ class PlayerData:
 	var placeholder_name : String = ""
 	var color : Color = Color(0.184314, 0.788235, 1)
 	var is_ready : bool = false
+	var global_trans : Transform = Transform(Basis(Vector3.ZERO))
+	var engine_rot : Vector3 = Vector3.ZERO
+	var placement : int = 0
 	
 	func data_to_dict() -> Dictionary:
 		var temp_dict = {}
+		
 		temp_dict.network_ID = network_ID
 		temp_dict.player_name = player_name
 		temp_dict.placeholder_name = placeholder_name
 		temp_dict.color = color
 		temp_dict.is_ready = is_ready
+		temp_dict.global_trans = global_trans
+		temp_dict.engine_rot = engine_rot
+		temp_dict.placement = placement
 		
 		return temp_dict
 	
@@ -48,8 +55,11 @@ class PlayerData:
 		placeholder_name = new_player_data.placeholder_name
 		color = new_player_data.color
 		is_ready = new_player_data.is_ready
+		global_trans = new_player_data.global_trans
+		engine_rot = new_player_data.engine_rot
+		placement = new_player_data.placement
 
-var player_list = {}
+var player_list : Dictionary = {}
 var self_data : PlayerData = PlayerData.new()
 
 
@@ -90,7 +100,7 @@ func init_host() -> int:
 	var port_result = _upnp.add_port_mapping(_DEFAULT_PORT)
 	
 	var peer = NetworkedMultiplayerENet.new()
-	var connection = peer.create_server(_DEFAULT_PORT, _MAX_CONNECTIONS)
+	var connection = peer.create_server(_DEFAULT_PORT, MAX_CONNECTIONS)
 	if connection == OK:
 		peer.set_bind_ip(_IP_address)
 		get_tree().set_network_peer(peer)

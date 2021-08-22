@@ -2,8 +2,6 @@ class_name Track
 extends Spatial
 
 onready var path_nodes : Array
-onready var minimap : Viewport = $Minimap
-onready var minimap_camera : Camera = $Minimap/MinimapCamera
 
 
 func _ready() -> void:
@@ -18,15 +16,8 @@ func _ready() -> void:
 	
 	$Players.connect("race_finished", self, "finish_race")
 	$Players.setup_players($Navigation, path_nodes)
-	$Players.player.HUD.setup_minimap(minimap.get_texture(), minimap_camera, $Players.players)
-	$Players.player.pause_menu.connect("end_race", self, "end_race")
 	
 	$MusicPlayer.play()
-
-
-func _process(delta) -> void:
-	if $StartTimer.time_left:
-		$Players.player.HUD.set_race_notice("%d" % ($StartTimer.time_left + 1), true)
 
 
 # Called by $Minimap/Naviation/PathNodes' ready signal
@@ -56,7 +47,6 @@ func setup_pathnodes():
 
 func start_race() -> void:
 	Globals.race_on_going = true
-	$Players.player.HUD.set_race_notice()
 	$Players.start_race()
 
 

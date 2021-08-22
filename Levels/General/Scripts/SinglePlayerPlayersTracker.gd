@@ -2,8 +2,9 @@ extends Node
 
 signal race_finished
 
-var npc
-var player = preload("res://Racers/SinglePlayer_Player/Player.tscn")
+var npc_ : PackedScene
+var player_ : PackedScene = preload("res://Racers/SinglePlayer_Player/Player.tscn")
+var player : Player
 var crash_bike = preload("res://Racers/General/Bike/Assets/Models/CrashBike.tscn")
 var players : Array
 var path_nodes_size : int = 0
@@ -11,7 +12,7 @@ var path_nodes_size : int = 0
 
 func _ready() -> void:
 	if Globals.NPC_number != 0:
-		npc = preload("res://Racers/SinglePlayer_NPC/NPC.tscn")
+		npc_ = preload("res://Racers/SinglePlayer_NPC/NPC.tscn")
 	_spawn_players()
 	players = get_children()
 	players.erase($CrashBikes)
@@ -23,7 +24,7 @@ func _process(delta : float) -> void:
 
 
 func _spawn_players():
-	player = player.instance()
+	player = player_.instance()
 	player.connect("finished_race", self, "finish_race")
 	add_child(player)
 	player.global_transform = get_node("PlayerSpawn"+str(Globals.NPC_number+1)).global_transform
@@ -33,7 +34,7 @@ func _spawn_players():
 	
 	if Globals.NPC_number > 0:
 		for NPC_num in range(Globals.NPC_number):
-			var new_NPC = npc.instance()
+			var new_NPC = npc_.instance()
 			new_NPC.connect("finished_race", self, "finish_race")
 			add_child(new_NPC)
 			
