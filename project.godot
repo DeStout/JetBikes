@@ -49,10 +49,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Racers/SinglePlayer_Player/Player.gd"
 }, {
+"base": "Spatial",
+"class": "PuppetRacer",
+"language": "GDScript",
+"path": "res://Racers/PuppetRacer/PuppetRacer.gd"
+}, {
 "base": "KinematicBody",
 "class": "Racer",
 "language": "GDScript",
-"path": "res://Racers/General/Racer/Racer.gd"
+"path": "res://Racers/Racer.gd"
 }, {
 "base": "Area",
 "class": "SwingPole",
@@ -73,6 +78,7 @@ _global_script_class_icons={
 "NPC": "",
 "PathNode": "",
 "Player": "",
+"PuppetRacer": "",
 "Racer": "",
 "SwingPole": "",
 "Track": ""

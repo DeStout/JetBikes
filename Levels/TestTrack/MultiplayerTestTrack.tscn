@@ -22,7 +22,7 @@ panorama = ExtResource( 1 )
 background_mode = 2
 background_sky = SubResource( 2 )
 
-[node name="Track" instance=ExtResource( 2 )]
+[node name="TestTrack" instance=ExtResource( 2 )]
 script = ExtResource( 5 )
 
 [node name="TestTrack" parent="LevelGeo" index="0" groups=[
@@ -154,7 +154,6 @@ next_serial = 12
 
 [node name="PathNode12" parent="PathNodes" index="12" instance=ExtResource( 4 )]
 transform = Transform( -0.467673, -0.027834, 0.883463, -0.0594109, 0.998234, -8.8772e-11, -0.881903, -0.0524874, -0.4685, -250.662, 77.1459, 145.994 )
-box_visible = true
 width = 33.713
 serial = 12
 next_serial = 13

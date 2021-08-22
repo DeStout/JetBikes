@@ -5,7 +5,7 @@ signal race_finished
 var npc_ : PackedScene
 var player_ : PackedScene = preload("res://Racers/SinglePlayer_Player/Player.tscn")
 var player : Player
-var crash_bike = preload("res://Racers/General/Bike/Assets/Models/CrashBike.tscn")
+var crash_bike = preload("res://Racers/CrashBike/CrashBike.tscn")
 var players : Array
 var path_nodes_size : int = 0
 
@@ -52,13 +52,8 @@ func _spawn_players():
 
 func _setup_crash_bike(racer : Racer):
 	racer.crash_bike = crash_bike.instance()
-	if racer is Player:
-		racer.crash_bike.set_materials(load("res://Racers/SinglePlayer_Player/Materials/M_PlayerBike.tres"), \
-			load("res://Racers/SinglePlayer_Player/Materials/M_PlayerWindshield.tres"))
-	elif racer is NPC:
-		racer.crash_bike.set_materials(load("res://Racers/SinglePlayer_NPC/Materials/M_NPCBike.tres"), \
-			load("res://Racers/SinglePlayer_NPC/Materials/M_NPCWindshield.tres"))
 	$CrashBikes.add_child(racer.crash_bike)
+	racer.crash_bike.set_bike_color(racer.get_racer_color())
 
 
 func setup_players(track_navigation, path_nodes):

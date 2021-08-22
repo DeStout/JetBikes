@@ -1,21 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Menus/PauseMenu/SinglePlayerPause.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Racers/SinglePlayer_Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Racers/SinglePlayer_Player/Camera.gd" type="Script" id=3]
-[ext_resource path="res://Racers/General/Racer/Racer.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Racers/SinglePlayer_Player/Materials/M_PlayerBike.tres" type="Material" id=6]
+[ext_resource path="res://Racers/Racer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Racers/SinglePlayer_Player/HUD/SinglePlayerHUD.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Racers/SinglePlayer_Player/Materials/M_PlayerWindshield.tres" type="Material" id=8]
 
 [node name="Player" instance=ExtResource( 4 )]
 script = ExtResource( 2 )
-
-[node name="WindShield" parent="EngineRotationHelper/Engine" index="0"]
-material/0 = ExtResource( 8 )
-
-[node name="SteeringColumn" parent="EngineRotationHelper/Engine" index="1"]
-material/0 = ExtResource( 6 )
 
 [node name="CamRotationHelper" type="Spatial" parent="." index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22729, 0 )

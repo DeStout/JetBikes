@@ -4,8 +4,10 @@ signal race_finished
 
 var npc_ : PackedScene
 var player_ : PackedScene = preload("res://Racers/SinglePlayer_Player/Player.tscn")
+var puppet_racer_ : PackedScene = preload("res://Racers/PuppetRacer/PuppetRacer.tscn")
+var crash_bike = preload("res://Racers/CrashBike/CrashBike.tscn")
+
 var master_player : Player
-var crash_bike = preload("res://Racers/General/Bike/Assets/Models/CrashBike.tscn")
 var players : Array
 var path_nodes_size : int = 0
 
@@ -26,7 +28,9 @@ func _process(delta : float) -> void:
 
 
 func _spawn_players():
+	#
 	# Spawn in and setup NPCs
+	#
 #	if Network.multiplayer_npc_amount > 0:
 #		for npc_num in range(Network.multiplayer_npc_amount):
 #			var new_npc = npc_.instance()
@@ -43,19 +47,24 @@ func _spawn_players():
 #			get_node("PlayerSpawn" + str(npc_num+1)).free()
 	
 	# Spawn in host and clients, host should be in last place
-	var player_keys : Array = Network.player_list.keys()
-	player_keys.invert()
 	
 	var player_num : int = 1
 	
+	var player_keys : Array = Network.player_list.keys()
+	player_keys.invert()
+	
 	for player in player_keys:
-		var new_player : Player = player_.instance()
+		var new_player
+		if player == get_tree().get_network_unique_id():
+			new_player = player_.instance()
+			master_player = new_player
+			new_player.connect("finished_race", self, "finish_race")
+		else:
+			new_player = puppet_racer_.instance()
+		
 		add_child(new_player)
 		new_player.set_network_master(player)
-		if player == get_tree().get_network_unique_id():
-			master_player = new_player
 		
-		new_player.connect("finished_race", self, "finish_race")
 		if Network.player_list[player].player_name != "":
 			new_player.name = Network.player_list[player].player_name
 		else:
@@ -82,14 +91,9 @@ func _spawn_players():
 	
 
 
-func _setup_crash_bike(racer : Racer):
+func _setup_crash_bike(racer):
 	racer.crash_bike = crash_bike.instance()
-	if racer is Player:
-		racer.crash_bike.set_materials(load("res://Racers/SinglePlayer_Player/Materials/M_PlayerBike.tres"), \
-			load("res://Racers/SinglePlayer_Player/Materials/M_PlayerWindshield.tres"))
-	elif racer is NPC:
-		racer.crash_bike.set_materials(load("res://Racers/SinglePlayer_NPC/Materials/M_NPCBike.tres"), \
-			load("res://Racers/SinglePlayer_NPC/Materials/M_NPCWindshield.tres"))
+	racer.crash_bike.set_bike_color(racer.get_racer_color())
 	$CrashBikes.add_child(racer.crash_bike)
 
 
@@ -110,11 +114,9 @@ func setup_players(track_navigation, path_nodes):
 
 
 func start_race() -> void:
-	if get_tree().get_network_unique_id() == 1:
-		for racer in players:
+	for racer in players:
+		if racer is Racer:
 			racer.start_race()
-	else:
-		master_player.start_race()
 
 
 func finish_race(winner) -> void:

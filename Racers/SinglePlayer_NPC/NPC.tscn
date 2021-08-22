@@ -1,17 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Racers/SinglePlayer_NPC/Materials/M_NPCWindshield.tres" type="Material" id=1]
 [ext_resource path="res://Racers/SinglePlayer_NPC/NPC.gd" type="Script" id=2]
-[ext_resource path="res://Racers/General/Racer/Racer.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Racers/SinglePlayer_NPC/Materials/M_NPCBike.tres" type="Material" id=8]
+[ext_resource path="res://Racers/Racer.tscn" type="PackedScene" id=3]
 
 [node name="Racer" instance=ExtResource( 3 )]
 script = ExtResource( 2 )
-
-[node name="WindShield" parent="EngineRotationHelper/Engine" index="0"]
-material/0 = ExtResource( 1 )
-
-[node name="SteeringColumn" parent="EngineRotationHelper/Engine" index="1"]
-material/0 = ExtResource( 8 )
 
 [editable path="EngineRotationHelper/Engine"]
