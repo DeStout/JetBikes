@@ -113,7 +113,6 @@ margin_right = 494.0
 margin_bottom = 114.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 5 )
-text = "127.0.0.1"
 max_length = 15
 context_menu_enabled = false
 clear_button_enabled = true
