@@ -24,6 +24,8 @@ func _ready():
 func setup_track():
 	Network.update_player_ready(false)
 	
+	if _multiplayer_track != null:
+		_multiplayer_track = null
 	_multiplayer_track = Network.level_dict[Network.level_dict_keys[Network.multiplayer_level]].instance()
 	_multiplayer_track.connect("return_to_lobby", self, "return_to_lobby")
 	

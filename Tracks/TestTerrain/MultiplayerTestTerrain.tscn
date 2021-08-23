@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Tracks/TestTerrain/TestTerrain.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Tracks/MultiplayerTrack.gd" type="Script" id=2]
+[ext_resource path="res://Tracks/General/Scripts/MultiplayerPlayersTracker.gd" type="Script" id=8]
+
+[node name="TestTerrain" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Players" parent="." index="1"]
+script = ExtResource( 8 )

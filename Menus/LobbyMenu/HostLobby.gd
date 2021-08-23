@@ -18,6 +18,7 @@ func _ready():
 	update_lobby_info("Lobby Created")
 
 
+# Start Race Button
 func _setup_race():
 	Network.setup_online_multiplayer_race()
 

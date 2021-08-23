@@ -4,11 +4,16 @@ extends Spatial
 var bike_material : SpatialMaterial = SpatialMaterial.new()
 var windshield_material : SpatialMaterial = SpatialMaterial.new()
 
+puppet var puppet_transform : Transform
+puppet var puppet_velocity : Vector3 = Vector3.ZERO
+puppet var puppet_engine_rotation : Vector3 = Vector3.ZERO
+
 var crash_bike : RigidBody
 
 
-func _ready():
-	pass
+func _process(delta):
+	global_transform = puppet_transform
+	$Engine.rotation = puppet_engine_rotation
 
 
 func set_racer_color(new_color : Color) -> void:

@@ -1,17 +1,21 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://Racers/SinglePlayer_Player/AudioBoost.gd" type="Script" id=1]
-[ext_resource path="res://Racers/General/Bike/Assets/Models/RacerModel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Racers/Player/AudioBoost.gd" type="Script" id=1]
+[ext_resource path="res://Racers/General/Bike/RacerModel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/LineRenderer/LineRenderer.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Racers/General/Bike/Assets/Models/Bike04.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Levels/TestTerrain/Assets/Materials/GroundWetRocks/Ground_Wet_Rocks_001_basecolor.jpg" type="Texture" id=5]
+[ext_resource path="res://Racers/General/Bike/Bike04.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Tracks/TestTerrain/Assets/Materials/GroundWetRocks/Ground_Wet_Rocks_001_basecolor.jpg" type="Texture" id=5]
 [ext_resource path="res://Racers/General/Bike/Assets/SFX/Boost.wav" type="AudioStream" id=6]
 [ext_resource path="res://addons/LineRenderer/line.png" type="Texture" id=7]
 [ext_resource path="res://Racers/General/Bike/Assets/SFX/JetEngine.wav" type="AudioStream" id=8]
 [ext_resource path="res://Racers/General/Bike/Assets/SFX/DieselEngine.wav" type="AudioStream" id=9]
 [ext_resource path="res://Racers/PuppetRacer/PuppetRacer.gd" type="Script" id=10]
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.75
+height = 2.5
+
+[sub_resource type="ParticlesMaterial" id=2]
 direction = Vector3( 0, 0, 5 )
 spread = 10.0
 gravity = Vector3( 0, -2, 0 )
@@ -20,7 +24,7 @@ initial_velocity_random = 0.19
 angle = 96.0
 angle_random = 0.87
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="SpatialMaterial" id=3]
 flags_transparent = true
 params_blend_mode = 1
 params_billboard_mode = 3
@@ -30,17 +34,17 @@ particles_anim_loop = false
 albedo_color = Color( 0.47451, 0.439216, 0.321569, 0.266667 )
 albedo_texture = ExtResource( 5 )
 
-[sub_resource type="QuadMesh" id=3]
-material = SubResource( 2 )
+[sub_resource type="QuadMesh" id=4]
+material = SubResource( 3 )
 size = Vector2( 2, 2 )
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=5]
 flags_transparent = true
 flags_unshaded = true
 albedo_color = Color( 1, 0.254902, 0.447059, 0.262745 )
 albedo_texture = ExtResource( 7 )
 
-[node name="PuppetRacer" type="Spatial"]
+[node name="PuppetRacer" type="KinematicBody"]
 script = ExtResource( 10 )
 
 [node name="Engine" parent="." instance=ExtResource( 4 )]
@@ -48,6 +52,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="RacerModel" parent="Engine" instance=ExtResource( 2 )]
 transform = Transform( -0.02, 0, -1.74846e-09, 0, 0.02, 0, 1.74846e-09, 0, -0.02, 0, -1.10989, 0.751 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
+shape = SubResource( 1 )
+disabled = true
 
 [node name="Audio_Jet" type="AudioStreamPlayer3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.887, 0 )
@@ -84,11 +93,11 @@ lifetime = 2.0
 randomness = 0.18
 visibility_aabb = AABB( -1.57502, -1.68518, -0.482215, 3.25055, 3.24511, 8.85 )
 local_coords = false
-process_material = SubResource( 1 )
-draw_pass_1 = SubResource( 3 )
+process_material = SubResource( 2 )
+draw_pass_1 = SubResource( 4 )
 
 [node name="LaserLine" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-material_override = SubResource( 4 )
+material_override = SubResource( 5 )
 
 [editable path="Engine"]

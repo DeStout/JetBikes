@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Racers/General/Bike/Assets/Models/Vehicle1.tres" type="ArrayMesh" id=1]
-[ext_resource path="res://Racers/General/Bike/Assets/Models/RacerModel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Racers/General/Bike/RacerModel.tscn" type="PackedScene" id=2]
 
 [node name="Engine" type="MeshInstance"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
