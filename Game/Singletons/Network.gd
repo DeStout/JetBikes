@@ -3,12 +3,13 @@ extends Node
 signal update_lobby
 signal setup_track
 signal start_timer_start
+signal remove_lame_racer
 signal finish_race
 
 const MAX_CONNECTIONS : int = 12
 const _DEFAULT_PORT : int = 34500
 const _DEFAULT_IP : String = "127.0.0.1"
-var _IP_address : String = _DEFAULT_IP
+var _ip_address : String = _DEFAULT_IP
 
 var _upnp : UPNP = UPNP.new()
 
@@ -108,8 +109,8 @@ remotesync func player_finished() -> void:
 #
 # Lobby Methods
 #
-func set_IP_address(new_IP_address : String) -> void:
-	_IP_address = new_IP_address
+func set_IP_address(new_ip_address : String = _DEFAULT_IP) -> void:
+	_ip_address = new_ip_address
 
 
 func init_host() -> int:
@@ -119,7 +120,7 @@ func init_host() -> int:
 	var peer = NetworkedMultiplayerENet.new()
 	var connection = peer.create_server(_DEFAULT_PORT, MAX_CONNECTIONS)
 	if connection == OK:
-		peer.set_bind_ip(_IP_address)
+		peer.set_bind_ip(_ip_address)
 		get_tree().set_network_peer(peer)
 	
 		self_data.placeholder_name = "Host"
@@ -127,7 +128,7 @@ func init_host() -> int:
 		self_data.is_ready = true
 		player_list[1] = self_data
 	
-		print("IP Address: " + _IP_address)
+		print("IP Address: " + _ip_address)
 	
 	print("Server Connection Code: " + str(connection))
 	return connection
@@ -135,7 +136,7 @@ func init_host() -> int:
 
 func init_client() -> int:
 	var peer = NetworkedMultiplayerENet.new()
-	var connection = peer.create_client(_IP_address, _DEFAULT_PORT)
+	var connection = peer.create_client(_ip_address, _DEFAULT_PORT)
 	if connection == OK:
 		get_tree().set_network_peer(peer)
 		
@@ -213,7 +214,15 @@ remotesync func update_race_info(new_level_select : int, new_laps_amount : int, 
 		emit_signal("update_lobby", "Race Info")
 
 
-func remove_peer(dead_peer_ID : int) -> void:
+remotesync func leave_race(lame_peer_ID) -> void:
+	if get_tree().get_rpc_sender_id() == 0:
+		rpc("leave_race", get_tree().get_network_unique_id())
+	else:
+		player_list.erase(lame_peer_ID)
+		emit_signal("remove_lame_racer", lame_peer_ID)
+
+
+func remove_dead_peer(dead_peer_ID : int) -> void:
 	player_list.erase(dead_peer_ID)
 	update_placeholder_names()
 	
@@ -222,12 +231,16 @@ func remove_peer(dead_peer_ID : int) -> void:
 	emit_signal("update_lobby", "Peer Removed")
 
 
-func update_placeholder_names():
+func update_placeholder_names() -> void:
 	var player_num = 2
 	for player in player_list:
 		if player != 1:
 			player_list[player].placeholder_name = "Player" + str(player_num)
 			player_num += 1
+
+
+func reset_lobby() -> void:
+	pass
 
 
 func close_network_connection() -> void:
@@ -244,4 +257,4 @@ func _clear_network_peer() -> void:
 func _reset_network() -> void:
 	player_list = {}
 	self_data = PlayerData.new()
-	_IP_address = _DEFAULT_IP
+	_ip_address = _DEFAULT_IP

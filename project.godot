@@ -32,7 +32,7 @@ _global_script_classes=[ {
 "base": "Area",
 "class": "ModNode",
 "language": "GDScript",
-"path": "res://Tracks/General/TrackComponents/ModNode/ModNode.gd"
+"path": "res://Tracks/Assets/TrackComponents/ModNode/ModNode.gd"
 }, {
 "base": "Racer",
 "class": "NPC",
@@ -42,14 +42,19 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "PathNode",
 "language": "GDScript",
-"path": "res://Tracks/General/TrackComponents/PathNode/PathNode.gd"
+"path": "res://Tracks/Assets/TrackComponents/PathNode/PathNode.gd"
+}, {
+"base": "Control",
+"class": "PauseMenu",
+"language": "GDScript",
+"path": "res://Racers/Player/PauseMenu.gd"
 }, {
 "base": "Racer",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Racers/Player/Player.gd"
 }, {
-"base": "Spatial",
+"base": "KinematicBody",
 "class": "PuppetRacer",
 "language": "GDScript",
 "path": "res://Racers/PuppetRacer/PuppetRacer.gd"
@@ -62,7 +67,7 @@ _global_script_classes=[ {
 "base": "Area",
 "class": "SwingPole",
 "language": "GDScript",
-"path": "res://Tracks/General/TrackComponents/SwingPole/SwingPole.gd"
+"path": "res://Tracks/Assets/TrackComponents/SwingPole/SwingPole.gd"
 }, {
 "base": "Spatial",
 "class": "Track",
@@ -77,6 +82,7 @@ _global_script_class_icons={
 "ModNode": "",
 "NPC": "",
 "PathNode": "",
+"PauseMenu": "",
 "Player": "",
 "PuppetRacer": "",
 "Racer": "",

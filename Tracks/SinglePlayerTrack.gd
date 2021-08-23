@@ -5,7 +5,7 @@ signal return_to_main
 
 func _ready():
 	$Players.player.HUD.setup_minimap($Minimap.get_texture(), $Minimap/MinimapCamera, $Players.players)
-	$Players.player.pause_menu.connect("end_race", self, "end_race")
+	$Players.player.pause_menu.connect("leave_race", self, "end_race")
 	
 	$StartTimer.start()
 

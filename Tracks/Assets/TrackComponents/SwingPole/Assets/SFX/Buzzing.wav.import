@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Buzzing.wav-a6d4ae0b176634cd8bae5600561107a6.sample"
+
+[deps]
+
+source_file="res://Tracks/Assets/TrackComponents/SwingPole/Assets/SFX/Buzzing.wav"
+dest_files=[ "res://.import/Buzzing.wav-a6d4ae0b176634cd8bae5600561107a6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

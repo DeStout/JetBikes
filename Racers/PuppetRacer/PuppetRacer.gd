@@ -1,5 +1,7 @@
 class_name PuppetRacer
-extends Spatial
+extends KinematicBody
+
+var master_id : int = 0
 
 var bike_material : SpatialMaterial = SpatialMaterial.new()
 var windshield_material : SpatialMaterial = SpatialMaterial.new()

@@ -1,14 +1,14 @@
 [gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://Tracks/Track.gd" type="Script" id=1]
-[ext_resource path="res://Tracks/General/TrackComponents/PathNode/PathNode.gd" type="Script" id=2]
-[ext_resource path="res://Tracks/General/TrackComponents/ModNode/ModNode.gd" type="Script" id=3]
-[ext_resource path="res://Tracks/General/Scripts/SinglePlayerPlayersTracker.gd" type="Script" id=4]
+[ext_resource path="res://Tracks/Assets/TrackComponents/PathNode/PathNode.gd" type="Script" id=2]
+[ext_resource path="res://Tracks/Assets/TrackComponents/ModNode/ModNode.gd" type="Script" id=3]
+[ext_resource path="res://Tracks/SinglePlayerPlayersTracker.gd" type="Script" id=4]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Materials/GroundWetRocks.tres" type="Material" id=5]
 [ext_resource path="res://Levels/TestTerrain/TestTerrainBase_v2.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Tracks/General/TrackComponents/ModNode/ModNode.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Tracks/General/TrackComponents/SwingPole/SwingPole.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Tracks/General/Skyboxes/Cold Sunset Equirect.png" type="Texture" id=9]
+[ext_resource path="res://Tracks/Assets/TrackComponents/ModNode/ModNode.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Tracks/Assets/TrackComponents/SwingPole/SwingPole.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Tracks/Assets/Skyboxes/Cold Sunset Equirect.png" type="Texture" id=9]
 
 [sub_resource type="PanoramaSky" id=1]
 panorama = ExtResource( 9 )

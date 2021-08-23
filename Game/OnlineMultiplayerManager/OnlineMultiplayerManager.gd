@@ -24,21 +24,22 @@ func _ready():
 func setup_track():
 	Network.update_player_ready(false)
 	
-	if _multiplayer_track != null:
-		_multiplayer_track = null
 	_multiplayer_track = Network.level_dict[Network.level_dict_keys[Network.multiplayer_level]].instance()
-	_multiplayer_track.connect("return_to_lobby", self, "return_to_lobby")
 	
 	remove_child(_lobby)
 	add_child(_multiplayer_track)
+	
+	_multiplayer_track.connect("return_to_lobby", self, "return_to_lobby")
+	_multiplayer_track.get_node("Players").master_player \
+					.pause_menu.connect("leave_race", self, "return_to_main")
 
 
 func return_to_lobby():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
-	if _multiplayer_track != null:
+	if is_instance_valid(_multiplayer_track):
+		_multiplayer_track.queue_free()
 		remove_child(_multiplayer_track)
-		_multiplayer_track = null
 		
 		add_child(_lobby)
 
@@ -72,7 +73,8 @@ func _peer_connected(new_peer_ID : int) -> void:
 
 func _peer_disconnected(dead_peer_ID : int) -> void:
 	print("Peer Disonnected: " + str(dead_peer_ID))
-	Network.remove_peer(dead_peer_ID)
+	if _multiplayer_track == null:
+		Network.remove_dead_peer(dead_peer_ID)
 
 
 func _connected_to_server() -> void:
@@ -86,11 +88,16 @@ func _server_connection_failed() -> void:
 
 func _server_disconnected() -> void:
 	print("Server Disconnected - Returning to Main Menu")
+	if is_instance_valid(_multiplayer_track):
+		_multiplayer_track.queue_free()
 	Network.close_network_connection()
 	emit_signal("return_to_main")
 
 
 func return_to_main():
 	_lobby.queue_free()
+	if is_instance_valid(_multiplayer_track):
+		_multiplayer_track.queue_free()
+	Network.close_network_connection()
 	print("Lobby Closed - Returning to Main Menu")
 	emit_signal("return_to_main")
