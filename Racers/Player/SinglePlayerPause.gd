@@ -14,4 +14,4 @@ func _toggle_pause():
 func _quit_race():
 	get_tree().paused = false
 	# Signals to Track
-	._quit_race()
+	emit_signal("leave_race")

@@ -13,7 +13,6 @@ var path_nodes_size : int = 0
 
 
 func _ready() -> void:
-	Network.connect("remove_lame_racer", self, "remove_lame_racer")
 	Network.connect("finish_race", self, "finish_race")
 	
 	if Globals.NPC_number != 0:
@@ -121,7 +120,6 @@ func setup_players(track_navigation, path_nodes):
 
 func remove_lame_racer(lame_peer_ID) -> void:
 	for lame_peer in players:
-		var network_master = lame_peer.get_network_master()
 		if lame_peer.get_network_master() == lame_peer_ID:
 			players.remove(players.find(lame_peer))
 			lame_peer.queue_free()
@@ -136,7 +134,9 @@ func start_race() -> void:
 
 func finish_race(winner_name) -> void:
 	master_player.HUD.set_race_notice("Finished!\n" + winner_name + " wins!", true)
+	# Called to Racer
 	master_player.finish_race()
+	# Signal to Track
 	emit_signal("race_finished")
 
 

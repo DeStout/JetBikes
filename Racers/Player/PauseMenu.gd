@@ -70,7 +70,3 @@ func _apply_settings():
 
 func _convert_decibal_to_percent(new_value : float, slider : Slider) -> int:
 	return int(((new_value + abs(slider.min_value)) / abs(slider.min_value)) * 100)
-
-
-func _quit_race():
-	emit_signal("leave_race")

@@ -3,7 +3,6 @@ extends Node
 signal update_lobby
 signal setup_track
 signal start_timer_start
-signal remove_lame_racer
 signal finish_race
 
 const MAX_CONNECTIONS : int = 12
@@ -70,6 +69,7 @@ var self_data : PlayerData = PlayerData.new()
 #
 remotesync func setup_online_multiplayer_race() -> void:
 	if get_tree().get_rpc_sender_id() == 0:
+		get_tree().network_peer.refuse_new_connections = true
 		rpc("setup_online_multiplayer_race")
 	else:
 		for player in player_list:
@@ -120,7 +120,7 @@ func init_host() -> int:
 	var peer = NetworkedMultiplayerENet.new()
 	var connection = peer.create_server(_DEFAULT_PORT, MAX_CONNECTIONS)
 	if connection == OK:
-		peer.set_bind_ip(_ip_address)
+#		peer.set_bind_ip(_ip_address)
 		get_tree().set_network_peer(peer)
 	
 		self_data.placeholder_name = "Host"
@@ -212,14 +212,6 @@ remotesync func update_race_info(new_level_select : int, new_laps_amount : int, 
 		Network.multiplayer_npc_amount = new_npc_amount
 		
 		emit_signal("update_lobby", "Race Info")
-
-
-remotesync func leave_race(lame_peer_ID) -> void:
-	if get_tree().get_rpc_sender_id() == 0:
-		rpc("leave_race", get_tree().get_network_unique_id())
-	else:
-		player_list.erase(lame_peer_ID)
-		emit_signal("remove_lame_racer", lame_peer_ID)
 
 
 func remove_dead_peer(dead_peer_ID : int) -> void:

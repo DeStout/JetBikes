@@ -31,4 +31,5 @@ func start_race() -> void:
 
 func end_race():
 	.end_race()
+	# Signal to MultiplayerManager
 	emit_signal("return_to_lobby")

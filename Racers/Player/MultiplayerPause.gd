@@ -11,6 +11,5 @@ func _toggle_pause():
 
 
 func _quit_race():
-	Network.leave_race(get_tree().get_network_unique_id())
 	# Signals to OnlineMultiplayerManager
-	._quit_race()
+	emit_signal("leave_race")
