@@ -11,5 +11,5 @@ func _toggle_pause():
 
 
 func _quit_race():
-	# Signals to OnlineMultiplayerManager
+	# Signals to MultiplayerManager
 	emit_signal("leave_race")

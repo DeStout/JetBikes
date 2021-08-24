@@ -3,7 +3,7 @@ extends Node
 
 onready var main_menu = $MainMenu
 
-var online_multiplayer_manager_ = preload("res://Game/OnlineMultiplayerManager/OnlineMultiplayerManager.tscn")
+var online_multiplayer_manager_ = preload("res://Game/MultiplayerManager/MultiplayerManager.tscn")
 var online_multiplayer_manager
 
 var _single_player_track : Track = null

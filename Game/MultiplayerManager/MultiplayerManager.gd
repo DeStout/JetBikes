@@ -73,8 +73,8 @@ func _peer_connected(new_peer_ID : int) -> void:
 
 func _peer_disconnected(dead_peer_ID : int) -> void:
 	print("Peer Disonnected: " + str(dead_peer_ID))
+	Network.remove_dead_peer(dead_peer_ID)
 	if is_instance_valid(_multiplayer_track):
-		Network.remove_dead_peer(dead_peer_ID)
 		_multiplayer_track.get_node("Players").remove_lame_racer(dead_peer_ID)
 
 
