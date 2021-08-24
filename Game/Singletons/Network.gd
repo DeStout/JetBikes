@@ -1,5 +1,6 @@
 extends Node
 
+signal connected_to_host
 signal update_lobby
 signal setup_track
 signal start_timer_start
@@ -179,6 +180,7 @@ remote func fill_player_list(new_player_list):
 		if player == get_tree().get_network_unique_id():
 			self_data = player_data
 
+	emit_signal("connected_to_host")
 	emit_signal("update_lobby", "New Peer Player List")
 
 

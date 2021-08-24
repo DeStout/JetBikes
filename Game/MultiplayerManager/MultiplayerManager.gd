@@ -41,21 +41,7 @@ func setup_lobby_network(is_host : bool) -> void:
 		connection = Network.init_host()
 	else:
 		connection = Network.init_client()
-		
-		# Restrict Client from joining "ghost" server
-		var _connect_menu = connect_menu_.instance()
-		add_child(_connect_menu)
-		_connect_menu.cancel_button.connect("pressed", self, "return_to_main")
-		
-		for attempts in range(20):
-			if false:
-				connection = OK
-				break
-			else:
-				connection = ERR_CANT_CONNECT
-			yield(get_tree().create_timer(0.5), "timeout")
-		_connect_menu.queue_free()
-	
+#
 	if connection == OK:
 		if is_host:
 			_lobby = host_lobby_.instance()
@@ -63,7 +49,6 @@ func setup_lobby_network(is_host : bool) -> void:
 			_lobby = client_lobby_.instance()
 		add_child(_lobby)
 		_lobby.cancel_button.connect("pressed", self, "return_to_main")
-			
 	else:
 		print("Failed Server Connection - Returning to Main Menu")
 		emit_signal("return_to_main")
@@ -86,10 +71,31 @@ func _peer_disconnected(dead_peer_ID : int) -> void:
 
 func _connected_to_server() -> void:
 	print("Connected to Server: " + str(Network.self_data.network_ID))
+		
+	# Restrict Client from joining "ghost" server
+	if !get_tree().is_network_server():
+		var _connect_menu : Control = connect_menu_.instance()
+		var connected : bool = false
+		add_child(_connect_menu)
+		_connect_menu.cancel_button.connect("pressed", self, "return_to_main")
+
+		for attempts in range(20):
+			if _lobby.connected_to_host:
+				connected = true
+				break
+			yield(get_tree().create_timer(0.5), "timeout")
+		_connect_menu.queue_free()
+		
+		if !connected:
+			emit_signal("return_to_main")
 
 
 func _server_connection_failed() -> void:
 	print("Failed Server Connection - Returning to Main Menu")
+	if is_instance_valid(_multiplayer_track):
+		_multiplayer_track.queue_free()
+	if is_instance_valid(_lobby):
+		_lobby.queue_free()
 	emit_signal("return_to_main")
 
 
@@ -97,6 +103,8 @@ func _server_disconnected() -> void:
 	print("Server Disconnected - Returning to Main Menu")
 	if is_instance_valid(_multiplayer_track):
 		_multiplayer_track.queue_free()
+	if is_instance_valid(_lobby):
+		_lobby.queue_free()
 	Network.close_network_connection()
 	emit_signal("return_to_main")
 
@@ -115,10 +123,10 @@ func return_to_lobby() -> void:
 
 
 func return_to_main() -> void:
-	if is_instance_valid(_lobby):
-		_lobby.queue_free()
 	if is_instance_valid(_multiplayer_track):
 		_multiplayer_track.queue_free()
+	if is_instance_valid(_lobby):
+		_lobby.queue_free()
 	Network.close_network_connection()
 	print("Lobby Closed - Returning to Main Menu")
 	emit_signal("return_to_main")
