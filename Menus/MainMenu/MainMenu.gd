@@ -7,6 +7,13 @@ onready var options_menu : Control = $MenuFrame/OptionsMenu
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	if not OS.is_debug_build():
+		$MenuFrame/ClientBtn.free()
+
+
+func _on_ClientBtn_pressed():
+	OS.execute(OS.get_executable_path(), [], false)
 
 
 func _toggle_single_player_menu() -> void:

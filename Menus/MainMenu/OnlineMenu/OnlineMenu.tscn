@@ -57,10 +57,10 @@ __meta__ = {
 anchor_top = 0.127
 anchor_right = 0.569
 anchor_bottom = 1.0
-margin_left = 16.0
-margin_top = 16.0728
-margin_right = -16.3547
-margin_bottom = -186.616
+margin_left = 4.0
+margin_top = 144.073
+margin_right = -18.3547
+margin_bottom = -153.616
 grow_vertical = 2
 custom_constants/separation = 32
 alignment = 1
@@ -69,50 +69,48 @@ __meta__ = {
 }
 
 [node name="HostBox" type="CheckBox" parent="HostJoin"]
-margin_left = 62.0
-margin_right = 243.0
-margin_bottom = 222.0
+margin_left = 67.0
+margin_right = 248.0
+margin_bottom = 127.0
 focus_mode = 0
 custom_fonts/font = SubResource( 2 )
 text = "Host"
-align = 1
-expand_icon = true
 
 [node name="JoinBox" type="CheckBox" parent="HostJoin"]
-margin_left = 275.0
-margin_right = 431.0
-margin_bottom = 222.0
+margin_left = 280.0
+margin_right = 436.0
+margin_bottom = 127.0
 focus_mode = 0
 custom_fonts/font = SubResource( 3 )
 text = "Join"
-align = 1
-expand_icon = true
 
 [node name="IPAdress" type="GridContainer" parent="."]
 anchor_top = 0.127
 anchor_right = 0.569
 anchor_bottom = 1.0
-margin_left = 11.7859
-margin_top = 231.577
-margin_right = -20.5687
-margin_bottom = -50.1119
-custom_constants/hseparation = 12
+margin_left = 12.0
+margin_top = 270.073
+margin_right = -20.3547
+margin_bottom = -41.616
+custom_constants/hseparation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="IPAdress"]
-margin_right = 494.0
+margin_right = 493.0
 margin_bottom = 50.0
 custom_fonts/font = SubResource( 4 )
 text = "IP Address:"
 
 [node name="IPText" type="LineEdit" parent="IPAdress"]
 margin_top = 54.0
-margin_right = 494.0
+margin_right = 493.0
 margin_bottom = 114.0
 size_flags_horizontal = 3
+size_flags_vertical = 8
 custom_fonts/font = SubResource( 5 )
+text = "127.0.0.1"
 max_length = 15
 context_menu_enabled = false
 clear_button_enabled = true
@@ -164,5 +162,6 @@ __meta__ = {
 
 [connection signal="pressed" from="HostJoin/HostBox" to="." method="_host"]
 [connection signal="pressed" from="HostJoin/JoinBox" to="." method="_join"]
+[connection signal="text_changed" from="IPAdress/IPText" to="." method="_ip_set"]
 [connection signal="timeout" from="OptimistLabel/Timer" to="." method="_unoptimist"]
 [connection signal="pressed" from="Buttons/RaceButton" to="." method="_setup_online_lobby"]

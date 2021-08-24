@@ -10,7 +10,7 @@ const _DEFAULT_PORT : int = 34500
 const _DEFAULT_IP : String = "127.0.0.1"
 var _ip_address : String = _DEFAULT_IP
 
-var _upnp : UPNP = UPNP.new()
+var upnp : UPNP = UPNP.new()
 
 var test_track_ : PackedScene = load("res://Tracks/TestTrack/MultiplayerTestTrack.tscn")
 var test_terrain_ : PackedScene = load("res://Tracks/TestTerrain/MultiplayerTestTerrain.tscn")
@@ -64,6 +64,10 @@ var player_list : Dictionary = {}
 var self_data : PlayerData = PlayerData.new()
 
 
+func _ready():
+	upnp.discover()
+
+
 #
 # Race Methods
 #
@@ -114,8 +118,7 @@ func set_IP_address(new_ip_address : String = _DEFAULT_IP) -> void:
 
 
 func init_host() -> int:
-	var upnp_result = _upnp.discover()
-	var port_result = _upnp.add_port_mapping(_DEFAULT_PORT)
+	var port_result = upnp.add_port_mapping(_DEFAULT_PORT)
 	
 	var peer = NetworkedMultiplayerENet.new()
 	var connection = peer.create_server(_DEFAULT_PORT, MAX_CONNECTIONS)
@@ -137,6 +140,7 @@ func init_host() -> int:
 func init_client() -> int:
 	var peer = NetworkedMultiplayerENet.new()
 	var connection = peer.create_client(_ip_address, _DEFAULT_PORT)
+	print("The connection is : " + str(connection))
 	if connection == OK:
 		get_tree().set_network_peer(peer)
 		
@@ -229,10 +233,6 @@ func update_placeholder_names() -> void:
 		if player != 1:
 			player_list[player].placeholder_name = "Player" + str(player_num)
 			player_num += 1
-
-
-func reset_lobby() -> void:
-	pass
 
 
 func close_network_connection() -> void:

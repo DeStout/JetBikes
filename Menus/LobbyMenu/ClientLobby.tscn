@@ -225,4 +225,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="toggled" from="MenuFrame/LobbyFrame/ClientSettingsPanel/Buttons/ReadyButton" to="." method="_toggle_racer_ready"]
+[connection signal="toggled" from="MenuFrame/LobbyFrame/ClientSettingsPanel/Buttons/ReadyButton" to="." method="toggle_racer_ready"]

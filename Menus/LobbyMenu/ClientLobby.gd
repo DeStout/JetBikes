@@ -10,7 +10,8 @@ func _ready():
 	update_lobby_info("Lobby Created")
 
 
-func _toggle_racer_ready(racer_ready : bool):
+func toggle_racer_ready(racer_ready : bool):
+	ready_button.pressed = racer_ready
 	Network.update_player_ready(racer_ready)
 
 
