@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Menus/LobbyMenu/LobbyMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Menus/Assets/MenuFont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Menus/LobbyMenu/ClientLobby.gd" type="Script" id=4]
+[ext_resource path="res://Menus/LobbyMenu/ConnectingMenu.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -17,7 +18,7 @@ font_data = ExtResource( 2 )
 size = 28
 font_data = ExtResource( 2 )
 
-[node name="Lobby" instance=ExtResource( 1 )]
+[node name="ClientLobby" instance=ExtResource( 1 )]
 script = ExtResource( 4 )
 
 [node name="Label" parent="MenuFrame/LobbyFrame/TitlePanel" index="0"]
@@ -225,4 +226,40 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ConnectingFrame" type="ColorRect" parent="MenuFrame" index="1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 704.0
+margin_top = 228.0
+margin_right = -727.232
+margin_bottom = -222.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.25098, 0.25098, 0.25098, 1 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Connection" type="Label" parent="MenuFrame/ConnectingFrame" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 3 )
+text = "Connecting
+
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="MenuFrame/ConnectingFrame" index="1"]
+wait_time = 0.5
+autostart = true
+
 [connection signal="toggled" from="MenuFrame/LobbyFrame/ClientSettingsPanel/Buttons/ReadyButton" to="." method="toggle_racer_ready"]
+[connection signal="timeout" from="MenuFrame/ConnectingFrame/Timer" to="MenuFrame/ConnectingFrame" method="_connecting"]

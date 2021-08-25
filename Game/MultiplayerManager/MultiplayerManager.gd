@@ -4,7 +4,6 @@ signal return_to_main
 
 var host_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/HostLobby.tscn")
 var client_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/ClientLobby.tscn")
-var connect_menu_ : PackedScene = preload("res://Menus/LobbyMenu/ConnectingMenu.tscn")
 var _lobby : Control
 
 var _multiplayer_track : Track = null
@@ -38,20 +37,19 @@ func setup_track() -> void:
 func setup_lobby_network(is_host : bool) -> void:
 	var connection : int = FAILED
 	if is_host:
+		_lobby = host_lobby_.instance()
 		connection = Network.init_host()
 	else:
+		_lobby = client_lobby_.instance()
+		_lobby.connect("failed_connection", self, "return_to_main")
 		connection = Network.init_client()
 #
 	if connection == OK:
-		if is_host:
-			_lobby = host_lobby_.instance()
-		else:
-			_lobby = client_lobby_.instance()
 		add_child(_lobby)
 		_lobby.cancel_button.connect("pressed", self, "return_to_main")
 	else:
 		print("Failed Server Connection - Returning to Main Menu")
-		emit_signal("return_to_main")
+		return_to_main()
 
 
 func _peer_connected(new_peer_ID : int) -> void:
@@ -71,23 +69,6 @@ func _peer_disconnected(dead_peer_ID : int) -> void:
 
 func _connected_to_server() -> void:
 	print("Connected to Server: " + str(Network.self_data.network_ID))
-		
-	# Restrict Client from joining "ghost" server
-	if !get_tree().is_network_server():
-		var _connect_menu : Control = connect_menu_.instance()
-		var connected : bool = false
-		add_child(_connect_menu)
-		_connect_menu.cancel_button.connect("pressed", self, "return_to_main")
-
-		for attempts in range(20):
-			if _lobby.connected_to_host:
-				connected = true
-				break
-			yield(get_tree().create_timer(0.5), "timeout")
-		_connect_menu.queue_free()
-		
-		if !connected:
-			emit_signal("return_to_main")
 
 
 func _server_connection_failed() -> void:

@@ -141,7 +141,6 @@ func init_host() -> int:
 func init_client() -> int:
 	var peer = NetworkedMultiplayerENet.new()
 	var connection = peer.create_client(_ip_address, _DEFAULT_PORT)
-	print("The connection is : " + str(connection))
 	if connection == OK:
 		get_tree().set_network_peer(peer)
 		

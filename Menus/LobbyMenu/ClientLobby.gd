@@ -1,8 +1,13 @@
 extends LobbyMenu
 
+signal failed_connection
+
+onready var connect_menu = $MenuFrame/ConnectingFrame
+
 onready var level_name = $MenuFrame/LobbyFrame/ClientSettingsPanel/Level/LevelName
 onready var num_laps = $MenuFrame/LobbyFrame/ClientSettingsPanel/Laps/NumLaps
 onready var num_npcs = $MenuFrame/LobbyFrame/ClientSettingsPanel/NPCs/NumNPCs
+
 onready var ready_button = $MenuFrame/LobbyFrame/ClientSettingsPanel/Buttons/ReadyButton
 
 var connected_to_host = false
@@ -11,6 +16,17 @@ var connected_to_host = false
 func _ready():
 	Network.connect("connected_to_host", self, "connected_to_host")
 	update_lobby_info("Lobby Created")
+	
+	# Restrict Client from joining "ghost" server
+	for attempts in range(20):
+		if connected_to_host:
+			connect_menu.visible = false
+			break
+		yield(get_tree().create_timer(0.5), "timeout")
+	$MenuFrame/ConnectingFrame/Timer.stop()
+#
+	if !connected_to_host:
+		emit_signal("failed_connection")
 
 
 func connected_to_host():
