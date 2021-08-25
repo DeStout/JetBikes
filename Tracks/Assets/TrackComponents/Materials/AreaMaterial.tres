@@ -4,4 +4,4 @@
 flags_transparent = true
 flags_do_not_receive_shadows = true
 params_cull_mode = 2
-albedo_color = Color( 1, 1, 1, 0.113725 )
+albedo_color = Color( 1, 1, 1, 0.0588235 )

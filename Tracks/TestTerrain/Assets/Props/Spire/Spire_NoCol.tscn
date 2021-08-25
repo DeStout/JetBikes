@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Tracks/TestTerrain/Assets/Props/Spire/M1_Spire.tres" type="Material" id=1]
+[ext_resource path="res://Tracks/TestTerrain/Assets/Props/Spire/Spire.glb" type="PackedScene" id=2]
+
+[node name="Spire" instance=ExtResource( 2 )]
+
+[node name="C_Cliff_CM" parent="." index="0"]
+material/0 = ExtResource( 1 )

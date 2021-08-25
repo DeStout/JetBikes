@@ -6,7 +6,7 @@ var master_id : int = 0
 var bike_material : SpatialMaterial = SpatialMaterial.new()
 var windshield_material : SpatialMaterial = SpatialMaterial.new()
 
-puppet var puppet_transform : Transform
+puppet var puppet_transform : Transform setget _set_puppet_transform
 puppet var puppet_velocity : Vector3 = Vector3.ZERO
 puppet var puppet_engine_rotation : Vector3 = Vector3.ZERO
 
@@ -14,8 +14,15 @@ var crash_bike : RigidBody
 
 
 func _process(delta):
+	global_transform.basis.slerp(puppet_transform.basis, delta*4)
+	$Engine.rotation.slerp(puppet_engine_rotation, delta*4)
+	
+	move_and_slide(puppet_velocity)
+
+
+func _set_puppet_transform(new_puppet_transform : Transform) -> void:
+	puppet_transform = new_puppet_transform
 	global_transform = puppet_transform
-	$Engine.rotation = puppet_engine_rotation
 
 
 func set_racer_color(new_color : Color) -> void:

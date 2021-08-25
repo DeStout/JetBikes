@@ -1,0 +1,14 @@
+[gd_resource type="SpatialMaterial" load_steps=4 format=2]
+
+[ext_resource path="res://Tracks/TestTerrain/Assets/Props/Rockb/D_Rock1_BaseColor.png" type="Texture" id=1]
+[ext_resource path="res://Tracks/TestTerrain/Assets/Props/Rockb/D_Rock1_Roughness.png" type="Texture" id=2]
+[ext_resource path="res://Tracks/TestTerrain/Assets/Props/Rockb/D_Rock1_Normal.png" type="Texture" id=3]
+
+[resource]
+albedo_color = Color( 0.515625, 0.380299, 0.314209, 1 )
+albedo_texture = ExtResource( 1 )
+roughness = 0.7
+roughness_texture = ExtResource( 2 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 3 )

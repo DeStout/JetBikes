@@ -1,0 +1,38 @@
+[gd_resource type="Environment" load_steps=3 format=2]
+
+[ext_resource path="res://Tracks/Assets/Skyboxes/Cold Sunset Equirect.png" type="Texture" id=1]
+
+[sub_resource type="PanoramaSky" id=1]
+panorama = ExtResource( 1 )
+
+[resource]
+background_mode = 2
+background_sky = SubResource( 1 )
+background_sky_orientation = Basis( -0.372826, 0, 0.927901, 0, 1, 0, -0.927901, 0, -0.372826 )
+background_color = Color( 0.419608, 0.113725, 0.407843, 0.027451 )
+ambient_light_color = Color( 0.00392157, 0.0313726, 0.0941176, 1 )
+fog_enabled = true
+fog_color = Color( 1, 0.827451, 0.627451, 1 )
+fog_sun_color = Color( 0.788235, 0.913725, 0.968627, 1 )
+fog_depth_begin = 0.0
+fog_depth_end = 2728.1
+fog_depth_curve = 0.659753
+tonemap_mode = 3
+tonemap_exposure = 0.19
+tonemap_white = 0.5
+auto_exposure_speed = 64.0
+ssao_enabled = true
+ssao_radius = 73.91
+ssao_intensity = 20.17
+dof_blur_far_enabled = true
+dof_blur_far_distance = 206.1
+dof_blur_far_transition = 424.48
+dof_blur_far_amount = 0.05
+dof_blur_far_quality = 0
+dof_blur_near_distance = 65.33
+dof_blur_near_transition = 63.06
+dof_blur_near_amount = 0.06
+dof_blur_near_quality = 0
+adjustment_brightness = 1.62
+adjustment_contrast = 1.09
+adjustment_saturation = 1.2

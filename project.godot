@@ -113,6 +113,10 @@ window/stretch/aspect="keep"
 
 enabled=PoolStringArray( "res://addons/waterways/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
 
+[gui]
+
+theme/use_hidpi=true
+
 [input]
 
 ui_accept={
