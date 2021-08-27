@@ -93,14 +93,12 @@ func _server_disconnected() -> void:
 func return_to_lobby() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
-	if !get_tree().is_network_server():
-		_lobby.toggle_racer_ready(false)
-	
 	if is_instance_valid(_multiplayer_track):
 		_multiplayer_track.queue_free()
 		remove_child(_multiplayer_track)
 		
 		add_child(_lobby)
+		_lobby.reset_lobby()
 
 
 func return_to_main() -> void:

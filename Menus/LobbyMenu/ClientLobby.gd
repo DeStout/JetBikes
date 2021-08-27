@@ -43,4 +43,9 @@ func update_lobby_info(update_type : String) -> void:
 	
 	level_name.text = Globals.level_dict_keys[Network.multiplayer_level]
 	num_laps.text = str(Network.multiplayer_lap_amount)
-	num_npcs.text = str(Network.multiplayer_npc_amount)
+#	num_npcs.text = str(Network.multiplayer_npc_amount)
+	num_npcs.text = str(0)
+
+
+func reset_lobby() -> void:
+	toggle_racer_ready(false)

@@ -58,9 +58,9 @@ anchor_top = 0.127
 anchor_right = 0.569
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = 144.073
+margin_top = 135.577
 margin_right = -18.3547
-margin_bottom = -153.616
+margin_bottom = -162.112
 grow_vertical = 2
 custom_constants/separation = 32
 alignment = 1
@@ -69,7 +69,7 @@ __meta__ = {
 }
 
 [node name="HostBox" type="CheckBox" parent="HostJoin"]
-margin_left = 67.0
+margin_left = 39.0
 margin_right = 248.0
 margin_bottom = 127.0
 focus_mode = 0
@@ -78,7 +78,7 @@ text = "Host"
 
 [node name="JoinBox" type="CheckBox" parent="HostJoin"]
 margin_left = 280.0
-margin_right = 436.0
+margin_right = 464.0
 margin_bottom = 127.0
 focus_mode = 0
 custom_fonts/font = SubResource( 3 )
@@ -89,9 +89,9 @@ anchor_top = 0.127
 anchor_right = 0.569
 anchor_bottom = 1.0
 margin_left = 12.0
-margin_top = 270.073
+margin_top = 263.577
 margin_right = -20.3547
-margin_bottom = -41.616
+margin_bottom = -34.1119
 custom_constants/hseparation = 0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -104,9 +104,9 @@ custom_fonts/font = SubResource( 4 )
 text = "IP Address:"
 
 [node name="IPText" type="LineEdit" parent="IPAdress"]
-margin_top = 54.0
+margin_top = 58.0
 margin_right = 493.0
-margin_bottom = 114.0
+margin_bottom = 128.0
 size_flags_horizontal = 3
 size_flags_vertical = 8
 custom_fonts/font = SubResource( 5 )
@@ -149,7 +149,7 @@ __meta__ = {
 
 [node name="RaceButton" type="Button" parent="Buttons"]
 margin_right = 398.0
-margin_bottom = 94.0
+margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 3 )

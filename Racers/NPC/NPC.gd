@@ -21,7 +21,7 @@ func _physics_process(delta : float) -> void:
 	temp_velocity.y = 0
 
 	if is_on_ground:
-		var ground_normal : Vector3 = _get_ground_normal()
+		ground_normal = _get_ground_normal()
 		# Apply acceleration/deacceleration along NPC X vector based on input
 		if has_control:
 #			if !is_braking:

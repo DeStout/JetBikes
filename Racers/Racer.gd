@@ -43,6 +43,7 @@ var bike_material : SpatialMaterial = SpatialMaterial.new()
 var windshield_material : SpatialMaterial = SpatialMaterial.new()
 onready var ground_particles : Particles = $GroundParticles
 
+var ground_normal = Vector3.UP
 var ground_point : Vector3
 var prev_ground_distance : float = 0
 
@@ -165,7 +166,7 @@ func _check_out_of_bounds():
 func _check_crash():
 	var prev_horizontal_vel = Vector2(prev_velocity.x, prev_velocity.z)
 	var horizontal_vel = Vector2(velocity.x, velocity.z)
-	if horizontal_vel.length() - prev_horizontal_vel.length() < -60:
+	if horizontal_vel.length() - prev_horizontal_vel.length() < -80:
 		is_crashed = true
 
 
@@ -191,7 +192,7 @@ func _crash_finished():
 	is_crashed = false
 	
 	global_transform.origin = navigation.get_closest_point(to_global(ground_point))
-	rotation = Vector3.ZERO
+	rotation = ground_normal
 	$EngineRotationHelper.rotation = Vector3.ZERO
 	$EngineRotationHelper/Engine.rotation = Vector3.ZERO
 	$CollisionShape.rotation = Vector3.ZERO

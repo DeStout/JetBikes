@@ -228,6 +228,7 @@ Down={
 3d_physics/layer_2="LevelGeo"
 3d_physics/layer_3="LevelModels"
 3d_physics/layer_4="Water"
+3d_physics/layer_5="NPCs"
 
 [physics]
 

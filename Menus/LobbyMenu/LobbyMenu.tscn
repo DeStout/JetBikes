@@ -234,9 +234,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 5 )
 custom_constants/vseparation = 0
+items = [ "Item 0", null, false, "Item 1", null, false, "Item 2", null, false, "Item 3", null, false ]
 max_columns = 4
 same_column_width = true
-fixed_column_width = 209
+fixed_column_width = 204
 __meta__ = {
 "_edit_use_anchors_": false
 }

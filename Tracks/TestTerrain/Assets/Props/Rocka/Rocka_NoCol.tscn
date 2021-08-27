@@ -20,7 +20,8 @@ ao_texture = ExtResource( 2 )
 ao_on_uv2 = false
 ao_texture_channel = 0
 
-[node name="Rock0" instance=ExtResource( 1 )]
+[node name="Rocka" instance=ExtResource( 1 )]
 
 [node name="Rock_5" parent="." index="0"]
+layers = 2
 material/0 = SubResource( 1 )

@@ -6,4 +6,5 @@
 [node name="Spire" instance=ExtResource( 2 )]
 
 [node name="C_Cliff_CM" parent="." index="0"]
+layers = 2
 material/0 = ExtResource( 1 )

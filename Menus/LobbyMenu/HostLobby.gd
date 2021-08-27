@@ -14,6 +14,7 @@ func _ready():
 	level_name.text = Network.level_dict_keys[level_select]
 	num_laps.text = str(lap_amount)
 	num_npcs.text = str(npc_amount)
+	num_npcs.text = str(npc_amount)
 	
 	update_lobby_info("Lobby Created")
 
@@ -32,7 +33,11 @@ func update_lobby_info(update_type : String):
 			race_button.disabled = true
 			break
 	
-	_check_max_npcs()
+#	_check_max_npcs()
+
+
+func reset_lobby():
+	Network.update_player_ready(true)
 
 
 func _level_select_left():
@@ -85,20 +90,20 @@ func _check_max_npcs():
 
 
 func _decrease_NPC_amount():
-	npc_amount -= 1
+#	npc_amount -= 1
 	if npc_amount < Globals.MIN_NPC_NUMBER:
 		npc_amount = Network.max_npc_num
 	num_npcs.text = str(npc_amount)
 	Network.multiplayer_npc_amount = npc_amount
 	
-	Network.update_race_info(level_select, lap_amount, npc_amount)
+#	Network.update_race_info(level_select, lap_amount, npc_amount)
 
 
 func _increase_NPC_amount():
-	npc_amount += 1
+#	npc_amount += 1
 	if npc_amount > Network.max_npc_num:
 		npc_amount = Globals.MIN_NPC_NUMBER
 	num_npcs.text = str(npc_amount)
 	Network.multiplayer_npc_amount = npc_amount
 	
-	Network.update_race_info(level_select, lap_amount, npc_amount)
+#	Network.update_race_info(level_select, lap_amount, npc_amount)

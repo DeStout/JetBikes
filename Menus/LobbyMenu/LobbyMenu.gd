@@ -52,5 +52,9 @@ func update_lobby_info(update_type : String) -> void:
 			racer_list.set_item_selectable(racer_list.get_item_count()-1, 0)
 
 
+func reset_lobby():
+	pass
+
+
 func _on_CancelButton_pressed() -> void:
 	emit_signal("return_to_main")

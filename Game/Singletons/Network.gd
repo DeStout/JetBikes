@@ -23,7 +23,7 @@ var level_dict_keys : Array = level_dict.keys()
 
 var multiplayer_level : int = Globals.DEFAULT_LEVEL
 var multiplayer_lap_amount : int = Globals.DEFAULT_LAP_NUMBER
-var multiplayer_npc_amount : int = Globals.DEFAULT_NPC_NUMBER
+var multiplayer_npc_amount : int = 0
 var max_npc_num : int = 11
 
 class PlayerData:
@@ -81,7 +81,7 @@ remotesync func setup_online_multiplayer_race() -> void:
 			if player_list[player].player_name == "":
 				player_list[player].player_name = player_list[player].placeholder_name
 		
-		# Signal to OnlineMultiplayerManager
+		# Signal to MultiplayerManager
 		emit_signal("setup_track")
 
 

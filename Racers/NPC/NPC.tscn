@@ -4,6 +4,8 @@
 [ext_resource path="res://Racers/NPC/NPC.gd" type="Script" id=2]
 
 [node name="Racer" instance=ExtResource( 1 )]
+collision_layer = 17
+collision_mask = 31
 script = ExtResource( 2 )
 
 [editable path="EngineRotationHelper/Engine"]

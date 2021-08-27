@@ -42,7 +42,7 @@ func _physics_process(delta : float) -> void:
 	
 	if is_on_ground:
 		
-		var ground_normal : Vector3 = _get_ground_normal()
+		ground_normal = _get_ground_normal()
 		
 		# Align player Y vector to ground normal
 		if player_basis[1].dot(ground_normal) > 0:
@@ -96,7 +96,7 @@ func _physics_process(delta : float) -> void:
 			ground_distance = 0.001
 			
 		var move_force : float = 1 / (ground_distance / (prev_move_distance)) - ground_distance
-		move_force = clamp(move_force, -11, 11)
+#		move_force = clamp(move_force, -11, 11)
 		
 		move_direction += ground_normal * move_force * 1.1
 		move_direction += downhill * -Globals.GRAVITY * 0.25

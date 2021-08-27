@@ -28,6 +28,9 @@ text = "Host Lobby"
 [node name="RacerName" parent="MenuFrame/LobbyFrame/RacerSettingsPanel" index="2"]
 placeholder_text = "Host"
 
+[node name="RacersList" parent="MenuFrame/LobbyFrame/ListPanel" index="1"]
+items = [ "Item 0", null, false, "Item 1", null, false, "Item 2", null, false, "Item 3", null, false ]
+
 [node name="HostSettingsPanel" type="Control" parent="MenuFrame/LobbyFrame" index="5"]
 anchor_right = 1.0
 anchor_bottom = 1.0
