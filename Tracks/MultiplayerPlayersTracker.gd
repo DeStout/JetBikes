@@ -3,8 +3,8 @@ extends Node
 signal race_finished
 
 var npc_ : PackedScene
-var player_ : PackedScene = preload("res://Racers/Player/MasterPlayer.tscn")
-var puppet_racer_ : PackedScene = preload("res://Racers/PuppetRacer/PuppetRacer.tscn")
+var player_ : PackedScene = load("res://Racers/Player/MasterPlayer.tscn")
+var puppet_racer_ : PackedScene = load("res://Racers/PuppetRacer/PuppetRacer.tscn")
 var crash_bike = preload("res://Racers/General/Bike/CrashBike.tscn")
 
 var master_player : Player
@@ -66,8 +66,8 @@ func _spawn_players():
 		
 		add_child(new_player)
 		new_player.set_network_master(player)
-		
-		new_player.name = Network.player_list[player].player_name
+		new_player.name = str(player)
+		new_player.player_name = Network.player_list[player].player_name
 			
 #		var player_spawn : Spatial = get_node("PlayerSpawn" + str(player_num + \
 #			Network.multiplayer_npc_amount))

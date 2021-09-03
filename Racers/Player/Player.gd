@@ -96,7 +96,7 @@ func _physics_process(delta : float) -> void:
 			ground_distance = 0.001
 			
 		var move_force : float = 1 / (ground_distance / (prev_move_distance)) - ground_distance
-#		move_force = clamp(move_force, -11, 11)
+		move_force = clamp(move_force, -11, 11)
 		
 		move_direction += ground_normal * move_force * 1.1
 		move_direction += downhill * -Globals.GRAVITY * 0.25
@@ -104,13 +104,8 @@ func _physics_process(delta : float) -> void:
 		prev_ground_distance = ground_distance
 
 	else:
-#		if !is_free_rotating:
 		var player_quat = player_basis.get_rotation_quat()
 		global_transform.basis = Basis(player_quat.slerp(_align_to_normal(Vector3.UP), delta*2))
-#		elif engine_rot_help.rotation != Vector3.ZERO:
-#		var rot_help_quat = cam_rot_help.global_transform.basis.get_rotation_quat()
-#		cam_rot_help.global_transform.basis = \
-#			Basis(rot_help_quat.slerp(_align_to_normal(Vector3.UP), delta*6))
 			
 		prev_ground_distance = 0
 		move_direction = Vector3(0, -Globals.GRAVITY, 0)
@@ -209,17 +204,17 @@ func _rotate_default(delta : float) -> void:
 	
 	if engine.rotation_degrees != Vector3.ZERO:
 		var engineRot : Vector3 = engine.rotation_degrees
-		engineRot = engineRot + (Vector3.ZERO - engineRot) * (delta * TURN_SPEED * 0.8)
+		engineRot = engineRot + (Vector3.ZERO - engineRot) * (delta * TURN_SPEED * 0.5)
 		engine.rotation_degrees = engineRot
 	
 	if is_on_ground:
 		if engine_rot_help.rotation_degrees != Vector3.ZERO:
 			var engineRot : Vector3 = engine_rot_help.rotation_degrees
-			engineRot = engineRot + (Vector3.ZERO - engineRot) * (delta * TURN_SPEED * 0.8)
+			engineRot = engineRot + (Vector3.ZERO - engineRot) * (delta * TURN_SPEED * 0.5)
 			engine_rot_help.rotation_degrees = engineRot
 		if $CollisionShape.rotation_degrees != Vector3.ZERO:
 			var engineRot : Vector3 = $CollisionShape.rotation_degrees
-			engineRot = engineRot + (Vector3.ZERO - engineRot) * (delta * TURN_SPEED * 0.8)
+			engineRot = engineRot + (Vector3.ZERO - engineRot) * (delta * TURN_SPEED * 0.5)
 			$CollisionShape.rotation_degrees = engineRot
 
 

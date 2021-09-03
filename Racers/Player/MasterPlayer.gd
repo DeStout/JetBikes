@@ -1,5 +1,7 @@
 extends Player
 
+var player_name : String
+
 var engine_rotation
 var rset_quarter_timer : Timer = Timer.new()
 var rset_twentieth_timer : Timer = Timer.new()
@@ -22,6 +24,8 @@ func _process(delta):
 	if !rset_twentieth_timer.time_left:
 		rset("puppet_velocity", velocity)
 		rset_twentieth_timer.start(0.05)
+		
+		rpc("swing", is_swinging)
 #		print("RSet: Twentieth")
 	
 	if !rset_quarter_timer.time_left:

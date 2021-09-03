@@ -14,12 +14,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Game.gd"
 }, {
-"base": "Reference",
+"base": "ResourceFormatLoader",
 "class": "HTerrainDataLoader",
 "language": "GDScript",
 "path": "res://addons/zylann.hterrain/hterrain_resource_loader.gd"
 }, {
-"base": "Reference",
+"base": "ResourceFormatSaver",
 "class": "HTerrainDataSaver",
 "language": "GDScript",
 "path": "res://addons/zylann.hterrain/hterrain_resource_saver.gd"
