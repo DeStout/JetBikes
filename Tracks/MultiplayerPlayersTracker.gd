@@ -95,10 +95,10 @@ func _spawn_players():
 		temp_node.free()
 
 
-func _setup_crash_bike(racer):
-	racer.crash_bike = crash_bike.instance()
-	racer.crash_bike.set_bike_color(racer.get_racer_color())
-	$CrashBikes.add_child(racer.crash_bike)
+func _setup_crash_bike(player):
+	player.crash_bike = crash_bike.instance()
+	player.crash_bike.set_bike_color(player.get_racer_color())
+	$CrashBikes.add_child(player.crash_bike)
 
 
 func setup_players(track_navigation, path_nodes):

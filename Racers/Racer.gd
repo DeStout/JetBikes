@@ -189,8 +189,6 @@ func _crash():
 
 
 func _crash_finished():
-	is_crashed = false
-	
 	global_transform.origin = navigation.get_closest_point(to_global(ground_point))
 	rotation = ground_normal
 	$EngineRotationHelper.rotation = Vector3.ZERO
@@ -205,6 +203,8 @@ func _crash_finished():
 #	$VisibilityTimer.stop()
 	ground_particles.emitting = true
 	crash_bike.remove_crash()
+	
+	is_crashed = false
 
 
 func _on_VisibilityTimer_timeout():

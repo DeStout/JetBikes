@@ -45,6 +45,7 @@ albedo_color = Color( 1, 0.254902, 0.447059, 0.262745 )
 albedo_texture = ExtResource( 7 )
 
 [node name="PuppetRacer" type="KinematicBody"]
+collision_mask = 14
 script = ExtResource( 10 )
 
 [node name="Engine" parent="." instance=ExtResource( 4 )]
@@ -56,7 +57,6 @@ transform = Transform( -0.02, 0, -1.74846e-09, 0, 0.02, 0, 1.74846e-09, 0, -0.02
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
 shape = SubResource( 1 )
-disabled = true
 
 [node name="Audio_Jet" type="AudioStreamPlayer3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.887, 0 )

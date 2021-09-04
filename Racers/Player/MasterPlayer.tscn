@@ -5,6 +5,7 @@
 [ext_resource path="res://Racers/Player/MultiplayerPause.gd" type="Script" id=3]
 
 [node name="Player" instance=ExtResource( 1 )]
+collision_mask = 14
 script = ExtResource( 2 )
 
 [node name="PauseMenu" parent="CamRotationHelper/Camera" index="1"]

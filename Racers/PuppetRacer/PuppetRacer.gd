@@ -1,5 +1,5 @@
-class_name PuppetRacer
 extends KinematicBody
+class_name PuppetRacer
 
 var master_id : int = 0
 var player_name : String
@@ -11,12 +11,15 @@ puppet var puppet_transform : Transform setget _set_puppet_transform
 puppet var puppet_velocity : Vector3 = Vector3.ZERO
 puppet var puppet_engine_rotation : Basis = Basis(Quat(Vector3.ZERO))
 
+puppet var crashbike_puppet_transform : Transform setget _set_crashbike_transform
+
+var is_crashed : bool = false
 var crash_bike : RigidBody
 
 var swing_poles : Array
 
 
-func _process(delta):
+func _physics_process(delta):
 #	global_transform.basis.slerp(puppet_transform.basis, delta)
 	$Engine.global_transform.basis.slerp(puppet_engine_rotation, delta)
 	move_and_slide(puppet_velocity)
@@ -26,6 +29,27 @@ func _set_puppet_transform(new_puppet_transform : Transform) -> void:
 	puppet_transform = new_puppet_transform
 	global_transform = puppet_transform
 #	global_transform.basis.slerp(puppet_transform.basis, 1)
+
+
+puppet func set_crashed(is_crashed : bool) -> void:
+	if is_crashed:
+		crash_bike.visible = true
+		
+		visible = false
+		$CollisionShape.disabled = true
+#		_set_boost_sfx()
+		$GroundParticles.emitting = false
+	else:
+		crash_bike.visible = false
+		
+		visible = true
+		$CollisionShape.disabled = false
+		$GroundParticles.emitting = true
+
+
+func _set_crashbike_transform(new_crashbike_transform : Transform) -> void:
+	crashbike_puppet_transform = new_crashbike_transform
+	crash_bike.global_transform = crashbike_puppet_transform
 
 
 func add_remove_swing_pole(swing_pole : SwingPole):

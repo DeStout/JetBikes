@@ -33,7 +33,6 @@ func _set_swing_length(new_sphere_size : float):
 # Functionality Shit
 #
 func _racer_within_influence(body):
-	print(body.name)
 	if body.has_method("add_remove_swing_pole"):
 		body.add_remove_swing_pole(self)
 
