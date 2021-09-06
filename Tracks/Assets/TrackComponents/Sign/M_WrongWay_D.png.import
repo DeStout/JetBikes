@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/M_StartLine_D.png-07c2f7f8fa4a70d59392dc1ce6d513ed.s3tc.stex"
-path.etc2="res://.import/M_StartLine_D.png-07c2f7f8fa4a70d59392dc1ce6d513ed.etc2.stex"
+path.s3tc="res://.import/M_WrongWay_D.png-16b1e22d895f0d314abb9a0bd7ad2aa6.s3tc.stex"
+path.etc2="res://.import/M_WrongWay_D.png-16b1e22d895f0d314abb9a0bd7ad2aa6.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Tracks/Assets/TrackComponents/Checkpoint/M_StartLine_D.png"
-dest_files=[ "res://.import/M_StartLine_D.png-07c2f7f8fa4a70d59392dc1ce6d513ed.s3tc.stex", "res://.import/M_StartLine_D.png-07c2f7f8fa4a70d59392dc1ce6d513ed.etc2.stex" ]
+source_file="res://Tracks/Assets/TrackComponents/Sign/M_WrongWay_D.png"
+dest_files=[ "res://.import/M_WrongWay_D.png-16b1e22d895f0d314abb9a0bd7ad2aa6.s3tc.stex", "res://.import/M_WrongWay_D.png-16b1e22d895f0d314abb9a0bd7ad2aa6.etc2.stex" ]
 
 [params]
 
@@ -25,7 +25,7 @@ flags/repeat=true
 flags/filter=true
 flags/mipmaps=true
 flags/anisotropic=false
-flags/srgb=1
+flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false

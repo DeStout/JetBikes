@@ -17,7 +17,8 @@ func _ready() -> void:
 	$Players.connect("race_finished", self, "finish_race")
 	$Players.setup_players($Navigation, path_nodes)
 	
-	$MusicPlayer.play()
+#	$MusicPlayer.play()
+	AudioServer.set_bus_mute(Globals.master_bus, true)
 
 
 # Called by $Minimap/Naviation/PathNodes' ready signal
@@ -43,6 +44,13 @@ func setup_pathnodes():
 			i += j
 			j = 1
 		path_nodes = path_nodes_array
+
+
+func begin_countdown() -> void:
+	$StartTimer.start()
+	$Players.player.HUD.visible = true
+	AudioServer.set_bus_mute(Globals.master_bus, false)
+	$MusicPlayer.play()
 
 
 func start_race() -> void:

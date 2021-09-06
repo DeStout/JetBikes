@@ -232,7 +232,6 @@ Down={
 
 [physics]
 
-common/physics_fps=45
 3d/active_soft_world=false
 
 [rendering]

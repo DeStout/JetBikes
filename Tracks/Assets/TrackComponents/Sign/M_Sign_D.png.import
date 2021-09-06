@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/M_Checkpoint_D.png-ac0a37e5d1d9dd0f24d37fad3558aa69.s3tc.stex"
-path.etc2="res://.import/M_Checkpoint_D.png-ac0a37e5d1d9dd0f24d37fad3558aa69.etc2.stex"
+path.s3tc="res://.import/M_Sign_D.png-bfa821e7f152981a1a3bd6dff051ab90.s3tc.stex"
+path.etc2="res://.import/M_Sign_D.png-bfa821e7f152981a1a3bd6dff051ab90.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Tracks/Assets/TrackComponents/Checkpoint/M_Checkpoint_D.png"
-dest_files=[ "res://.import/M_Checkpoint_D.png-ac0a37e5d1d9dd0f24d37fad3558aa69.s3tc.stex", "res://.import/M_Checkpoint_D.png-ac0a37e5d1d9dd0f24d37fad3558aa69.etc2.stex" ]
+source_file="res://Tracks/Assets/TrackComponents/Sign/M_Sign_D.png"
+dest_files=[ "res://.import/M_Sign_D.png-bfa821e7f152981a1a3bd6dff051ab90.s3tc.stex", "res://.import/M_Sign_D.png-bfa821e7f152981a1a3bd6dff051ab90.etc2.stex" ]
 
 [params]
 

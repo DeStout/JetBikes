@@ -3,10 +3,12 @@ extends Node
 
 onready var main_menu = $MainMenu
 
-var online_multiplayer_manager_ = preload("res://Game/MultiplayerManager/MultiplayerManager.tscn")
+var online_multiplayer_manager_ = load("res://Game/MultiplayerManager/MultiplayerManager.tscn")
 var online_multiplayer_manager
 
-var _single_player_track : Track = null
+var level_loader_ = preload("res://Menus/LoadingMenu/LoadingMenu.tscn")
+
+var _single_player_track = null
 
 
 func _ready():
@@ -17,17 +19,35 @@ func _ready():
 
 	online_multiplayer_manager = online_multiplayer_manager_.instance()
 	online_multiplayer_manager.connect("return_to_main", self, "return_to_main_menu")
-	
-	
+
+
 func start_single_player_game():
-	_single_player_track = Globals.level_dict[Globals.level_dict_keys[Globals.level]].instance()
+#	_single_player_track = Globals.level_dict[Globals.level_dict_keys[Globals.level]].instance()
+
+	var level_loader = level_loader_.instance()
+	add_child(level_loader)
+	level_loader.load_track(Globals.level_dict[Globals.level_dict_keys[Globals.level]])
+	_single_player_track = yield(level_loader, "track_loaded")
+	
+	_single_player_track = _single_player_track.instance()
+	add_child(_single_player_track)
 	_single_player_track.connect("return_to_main", self, "return_to_main_menu")
 	
+	yield(get_tree().create_timer(2.0), "timeout")
+	
 	remove_child(main_menu)
-	add_child(_single_player_track)
+	remove_child(level_loader)
+	level_loader.queue_free()
+	
+	_single_player_track.begin_countdown()
 
 
 func setup_online_lobby(is_host : bool):
+	if online_multiplayer_manager == null:
+		online_multiplayer_manager = load("res://Game/MultiplayerManager/MultiplayerManager.tscn")
+		online_multiplayer_manager = online_multiplayer_manager.instance()
+		online_multiplayer_manager.connect("return_to_main", self, "return_to_main_menu")
+		
 	remove_child(main_menu)
 	
 	add_child(online_multiplayer_manager)

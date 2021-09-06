@@ -7,7 +7,7 @@ func _ready():
 	$Players.player.HUD.setup_minimap($Minimap.get_texture(), $Minimap/MinimapCamera, $Players.players)
 	$Players.player.pause_menu.connect("leave_race", self, "end_race")
 	
-	$StartTimer.start()
+#	$StartTimer.start()
 
 
 func _process(delta) -> void:

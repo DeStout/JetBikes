@@ -4,8 +4,8 @@ extends Node
 var SHOW_NPC_PATHFIND : bool = false
 var INFINITE_BOOST : bool = false
 
-var test_track_ : PackedScene = load("res://Tracks/TestTrack/SinglePlayerTestTrack.tscn")
-var test_terrain_ : PackedScene = load("res://Tracks/TestTerrain/SinglePlayerTestTerrain.tscn")
+var test_track_ = "res://Tracks/TestTrack/SinglePlayerTestTrack.tscn"
+var test_terrain_ = "res://Tracks/TestTerrain/SinglePlayerTestTerrain.tscn"
 var level_dict : Dictionary = {
 	"test_track" : test_track_,
 	"test_terrain" : test_terrain_

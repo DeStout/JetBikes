@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/TestTerrain_v9.glb-78ed7d38e095b463bee3e85871d02127.scn"
+path="res://.import/Checkpoint.glb-b83c27a07289d9fa3535be1b40387545.scn"
 
 [deps]
 
-source_file="res://Tracks/TestTerrain/TestTerrain_v9.glb"
-dest_files=[ "res://.import/TestTerrain_v9.glb-78ed7d38e095b463bee3e85871d02127.scn" ]
+source_file="res://Tracks/Assets/TrackComponents/Sign/Checkpoint.glb"
+dest_files=[ "res://.import/Checkpoint.glb-b83c27a07289d9fa3535be1b40387545.scn" ]
 
 [params]
 
