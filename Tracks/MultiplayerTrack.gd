@@ -7,7 +7,7 @@ func _ready():
 	$Players.master_player.HUD.setup_minimap($Minimap.get_texture(), \
 		$Minimap/MinimapCamera, $Players.players)
 	
-	Network.connect("start_timer_start", self, "begin_race")
+	Network.connect("start_timer_start", self, "begin_countdown")
 	Network.track_ready()
 
 
@@ -20,8 +20,11 @@ func remove_dead_peer(dead_peer_ID : int) -> void:
 	$Players.remove_dead_peer(dead_peer_ID)
 
 
-func begin_race():
-	$StartTimer.start()
+func begin_countdown():
+	.begin_countdown()
+	
+	$Players.master_player.pause_menu.set_process_input(true)
+	$Players.master_player.HUD.visible = true
 
 
 func start_race() -> void:

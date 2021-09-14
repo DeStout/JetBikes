@@ -15,6 +15,13 @@ func _process(delta) -> void:
 		$Players.player.HUD.set_race_notice("%d" % ($StartTimer.time_left + 1), true)
 
 
+func begin_countdown() -> void:
+	.begin_countdown()
+	
+	$Players.player.pause_menu.set_process_input(true)
+	$Players.player.HUD.visible = true
+
+
 func start_race() -> void:
 	.start_race()
 	$Players.player.HUD.set_race_notice()

@@ -14,7 +14,6 @@ func _process(delta):
 	poll_msg = loader.poll()
 	
 	if poll_msg == OK || poll_msg == ERR_FILE_EOF:
-		print(loader.get_stage(), loader.get_stage_count())
 		$BG/MenuFrame/ProgressBar.value = float(loader.get_stage()) / float(loader.get_stage_count()) * 100
 	else:
 		print("Error loading level: ", poll_msg)

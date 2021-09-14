@@ -48,7 +48,7 @@ func setup_pathnodes():
 
 func begin_countdown() -> void:
 	$StartTimer.start()
-	$Players.player.HUD.visible = true
+	
 	AudioServer.set_bus_mute(Globals.master_bus, false)
 	$MusicPlayer.play()
 

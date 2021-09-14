@@ -39,7 +39,8 @@ points = PoolVector3Array( -4.5889, -3.73393, -5.72306, -4.5889, -3.20854, -5.72
 material/0 = ExtResource( 2 )
 
 [node name="StaticBody" type="StaticBody" parent="." index="1"]
-collision_layer = 6
+collision_layer = 2
+collision_mask = 17
 
 [node name="CollisionShape10" type="CollisionShape" parent="StaticBody" index="0"]
 shape = SubResource( 1 )

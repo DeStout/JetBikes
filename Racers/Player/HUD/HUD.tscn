@@ -44,8 +44,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 4 )
 __meta__ = {
-"_edit_use_anchors_": false,
-"_edit_vertical_guides_": [ 1279.6, 179.281 ]
+"_edit_use_anchors_": false
 }
 
 [node name="LapLabel" type="Label" parent="."]

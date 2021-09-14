@@ -11,6 +11,8 @@ onready var music_level : LineEdit = $BG/Options/Music/Level
 
 
 func _ready():
+	set_process_input(false)
+	
 	sfx_slider.min_value = Globals.MIN_SFX_LEVEL
 	sfx_slider.max_value = Globals.MAX_SFX_LEVEL
 	music_slider.min_value = Globals.MIN_MUSIC_LEVEL
