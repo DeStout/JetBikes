@@ -13,10 +13,10 @@ const AIR_BRAKE_DEACCEL : float  = 0.5
 
 const MAX_SPEED : int = 180
 const MAX_BOOST : int = 250
-const MAX_FORWARD_VEL : int = 90
-const MAX_STRIFE_VEL : int = 50
-const MAX_REVERSE_VEL : int =  75
-const MAX_BOOST_VEL : int = 120
+const MAX_FORWARD_VEL : int = 100
+const MAX_STRIFE_VEL : int = 75
+const MAX_REVERSE_VEL : int =  50
+const MAX_BOOST_VEL : int = 125
 const TURN_SPEED : int = 8
 
 const MIN_SFX_PITCH : float = 1.5
@@ -146,7 +146,7 @@ func _set_boost(delta_boost : float) -> void:
 		boost = MAX_BOOST
 	boost = clamp(boost, 0, MAX_BOOST)
 	if boost == 0:
-		is_boosting = 0
+		is_boosting = false
 
 
 func _emit_trail_particles():

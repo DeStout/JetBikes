@@ -1,7 +1,8 @@
 extends Node
 
-
+# Debug Options
 var SHOW_NPC_PATHFIND : bool = false
+var SHOW_RACER_BASIS : bool = false
 var INFINITE_BOOST : bool = false
 
 var test_track_ = "res://Tracks/TestTrack/SinglePlayerTestTrack.tscn"

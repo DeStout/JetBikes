@@ -49,33 +49,59 @@ func _physics_process(delta : float) -> void:
 			var player_quat = player_basis.get_rotation_quat()
 			global_transform.basis = Basis(player_quat.slerp(_align_to_normal(ground_normal), delta*4))
 		
-		# Apply acceleration/deacceleration along player X vector based on input
 		if !is_braking:
-			if movement_input.x != 0:
-				var delta_move : Vector3 = player_basis[0] * movement_input.x * STRIFE_ACCELERATION
-				var strife_vel : Vector3 = player_basis[0].dot(temp_velocity) * temp_velocity.normalized()
-				if abs((strife_vel + delta_move).length()) < MAX_STRIFE_VEL:
+			var delta_move : Vector3
+			# Apply acceleration/deacceleration along player X vector based on input
+			var left_vel : Vector3 = -player_basis[0].dot(temp_velocity) * -player_basis[0]
+			var right_vel : Vector3 = player_basis[0].dot(temp_velocity) * player_basis[0]
+			delta_move = player_basis[0] * movement_input.x * STRIFE_ACCELERATION
+			if movement_input.x < 0:
+				if left_vel.length() > MAX_STRIFE_VEL:
+					move_direction -= player_basis[0].dot(temp_velocity) * player_basis[0].normalized() * DEACCELERATION * 0.5
+				else:
+					if (left_vel + delta_move).length() > MAX_STRIFE_VEL:
+						delta_move = delta_move.normalized() * (MAX_STRIFE_VEL - left_vel.length())
+					move_direction += delta_move
+			elif movement_input.x > 0:
+				if left_vel.length() > MAX_STRIFE_VEL:
+					move_direction -= player_basis[0].dot(temp_velocity) * player_basis[0].normalized() * DEACCELERATION * 0.5
+				else:
+					if (right_vel + delta_move).length() > MAX_STRIFE_VEL:
+						delta_move = delta_move.normalized() * (MAX_STRIFE_VEL - right_vel.length())
 					move_direction += delta_move
 			else:
 				move_direction -= player_basis[0].dot(temp_velocity) * player_basis[0].normalized() * DEACCELERATION
 				
 			# Apply acceleration/deacceleration along player Z vector based on input
+			var forward_vel : Vector3 = player_basis[2].dot(temp_velocity) * player_basis[2]
+			var reverse_vel : Vector3 = -player_basis[2].dot(temp_velocity) * -player_basis[2]
 			if movement_input.y > 0:
-				if is_boosting and boost > 0:
-					var delta_move : Vector3 = player_basis[2] * -movement_input.y * BOOST_ACCELERATION
-					var boost_vel : Vector3 = player_basis[2].dot(temp_velocity) * temp_velocity.normalized()
-					if abs((boost_vel + delta_move).length()) < MAX_BOOST_VEL:
-						move_direction += delta_move
+				if forward_vel.length() < MAX_BOOST_VEL and is_boosting and boost > 0:
+					delta_move = player_basis[2] * -movement_input.y * BOOST_ACCELERATION
+					if (forward_vel + delta_move).length() > MAX_BOOST_VEL:
+						delta_move = delta_move.normalized() * (MAX_BOOST_VEL - forward_vel.length())
+					move_direction += delta_move
 					_set_boost(boost_cost)
-				else:
-					var delta_move : Vector3 = player_basis[2] * -movement_input.y * FORWARD_ACCELERATION
-					var forward_vel : Vector3 = player_basis[2].dot(temp_velocity) * temp_velocity.normalized()
-					if abs((forward_vel + delta_move).length()) < MAX_FORWARD_VEL:
-						move_direction += delta_move
+					
+					if move_direction.length() > BOOST_ACCELERATION:
+						move_direction *= (BOOST_ACCELERATION / move_direction.length())
+						
+				elif forward_vel.length() < MAX_FORWARD_VEL:
+					delta_move = player_basis[2] * -movement_input.y * FORWARD_ACCELERATION
+					if (forward_vel + delta_move).length() > MAX_FORWARD_VEL:
+						delta_move = delta_move.normalized() * (MAX_FORWARD_VEL - forward_vel.length())
+					move_direction += delta_move
+					
+					if move_direction.length() > FORWARD_ACCELERATION:
+						move_direction *= (FORWARD_ACCELERATION / move_direction.length())
+						
 			elif movement_input.y < 0:
-				var delta_move : Vector3 = player_basis[2] * -movement_input.y * REVERSE_ACCELERATION
-				var reverse_vel : Vector3 = player_basis[2].dot(temp_velocity) * temp_velocity.normalized()
-				if abs((reverse_vel + delta_move).length()) < MAX_REVERSE_VEL:
+				delta_move = player_basis[2] * -movement_input.y * REVERSE_ACCELERATION
+				if reverse_vel.length() > MAX_REVERSE_VEL:
+					move_direction -= player_basis[2].dot(temp_velocity) * player_basis[2] * DEACCELERATION * 0.5
+				else:
+					if (reverse_vel + delta_move).length() > MAX_REVERSE_VEL:
+						delta_move = delta_move.normalized() * (MAX_REVERSE_VEL - reverse_vel.length())
 					move_direction += delta_move
 			else:
 				move_direction -= player_basis[2].dot(temp_velocity) * player_basis[2] * DEACCELERATION
@@ -102,7 +128,8 @@ func _physics_process(delta : float) -> void:
 		move_direction += downhill * -Globals.GRAVITY * 0.25
 		
 		prev_ground_distance = ground_distance
-
+	
+	# Else if not on ground
 	else:
 		var player_quat = player_basis.get_rotation_quat()
 		global_transform.basis = Basis(player_quat.slerp(_align_to_normal(Vector3.UP), delta*2))
@@ -229,7 +256,7 @@ func _adjust_cam_fov_dist():
 
 func _set_speedometer() -> void:
 	var _y_vector : Vector3 = -global_transform.basis[1]
-	var _y_velocity = Vector3(0, velocity.z, 0)
+	var _y_velocity = Vector3(0, velocity.y, 0)
 	_y_velocity = _y_vector.dot(_y_velocity)
 	var modified_velocity : Vector3 = Vector3(velocity.x, _y_velocity, velocity.z)
 	HUD.set_speedometer(clamp(modified_velocity.length(), 0, MAX_SPEED))
