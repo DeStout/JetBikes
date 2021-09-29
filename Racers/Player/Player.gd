@@ -9,8 +9,8 @@ onready var camera : Camera = $CamRotationHelper/Camera
 onready var HUD : Control = $CamRotationHelper/Camera/HUD
 onready var pause_menu : Control = $CamRotationHelper/Camera/PauseMenu
 
-const MIN_CAM_FOV : float = 45.0
-const MAX_CAM_FOV : float = 70.0
+const MIN_CAM_FOV : float = 40.0
+const MAX_CAM_FOV : float = 75.0
 const MIN_CAM_DIST : float = 10.0
 const MAX_CAM_DIST : float = 25.0
 
@@ -247,13 +247,13 @@ func _rotate_default(delta : float) -> void:
 
 
 func _adjust_cam_fov_dist():
-	var temp_velocity : Vector2 = Vector2(velocity.x, velocity.z)
+	var player_basis : Basis = global_transform.basis
+	var temp_velocity : Vector2 = Vector2(velocity.dot(player_basis.x), velocity.dot(player_basis.z))
 	var max_speed : float = MAX_FORWARD_VEL
 	if is_boosting:
 		max_speed = MAX_BOOST_VEL
-	camera.fov = ((temp_velocity.length() * MAX_CAM_FOV) / max_speed) + MIN_CAM_FOV
-#	camera.transform.origin.z = (temp_velocity.length() * MIN_CAM_DIST) / MAX_SPEED
-	camera.transform.origin.z = ((MIN_CAM_DIST - MAX_CAM_DIST) / max_speed) * temp_velocity.length() + MAX_CAM_DIST
+	camera.fov = ((temp_velocity.length() * (MAX_CAM_FOV - MIN_CAM_FOV)) / max_speed) + MIN_CAM_FOV
+	camera.transform.origin.z = ((temp_velocity.length() * (MIN_CAM_DIST - MAX_CAM_DIST)) / max_speed) + MAX_CAM_DIST
 	camera.fov = clamp(camera.fov, MIN_CAM_FOV, MAX_CAM_FOV)
 	camera.transform.origin.z = clamp(camera.transform.origin.z, MIN_CAM_DIST, MAX_CAM_DIST)
 

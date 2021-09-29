@@ -8,11 +8,10 @@ var debug_frame : int = 0
 
 var test_track_ = "res://Tracks/TestTrack/SinglePlayerTestTrack.tscn"
 var test_terrain_ = "res://Tracks/TestTerrain/SinglePlayerTestTerrain.tscn"
-var valley_ = "res://Tracks/Valley/SinglePlayerValley.tscn"
+#var valley_ = "res://Tracks/Valley/SinglePlayerValley.tscn"
 var level_dict : Dictionary = {
 	"test_track" : test_track_,
-	"test_terrain" : test_terrain_,
-	"valley" : valley_
+	"test_terrain" : test_terrain_
 	}
 var level_dict_keys : Array = level_dict.keys()
 var DEFAULT_LEVEL = 1
