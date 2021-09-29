@@ -160,7 +160,8 @@ func pathfind_next_node() -> void:
 	
 	if Globals.SHOW_NPC_PATHFIND:
 		draw_path.clear()
-		draw_path.begin(Mesh.PRIMITIVE_LINE_STRIP)
+		draw_path.begin(Mesh.PRIMITIVE_LINES)
+		draw_path.set_color(Color.red)
 		for p in simple_path:
 			draw_path.add_vertex(p)
 		draw_path.end()

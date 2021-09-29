@@ -3,18 +3,19 @@ class_name Racer
 
 signal finished_race
 
-const FORWARD_ACCELERATION : float  = 0.85
-const STRIFE_ACCELERATION : float  = 0.65
-const REVERSE_ACCELERATION : float  = 0.65
-const BOOST_ACCELERATION : float  = 1.1
-const DEACCELERATION : float  = 0.025
+const FORWARD_ACCELERATION : float  = 0.95
+const STRIFE_ACCELERATION : float  = 0.85
+const REVERSE_ACCELERATION : float  = 0.75
+const BOOST_ACCELERATION : float  = 1.5
+const STRIFE_DEACCELERATION : float = 0.9
+const DEACCELERATION : float  = 0.5
 const BRAKE_DEACCEL : float  = 1.5
-const AIR_BRAKE_DEACCEL : float  = 0.5
+const AIR_BRAKE_DEACCEL : float  = 1.2
 
-const MAX_SPEED : int = 180
+#const MAX_SPEED : int = 180
 const MAX_BOOST : int = 250
 const MAX_FORWARD_VEL : int = 100
-const MAX_STRIFE_VEL : int = 75
+const MAX_STRIFE_VEL : int = 65
 const MAX_REVERSE_VEL : int =  50
 const MAX_BOOST_VEL : int = 125
 const TURN_SPEED : int = 8
@@ -64,6 +65,9 @@ func _process(delta):
 		_path_node_distance()
 	_pitch_sfx()
 	_emit_trail_particles()
+	
+	if Globals.SHOW_RACER_BASIS:
+		_draw_racer_basis()
 
 
 func _physics_process(delta):
@@ -73,6 +77,10 @@ func _physics_process(delta):
 	_check_crash()
 	if is_crashed:
 		_crash()
+	
+
+func _draw_racer_basis():
+	pass
 
 
 func _check_ray_collision():
@@ -130,7 +138,10 @@ func _path_node_distance() -> void:
 
 func _pitch_sfx():
 	var temp_velocity : Vector2 = Vector2(velocity.x, velocity.z)
-	sfx_pitch = ((temp_velocity.length() * MAX_SFX_PITCH) / MAX_SPEED) + MIN_SFX_PITCH
+	var max_speed : float = MAX_FORWARD_VEL
+	if is_boosting:
+		max_speed = MAX_BOOST_VEL
+	sfx_pitch = ((temp_velocity.length() * MAX_SFX_PITCH) / max_speed) + MIN_SFX_PITCH
 	sfx_pitch = clamp(sfx_pitch, MIN_SFX_PITCH, MAX_SFX_PITCH)
 	$Audio_Jet.pitch_scale = sfx_pitch
 	$Audio_Diesel.pitch_scale = sfx_pitch
@@ -147,6 +158,7 @@ func _set_boost(delta_boost : float) -> void:
 	boost = clamp(boost, 0, MAX_BOOST)
 	if boost == 0:
 		is_boosting = false
+		_set_boost_sfx()
 
 
 func _emit_trail_particles():
@@ -194,7 +206,8 @@ func _crash_finished():
 	$EngineRotationHelper.rotation = Vector3.ZERO
 	$EngineRotationHelper/Engine.rotation = Vector3.ZERO
 	$CollisionShape.rotation = Vector3.ZERO
-	look_at(current_path_node.global_transform.origin, Vector3.UP)
+	if current_path_node != null:
+		look_at(current_path_node.global_transform.origin, Vector3.UP)
 	
 	visible = true
 	if Globals.race_on_going == true:

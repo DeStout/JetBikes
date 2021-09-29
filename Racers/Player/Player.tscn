@@ -18,7 +18,7 @@ transform = Transform( 1, 0, 0, 0, 0.946767, 0.321921, 0, -0.321921, 0.946767, 0
 doppler_tracking = 2
 current = true
 fov = 50.0
-far = 1500.0
+far = 2000.0
 script = ExtResource( 5 )
 
 [node name="HUD" parent="CamRotationHelper/Camera" index="0" instance=ExtResource( 2 )]

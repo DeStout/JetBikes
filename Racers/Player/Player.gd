@@ -1,3 +1,4 @@
+# Jimmy Jazz
 extends Racer
 class_name Player
 
@@ -9,9 +10,9 @@ onready var HUD : Control = $CamRotationHelper/Camera/HUD
 onready var pause_menu : Control = $CamRotationHelper/Camera/PauseMenu
 
 const MIN_CAM_FOV : float = 45.0
-const MAX_CAM_FOV : float = 65.0
-const MIN_CAM_DIST : float = 7.0
-const MAX_CAM_DIST : float = 15.0
+const MAX_CAM_FOV : float = 70.0
+const MIN_CAM_DIST : float = 10.0
+const MAX_CAM_DIST : float = 25.0
 
 const MOUSE_VERT_SENSITIVITY : float = 0.1
 const MOUSE_HORZ_SENSITIVITY : float  = 0.1
@@ -35,10 +36,11 @@ func _process(delta : float) -> void:
 func _physics_process(delta : float) -> void:
 	_rotate_default(delta)
 	
-	var move_direction : Vector3 = Vector3()
+	var move_direction : Vector3 = Vector3.ZERO
 	var player_basis : Basis = global_transform.basis
-	var temp_velocity : Vector3 = velocity
-	temp_velocity.y = 0
+	var basis_velocity : Vector3 = Vector3(velocity.dot(player_basis.x), \
+						velocity.dot(player_basis.y), velocity.dot(player_basis.z))
+#	var velocity_delta : Vector3 = velocity.direction_to(basis_velocity) * velocity.distance_to(basis_velocity)
 	
 	if is_on_ground:
 		
@@ -51,60 +53,64 @@ func _physics_process(delta : float) -> void:
 		
 		if !is_braking:
 			var delta_move : Vector3
+			
+			#
 			# Apply acceleration/deacceleration along player X vector based on input
-			var left_vel : Vector3 = -player_basis[0].dot(temp_velocity) * -player_basis[0]
-			var right_vel : Vector3 = player_basis[0].dot(temp_velocity) * player_basis[0]
-			delta_move = player_basis[0] * movement_input.x * STRIFE_ACCELERATION
-			if movement_input.x < 0:
-				if left_vel.length() > MAX_STRIFE_VEL:
-					move_direction -= player_basis[0].dot(temp_velocity) * player_basis[0].normalized() * DEACCELERATION * 0.5
+			#
+			if movement_input.x != 0:
+				if abs(basis_velocity.x) > MAX_STRIFE_VEL and sign(movement_input.x) == sign(basis_velocity.x):
+					move_direction.x = _interpolate_float(basis_velocity.x, \
+						MAX_STRIFE_VEL * sign(movement_input.x), STRIFE_DEACCELERATION * 0.5) - basis_velocity.x
 				else:
-					if (left_vel + delta_move).length() > MAX_STRIFE_VEL:
-						delta_move = delta_move.normalized() * (MAX_STRIFE_VEL - left_vel.length())
-					move_direction += delta_move
-			elif movement_input.x > 0:
-				if left_vel.length() > MAX_STRIFE_VEL:
-					move_direction -= player_basis[0].dot(temp_velocity) * player_basis[0].normalized() * DEACCELERATION * 0.5
-				else:
-					if (right_vel + delta_move).length() > MAX_STRIFE_VEL:
-						delta_move = delta_move.normalized() * (MAX_STRIFE_VEL - right_vel.length())
-					move_direction += delta_move
+					move_direction.x = _interpolate_float(basis_velocity.x, \
+						MAX_STRIFE_VEL * sign(movement_input.x), STRIFE_ACCELERATION) - basis_velocity.x
 			else:
-				move_direction -= player_basis[0].dot(temp_velocity) * player_basis[0].normalized() * DEACCELERATION
-				
+				move_direction.x = _interpolate_float(basis_velocity.x, 0, STRIFE_DEACCELERATION) - basis_velocity.x
+			
+			#
 			# Apply acceleration/deacceleration along player Z vector based on input
-			var forward_vel : Vector3 = player_basis[2].dot(temp_velocity) * player_basis[2]
-			var reverse_vel : Vector3 = -player_basis[2].dot(temp_velocity) * -player_basis[2]
+			#
 			if movement_input.y > 0:
-				if forward_vel.length() < MAX_BOOST_VEL and is_boosting and boost > 0:
-					delta_move = player_basis[2] * -movement_input.y * BOOST_ACCELERATION
-					if (forward_vel + delta_move).length() > MAX_BOOST_VEL:
-						delta_move = delta_move.normalized() * (MAX_BOOST_VEL - forward_vel.length())
-					move_direction += delta_move
+				var max_forward_vel : float = MAX_FORWARD_VEL
+				var acceleration : float = FORWARD_ACCELERATION
+				if is_boosting:
+					max_forward_vel = MAX_BOOST_VEL
+					acceleration = BOOST_ACCELERATION
 					_set_boost(boost_cost)
-					
-					if move_direction.length() > BOOST_ACCELERATION:
-						move_direction *= (BOOST_ACCELERATION / move_direction.length())
-						
-				elif forward_vel.length() < MAX_FORWARD_VEL:
-					delta_move = player_basis[2] * -movement_input.y * FORWARD_ACCELERATION
-					if (forward_vel + delta_move).length() > MAX_FORWARD_VEL:
-						delta_move = delta_move.normalized() * (MAX_FORWARD_VEL - forward_vel.length())
-					move_direction += delta_move
-					
-					if move_direction.length() > FORWARD_ACCELERATION:
-						move_direction *= (FORWARD_ACCELERATION / move_direction.length())
-						
-			elif movement_input.y < 0:
-				delta_move = player_basis[2] * -movement_input.y * REVERSE_ACCELERATION
-				if reverse_vel.length() > MAX_REVERSE_VEL:
-					move_direction -= player_basis[2].dot(temp_velocity) * player_basis[2] * DEACCELERATION * 0.5
+
+				if basis_velocity.z < -max_forward_vel:
+					move_direction.z = _interpolate_float(basis_velocity.z, \
+						-max_forward_vel, DEACCELERATION * 0.5) - basis_velocity.z
 				else:
-					if (reverse_vel + delta_move).length() > MAX_REVERSE_VEL:
-						delta_move = delta_move.normalized() * (MAX_REVERSE_VEL - reverse_vel.length())
-					move_direction += delta_move
+					move_direction.z = _interpolate_float(basis_velocity.z, \
+						-max_forward_vel, acceleration) - basis_velocity.z
+			elif movement_input.y < 0:
+				if basis_velocity.z < MAX_REVERSE_VEL:
+					move_direction.z = _interpolate_float(basis_velocity.z, \
+						MAX_REVERSE_VEL, DEACCELERATION * 0.5) - basis_velocity.z
+				else:
+					move_direction.z = _interpolate_float(basis_velocity.z, \
+						MAX_REVERSE_VEL, REVERSE_ACCELERATION) - basis_velocity.z
 			else:
-				move_direction -= player_basis[2].dot(temp_velocity) * player_basis[2] * DEACCELERATION
+				move_direction.z = _interpolate_float(basis_velocity.z, 0, DEACCELERATION) - basis_velocity.z
+		
+			basis_velocity += move_direction
+			
+			# Throttle kitty corner movement speed
+			var mod_basis_velocity : Vector3 = Vector3(basis_velocity.x, 0, basis_velocity.z)
+			if movement_input.y > 0 and movement_input.x != 0:
+				var max_forward_vel : float = MAX_FORWARD_VEL
+				if is_boosting:
+					max_forward_vel = MAX_BOOST_VEL
+					
+				if mod_basis_velocity.length() > max_forward_vel:
+					var max_z_vel : float = max_forward_vel * (basis_velocity.z / mod_basis_velocity.length())
+					var max_x_vel : float = max_forward_vel * (basis_velocity.x / mod_basis_velocity.length())
+					basis_velocity.z = _interpolate_float(basis_velocity.z, max_z_vel, DEACCELERATION * 2)
+					basis_velocity.x = _interpolate_float(basis_velocity.x, max_x_vel, DEACCELERATION * 2)
+					
+			basis_velocity = player_basis.xform(basis_velocity)
+			velocity = basis_velocity
 		
 		# Hover along surface normal and slide downhill
 		var downhill : Vector3 = Vector3(0, -1, 0).cross(ground_normal).cross(ground_normal)
@@ -112,20 +118,18 @@ func _physics_process(delta : float) -> void:
 		ground_point = _get_ground_point()
 		
 		var ground_distance : float = clamp(cast_point.length() - ground_point.length(), \
-			($CollisionShape/GroundDetect1.cast_to.length() - 0.1) * -0.499, \
-			($CollisionShape/GroundDetect1.cast_to.length() - 0.1) * 0.499)
+			($CollisionShape/GroundDetect1.cast_to.length() - 0.1) * -0.5, \
+			($CollisionShape/GroundDetect1.cast_to.length() - 0.1) * 0.5)
 		var prev_move_distance : float = ground_distance - prev_ground_distance
 		
 		if prev_move_distance == 0:
 			prev_move_distance = 0.001
-		if ground_distance == 0:
-			ground_distance = 0.001
 			
-		var move_force : float = 1 / (ground_distance / (prev_move_distance)) - ground_distance
-		move_force = clamp(move_force, -11, 11)
+		var move_force : float = 1 / (ground_distance / prev_move_distance) - ground_distance
+		move_force = clamp(move_force, -10, 10)
 		
-		move_direction += ground_normal * move_force * 1.1
-		move_direction += downhill * -Globals.GRAVITY * 0.25
+		velocity += ground_normal * move_force
+#		velocity += downhill * -Globals.GRAVITY
 		
 		prev_ground_distance = ground_distance
 	
@@ -135,9 +139,7 @@ func _physics_process(delta : float) -> void:
 		global_transform.basis = Basis(player_quat.slerp(_align_to_normal(Vector3.UP), delta*2))
 			
 		prev_ground_distance = 0
-		move_direction = Vector3(0, -Globals.GRAVITY, 0)
-	
-	velocity += move_direction
+		velocity.y -= Globals.GRAVITY
 	
 	if is_braking:
 		if is_on_ground:
@@ -149,9 +151,8 @@ func _physics_process(delta : float) -> void:
 	
 	prev_velocity = velocity
 	velocity = move_and_slide(velocity, Vector3(0,1,0))
-	_set_speedometer()
 	
-	is_on_ground = false
+	_set_speedometer()
 
 
 # Track what keyboard input is being pressed
@@ -174,7 +175,7 @@ func _get_key_input() -> void:
 			is_braking = false
 		else:
 			if Input.is_action_just_pressed("Boost"):
-				if boost > 0:
+				if boost > 0 and movement_input.y > 0:
 					is_boosting = true
 					_set_boost_sfx()
 			elif Input.is_action_just_released("Boost"):
@@ -247,9 +248,12 @@ func _rotate_default(delta : float) -> void:
 
 func _adjust_cam_fov_dist():
 	var temp_velocity : Vector2 = Vector2(velocity.x, velocity.z)
-	camera.fov = ((temp_velocity.length() * MAX_CAM_FOV) / MAX_SPEED) + MIN_CAM_FOV
+	var max_speed : float = MAX_FORWARD_VEL
+	if is_boosting:
+		max_speed = MAX_BOOST_VEL
+	camera.fov = ((temp_velocity.length() * MAX_CAM_FOV) / max_speed) + MIN_CAM_FOV
 #	camera.transform.origin.z = (temp_velocity.length() * MIN_CAM_DIST) / MAX_SPEED
-	camera.transform.origin.z = ((MIN_CAM_DIST - MAX_CAM_DIST) / MAX_SPEED) * temp_velocity.length() + MAX_CAM_DIST
+	camera.transform.origin.z = ((MIN_CAM_DIST - MAX_CAM_DIST) / max_speed) * temp_velocity.length() + MAX_CAM_DIST
 	camera.fov = clamp(camera.fov, MIN_CAM_FOV, MAX_CAM_FOV)
 	camera.transform.origin.z = clamp(camera.transform.origin.z, MIN_CAM_DIST, MAX_CAM_DIST)
 
@@ -259,7 +263,7 @@ func _set_speedometer() -> void:
 	var _y_velocity = Vector3(0, velocity.y, 0)
 	_y_velocity = _y_vector.dot(_y_velocity)
 	var modified_velocity : Vector3 = Vector3(velocity.x, _y_velocity, velocity.z)
-	HUD.set_speedometer(clamp(modified_velocity.length(), 0, MAX_SPEED))
+	HUD.set_speedometer(clamp(modified_velocity.length(), 0, MAX_BOOST_VEL))
 
 
 func _set_arrow_angle() -> void:
