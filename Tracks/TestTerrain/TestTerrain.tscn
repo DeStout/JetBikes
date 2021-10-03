@@ -631,7 +631,7 @@ transform = Transform( 0.998431, 0, -0.0560132, 0, 1, 0, 0.0560132, 0, 0.998431,
 shape = SubResource( 3 )
 
 [node name="SwingPole0" parent="SwingPoles" index="0" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 0.996927, 0.0783373, 0, -0.0783373, 0.996927, 496.71, 29.7858, -387.369 )
+transform = Transform( 1, 0, 0, 0, 0.996927, 0.0783373, 0, -0.0783373, 0.996927, 496.71, 29.7858, -377.332 )
 sphere_visible = false
 swing_length = 100.0
 swing_strength = 0.06

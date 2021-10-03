@@ -40,7 +40,6 @@ func _physics_process(delta : float) -> void:
 	var player_basis : Basis = global_transform.basis
 	var basis_velocity : Vector3 = Vector3(velocity.dot(player_basis.x), \
 						velocity.dot(player_basis.y), velocity.dot(player_basis.z))
-#	var velocity_delta : Vector3 = velocity.direction_to(basis_velocity) * velocity.distance_to(basis_velocity)
 	
 	if is_on_ground:
 		
@@ -111,8 +110,10 @@ func _physics_process(delta : float) -> void:
 					
 			basis_velocity = player_basis.xform(basis_velocity)
 			velocity = basis_velocity
+#			velocity += hover_velocity
 		
 		# Hover along surface normal and slide downhill
+		hover_velocity = Vector3.ZERO
 		var downhill : Vector3 = Vector3(0, -1, 0).cross(ground_normal).cross(ground_normal)
 		var cast_point : Vector3 = _get_cast_point()
 		ground_point = _get_ground_point()
@@ -128,8 +129,11 @@ func _physics_process(delta : float) -> void:
 		var move_force : float = 1 / (ground_distance / prev_move_distance) - ground_distance
 		move_force = clamp(move_force, -10, 10)
 		
+		hover_velocity += ground_normal * move_force
+		hover_velocity += downhill * -Globals.GRAVITY * 0.25
+		
 		velocity += ground_normal * move_force
-#		velocity += downhill * -Globals.GRAVITY
+		velocity += downhill * -Globals.GRAVITY * 0.25
 		
 		prev_ground_distance = ground_distance
 	
@@ -137,7 +141,7 @@ func _physics_process(delta : float) -> void:
 	else:
 		var player_quat = player_basis.get_rotation_quat()
 		global_transform.basis = Basis(player_quat.slerp(_align_to_normal(Vector3.UP), delta*2))
-			
+
 		prev_ground_distance = 0
 		velocity.y -= Globals.GRAVITY
 	
@@ -149,6 +153,7 @@ func _physics_process(delta : float) -> void:
 			velocity.x = _interpolate_float(velocity.x, 0, AIR_BRAKE_DEACCEL)
 			velocity.z = _interpolate_float(velocity.z, 0, AIR_BRAKE_DEACCEL)
 	
+#	velocity += hover_velocity
 	prev_velocity = velocity
 	velocity = move_and_slide(velocity, Vector3(0,1,0))
 	

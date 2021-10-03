@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Racers/Player/HUD/Minimap.gd" type="Script" id=2]
@@ -21,16 +21,30 @@ font_data = ExtResource( 1 )
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.776471, 0.254902, 0.254902, 1 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.109804, 0.113725, 0.121569, 1 )
+
+[sub_resource type="DynamicFont" id=6]
 size = 22
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.615686, 0.701961, 0.423529, 1 )
+[sub_resource type="Gradient" id=7]
+offsets = PoolRealArray( 0, 0.797814, 0.8, 1 )
+colors = PoolColorArray( 0, 0.640625, 0.167664, 1, 0, 0.639216, 0.168627, 1, 0.776471, 0.254902, 0.254902, 1, 0.776471, 0.254902, 0.254902, 1 )
 
-[sub_resource type="ViewportTexture" id=7]
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
+
+[sub_resource type="StyleBoxTexture" id=9]
+texture = SubResource( 8 )
+region_rect = Rect2( 0, 0, 2048, 1 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.109804, 0.113725, 0.121569, 1 )
+
+[sub_resource type="ViewportTexture" id=11]
 viewport_path = NodePath("ArrowView")
 
 [node name="HUD" type="Control"]
@@ -97,6 +111,7 @@ margin_top = 1300.4
 margin_right = -2247.72
 margin_bottom = -110.6
 custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 5 )
 max_value = 250.0
 step = 1.0
 value = 125.0
@@ -111,7 +126,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -133.0
 margin_bottom = 2.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "Boost"
 align = 1
 valign = 1
@@ -126,11 +141,11 @@ margin_left = 63.0
 margin_top = 1338.0
 margin_right = -2008.0
 margin_bottom = -64.0
-custom_styles/fg = SubResource( 6 )
-max_value = 180.0
+custom_styles/fg = SubResource( 9 )
+custom_styles/bg = SubResource( 10 )
+max_value = 125.0
 step = 1.0
-value = 60.0
-allow_greater = true
+value = 100.0
 percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -149,7 +164,7 @@ transform = Transform( 0.539403, 0, -0.842048, 0, 1, 0, 0.842048, 0, 0.539403, 0
 [node name="Arrow" type="Sprite" parent="."]
 position = Vector2( 1279.6, 123 )
 scale = Vector2( 1.19519, -1.19519 )
-texture = SubResource( 7 )
+texture = SubResource( 11 )
 region_rect = Rect2( 0, 0, 256, 256 )
 
 [node name="Minimap" type="Sprite" parent="."]

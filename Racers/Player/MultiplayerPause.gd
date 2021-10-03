@@ -4,7 +4,7 @@ extends PauseMenu
 func _toggle_pause():
 	if visible:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		_close_options_menu()
+		_close_menus()
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	visible = !visible

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Racers/Player/PauseMenu.gd" type="Script" id=1]
 [ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=2]
@@ -16,7 +16,7 @@ size = 48
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=4]
-size = 72
+size = 150
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=5]
@@ -33,6 +33,15 @@ font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=8]
 size = 48
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 150
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 64
+extra_spacing_top = 5
 font_data = ExtResource( 2 )
 
 [node name="PauseMenu" type="Control"]
@@ -56,11 +65,14 @@ anchor_left = -0.75
 anchor_top = -0.7
 anchor_right = 1.75
 anchor_bottom = 1.7
-margin_left = 832.0
-margin_top = 484.0
-margin_right = -832.0
-margin_bottom = -484.0
+margin_left = 128.0
+margin_top = 128.0
+margin_right = -128.0
+margin_bottom = -128.0
 color = Color( 0.156863, 0.156863, 0.156863, 0.784314 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Main" type="Control" parent="BG"]
 anchor_right = 1.0
@@ -72,10 +84,10 @@ __meta__ = {
 [node name="ResumeButton" type="Button" parent="BG/Main"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 64.0
-margin_top = 64.0
-margin_right = -64.0
-margin_bottom = -320.0
+margin_left = 640.0
+margin_top = 130.0
+margin_right = -640.0
+margin_bottom = -864.0
 custom_fonts/font = SubResource( 1 )
 text = "Resume"
 __meta__ = {
@@ -85,12 +97,25 @@ __meta__ = {
 [node name="OptionsButton" type="Button" parent="BG/Main"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 64.0
-margin_top = 192.0
-margin_right = -64.0
-margin_bottom = -192.0
+margin_left = 640.0
+margin_top = 376.0
+margin_right = -640.0
+margin_bottom = -616.0
 custom_fonts/font = SubResource( 2 )
 text = "Options"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ControlsButton" type="Button" parent="BG/Main"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 640.0
+margin_top = 624.0
+margin_right = -640.0
+margin_bottom = -368.0
+custom_fonts/font = SubResource( 2 )
+text = "Controls"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -98,10 +123,10 @@ __meta__ = {
 [node name="QuitButton" type="Button" parent="BG/Main"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 64.0
-margin_top = 320.0
-margin_right = -64.0
-margin_bottom = -64.0
+margin_left = 640.0
+margin_top = 872.0
+margin_right = -640.0
+margin_bottom = -128.0
 custom_fonts/font = SubResource( 3 )
 text = "Quit Race"
 __meta__ = {
@@ -119,21 +144,21 @@ __meta__ = {
 [node name="OptionsLabel" type="Label" parent="BG/Options"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -344.0
+margin_bottom = -928.0
 custom_fonts/font = SubResource( 4 )
 text = "Options"
 align = 1
 valign = 1
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="SFX" type="Control" parent="BG/Options"]
+anchor_top = 0.216
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 133.0
-margin_bottom = -275.0
+margin_top = 0.255997
+margin_bottom = -704.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -141,28 +166,28 @@ __meta__ = {
 [node name="Label" type="Label" parent="BG/Options/SFX"]
 anchor_right = 1.0
 anchor_bottom = 0.984
-margin_left = 64.0
-margin_top = 8.0
-margin_right = -615.0
-margin_bottom = -4.976
+margin_left = 128.0
+margin_top = 128.0
+margin_right = -1920.0
+margin_bottom = -28.416
 custom_fonts/font = SubResource( 5 )
 text = "SFX Volume"
-align = 1
+align = 2
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Slider" type="HSlider" parent="BG/Options/SFX"]
-anchor_top = -0.016
+anchor_top = 0.571
 anchor_right = 1.0
-anchor_bottom = 0.984
-margin_left = 305.0
-margin_top = 9.024
-margin_right = -216.0
-margin_bottom = -6.976
-min_value = -24.0
-max_value = 0.0
+anchor_bottom = 0.857
+margin_left = 416.0
+margin_top = 0.095993
+margin_right = -1152.0
+margin_bottom = 0.0319824
+min_value = -48.0
+max_value = -12.0
 value = -24.0
 rounded = true
 tick_count = 20
@@ -174,9 +199,10 @@ __meta__ = {
 [node name="Level" type="LineEdit" parent="BG/Options/SFX"]
 anchor_right = 1.0
 anchor_bottom = 0.984
-margin_left = 705.0
-margin_right = -27.0
-margin_bottom = 1.024
+margin_left = 1184.0
+margin_top = 128.0
+margin_right = -832.0
+margin_bottom = -28.416
 custom_fonts/font = SubResource( 6 )
 text = "100"
 align = 1
@@ -189,22 +215,22 @@ __meta__ = {
 [node name="Music" type="Control" parent="BG/Options"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 220.0
-margin_bottom = -188.0
+margin_top = 512.0
+margin_bottom = -608.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="BG/Options/Music"]
+anchor_top = -0.036
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 20.0
-margin_top = 8.0
-margin_right = -616.0
-margin_bottom = -6.0
+margin_left = 124.0
+margin_top = 2.304
+margin_right = -1920.0
 custom_fonts/font = SubResource( 5 )
 text = "Music Volume"
-align = 1
+align = 2
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -213,13 +239,11 @@ __meta__ = {
 [node name="Slider" type="HSlider" parent="BG/Options/Music"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 304.0
-margin_top = 8.0
-margin_right = -216.0
-margin_bottom = -8.0
+margin_left = 416.0
+margin_right = -1152.0
 min_value = -48.0
 max_value = -12.0
-value = -12.0
+value = -24.0
 rounded = true
 tick_count = 20
 ticks_on_borders = true
@@ -230,8 +254,8 @@ __meta__ = {
 [node name="Level" type="LineEdit" parent="BG/Options/Music"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 705.0
-margin_right = -27.0
+margin_left = 1184.0
+margin_right = -832.0
 custom_fonts/font = SubResource( 7 )
 text = "100"
 align = 1
@@ -243,10 +267,10 @@ __meta__ = {
 [node name="ApplyButton" type="Button" parent="BG/Options"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 64.0
-margin_top = 320.0
-margin_right = -464.0
-margin_bottom = -64.0
+margin_left = 128.0
+margin_top = 960.0
+margin_right = -1216.0
+margin_bottom = -128.0
 custom_fonts/font = SubResource( 8 )
 text = "Apply"
 __meta__ = {
@@ -256,10 +280,74 @@ __meta__ = {
 [node name="CloseButton" type="Button" parent="BG/Options"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 464.0
-margin_top = 320.0
+margin_left = 1216.0
+margin_top = 960.0
+margin_right = -128.0
+margin_bottom = -128.0
+custom_fonts/font = SubResource( 8 )
+text = "Close"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="Control" parent="BG"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_top = 64.0
 margin_right = -64.0
 margin_bottom = -64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ControlsLabel" type="Label" parent="BG/Controls"]
+anchor_left = -0.083
+anchor_top = -0.108
+anchor_right = 1.083
+anchor_bottom = 1.108
+margin_left = 116.608
+margin_top = 50.048
+margin_right = -116.608
+margin_bottom = -978.048
+custom_fonts/font = SubResource( 9 )
+text = "Controls"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="Label" parent="BG/Controls"]
+anchor_left = -0.029
+anchor_top = 0.182
+anchor_right = 1.029
+anchor_bottom = 1.061
+margin_left = 759.104
+margin_top = -32.192
+margin_right = -752.104
+margin_bottom = -273.416
+custom_fonts/font = SubResource( 10 )
+text = "Mouse - Steer
+WASD - Movement
+Shift - Boost
+Ctrl - Brake
+Left Click - Swing
+Right Click - Free Rotate
+Esc - Pause Menu"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseButton" type="Button" parent="BG/Controls"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 672.0
+margin_top = 896.0
+margin_right = -672.0
+margin_bottom = -65.0
 custom_fonts/font = SubResource( 8 )
 text = "Close"
 __meta__ = {
@@ -268,10 +356,12 @@ __meta__ = {
 
 [connection signal="pressed" from="BG/Main/ResumeButton" to="." method="_toggle_pause"]
 [connection signal="pressed" from="BG/Main/OptionsButton" to="." method="_open_options_menu"]
+[connection signal="pressed" from="BG/Main/ControlsButton" to="." method="_open_controls_menu"]
 [connection signal="pressed" from="BG/Main/QuitButton" to="." method="_quit_race"]
 [connection signal="value_changed" from="BG/Options/SFX/Slider" to="." method="_update_sfx_sound_values"]
 [connection signal="text_entered" from="BG/Options/SFX/Level" to="." method="_update_sfx_sound_values"]
 [connection signal="value_changed" from="BG/Options/Music/Slider" to="." method="_update_music_sound_values"]
 [connection signal="text_entered" from="BG/Options/Music/Level" to="." method="_update_music_sound_values"]
 [connection signal="pressed" from="BG/Options/ApplyButton" to="." method="_apply_settings"]
-[connection signal="pressed" from="BG/Options/CloseButton" to="." method="_close_options_menu"]
+[connection signal="pressed" from="BG/Options/CloseButton" to="." method="_close_menus"]
+[connection signal="pressed" from="BG/Controls/CloseButton" to="." method="_close_menus"]

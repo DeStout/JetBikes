@@ -1,7 +1,7 @@
 extends Node
 
 # Debug Options
-var SHOW_NPC_PATHFIND : bool = true
+var SHOW_NPC_PATHFIND : bool = false
 var SHOW_RACER_BASIS : bool = false
 var INFINITE_BOOST : bool = false
 var debug_frame : int = 0
@@ -24,10 +24,10 @@ const DEFAULT_NPC_NUMBER : int = 11
 const MIN_NPC_NUMBER : int = 0
 const MAX_NPC_NUMBER : int = 11
 
-const DEFAULT_SFX_LEVEL : int = -30
+const DEFAULT_SFX_LEVEL : int = -20
 #const DEFAULT_SFX_LEVEL : int = -48
-#const DEFAULT_MUSIC_LEVEL : int = -25
-const DEFAULT_MUSIC_LEVEL : int = -48
+const DEFAULT_MUSIC_LEVEL : int = -25
+#const DEFAULT_MUSIC_LEVEL : int = -48
 const MIN_SFX_LEVEL : int = -48
 const MAX_SFX_LEVEL : int = -12
 const MIN_MUSIC_LEVEL : int = -48
