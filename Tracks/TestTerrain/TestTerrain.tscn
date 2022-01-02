@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Tracks/Assets/TrackComponents/SwingPole/SwingPole.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Tracks/M_Dev.tres" type="Material" id=3]
+[ext_resource path="res://Tracks/Assets/TrackComponents/Materials/M_Dev.tres" type="Material" id=3]
 [ext_resource path="res://Tracks/Assets/TrackComponents/PathNode/PathNode.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Tracks/TestTerrain/TestTerrainBase.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Tracks/Track.tscn" type="PackedScene" id=6]
@@ -11,7 +11,12 @@
 [ext_resource path="res://Tracks/Assets/TrackComponents/Sign/StartLine.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Tracks/TestTerrain/world_env.tres" type="Environment" id=15]
 [ext_resource path="res://Tracks/Assets/TrackComponents/Sign/Checkpoint.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Tracks/TestTerrain/Assets/Props/RockWall/StoneWall.tscn" type="PackedScene" id=18]
+
+[sub_resource type="Curve3D" id=5]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0.322771, -3.02272, -0.351234, 0, 0, 0, 0, 0, 0, 75.569, -8.75998, -22.2842, 0, 0, 0, 0, 0, 0, 156.009, -18.0726, -60.244, 0, 0, 0, 0, 0, 0, 195.771, -19.4349, -98.3215, 0, 0, 0, 0, 0, 0, 222.639, -16.683, -146.539, 0, 0, 0, 0, 0, 0, 256.59, -17.8729, -171.695, 0, 0, 0, 0, 0, 0, 289.569, -17.8888, -235.594, 0, 0, 0, 0, 0, 0, 330.214, -13.1252, -307.062, 0, 0, 0, 0, 0, 0, 369.847, -12.4001, -377.166, 0, 0, 0, 0, 0, 0, 428.388, -4.55267, -431.002, 0, 0, 0, 0, 0, 0, 481.975, 3.85379, -448.39, 0, 0, 0, 0, 0, 0, 524.22, 8.24827, -424.106, 0, 0, 0, 0, 0, 0, 544.85, 14.2553, -370.421, 0, 0, 0, 0, 0, 0, 547.576, 20.7762, -309.699, 0, 0, 0, 0, 0, 0, 551.886, 28.3037, -247.688, 0, 0, 0, 0, 0, 0, 536.372, 32.4752, -177.241, 0, 0, 0, 0, 0, 0, 517.742, 34.8743, -68.7849, 0, 0, 0, 0, 0, 0, 491.948, 29.0362, 8.75488, 0, 0, 0, 0, 0, 0, 461.062, 14.3134, 100.054, 0, 0, 0, 0, 0, 0, 412.014, 15.1861, 184.736, 0, 0, 0, 0, 0, 0, 364.059, 23.2529, 268.444, 0, 0, 0, 0, 0, 0, 313.902, 27.7928, 286.783, 0, 0, 0, 0, 0, 0, 242.781, 44.4966, 287.131, 0, 0, 0, 0, 0, 0, 174.427, 62.7168, 286.428, 0, 0, 0, 0, 0, 0, 112.171, 76.6907, 290.799, 0, 0, 0, 0, 0, 0, 43.6421, 86.6528, 283.974, 0, 0, 0, 0, 0, 0, -6.50834, 94.109, 246.738, 0, 0, 0, 0, 0, 0, -39.9518, 102.93, 243.106, 0, 0, 0, 0, 0, 0, -83.3607, 110.334, 262.804, 0, 0, 0, 0, 0, 0, -146.497, 114.789, 264.832, 0, 0, 0, 0, 0, 0, -199.076, 119.829, 256.909, 0, 0, 0, 0, 0, 0, -243.827, 121.718, 299.67, 0, 0, 0, 0, 0, 0, -273.721, 110.639, 365.258, 0, 0, 0, 0, 0, 0, -305.618, 98.4964, 458.531, 0, 0, 0, 0, 0, 0, -351.172, 91.4293, 524.381, 0, 0, 0, 0, 0, 0, -416.988, 93.0914, 552.647, 0, 0, 0, 0, 0, 0, -500.832, 94.6404, 563.242, 0, 0, 0, 0, 0, 0, -580.307, 107.074, 532.195, 0, 0, 0, 0, 0, 0, -583.232, 124.124, 473.407, 0, 0, 0, 0, 0, 0, -570.656, 139.69, 392.733, 0, 0, 0, 0, 0, 0, -576.815, 143.309, 319.203, 0, 0, 0, 0, 0, 0, -576.56, 130.831, 221.09, 0, 0, 0, 0, 0, 0, -550.984, 119.648, 111.206, 0, 0, 0, 0, 0, 0, -516.646, 106.022, -13.7391, 0, 0, 0, 0, 0, 0, -512.434, 95.9532, -155.674, 0, 0, 0, 0, 0, 0, -517.542, 77.376, -228.033, 0, 0, 0, 0, 0, 0, -534.774, 55.8305, -348.168, 0, 0, 0, 0, 0, 0, -555.154, 52.4341, -498.305, 0, 0, 0, 0, 0, 0, -552.211, 55.3072, -571.938, 0, 0, 0, 0, 0, 0, -531.985, 55.6013, -614.684, 0, 0, 0, 0, 0, 0, -495.718, 56.2701, -646.608, 0, 0, 0, 0, 0, 0, -439.213, 57.5582, -651.674, 0, 0, 0, 0, 0, 0, -390.209, 56.9571, -654.111, 0, 0, 0, 0, 0, 0, -318.262, 47.2438, -674.791, 0, 0, 0, 0, 0, 0, -245.696, 44.7874, -676.299, 0, 0, 0, 0, 0, 0, -172.172, 47.323, -664.422, 0, 0, 0, 0, 0, 0, -119.07, 51.3329, -645.752, 0, 0, 0, 0, 0, 0, -88.5818, 52.005, -639.445, 0, 0, 0, 0, 0, 0, -63.837, 50.4145, -625.605, 0, 0, 0, 0, 0, 0, -69.2054, 52.036, -600.905, 0, 0, 0, 0, 0, 0, -97.7903, 56.3821, -597.055, 0, 0, 0, 0, 0, 0, -181.805, 74.0668, -611.174, 0, 0, 0, 0, 0, 0, -267.435, 97.6676, -617.672, 0, 0, 0, 0, 0, 0, -356.318, 115.561, -597.694, 0, 0, 0, 0, 0, 0, -428.204, 127.542, -587.149, 0, 0, 0, 0, 0, 0, -469.244, 131.032, -575.997, 0, 0, 0, 0, 0, 0, -478.624, 129.933, -556.364, 0, 0, 0, 0, 0, 0, -455.466, 131.066, -533.207, 0, 0, 0, 0, 0, 0, -430.373, 133.814, -522.465, 0, 0, 0, 0, 0, 0, -314.072, 142.316, -502.628, 0, 0, 0, 0, 0, 0, -190.762, 147.981, -483.742, 0, 0, 0, 0, 0, 0, -101.045, 137.897, -468.48, 0, 0, 0, 0, 0, 0, -38.2103, 124.163, -468.198, 0, 0, 0, 0, 0, 0, 30.2232, 108.801, -466.866, 0, 0, 0, 0, 0, 0, 66.2358, 101.029, -443.015, 0, 0, 0, 0, 0, 0, 88.3688, 95.4311, -392.956, 0, 0, 0, 0, 0, 0, 78.1946, 93.3295, -343.416, 0, 0, 0, 0, 0, 0, 55.6571, 92.2266, -280.033, 0, 0, 0, 0, 0, 0, 15.0172, 96.0482, -228.229, 0, 0, 0, 0, 0, 0, -28.1817, 93.3252, -208.587, 0, 0, 0, 0, 0, 0, -75.433, 85.5592, -189.093, 0, 0, 0, 0, 0, 0, -142.967, 58.8136, -159.575, 0, 0, 0, 0, 0, 0, -198.511, 48.428, -133.339, 0, 0, 0, 0, 0, 0, -223.79, 48.5843, -96.2749, 0, 0, 0, 0, 0, 0, -227.11, 47.3731, -56.6808, 0, 0, 0, 0, 0, 0, -212.352, 46.1272, -23.5207, 0, 0, 0, 0, 0, 0, -166.146, 48.2053, -8.38282, 0, 0, 0, 0, 0, 0, -117.043, 2.08526, 5.88912, 0, 0, 0, 0, 0, 0, -52.3747, 1.90875, 6.35984, 0, 0, 0, 0, 0, 0, 0.322771, -3.02272, -0.351234 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
 
 [sub_resource type="CylinderShape" id=1]
 radius = 36.14
@@ -33,81 +38,11 @@ geometry/source_geometry_mode = 2
 geometry/source_group_name = "navmesh"
 region/min_size = 25.0
 
-[node name="TestTerrain" groups=[
-"navmesh",
-] instance=ExtResource( 6 )]
+[node name="TestTerrain" instance=ExtResource( 6 )]
 script = null
 
-[node name="TestTerrain_dec" parent="LevelGeo" index="0" groups=[
-"navmesh",
-] instance=ExtResource( 5 )]
+[node name="TestTerrain_dec" parent="LevelGeo" index="0" instance=ExtResource( 5 )]
 material/0 = ExtResource( 3 )
-
-[node name="StoneWall3" parent="LevelGeo/Terrain" index="0" instance=ExtResource( 18 )]
-transform = Transform( 0.520558, -2.0901, 12.394, -0.22796, 12.4011, 2.10085, -12.567, -0.311528, 0.475286, 525.575, 60.9907, -195.782 )
-
-[node name="StoneWall4" parent="LevelGeo/Terrain" index="1" instance=ExtResource( 18 )]
-transform = Transform( 12.235, -0.66201, -2.8493, 0.702964, 12.5598, 0.100399, 2.83947, -0.256866, 12.2525, 519.39, 84.2247, -197.691 )
-
-[node name="StoneWall5" parent="LevelGeo/Terrain" index="2" instance=ExtResource( 18 )]
-transform = Transform( 1.86657, 1.29851, 12.3726, -0.74578, 12.5003, -1.1994, -12.4182, -0.555531, 1.93175, 515.675, 69.3248, -139.84 )
-
-[node name="StoneWall6" parent="LevelGeo/Terrain" index="3" instance=ExtResource( 18 )]
-transform = Transform( 11.5835, 2.70219, -4.09534, -2.43305, 12.2817, 1.2219, 4.26075, -0.33305, 11.8316, 516.085, 93.2969, -142.464 )
-
-[node name="StoneWall7" parent="LevelGeo/Terrain" index="4" instance=ExtResource( 18 )]
-transform = Transform( -12.55, 0.847203, -0.177745, 0.860237, 12.4942, -1.18642, 0.0966345, -1.19576, -12.5225, 502.89, 76.1102, -81.7938 )
-
-[node name="StoneWall9" parent="LevelGeo/Terrain" index="5" instance=ExtResource( 18 )]
-transform = Transform( -12.1466, 0.929699, 3.13819, 0.612318, 12.4942, -1.33142, -3.21522, -1.13281, -12.1091, 495.69, 82.8899, -42.695 )
-
-[node name="StoneWall11" parent="LevelGeo/Terrain" index="6" instance=ExtResource( 18 )]
-transform = Transform( -12.1466, 0.929699, 3.13819, 0.612318, 12.4942, -1.33142, -3.21522, -1.13281, -12.1091, 493.481, 49.231, -39.1589 )
-
-[node name="StoneWall8" parent="LevelGeo/Terrain" index="7" instance=ExtResource( 18 )]
-transform = Transform( 2.06901, 0.819775, 12.3814, -2.71882, 12.2773, -0.35855, -12.107, -2.61696, 2.19642, 503.31, 100.225, -81.7886 )
-
-[node name="StoneWall10" parent="LevelGeo/Terrain" index="8" instance=ExtResource( 18 )]
-transform = Transform( 1.59938, 2.80518, 12.1583, -3.01906, 11.9806, -2.36703, -12.107, -2.61696, 2.19642, 502.091, 118.733, -48.9206 )
-
-[node name="StoneWall12" parent="LevelGeo/Terrain" index="9" instance=ExtResource( 18 )]
-transform = Transform( 3.41122, 2.80518, 11.7791, -0.422099, 12.2577, -2.79693, -12.1011, 0.363201, 3.41799, 489.61, 119.605, 11.3592 )
-
-[node name="StoneWall14" parent="LevelGeo/Terrain" index="10" instance=ExtResource( 18 )]
-transform = Transform( -11.6331, 1.69016, 4.47963, 2.57042, 12.1346, 2.09669, -4.03939, 2.85421, -11.5667, 460.427, 121.895, 62.9419 )
-
-[node name="StoneWall16" parent="LevelGeo/Terrain" index="11" instance=ExtResource( 18 )]
-transform = Transform( 6.86635, 1.1751, 10.4749, 2.44019, 11.9846, -2.94401, -10.2543, 3.6388, 6.31351, 441.778, 113.429, 108.549 )
-
-[node name="StoneWall18" parent="LevelGeo/Terrain" index="12" instance=ExtResource( 18 )]
-transform = Transform( -10.483, 0.0699713, 6.95374, 2.94116, 11.4433, 4.31872, -6.30151, 5.22464, -9.55227, 411.859, 101.213, 152.505 )
-
-[node name="StoneWall20" parent="LevelGeo/Terrain" index="13" instance=ExtResource( 18 )]
-transform = Transform( 5.71178, 0.0699717, 11.2081, 4.6262, 11.4433, -2.429, -10.2091, 5.22464, 5.17004, 392.624, 86.7719, 184.393 )
-
-[node name="StoneWall21" parent="LevelGeo/Terrain" index="14" instance=ExtResource( 18 )]
-transform = Transform( 10.9075, 0.069972, -6.26676, -2.65798, 11.4433, -4.49855, 5.67559, 5.22464, 9.93693, 362.662, 69.5755, 222.458 )
-
-[node name="StoneWall19" parent="LevelGeo/Terrain" index="15" instance=ExtResource( 18 )]
-transform = Transform( -6.51154, 0.312886, -10.7589, -2.53746, 12.1755, 1.88982, 10.4601, 3.14837, -6.23912, 417.003, 57.1956, 138.303 )
-
-[node name="StoneWall24" parent="LevelGeo/Terrain" index="16" instance=ExtResource( 18 )]
-transform = Transform( -7.28844, 1.93639, -10.0688, -0.834354, 12.2005, 2.95031, 10.2193, 2.37715, -6.94023, 393.831, 34.7095, 172.967 )
-
-[node name="StoneWall17" parent="LevelGeo/Terrain" index="17" instance=ExtResource( 18 )]
-transform = Transform( 10.4792, 1.1751, -6.85977, -2.94248, 11.9846, -2.44204, 6.30707, 3.6388, 10.2583, 430.375, 75.3965, 92.5665 )
-
-[node name="StoneWall23" parent="LevelGeo/Terrain" index="18" instance=ExtResource( 18 )]
-transform = Transform( 4.46031, 1.1751, 11.7037, 3.01476, 11.9846, -2.35224, -11.3696, 3.6388, 3.96765, 426.692, 42.4343, 108.86 )
-
-[node name="StoneWall15" parent="LevelGeo/Terrain" index="19" instance=ExtResource( 18 )]
-transform = Transform( -11.103, 1.69016, 5.66739, 2.7749, 12.1346, 1.81744, -5.22264, 2.85421, -11.0828, 454.414, 83.2131, 55.1727 )
-
-[node name="StoneWall22" parent="LevelGeo/Terrain" index="20" instance=ExtResource( 18 )]
-transform = Transform( -8.3073, 1.69016, -9.29429, -1.05111, 12.1346, 3.14616, 9.38806, 2.85421, -7.87208, 458.126, 49.0821, 51.9992 )
-
-[node name="StoneWall13" parent="LevelGeo/Terrain" index="21" instance=ExtResource( 18 )]
-transform = Transform( 4.25719, 2.66048, 11.5347, 0.00370049, 12.2577, -2.82859, -11.8376, 0.96063, 4.14739, 482.635, 83.753, 10.7056 )
 
 [node name="Truss" parent="LevelGeo/Race" index="0" instance=ExtResource( 13 )]
 transform = Transform( -0.180021, 0, 0.983663, 0, 1, 0, -0.983663, 0, -0.180021, 27.8749, 39.455, 40.4709 )
@@ -474,6 +409,10 @@ transform = Transform( -0.114159, -0.119714, -0.986223, 0.0338823, 0.991666, -0.
 [node name="PlayerSpawn12" parent="Players" index="12"]
 transform = Transform( -0.114159, -0.119714, -0.986223, 0.0338823, 0.991666, -0.124296, 0.992885, -0.047605, -0.109151, -92.3169, 31.1315, 59.428 )
 
+[node name="Path" type="Path" parent="." index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5329, 25.1084, 40.9375 )
+curve = SubResource( 5 )
+
 [node name="PathNode0" parent="PathNodes" index="0" instance=ExtResource( 4 )]
 transform = Transform( 0.159831, -0.0198032, -0.986946, 0.0128951, 0.999756, -0.017972, 0.987061, -0.00985346, 0.160047, 26.8975, 42.5405, 39.929 )
 boost_value = 100
@@ -611,6 +550,7 @@ value = 60
 [node name="CollisionShape" parent="ModNodes/Mod_Node" index="0"]
 transform = Transform( 0.997383, 0.0719856, 0.00682163, -0.0713073, 0.994834, -0.072273, -0.011989, 0.0715973, 0.997362, 0.971535, 13.4264, 24.3369 )
 shape = SubResource( 1 )
+disabled = true
 
 [node name="NPCBarrier" type="StaticBody" parent="ModNodes" index="1"]
 transform = Transform( 0.999514, 0, -0.031184, 0, 1, 0, 0.031184, 0, 0.999514, -244.899, 89.0147, -650.199 )
@@ -644,16 +584,12 @@ swing_strength = 0.06
 
 [node name="SwingPole2" parent="SwingPoles" index="2" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 0.998094, 0.0617105, 0, -0.0617105, 0.998094, -179.663, 152.328, 332.379 )
-visible = false
-disabled = true
 sphere_visible = false
 swing_length = 60.0
 swing_strength = 0.06
 
 [node name="SwingPole3" parent="SwingPoles" index="3" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -515.429, 136.89, 560.044 )
-visible = false
-disabled = true
 sphere_visible = false
 swing_length = 75.0
 swing_strength = 0.06
@@ -671,16 +607,12 @@ swing_strength = 0.07
 
 [node name="SwingPole6" parent="SwingPoles" index="6" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 82.5525, 121.601, -325.699 )
-visible = false
-disabled = true
 sphere_visible = false
 swing_length = 100.0
 swing_strength = 0.06
 
 [node name="SwingPole7" parent="SwingPoles" index="7" instance=ExtResource( 1 )]
 transform = Transform( 0.99767, 0.0682243, 0, -0.0682243, 0.99767, 0, 0, 0, 1, -160.991, 79.3127, -51.3473 )
-visible = false
-disabled = true
 sphere_visible = false
 swing_length = 110.0
 swing_strength = 0.06
@@ -688,10 +620,10 @@ swing_strength = 0.06
 [node name="NavigationMeshInstance" parent="Navigation" index="0"]
 navmesh = SubResource( 4 )
 
-[node name="WorldEnvironment" parent="." index="6"]
+[node name="WorldEnvironment" parent="." index="7"]
 environment = ExtResource( 15 )
 
-[node name="DirectionalLight" parent="." index="7"]
+[node name="DirectionalLight" parent="." index="8"]
 transform = Transform( 0.674243, 0.0236552, -0.738131, 0.725102, -0.210796, 0.655586, -0.140087, -0.977244, -0.15928, -68.3306, 37.4189, 37.8483 )
 layers = 0
 light_color = Color( 0.984314, 0.729412, 0.435294, 1 )
@@ -702,13 +634,13 @@ shadow_color = Color( 0.129412, 0.0352941, 0.00392157, 1 )
 shadow_reverse_cull_face = true
 directional_shadow_max_distance = 450.0
 
-[node name="DirectionalLight2" type="DirectionalLight" parent="." index="8"]
+[node name="DirectionalLight2" type="DirectionalLight" parent="." index="9"]
 transform = Transform( 0.936231, -6.65801e-08, 0.351384, -0.347178, -0.154262, 0.925025, 0.0542052, -0.98803, -0.144425, 0, 0, -17.7084 )
 visible = false
 layers = 3
 light_energy = 3.06
 
-[node name="Minimap" parent="." index="9"]
+[node name="Minimap" parent="." index="10"]
 debug_draw = 1
 
 [node name="MinimapCamera" parent="Minimap" index="0"]
@@ -717,7 +649,7 @@ cull_mask = 1048573
 size = 1379.08
 far = 500.0
 
-[node name="MusicPlayer" parent="." index="12"]
+[node name="MusicPlayer" parent="." index="13"]
 stream = ExtResource( 7 )
 
 [editable path="ModNodes/Mod_Node"]

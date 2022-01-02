@@ -25,9 +25,7 @@ background_sky = SubResource( 2 )
 [node name="TestTrack" instance=ExtResource( 2 )]
 script = ExtResource( 5 )
 
-[node name="TestTrack" parent="LevelGeo" index="0" groups=[
-"navmesh",
-] instance=ExtResource( 3 )]
+[node name="TestTrack" parent="LevelGeo" index="0" groups=["navmesh"] instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 109.27, 0 )
 
 [node name="Players" parent="." index="1"]

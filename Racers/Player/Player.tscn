@@ -14,10 +14,10 @@ script = ExtResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22729, 0 )
 
 [node name="Camera" type="Camera" parent="CamRotationHelper" index="0"]
-transform = Transform( 1, 0, 0, 0, 0.946767, 0.321921, 0, -0.321921, 0.946767, 0, 8.683, 16.439 )
+transform = Transform( 1, 0, 0, 0, 0.946767, 0.321921, 0, -0.321921, 0.946767, 0, 10, 25 )
 doppler_tracking = 2
 current = true
-fov = 50.0
+fov = 40.0
 far = 2000.0
 script = ExtResource( 5 )
 

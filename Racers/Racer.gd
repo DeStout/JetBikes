@@ -13,7 +13,7 @@ const BRAKE_DEACCEL : float  = 1.5
 const AIR_BRAKE_DEACCEL : float  = 1.2
 
 #const MAX_SPEED : int = 180
-const MAX_FORWARD_VEL : int = 100
+const MAX_FORWARD_VEL : int = 80
 const MAX_STRIFE_VEL : int = 65
 const MAX_REVERSE_VEL : int =  50
 const MAX_BOOST_VEL : int = 125
@@ -29,7 +29,6 @@ var sfx_pitch : float = MIN_SFX_PITCH
 var movement_input : Vector2 = Vector2.ZERO
 var velocity : Vector3 = Vector3.ZERO
 var prev_velocity : Vector3 = Vector3.ZERO
-var hover_velocity : Vector3
 var boost : float = 125.0
 var boost_cost : float = -1.0
 var swing_cost : float = -0.66
@@ -143,9 +142,6 @@ func _pitch_sfx():
 	var player_basis : Basis = global_transform.basis
 	var temp_velocity : Vector2 = Vector2(velocity.dot(player_basis.x), velocity.dot(player_basis.z))
 	var max_speed : float = MAX_BOOST_VEL
-#	if is_boosting:
-#		max_speed = MAX_BOOST_VEL
-#	sfx_pitch = ((temp_velocity.length() * MAX_SFX_PITCH) / max_speed) + MIN_SFX_PITCH
 	sfx_pitch = ((temp_velocity.length() * (MAX_SFX_PITCH - MIN_SFX_PITCH)) / max_speed) + MIN_SFX_PITCH
 	sfx_pitch = clamp(sfx_pitch, MIN_SFX_PITCH, MAX_SFX_PITCH)
 	$Audio_Jet.pitch_scale = sfx_pitch

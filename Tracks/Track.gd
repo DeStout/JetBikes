@@ -6,16 +6,16 @@ onready var path_nodes : Array
 
 func _ready() -> void:
 	#	#	#	NPC path debug 	#	#	#	#	#
-	if Globals.SHOW_NPC_PATHFIND:
-		for player in $Players.players:
-			if player is NPC:
-				add_child(player.draw_path)
+#	if Globals.SHOW_NPC_PATHFIND:
+#		for player in $Players.players:
+#			if player is NPC:
+#				add_child(player.draw_path)
 	#	#	#	#	#	#	#	#	#	#	#	#
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	$Players.connect("race_finished", self, "finish_race")
-	$Players.setup_players($Navigation, path_nodes)
+	$Players.setup_players($Navigation, $Path, path_nodes)
 	
 #	$MusicPlayer.play()
 	AudioServer.set_bus_mute(Globals.master_bus, true)

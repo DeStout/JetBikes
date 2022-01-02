@@ -6,6 +6,7 @@ var npc_ : PackedScene
 var player_ : PackedScene = preload("res://Racers/Player/Player.tscn")
 var player : Player
 var crash_bike = preload("res://Racers/General/Bike/CrashBike.tscn")
+var path_follow_ = preload("res://Racers/NPC/PathFollow.tscn")
 var players : Array
 var path_nodes_size : int = 0
 
@@ -56,7 +57,7 @@ func _setup_crash_bike(racer : Racer):
 	racer.crash_bike.set_bike_color(racer.get_racer_color())
 
 
-func setup_players(track_navigation, path_nodes):
+func setup_players(track_navigation, path, path_nodes):
 	path_nodes_size = path_nodes.size()
 	
 	player.HUD.set_max_laps(Globals.laps_number)
@@ -67,9 +68,13 @@ func setup_players(track_navigation, path_nodes):
 	for npc_temp in players:
 		if npc_temp is NPC:
 			npc_temp.navigation = track_navigation
+			var new_path_follow = path_follow_.instance()
+			path.add_child(new_path_follow)
+			npc_temp.path_follow = new_path_follow
+			new_path_follow.npc = npc_temp
 			npc_temp.path_nodes = path_nodes
 			npc_temp.current_path_node = path_nodes[0]
-			npc_temp.pathfind_next_node()
+#			npc_temp.pathfind_next_node()
 
 
 func start_race() -> void:

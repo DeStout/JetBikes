@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/DevGrid.jpg-07c9dbd4dc4410b45a39e4318a41db0f.s3tc.stex"
-path.etc2="res://.import/DevGrid.jpg-07c9dbd4dc4410b45a39e4318a41db0f.etc2.stex"
+path.s3tc="res://.import/DevGrid.jpg-aaf522f2cc1bf268bd478a7ab9e64434.s3tc.stex"
+path.etc2="res://.import/DevGrid.jpg-aaf522f2cc1bf268bd478a7ab9e64434.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Tracks/DevGrid.jpg"
-dest_files=[ "res://.import/DevGrid.jpg-07c9dbd4dc4410b45a39e4318a41db0f.s3tc.stex", "res://.import/DevGrid.jpg-07c9dbd4dc4410b45a39e4318a41db0f.etc2.stex" ]
+source_file="res://Tracks/Assets/TrackComponents/Materials/DevGrid.jpg"
+dest_files=[ "res://.import/DevGrid.jpg-aaf522f2cc1bf268bd478a7ab9e64434.s3tc.stex", "res://.import/DevGrid.jpg-aaf522f2cc1bf268bd478a7ab9e64434.etc2.stex" ]
 
 [params]
 

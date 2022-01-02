@@ -1,9 +1,7 @@
 extends Racer
-class_name NPC
 
 var target_speed : int = MAX_FORWARD_VEL
 
-var path_follow : PathFollow
 var draw_path : ImmediateGeometry = ImmediateGeometry.new()
 var simple_path : PoolVector3Array
 var current_goal : int = 0
@@ -11,8 +9,8 @@ var current_goal : int = 0
 
 func _process(_delta):
 	movement_input = Vector2(0, 1)
-#	if path_nodes != null:
-#		_path_point_distance()
+	if path_nodes != null:
+		_path_point_distance()
 
 
 func _physics_process(delta : float) -> void:	
@@ -112,40 +110,25 @@ func _physics_process(delta : float) -> void:
 	is_on_ground = false
 
 
-func start_race() -> void:
-	.start_race()
-	path_follow.follow = true
-
-
 func _aim() -> void:
-	look_at(path_follow.global_transform.origin, global_transform.basis[1])
-
-
-func _crash() -> void:
-	._crash()
-	path_follow.follow = false
-
-
-func _crash_finished() -> void:
-	._crash_finished()
-	path_follow.follow = true
+	look_at(simple_path[current_goal], global_transform.basis[1])
 
 
 func _set_target_speed(new_target_speed : int) -> void:
 	target_speed = new_target_speed
 
 
-#func _path_point_distance() -> void:
-#	if simple_path.size() > 0:
-#		var temp_2D_goal = Vector2(simple_path[current_goal].x, simple_path[current_goal].z)
-#		var temp_2D_global = Vector2(global_transform.origin.x, global_transform.origin.z)
-#		if temp_2D_global.distance_to(temp_2D_goal) < 5:
-#			if current_goal < simple_path.size()-1:
-#				current_goal += 1
-#		elif temp_2D_global.distance_to(temp_2D_goal) > 20:
-#			pathfind_next_node()
-#	else:
-#		pathfind_next_node()
+func _path_point_distance() -> void:
+	if simple_path.size() > 0:
+		var temp_2D_goal = Vector2(simple_path[current_goal].x, simple_path[current_goal].z)
+		var temp_2D_global = Vector2(global_transform.origin.x, global_transform.origin.z)
+		if temp_2D_global.distance_to(temp_2D_goal) < 5:
+			if current_goal < simple_path.size()-1:
+				current_goal += 1
+		elif temp_2D_global.distance_to(temp_2D_goal) > 20:
+			pathfind_next_node()
+	else:
+		pathfind_next_node()
 
 
 func update_path_node(new_path_node : PathNode) -> void:
@@ -154,30 +137,30 @@ func update_path_node(new_path_node : PathNode) -> void:
 			lap_number += 1
 			if lap_number > Globals.laps_number:
 				emit_signal("finished_race", self)
-#		if typeof(path_nodes[new_path_node.next_serial]) == TYPE_ARRAY:
-#			var temp_array = path_nodes[new_path_node.next_serial]
-#			if current_path_node.route >= 0:
-#				current_path_node = temp_array[current_path_node.route]
-#			else:
-#				current_path_node = temp_array[randi() % temp_array.size()]
-#		else:
-#			current_path_node = path_nodes[current_path_node.next_serial]
+		if typeof(path_nodes[new_path_node.next_serial]) == TYPE_ARRAY:
+			var temp_array = path_nodes[new_path_node.next_serial]
+			if current_path_node.route >= 0:
+				current_path_node = temp_array[current_path_node.route]
+			else:
+				current_path_node = temp_array[randi() % temp_array.size()]
+		else:
+			current_path_node = path_nodes[current_path_node.next_serial]
 		
 		if new_path_node.function == new_path_node.FUNCTION.DEFAULT:
 			pathfind_next_node()
 
 
-#func pathfind_next_node() -> void:
-#	var path_node_point : Vector3 = current_path_node.get_closest_point(global_transform.origin)
-#
-#	simple_path.empty()
-#	simple_path = navigation.get_simple_path(global_transform.origin, path_node_point, true)
-#	current_goal = 0
-#
-#	if Globals.SHOW_NPC_PATHFIND:
-#		draw_path.clear()
-#		draw_path.begin(Mesh.PRIMITIVE_LINES)
-#		draw_path.set_color(Color.red)
-#		for p in simple_path:
-#			draw_path.add_vertex(p)
-#		draw_path.end()
+func pathfind_next_node() -> void:
+	var path_node_point : Vector3 = current_path_node.get_closest_point(global_transform.origin)
+	
+	simple_path.empty()
+	simple_path = navigation.get_simple_path(global_transform.origin, path_node_point, true)
+	current_goal = 0
+	
+	if Globals.SHOW_NPC_PATHFIND:
+		draw_path.clear()
+		draw_path.begin(Mesh.PRIMITIVE_LINES)
+		draw_path.set_color(Color.red)
+		for p in simple_path:
+			draw_path.add_vertex(p)
+		draw_path.end()

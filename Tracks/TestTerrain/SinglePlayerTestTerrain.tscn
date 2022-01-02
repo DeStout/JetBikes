@@ -9,3 +9,8 @@ script = ExtResource( 2 )
 
 [node name="Players" parent="." index="1"]
 script = ExtResource( 8 )
+
+[node name="PathFollow" parent="Path" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.322771, -3.02272, -0.351234 )
+
+[editable path="ModNodes/Mod_Node"]

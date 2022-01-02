@@ -13,6 +13,8 @@ const MIN_CAM_FOV : float = 40.0
 const MAX_CAM_FOV : float = 75.0
 const MIN_CAM_DIST : float = 10.0
 const MAX_CAM_DIST : float = 25.0
+const MIN_CAM_HEIGHT : float = 10.0
+const MAX_CAM_HEIGHT : float = 12.5
 
 const MOUSE_VERT_SENSITIVITY : float = 0.1
 const MOUSE_HORZ_SENSITIVITY : float  = 0.1
@@ -24,6 +26,8 @@ var has_cam_control : bool = true
 
 var mouse_vert_invert : int = 1
 var mouse_horz_invert : int = -1
+var free_rotate_origin : Vector2 = Vector2.ZERO
+var max_rotate_speed : int = 200
 
 
 func _process(delta : float) -> void:
@@ -35,17 +39,17 @@ func _process(delta : float) -> void:
 
 func _physics_process(delta : float) -> void:
 	_rotate_default(delta)
+	_free_rotate(delta)
 	
-	var move_direction : Vector3 = Vector3.ZERO
 	var player_basis : Basis = global_transform.basis
-	var basis_velocity : Vector3 = Vector3(velocity.dot(player_basis.x), \
-						velocity.dot(player_basis.y), velocity.dot(player_basis.z))
 	
 	if is_on_ground:
 		
-		ground_normal = _get_ground_normal()
-		
 		# Align player Y vector to ground normal
+		var move_direction : Vector3 = Vector3.ZERO
+		var basis_velocity : Vector3 = Vector3(velocity.dot(player_basis.x), \
+							velocity.dot(player_basis.y), velocity.dot(player_basis.z))
+		
 		if player_basis[1].dot(ground_normal) > 0:
 			var player_quat = player_basis.get_rotation_quat()
 			global_transform.basis = Basis(player_quat.slerp(_align_to_normal(ground_normal), delta*4))
@@ -70,7 +74,7 @@ func _physics_process(delta : float) -> void:
 			# Apply acceleration/deacceleration along player Z vector based on input
 			#
 			if movement_input.y > 0:
-				var max_forward_vel : float = MAX_FORWARD_VEL
+				var max_forward_vel : float = MAX_FORWARD_VEL * 1.25
 				var acceleration : float = FORWARD_ACCELERATION
 				if is_boosting:
 					max_forward_vel = MAX_BOOST_VEL
@@ -95,7 +99,7 @@ func _physics_process(delta : float) -> void:
 		
 			basis_velocity += move_direction
 			
-			# Throttle kitty corner movement speed
+			# Throttle diagonal movement speed
 			var mod_basis_velocity : Vector3 = Vector3(basis_velocity.x, 0, basis_velocity.z)
 			if movement_input.y > 0 and movement_input.x != 0:
 				var max_forward_vel : float = MAX_FORWARD_VEL
@@ -107,13 +111,11 @@ func _physics_process(delta : float) -> void:
 					var max_x_vel : float = max_forward_vel * (basis_velocity.x / mod_basis_velocity.length())
 					basis_velocity.z = _interpolate_float(basis_velocity.z, max_z_vel, DEACCELERATION * 2)
 					basis_velocity.x = _interpolate_float(basis_velocity.x, max_x_vel, DEACCELERATION * 2)
-					
-			basis_velocity = player_basis.xform(basis_velocity)
-			velocity = basis_velocity
-#			velocity += hover_velocity
+			
+			velocity = player_basis.xform(basis_velocity)
 		
 		# Hover along surface normal and slide downhill
-		hover_velocity = Vector3.ZERO
+		ground_normal = _get_ground_normal()
 		var downhill : Vector3 = Vector3(0, -1, 0).cross(ground_normal).cross(ground_normal)
 		var cast_point : Vector3 = _get_cast_point()
 		ground_point = _get_ground_point()
@@ -128,9 +130,6 @@ func _physics_process(delta : float) -> void:
 			
 		var move_force : float = 1 / (ground_distance / prev_move_distance) - ground_distance
 		move_force = clamp(move_force, -10, 10)
-		
-		hover_velocity += ground_normal * move_force
-		hover_velocity += downhill * -Globals.GRAVITY * 0.25
 		
 		velocity += ground_normal * move_force
 		velocity += downhill * -Globals.GRAVITY * 0.25
@@ -153,9 +152,8 @@ func _physics_process(delta : float) -> void:
 			velocity.x = _interpolate_float(velocity.x, 0, AIR_BRAKE_DEACCEL)
 			velocity.z = _interpolate_float(velocity.z, 0, AIR_BRAKE_DEACCEL)
 	
-#	velocity += hover_velocity
 	prev_velocity = velocity
-	velocity = move_and_slide(velocity, Vector3(0,1,0))
+	velocity = move_and_slide(velocity, Vector3.UP)
 	
 	_set_speedometer()
 
@@ -193,21 +191,23 @@ func _input(event):
 		if event is InputEventMouseButton:
 			if has_control:
 				if event.button_index == 1:
-					is_swinging = event.is_pressed()
+					is_swinging = event.pressed
 				if event.button_index == 2:
 					is_free_rotating = event.pressed
+					free_rotate_origin = Vector2.ZERO
 		
-		# Rotate the camera based on mouse movement
 		if event is InputEventMouseMotion:
+			# Free rotate the player
 			if is_free_rotating and !is_on_ground:
 				if engine.rotation != Vector3.ZERO:
 					engine_rot_help.rotation += engine.rotation
 					$CollisionShape.rotation += engine.rotation
 					engine.rotation = Vector3.ZERO
-				engine_rot_help.rotate_x(deg2rad(event.relative.y * mouse_vert_invert * FREE_ROTATE_VERT_SENSITIVITY))
-				engine_rot_help.rotate_z(deg2rad(event.relative.x * mouse_horz_invert * FREE_ROTATE_HORZ_SENSITIVITY))
-				$CollisionShape.rotate_x(deg2rad(event.relative.y * mouse_vert_invert * FREE_ROTATE_VERT_SENSITIVITY))
-				$CollisionShape.rotate_z(deg2rad(event.relative.x * mouse_horz_invert * FREE_ROTATE_HORZ_SENSITIVITY))
+					
+				free_rotate_origin.x = clamp(free_rotate_origin.x + event.relative.x * 0.07, -max_rotate_speed, max_rotate_speed)
+				free_rotate_origin.y = clamp(free_rotate_origin.y + event.relative.y * 0.07, -max_rotate_speed, max_rotate_speed)
+				
+			# Rotate the camera based on mouse movement
 			elif has_cam_control:
 				cam_rot_help.rotate_x(-deg2rad(event.relative.y * mouse_vert_invert * MOUSE_VERT_SENSITIVITY))
 				cam_rot_help.rotate_y(deg2rad(event.relative.x * mouse_horz_invert * MOUSE_HORZ_SENSITIVITY))
@@ -251,16 +251,26 @@ func _rotate_default(delta : float) -> void:
 			$CollisionShape.rotation_degrees = engineRot
 
 
+func _free_rotate(delta : float) -> void:
+	if is_free_rotating and !is_on_ground:
+		engine_rot_help.rotate_x(deg2rad(free_rotate_origin.y * mouse_vert_invert * FREE_ROTATE_VERT_SENSITIVITY))
+		engine_rot_help.rotate_z(deg2rad(free_rotate_origin.x * mouse_horz_invert * FREE_ROTATE_HORZ_SENSITIVITY))
+		$CollisionShape.rotate_x(deg2rad(free_rotate_origin.y * mouse_vert_invert * FREE_ROTATE_VERT_SENSITIVITY))
+		$CollisionShape.rotate_z(deg2rad(free_rotate_origin.x * mouse_horz_invert * FREE_ROTATE_HORZ_SENSITIVITY))
+
+
 func _adjust_cam_fov_dist():
 	var player_basis : Basis = global_transform.basis
 	var temp_velocity : Vector2 = Vector2(velocity.dot(player_basis.x), velocity.dot(player_basis.z))
 	var max_speed : float = MAX_FORWARD_VEL
-	if is_boosting:
-		max_speed = MAX_BOOST_VEL
+#	if is_boosting:
+#		max_speed = MAX_BOOST_VEL
 	camera.fov = ((temp_velocity.length() * (MAX_CAM_FOV - MIN_CAM_FOV)) / max_speed) + MIN_CAM_FOV
 	camera.transform.origin.z = ((temp_velocity.length() * (MIN_CAM_DIST - MAX_CAM_DIST)) / max_speed) + MAX_CAM_DIST
+	camera.transform.origin.y = ((temp_velocity.length() * (MIN_CAM_HEIGHT - MAX_CAM_HEIGHT)) / max_speed) + MAX_CAM_HEIGHT
 	camera.fov = clamp(camera.fov, MIN_CAM_FOV, MAX_CAM_FOV)
 	camera.transform.origin.z = clamp(camera.transform.origin.z, MIN_CAM_DIST, MAX_CAM_DIST)
+	camera.transform.origin.y = clamp(camera.transform.origin.y, MIN_CAM_HEIGHT, MAX_CAM_HEIGHT)
 
 
 func _set_speedometer() -> void:

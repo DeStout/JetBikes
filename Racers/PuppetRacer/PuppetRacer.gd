@@ -20,7 +20,7 @@ var swing_poles : Array
 
 
 func _physics_process(delta):
-#	global_transform.basis.slerp(puppet_transform.basis, delta)
+	global_transform.basis.slerp(puppet_transform.basis, delta)
 	$Engine.global_transform.basis.slerp(puppet_engine_rotation, delta)
 	move_and_slide(puppet_velocity)
 
