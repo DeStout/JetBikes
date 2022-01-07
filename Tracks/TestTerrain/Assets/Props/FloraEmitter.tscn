@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Tracks/TestTerrain/Assets/Props/Agave/AgaveLeaf.tres" type="ArrayMesh" id=1]
+[ext_resource path="res://Tracks/TestTerrain/Assets/Props/FloraEmitter.gd" type="Script" id=3]
+
+[sub_resource type="ParticlesMaterial" id=6]
+lifetime_randomness = 1.0
+flag_align_y = true
+direction = Vector3( 0, 1, 0 )
+spread = 85.0
+initial_velocity = 40.0
+initial_velocity_random = 0.84
+damping = 18.9
+scale = 0.5
+
+[node name="Particles" type="Particles"]
+amount = 30
+explosiveness = 1.0
+visibility_aabb = AABB( -19.7889, -2.66403, -20.2935, 38.4484, 19.1255, 33.1018 )
+process_material = SubResource( 6 )
+draw_pass_1 = ExtResource( 1 )
+script = ExtResource( 3 )

@@ -101,7 +101,7 @@ func _setup_crash_bike(player):
 	$CrashBikes.add_child(player.crash_bike)
 
 
-func setup_players(track_navigation, path_nodes):
+func setup_players(track_navigation, path, path_nodes):
 	path_nodes_size = path_nodes.size()
 	
 	master_player.HUD.set_max_laps(Network.multiplayer_lap_amount)

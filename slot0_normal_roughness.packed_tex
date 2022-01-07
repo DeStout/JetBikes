@@ -1,8 +1,0 @@
-{
-	"contains_albedo": false,
-	"resolution": 1024,
-	"src": {
-		"a": "res://Tracks/TestTerrain/Assets/Materials/Ground1/Ground048_1K_Roughness.png",
-		"rgb": "res://Tracks/TestTerrain/Assets/Materials/Ground1/Ground048_1K_Normal.png"
-	}
-}

@@ -1,0 +1,10 @@
+[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://Tracks/TestTerrain/Assets/Props/GrassC/D_GrassC.png" type="Texture" id=1]
+
+[resource]
+flags_transparent = true
+flags_no_depth_test = true
+params_cull_mode = 2
+params_depth_draw_mode = 1
+albedo_texture = ExtResource( 1 )

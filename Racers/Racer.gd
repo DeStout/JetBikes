@@ -13,7 +13,7 @@ const BRAKE_DEACCEL : float  = 1.5
 const AIR_BRAKE_DEACCEL : float  = 1.2
 
 #const MAX_SPEED : int = 180
-const MAX_FORWARD_VEL : int = 80
+const MAX_FORWARD_VEL : int = 85
 const MAX_STRIFE_VEL : int = 65
 const MAX_REVERSE_VEL : int =  50
 const MAX_BOOST_VEL : int = 125
@@ -53,6 +53,7 @@ var lap_number : int = 0
 var placement : int = 0
 
 var navigation : Navigation
+var path : Path
 var path_nodes : Array
 var current_path_node : PathNode
 var path_node_distance : float
@@ -66,9 +67,6 @@ func _process(delta):
 		_path_node_distance()
 	_pitch_sfx()
 	_emit_trail_particles()
-	
-	if Globals.SHOW_RACER_BASIS:
-		_draw_racer_basis()
 
 
 func _physics_process(delta):
@@ -78,10 +76,6 @@ func _physics_process(delta):
 	_check_crash()
 	if is_crashed:
 		_crash()
-	
-
-func _draw_racer_basis():
-	pass
 
 
 func _check_ray_collision():
@@ -202,7 +196,8 @@ func _crash():
 
 
 func _crash_finished():
-	global_transform.origin = navigation.get_closest_point(to_global(ground_point))
+#	global_transform.origin = navigation.get_closest_point(to_global(ground_point))
+	global_transform.origin = path.to_global(path.curve.get_closest_point(path.to_local(global_transform.origin)))
 	rotation = ground_normal
 	$EngineRotationHelper.rotation = Vector3.ZERO
 	$EngineRotationHelper/Engine.rotation = Vector3.ZERO
@@ -308,14 +303,17 @@ func _set_target_speed(new_target_speed : int) -> void:
 
 
 func set_racer_color(new_color : Color) -> void:
-	$EngineRotationHelper/Engine/SteeringColumn.set_surface_material(0, bike_material)
+#	$EngineRotationHelper/Engine/Shielding.set_surface_material(0, bike_material)
 	$EngineRotationHelper/Engine/WindShield.set_surface_material(0, windshield_material)
-	
-	bike_material.params_cull_mode = SpatialMaterial.CULL_DISABLED
+#
+#	bike_material.params_cull_mode = SpatialMaterial.CULL_DISABLED
 	windshield_material.params_cull_mode = SpatialMaterial.CULL_DISABLED
 	windshield_material.flags_transparent = true
-	
-	bike_material.albedo_color = new_color
+#
+#	bike_material.albedo_color = new_color
+	yield(get_tree(), "idle_frame")
+	$EngineRotationHelper/Engine/Shielding.get_surface_material(0).albedo_color = new_color
+	var temp = $EngineRotationHelper/Engine/Shielding.get_surface_material(0)
 	windshield_material.albedo_color = new_color
 	windshield_material.albedo_color.a = 90.0 / 255.0
 
@@ -323,7 +321,8 @@ func set_racer_color(new_color : Color) -> void:
 func get_racer_color() -> Color:
 	if bike_material == null:
 		return Color(0.184314, 0.788235, 1)
-	return bike_material.albedo_color
+#	return bike_material.albedo_color
+	return $EngineRotationHelper/Engine/Shielding.get_surface_material(0).albedo_color
 
 
 func _set_audio_sfx(sfx_effect):

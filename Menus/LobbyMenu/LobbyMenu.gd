@@ -24,7 +24,7 @@ func _racer_color_changed(new_color : Color) -> void:
 
 
 func update_lobby_info(update_type : String) -> void:
-	print("Updating Lobby: " + update_type)
+#	print("Updating Lobby: " + update_type)
 	
 	if is_inside_tree():
 		racer_list.clear()

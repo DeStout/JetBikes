@@ -57,21 +57,28 @@ func _setup_crash_bike(racer : Racer):
 	racer.crash_bike.set_bike_color(racer.get_racer_color())
 
 
-func setup_players(track_navigation, path, path_nodes):
+func setup_players(path, path_nodes):
 	path_nodes_size = path_nodes.size()
 	
 	player.HUD.set_max_laps(Globals.laps_number)
-	player.navigation = track_navigation
+#	player.navigation = track_navigation
+	player.path = path
 	player.path_nodes = path_nodes
 	player.current_path_node = path_nodes[0]
 	
 	for npc_temp in players:
 		if npc_temp is NPC:
-			npc_temp.navigation = track_navigation
+#			npc_temp.navigation = track_navigation
+			npc_temp.path = path
+			
 			var new_path_follow = path_follow_.instance()
 			path.add_child(new_path_follow)
+			new_path_follow.rotation_mode = PathFollow.ROTATION_ORIENTED
+			var path_variability = 20
+			new_path_follow.h_offset = randf() * path_variability - (path_variability / 2)
 			npc_temp.path_follow = new_path_follow
 			new_path_follow.npc = npc_temp
+			
 			npc_temp.path_nodes = path_nodes
 			npc_temp.current_path_node = path_nodes[0]
 #			npc_temp.pathfind_next_node()

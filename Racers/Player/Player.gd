@@ -74,7 +74,7 @@ func _physics_process(delta : float) -> void:
 			# Apply acceleration/deacceleration along player Z vector based on input
 			#
 			if movement_input.y > 0:
-				var max_forward_vel : float = MAX_FORWARD_VEL * 1.25
+				var max_forward_vel : float = MAX_FORWARD_VEL * 1.15
 				var acceleration : float = FORWARD_ACCELERATION
 				if is_boosting:
 					max_forward_vel = MAX_BOOST_VEL
@@ -153,7 +153,7 @@ func _physics_process(delta : float) -> void:
 			velocity.z = _interpolate_float(velocity.z, 0, AIR_BRAKE_DEACCEL)
 	
 	prev_velocity = velocity
-	velocity = move_and_slide(velocity, Vector3.UP)
+	velocity = move_and_slide(velocity, Vector3.UP, false, 4, 0.785, false)
 	
 	_set_speedometer()
 

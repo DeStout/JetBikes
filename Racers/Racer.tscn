@@ -1,16 +1,28 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Racers/General/Bike/DetectRay.gd" type="Script" id=1]
 [ext_resource path="res://Racers/Player/AudioBoost.gd" type="Script" id=2]
 [ext_resource path="res://Racers/General/Bike/RiderPosed.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/LineRenderer/LineRenderer.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Racers/General/Bike/Bike04.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_NormalGL_scaled.png" type="Texture" id=5]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Materials/GroundWetRocks/Ground_Wet_Rocks_001_basecolor.jpg" type="Texture" id=6]
 [ext_resource path="res://Racers/General/Bike/Assets/SFX/Boost.wav" type="AudioStream" id=7]
 [ext_resource path="res://addons/LineRenderer/line.png" type="Texture" id=8]
 [ext_resource path="res://Racers/General/Bike/Assets/SFX/JetEngine.wav" type="AudioStream" id=9]
 [ext_resource path="res://Racers/General/Bike/Assets/SFX/DieselEngine.wav" type="AudioStream" id=10]
 [ext_resource path="res://Racers/General/Bike/RacerPosed.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Racers/General/Bike/Bike05.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_Metalness.png" type="Texture" id=13]
+[ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_Roughness.png" type="Texture" id=14]
+
+[sub_resource type="SpatialMaterial" id=6]
+resource_local_to_scene = true
+params_cull_mode = 2
+metallic_texture = ExtResource( 13 )
+roughness_texture = ExtResource( 14 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 5 )
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.75
@@ -51,7 +63,10 @@ collision_mask = 15
 [node name="EngineRotationHelper" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
-[node name="Engine" parent="EngineRotationHelper" instance=ExtResource( 5 )]
+[node name="Engine" parent="EngineRotationHelper" instance=ExtResource( 12 )]
+
+[node name="Shielding" parent="EngineRotationHelper/Engine" index="1"]
+material/0 = SubResource( 6 )
 
 [node name="RiderPosed" parent="EngineRotationHelper/Engine" instance=ExtResource( 11 )]
 transform = Transform( -1.25, 0, -1.88745e-07, 0, 1.25, 0, 1.88745e-07, 0, -1.25, 0, 0.591315, 0.643297 )

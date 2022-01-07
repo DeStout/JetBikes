@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Tracks/TestTerrain/Assets/Props/CactusC/CactusC.glb" type="PackedScene" id=1]
+
+[node name="CactusC" instance=ExtResource( 1 )]
+
+[node name="cactus_03" parent="." index="0"]
+transform = Transform( 0.0825672, 0, 0, 0, -9.84277e-09, -0.0825671, 0, 0.0825671, -9.84277e-09, 0, -0.0417704, -0.0269358 )

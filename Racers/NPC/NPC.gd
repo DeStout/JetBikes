@@ -107,7 +107,7 @@ func _physics_process(delta : float) -> void:
 			velocity.z = _interpolate_float(velocity.z, 0, AIR_BRAKE_DEACCEL)
 	
 	prev_velocity = velocity
-	velocity = move_and_slide(velocity, Vector3(0,1,0))
+	velocity = move_and_slide(velocity, Vector3.UP, false, 4, 0.785, false)
 
 	is_on_ground = false
 
@@ -115,6 +115,11 @@ func _physics_process(delta : float) -> void:
 func start_race() -> void:
 	.start_race()
 	path_follow.follow = true
+
+
+func finish_race() -> void:
+	.finish_race()
+	path_follow.follow = false
 
 
 func _aim() -> void:
@@ -154,17 +159,18 @@ func update_path_node(new_path_node : PathNode) -> void:
 			lap_number += 1
 			if lap_number > Globals.laps_number:
 				emit_signal("finished_race", self)
-#		if typeof(path_nodes[new_path_node.next_serial]) == TYPE_ARRAY:
-#			var temp_array = path_nodes[new_path_node.next_serial]
+		if typeof(path_nodes[new_path_node.next_serial]) == TYPE_ARRAY:
+			var temp_array = path_nodes[new_path_node.next_serial]
+			current_path_node = temp_array[0]
 #			if current_path_node.route >= 0:
 #				current_path_node = temp_array[current_path_node.route]
 #			else:
 #				current_path_node = temp_array[randi() % temp_array.size()]
-#		else:
-#			current_path_node = path_nodes[current_path_node.next_serial]
-		
-		if new_path_node.function == new_path_node.FUNCTION.DEFAULT:
-			pathfind_next_node()
+		else:
+			current_path_node = path_nodes[current_path_node.next_serial]
+#
+#		if new_path_node.function == new_path_node.FUNCTION.DEFAULT:
+#			pathfind_next_node()
 
 
 #func pathfind_next_node() -> void:

@@ -23,9 +23,7 @@ script = ExtResource( 1 )
 
 [node name="LevelGeo" type="Node" parent="."]
 
-[node name="Floor" type="MeshInstance" parent="LevelGeo" groups=[
-"navmesh",
-]]
+[node name="Floor" type="MeshInstance" parent="LevelGeo" groups=["navmesh"]]
 mesh = SubResource( 1 )
 material/0 = ExtResource( 2 )
 

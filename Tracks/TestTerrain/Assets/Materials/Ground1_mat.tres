@@ -1,0 +1,19 @@
+[gd_resource type="SpatialMaterial" load_steps=5 format=2]
+
+[ext_resource path="res://Tracks/TestTerrain/Assets/Materials/Ground1/Ground048_1K_Normal.png" type="Texture" id=1]
+[ext_resource path="res://Tracks/TestTerrain/Assets/Materials/Ground1/Ground048_1K_Roughness.png" type="Texture" id=2]
+[ext_resource path="res://Tracks/TestTerrain/Assets/Materials/Ground1/Ground048_1K_AmbientOcclusion.png" type="Texture" id=3]
+[ext_resource path="res://Tracks/TestTerrain/Assets/Materials/Ground1/Ground048_1K_Color.png" type="Texture" id=4]
+
+[resource]
+albedo_texture = ExtResource( 4 )
+roughness_texture = ExtResource( 2 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 1 )
+ao_enabled = true
+ao_light_affect = 0.75
+ao_texture = ExtResource( 3 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+uv1_scale = Vector3( 40, 40, 1 )

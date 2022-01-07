@@ -2,9 +2,7 @@ extends Node
 
 # Debug Options
 var SHOW_NPC_PATHFIND : bool = false
-var SHOW_RACER_BASIS : bool = false
-var INFINITE_BOOST : bool = true
-var debug_frame : int = 0
+var INFINITE_BOOST : bool = false
 
 var test_track_ = "res://Tracks/TestTrack/SinglePlayerTestTrack.tscn"
 var test_terrain_ = "res://Tracks/TestTerrain/SinglePlayerTestTerrain.tscn"
@@ -60,18 +58,6 @@ var player_color : Color = Color("#2fc9ff")
 func _ready():
 	_apply_sfx_volume(DEFAULT_SFX_LEVEL)
 	_apply_music_volume(DEFAULT_MUSIC_LEVEL)
-
-
-func _process(delta):
-	debug_frame += 1
-
-
-func debug_print(print_var = "", print_label : String = "", print_frame : int = 1):
-	if !print_label.empty():
-		print_label += ": "
-	
-	if debug_frame % print_frame == 0:
-		print(print_label + str(print_var))
 
 
 func _apply_sfx_volume(new_volume):

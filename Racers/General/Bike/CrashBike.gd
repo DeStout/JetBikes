@@ -11,14 +11,16 @@ func _ready():
 
 
 func set_bike_color(new_color : Color) -> void:
-	$SteeringColumn.set_surface_material(0, bike_material)
+#	$Shielding.set_surface_material(0, bike_material)
 	$WindShield.set_surface_material(0, windshield_material)
-	
-	bike_material.params_cull_mode = SpatialMaterial.CULL_DISABLED
+#
+#	bike_material.params_cull_mode = SpatialMaterial.CULL_DISABLED
 	windshield_material.params_cull_mode = SpatialMaterial.CULL_DISABLED
 	windshield_material.flags_transparent = true
-	
-	bike_material.albedo_color = new_color
+#
+#	bike_material.albedo_color = new_color
+	yield(get_tree(), "idle_frame")
+	$Shielding.get_surface_material(0).albedo_color = new_color
 	windshield_material.albedo_color = new_color
 	windshield_material.albedo_color.a = 90.0 / 255.0
 

@@ -15,7 +15,7 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	$Players.connect("race_finished", self, "finish_race")
-	$Players.setup_players($Navigation, $Path, path_nodes)
+	$Players.setup_players($Path, path_nodes)
 	
 #	$MusicPlayer.play()
 	AudioServer.set_bus_mute(Globals.master_bus, true)
