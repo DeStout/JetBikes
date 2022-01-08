@@ -6,6 +6,7 @@
 [ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_Roughness.png" type="Texture" id=4]
 
 [resource]
+resource_local_to_scene = true
 params_cull_mode = 2
 albedo_texture = ExtResource( 1 )
 metallic_texture = ExtResource( 2 )

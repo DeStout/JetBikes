@@ -1,9 +1,12 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Racers/General/Bike/CrashBike.gd" type="Script" id=1]
 [ext_resource path="res://Racers/General/Bike/Assets/Materials/Leather_mat.tres" type="Material" id=2]
-[ext_resource path="res://Racers/General/Bike/Assets/Materials/Shielding_mat.tres" type="Material" id=3]
+[ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_Metalness.png" type="Texture" id=3]
 [ext_resource path="res://Racers/General/Bike/Assets/Materials/Frame_mat.tres" type="Material" id=4]
+[ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_NormalGL_scaled.png" type="Texture" id=5]
+[ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_Roughness.png" type="Texture" id=6]
+[ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_Color_scaled.png" type="Texture" id=7]
 
 [sub_resource type="PhysicsMaterial" id=1]
 rough = true
@@ -37,6 +40,16 @@ surfaces/0 = {
 "skeleton_aabb": [  ],
 "vertex_count": 496
 }
+
+[sub_resource type="SpatialMaterial" id=8]
+resource_local_to_scene = true
+params_cull_mode = 2
+albedo_texture = ExtResource( 7 )
+metallic_texture = ExtResource( 3 )
+roughness_texture = ExtResource( 6 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 5 )
 
 [sub_resource type="ArrayMesh" id=3]
 resource_name = "Bike05_Cylinder028"
@@ -82,7 +95,7 @@ material/0 = null
 
 [node name="Shielding" type="MeshInstance" parent="."]
 mesh = SubResource( 2 )
-material/0 = ExtResource( 3 )
+material/0 = SubResource( 8 )
 
 [node name="Seat" type="MeshInstance" parent="."]
 mesh = SubResource( 3 )

@@ -54,6 +54,7 @@ func _spawn_players():
 func _setup_crash_bike(racer : Racer):
 	racer.crash_bike = crash_bike.instance()
 	$CrashBikes.add_child(racer.crash_bike)
+	
 	racer.crash_bike.set_bike_color(racer.get_racer_color())
 
 

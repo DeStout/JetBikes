@@ -1,11 +1,26 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Racers/Racer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Racers/NPC/NPC.gd" type="Script" id=2]
+[ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_NormalGL_scaled.png" type="Texture" id=3]
+[ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_Metalness.png" type="Texture" id=4]
+[ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_Roughness.png" type="Texture" id=5]
+
+[sub_resource type="SpatialMaterial" id=1]
+resource_local_to_scene = true
+params_cull_mode = 2
+metallic_texture = ExtResource( 4 )
+roughness_texture = ExtResource( 5 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 3 )
 
 [node name="Racer" instance=ExtResource( 1 )]
 collision_layer = 17
 collision_mask = 31
 script = ExtResource( 2 )
+
+[node name="Shielding" parent="EngineRotationHelper/Engine" index="1"]
+material/0 = SubResource( 1 )
 
 [editable path="EngineRotationHelper/Engine"]

@@ -5,16 +5,20 @@ class_name Player
 onready var engine_rot_help : Spatial = $EngineRotationHelper
 onready var engine : Spatial = $EngineRotationHelper/Engine
 onready var cam_rot_help : Spatial = $CamRotationHelper
-onready var camera : Camera = $CamRotationHelper/Camera
-onready var HUD : Control = $CamRotationHelper/Camera/HUD
-onready var pause_menu : Control = $CamRotationHelper/Camera/PauseMenu
+onready var camera : Camera = $CamRotationHelper/SpringArm/CamPosHelper/Camera
+onready var HUD : Control = $CamRotationHelper/SpringArm/CamPosHelper/Camera/HUD
+onready var pause_menu : Control = $CamRotationHelper/SpringArm/CamPosHelper/Camera/PauseMenu
 
 const MIN_CAM_FOV : float = 40.0
 const MAX_CAM_FOV : float = 75.0
-const MIN_CAM_DIST : float = 10.0
-const MAX_CAM_DIST : float = 25.0
-const MIN_CAM_HEIGHT : float = 10.0
-const MAX_CAM_HEIGHT : float = 12.5
+#const MIN_CAM_DIST : float = 10.0
+#const MAX_CAM_DIST : float = 25.0
+const MIN_CAM_DIST : float = -10.0
+const MAX_CAM_DIST : float = 0.0
+#const MIN_CAM_HEIGHT : float = 10.0
+#const MAX_CAM_HEIGHT : float = 12.5
+const MIN_CAM_HEIGHT : float = 5.0
+const MAX_CAM_HEIGHT : float = 5.0
 
 const MOUSE_VERT_SENSITIVITY : float = 0.1
 const MOUSE_HORZ_SENSITIVITY : float  = 0.1
@@ -23,6 +27,7 @@ const FREE_ROTATE_VERT_SENSITIVITY : float = 0.05
 const FREE_ROTATE_HORZ_SENSITIVITY : float = 0.05
 
 var has_cam_control : bool = true
+onready var default_spring_arm_orientation : Transform = $CamRotationHelper/SpringArm.transform
 
 var mouse_vert_invert : int = 1
 var mouse_horz_invert : int = -1
@@ -144,6 +149,8 @@ func _physics_process(delta : float) -> void:
 		prev_ground_distance = 0
 		velocity.y -= Globals.GRAVITY
 	
+	velocity += _check_kinematic_collision()
+	
 	if is_braking:
 		if is_on_ground:
 			velocity.x = _interpolate_float(velocity.x, 0, BRAKE_DEACCEL)
@@ -213,7 +220,7 @@ func _input(event):
 				cam_rot_help.rotate_y(deg2rad(event.relative.x * mouse_horz_invert * MOUSE_HORZ_SENSITIVITY))
 				
 				var helper_rotation : Vector3 = cam_rot_help.rotation_degrees
-				helper_rotation.x = clamp(helper_rotation.x, -10, 10)
+				helper_rotation.x = clamp(helper_rotation.x, -28, -5)
 				helper_rotation.y = clamp(helper_rotation.y, -30, 30)
 				helper_rotation.z = 0
 				cam_rot_help.rotation_degrees = helper_rotation
@@ -265,10 +272,10 @@ func _adjust_cam_fov_dist():
 	var max_speed : float = MAX_FORWARD_VEL
 #	if is_boosting:
 #		max_speed = MAX_BOOST_VEL
-	camera.fov = ((temp_velocity.length() * (MAX_CAM_FOV - MIN_CAM_FOV)) / max_speed) + MIN_CAM_FOV
+	camera.fov = clamp(((temp_velocity.length() * (MAX_CAM_FOV - MIN_CAM_FOV)) / max_speed) + MIN_CAM_FOV, \
+		MIN_CAM_FOV, MAX_CAM_FOV)
 	camera.transform.origin.z = ((temp_velocity.length() * (MIN_CAM_DIST - MAX_CAM_DIST)) / max_speed) + MAX_CAM_DIST
 	camera.transform.origin.y = ((temp_velocity.length() * (MIN_CAM_HEIGHT - MAX_CAM_HEIGHT)) / max_speed) + MAX_CAM_HEIGHT
-	camera.fov = clamp(camera.fov, MIN_CAM_FOV, MAX_CAM_FOV)
 	camera.transform.origin.z = clamp(camera.transform.origin.z, MIN_CAM_DIST, MAX_CAM_DIST)
 	camera.transform.origin.y = clamp(camera.transform.origin.y, MIN_CAM_HEIGHT, MAX_CAM_HEIGHT)
 
@@ -319,12 +326,14 @@ func _crash():
 	if !$CrashTimer.time_left:
 		has_cam_control = false
 	._crash()
-	camera.look_at(crash_bike.global_transform.origin, Vector3.UP)
+	$CamRotationHelper/SpringArm.look_at(crash_bike.global_transform.origin, Vector3.UP)
+#	camera.look_at(crash_bike.global_transform.origin, Vector3.UP)
 
 
 func _crash_finished():
 	._crash_finished()
-	camera.transform = camera.default_cam_transform
+	$CamRotationHelper/SpringArm.transform = default_spring_arm_orientation
+#	camera.transform = camera.default_cam_transform
 	if Globals.race_on_going == true:
 		has_cam_control = true
 

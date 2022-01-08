@@ -31,8 +31,8 @@ outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="Gradient" id=7]
-offsets = PoolRealArray( 0, 0.797814, 0.8, 1 )
-colors = PoolColorArray( 0, 0.640625, 0.167664, 1, 0, 0.639216, 0.168627, 1, 0.776471, 0.254902, 0.254902, 1, 0.776471, 0.254902, 0.254902, 1 )
+offsets = PoolRealArray( 0 )
+colors = PoolColorArray( 0, 0.640625, 0.167664, 1 )
 
 [sub_resource type="GradientTexture" id=8]
 gradient = SubResource( 7 )
@@ -59,6 +59,18 @@ size_flags_vertical = 3
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
+}
+
+[node name="FPS" type="Label" parent="."]
+anchor_left = -0.0182705
+anchor_right = 0.98173
+anchor_bottom = 1.0
+margin_left = 2500.29
+margin_top = 1402.08
+margin_right = -19.7114
+margin_bottom = -12.9208
+__meta__ = {
+"_edit_use_anchors_": true
 }
 
 [node name="LapLabel" type="Label" parent="."]

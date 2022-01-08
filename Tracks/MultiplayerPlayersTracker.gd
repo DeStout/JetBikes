@@ -78,7 +78,7 @@ func _spawn_players():
 			new_player.puppet_transform = player_spawn.global_transform
 		else:
 			new_player.global_transform = player_spawn.global_transform
-			
+		
 		new_player.set_racer_color(Network.player_list[player].color)
 		
 		_setup_crash_bike(new_player)
@@ -97,22 +97,23 @@ func _spawn_players():
 
 func _setup_crash_bike(player):
 	player.crash_bike = crash_bike.instance()
-	player.crash_bike.set_bike_color(player.get_racer_color())
 	$CrashBikes.add_child(player.crash_bike)
+	player.crash_bike.set_bike_color(player.get_racer_color())
 
 
-func setup_players(track_navigation, path, path_nodes):
+func setup_players(path, path_nodes):
 	path_nodes_size = path_nodes.size()
 	
 	master_player.HUD.set_max_laps(Network.multiplayer_lap_amount)
-	master_player.navigation = track_navigation
+#	master_player.navigation = track_navigation
+	master_player.path = path
 	master_player.path_nodes = path_nodes
 	master_player.current_path_node = path_nodes[0]
 	
 	if get_tree().get_network_unique_id() == 1:
 		for npc_temp in players:
 			if npc_temp is NPC:
-				npc_temp.navigation = track_navigation
+#				npc_temp.navigation = track_navigation
 				npc_temp.path_nodes = path_nodes
 				npc_temp.current_path_node = path_nodes[0]
 				npc_temp.pathfind_next_node()

@@ -41,6 +41,7 @@ var is_crashed : bool = false
 var is_swinging : bool = false
 var is_free_rotating : bool = false
 
+var bike_color : Color
 var bike_material : SpatialMaterial = SpatialMaterial.new()
 var windshield_material : SpatialMaterial = SpatialMaterial.new()
 onready var ground_particles : Particles = $GroundParticles
@@ -216,21 +217,22 @@ func _crash_finished():
 	is_crashed = false
 
 
-func _on_VisibilityTimer_timeout():
+func _on_VisibilityTimer_timeout() -> void:
 	$EngineRotationHelper/Engine.visible = !$EngineRotationHelper/Engine.visible
 
 
-func _check_kinematic_collision():
+func _check_kinematic_collision() -> Vector3:
 	if get_slide_count():
 		for i in get_slide_count():
 			var collision : KinematicCollision = get_slide_collision(i)
 			if collision.collider.get_class() == "KinematicBody":
 #				var collision_factor : float = 1 - velocity.normalized().dot(collision.collider_velocity.normalized())
+#				print(collision.collider.name, " ", collision.collider_velocity, " ", collision.collider_velocity - velocity)
 				return collision.collider_velocity - velocity
 	return Vector3.ZERO
 
 
-func add_remove_swing_pole(swing_pole : SwingPole):
+func add_remove_swing_pole(swing_pole : SwingPole) -> void:
 	if swing_poles.has(swing_pole):
 		swing_poles.erase(swing_pole)
 		$LaserLine.set_laser_line()
@@ -238,7 +240,7 @@ func add_remove_swing_pole(swing_pole : SwingPole):
 		swing_poles.append(swing_pole)
 
 
-func _check_swing_poles(delta : float):
+func _check_swing_poles(delta : float) -> void:
 	if !swing_poles.empty():
 		var closest_pole : SwingPole = swing_poles.front()
 		for swing_pole in swing_poles:
@@ -251,7 +253,7 @@ func _check_swing_poles(delta : float):
 			$LaserLine.set_laser_line()
 
 
-func _swing(swing_pole : SwingPole, delta : float):
+func _swing(swing_pole : SwingPole, delta : float) -> void:
 	var swing_distance = global_transform.origin.distance_to(swing_pole.global_transform.origin)
 	var pull_strength = (swing_distance / swing_pole.swing_length) * swing_pole.swing_strength
 	var delta_velocity = Vector3.ZERO
@@ -303,6 +305,7 @@ func _set_target_speed(new_target_speed : int) -> void:
 
 
 func set_racer_color(new_color : Color) -> void:
+	bike_color = new_color
 #	$EngineRotationHelper/Engine/Shielding.set_surface_material(0, bike_material)
 	$EngineRotationHelper/Engine/WindShield.set_surface_material(0, windshield_material)
 #
@@ -312,20 +315,19 @@ func set_racer_color(new_color : Color) -> void:
 #
 #	bike_material.albedo_color = new_color
 	yield(get_tree(), "idle_frame")
-	$EngineRotationHelper/Engine/Shielding.get_surface_material(0).albedo_color = new_color
-	var temp = $EngineRotationHelper/Engine/Shielding.get_surface_material(0)
-	windshield_material.albedo_color = new_color
+	$EngineRotationHelper/Engine/Shielding.get_surface_material(0).albedo_color = bike_color
+	windshield_material.albedo_color = bike_color
 	windshield_material.albedo_color.a = 90.0 / 255.0
 
 
 func get_racer_color() -> Color:
-	if bike_material == null:
+	if bike_color == null:
 		return Color(0.184314, 0.788235, 1)
 #	return bike_material.albedo_color
-	return $EngineRotationHelper/Engine/Shielding.get_surface_material(0).albedo_color
+	return bike_color
 
 
-func _set_audio_sfx(sfx_effect):
+func _set_audio_sfx(sfx_effect) -> void:
 	var effect_enabled : bool = AudioServer.is_bus_effect_enabled(Globals.player_bus, sfx_effect)
 	AudioServer.set_bus_effect_enabled(Globals.player_bus, sfx_effect, !effect_enabled)
 

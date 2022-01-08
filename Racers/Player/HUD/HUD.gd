@@ -3,6 +3,10 @@ extends Control
 var max_laps : String
 
 
+func _process(delta):
+	$FPS.text = "FPS: " + str(Engine.get_frames_per_second())
+
+
 func set_max_laps(new_max_laps : int) -> void:
 	max_laps = str(new_max_laps)
 	$LapLabel.text = ("Lap: ~/" + str(max_laps))

@@ -15,12 +15,11 @@ func _process(delta):
 	if acceleration != 0:
 		if !playing:
 			playing = true
-		pitch_scale += clamp(delta * acceleration * DELTA_PITCH, MIN_PITCH, MAX_PITCH)
+		pitch_scale = clamp(pitch_scale + (delta * acceleration * DELTA_PITCH), MIN_PITCH, MAX_PITCH)
 
 		if is_equal_approx(pitch_scale, MIN_PITCH):
-			if pitch_scale == MIN_PITCH:
-				playing = false
-				pitch_scale = DEFAULT_PITCH
+			playing = false
+			pitch_scale = DEFAULT_PITCH
 			acceleration = 0
 	else:
 		playing = false
