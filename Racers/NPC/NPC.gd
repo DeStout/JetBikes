@@ -85,7 +85,7 @@ func _physics_process(delta : float) -> void:
 		move_force = clamp(move_force, -11, 11)
 
 		move_direction += ground_normal * move_force * 1.1
-		move_direction += downhill * -Globals.GRAVITY * 0.25
+		move_direction += downhill * -Globals.GRAVITY * 0.25 * delta
 
 		prev_ground_distance = ground_distance
 
@@ -93,7 +93,7 @@ func _physics_process(delta : float) -> void:
 		var npc_quat = npc_basis.get_rotation_quat()
 		global_transform.basis = Basis(npc_quat.slerp(_align_to_normal(Vector3.UP), delta*4))
 		prev_ground_distance = 0
-		move_direction = Vector3(0, -Globals.GRAVITY, 0)
+		move_direction = Vector3(0, -Globals.GRAVITY, 0) * delta
 	move_direction += _check_kinematic_collision()
 
 	velocity += move_direction

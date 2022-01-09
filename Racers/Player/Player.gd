@@ -137,7 +137,7 @@ func _physics_process(delta : float) -> void:
 		move_force = clamp(move_force, -10, 10)
 		
 		velocity += ground_normal * move_force
-		velocity += downhill * -Globals.GRAVITY * 0.25
+		velocity += downhill * -Globals.GRAVITY * 0.25 * delta
 		
 		prev_ground_distance = ground_distance
 	
@@ -147,7 +147,7 @@ func _physics_process(delta : float) -> void:
 		global_transform.basis = Basis(player_quat.slerp(_align_to_normal(Vector3.UP), delta*2))
 
 		prev_ground_distance = 0
-		velocity.y -= Globals.GRAVITY
+		velocity.y -= Globals.GRAVITY * delta
 	
 	velocity += _check_kinematic_collision()
 	
@@ -160,6 +160,7 @@ func _physics_process(delta : float) -> void:
 			velocity.z = _interpolate_float(velocity.z, 0, AIR_BRAKE_DEACCEL)
 	
 	prev_velocity = velocity
+	
 	velocity = move_and_slide(velocity, Vector3.UP, false, 4, 0.785, false)
 	
 	_set_speedometer()

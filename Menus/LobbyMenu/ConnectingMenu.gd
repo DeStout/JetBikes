@@ -1,7 +1,7 @@
 extends Control
 
 onready var connect_text = $Connection
-onready var cancel_button = $CancelPanel/CancelButton
+onready var cancel_button
 var num_periods : int = 0
 
 

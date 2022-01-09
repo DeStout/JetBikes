@@ -15,6 +15,7 @@ var connected_to_host = false
 
 func _ready():
 	Network.connect("connected_to_host", self, "connected_to_host")
+	$MenuFrame/ConnectingFrame.cancel_button = $MenuFrame/LobbyFrame/CancelPanel/CancelButton
 	update_lobby_info("Lobby Created")
 	
 	# Restrict Client from joining "ghost" server

@@ -38,7 +38,7 @@ onready var player_bus : int = AudioServer.get_bus_index("Player_SFX")
 onready var npc_bus : int = AudioServer.get_bus_index("NPC_SFX")
 onready var level_bus : int = AudioServer.get_bus_index("Level_SFX")
 
-const GRAVITY = 2.5
+const GRAVITY = 150
 
 var level : int = DEFAULT_LEVEL
 var laps_number : int = DEFAULT_LAP_NUMBER

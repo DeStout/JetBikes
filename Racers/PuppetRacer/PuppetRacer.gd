@@ -4,6 +4,7 @@ class_name PuppetRacer
 var master_id : int = 0
 var player_name : String
 
+var bike_color : Color
 var bike_material : SpatialMaterial = SpatialMaterial.new()
 var windshield_material : SpatialMaterial = SpatialMaterial.new()
 
@@ -74,19 +75,22 @@ puppet func swing(var is_swinging : bool):
 
 
 func set_racer_color(new_color : Color) -> void:
-	$Engine/SteeringColumn.set_surface_material(0, bike_material)
+	bike_color = new_color
+#	$Engine/SteeringColumn.set_surface_material(0, bike_material)
 	$Engine/WindShield.set_surface_material(0, windshield_material)
 	
-	bike_material.params_cull_mode = SpatialMaterial.CULL_DISABLED
+#	bike_material.params_cull_mode = SpatialMaterial.CULL_DISABLED
 	windshield_material.params_cull_mode = SpatialMaterial.CULL_DISABLED
 	windshield_material.flags_transparent = true
 	
-	bike_material.albedo_color = new_color
-	windshield_material.albedo_color = new_color
+#	bike_material.albedo_color = new_color
+	yield(get_tree(), "idle_frame")
+	$Engine/Shielding.get_surface_material(0).albedo_color = bike_color
+	windshield_material.albedo_color = bike_color
 	windshield_material.albedo_color.a = 90.0 / 255.0
 
 
 func get_racer_color() -> Color:
 	if bike_material == null:
 		return Color(0.184314, 0.788235, 1)
-	return bike_material.albedo_color
+	return bike_color

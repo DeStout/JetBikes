@@ -68,7 +68,7 @@ func _spawn_players():
 		new_player.set_network_master(player)
 		new_player.name = str(player)
 		new_player.player_name = Network.player_list[player].player_name
-			
+		
 #		var player_spawn : Spatial = get_node("PlayerSpawn" + str(player_num + \
 #			Network.multiplayer_npc_amount))
 		var player_spawn : Spatial = get_node("PlayerSpawn" + str(Network.MAX_CONNECTIONS - \
