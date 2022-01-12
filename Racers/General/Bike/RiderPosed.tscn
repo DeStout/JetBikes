@@ -1,15 +1,69 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Racers/General/Bike/Assets/Models/RiderPosed.glb" type="PackedScene" id=1]
-[ext_resource path="res://Racers/General/Bike/Assets/Models/M_Racer_N.png" type="Texture" id=2]
+[ext_resource path="res://Racers/General/Helmet/N_Helmet.png" type="Texture" id=2]
+[ext_resource path="res://Racers/General/Helmet/Helmet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Racers/General/Helmet/helmet_AO.png" type="Texture" id=4]
+[ext_resource path="res://Racers/General/Helmet/D_Helmet.png" type="Texture" id=5]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.941176, 0.807843, 0.623529, 1 )
+
+[sub_resource type="SpatialMaterial" id=2]
+resource_local_to_scene = true
+params_cull_mode = 2
+albedo_texture = ExtResource( 5 )
 normal_enabled = true
 normal_scale = 1.0
 normal_texture = ExtResource( 2 )
+ao_enabled = true
+ao_light_affect = 0.0
+ao_texture = ExtResource( 4 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+
+[sub_resource type="SpatialMaterial" id=3]
+resource_local_to_scene = true
+flags_transparent = true
+albedo_texture = ExtResource( 5 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 2 )
+ao_enabled = true
+ao_light_affect = 0.0
+ao_texture = ExtResource( 4 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+
+[sub_resource type="SpatialMaterial" id=4]
+resource_local_to_scene = true
+flags_transparent = true
+albedo_texture = ExtResource( 5 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 2 )
+ao_enabled = true
+ao_light_affect = 0.0
+ao_texture = ExtResource( 4 )
+ao_on_uv2 = false
+ao_texture_channel = 0
 
 [node name="RiderPosed" instance=ExtResource( 1 )]
 
 [node name="Rider" parent="." index="0"]
 material/0 = SubResource( 1 )
+
+[node name="Helmet" parent="." index="1" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 0.922552, -0.385874, 0, 0.385874, 0.922552, 0, 0.855483, 1.08743 )
+
+[node name="Helmet" parent="Helmet" index="0"]
+material/0 = SubResource( 2 )
+
+[node name="Visor" parent="Helmet" index="1"]
+transform = Transform( 1, 1.77636e-15, 0, 0, 1, 6.80182e-16, 0, 6.80182e-16, 1, -3.55271e-15, 0.106092, 0.0308775 )
+material/0 = SubResource( 3 )
+
+[node name="Spoiler" parent="Helmet" index="2"]
+material/0 = SubResource( 4 )
+
+[editable path="Helmet"]

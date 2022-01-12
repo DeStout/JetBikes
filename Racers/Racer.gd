@@ -315,9 +315,17 @@ func set_racer_color(new_color : Color) -> void:
 #
 #	bike_material.albedo_color = new_color
 	yield(get_tree(), "idle_frame")
+	var helmet = $EngineRotationHelper/Engine/Rider.get_node("Helmet").get_node("Helmet")
+	var visor = $EngineRotationHelper/Engine/Rider.get_node("Helmet").get_node("Visor")
+	var spoiler = $EngineRotationHelper/Engine/Rider.get_node("Helmet").get_node("Spoiler")
+	
 	$EngineRotationHelper/Engine/Shielding.get_surface_material(0).albedo_color = bike_color
 	windshield_material.albedo_color = bike_color
 	windshield_material.albedo_color.a = 90.0 / 255.0
+	
+	helmet.get_surface_material(0).albedo_color = bike_color
+	visor.get_surface_material(0).albedo_color = bike_color
+	spoiler.get_surface_material(0).albedo_color = bike_color
 
 
 func get_racer_color() -> Color:

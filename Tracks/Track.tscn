@@ -117,13 +117,6 @@ __meta__ = {
 
 [node name="SwingPoles" type="Node" parent="."]
 
-[node name="Navigation" type="Navigation" parent="."]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]

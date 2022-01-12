@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Racers/General/Bike/DetectRay.gd" type="Script" id=1]
 [ext_resource path="res://Racers/Player/AudioBoost.gd" type="Script" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://addons/LineRenderer/line.png" type="Texture" id=8]
 [ext_resource path="res://Racers/General/Bike/Assets/SFX/JetEngine.wav" type="AudioStream" id=9]
 [ext_resource path="res://Racers/General/Bike/Assets/SFX/DieselEngine.wav" type="AudioStream" id=10]
-[ext_resource path="res://Racers/General/Bike/RacerPosed.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Racers/General/Bike/Bike05.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_Metalness.png" type="Texture" id=13]
 [ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_Roughness.png" type="Texture" id=14]
@@ -68,12 +67,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 [node name="Shielding" parent="EngineRotationHelper/Engine" index="1"]
 material/0 = SubResource( 6 )
 
-[node name="RiderPosed" parent="EngineRotationHelper/Engine" instance=ExtResource( 11 )]
-transform = Transform( -1.25, 0, -1.88745e-07, 0, 1.25, 0, 1.88745e-07, 0, -1.25, 0, 0.591315, 0.643297 )
-
-[node name="RiderPosed2" parent="EngineRotationHelper/Engine" instance=ExtResource( 3 )]
+[node name="Rider" parent="EngineRotationHelper/Engine" instance=ExtResource( 3 )]
 transform = Transform( -1.25, 0, -1.09278e-07, 0, 1.25, 0, 1.09278e-07, 0, -1.25, 0, 0.58255, 0.641995 )
-visible = false
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
