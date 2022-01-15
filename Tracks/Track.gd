@@ -4,25 +4,22 @@ extends Spatial
 onready var path_nodes : Array
 
 
-func _ready() -> void:
-	#	#	#	NPC path debug 	#	#	#	#	#
-#	if Globals.SHOW_NPC_PATHFIND:
-#		for player in $Players.players:
-#			if player is NPC:
-#				add_child(player.draw_path)
-	#	#	#	#	#	#	#	#	#	#	#	#
-	
+func _ready():
+	_setup_race()
+
+
+func _setup_race() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	$Players.connect("race_finished", self, "finish_race")
+	$Players.spawn_players()
 	$Players.setup_players($Path, path_nodes)
 	
-#	$MusicPlayer.play()
 	AudioServer.set_bus_mute(Globals.master_bus, true)
 
 
-# Called by $Minimap/Naviation/PathNodes' ready signal
-func setup_pathnodes():
+# Called by $PathNodes' ready signal
+func setup_pathnodes() -> void:
 	path_nodes = $PathNodes.get_children()
 	
 	if path_nodes.size() > 0:
@@ -46,6 +43,10 @@ func setup_pathnodes():
 		path_nodes = path_nodes_array
 
 
+func _preview_finished():
+	begin_countdown()
+
+
 func begin_countdown() -> void:
 	$StartTimer.start()
 	
@@ -63,5 +64,5 @@ func finish_race() -> void:
 	$EndTimer.start()
 
 
-func end_race():
+func end_race() -> void:
 	$MusicPlayer.stop()

@@ -1,6 +1,45 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Tracks/Track.gd" type="Script" id=1]
+[ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Tracks/Assets/TrackComponents/PreviewFollow.gd" type="Script" id=3]
+[ext_resource path="res://Tracks/LevelPreview.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=10]
+size = 128
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=11]
+resource_name = "FadeIn"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "FadeOut"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="Track" type="Spatial"]
 script = ExtResource( 1 )
@@ -145,6 +184,49 @@ bus = "Music"
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 bus = "SFX"
 
+[node name="LevelPreview" type="Path" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -553.103, 138.739, 590.953 )
+curve = null
+script = ExtResource( 4 )
+
+[node name="PreviewFollow" type="PathFollow" parent="LevelPreview"]
+transform = Transform( -0.998529, -0.028807, 0.045776, 0, 0.846399, 0.532471, -0.0540915, 0.531776, -0.845025, -0.0490723, -0.060318, 0.069458 )
+rotation_mode = 4
+script = ExtResource( 3 )
+
+[node name="PreviewCamera" type="Camera" parent="LevelPreview/PreviewFollow"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+current = true
+far = 970.3
+
+[node name="Label" type="Label" parent="LevelPreview/PreviewFollow/PreviewCamera"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1093.0
+custom_fonts/font = SubResource( 10 )
+text = "Press Any Button"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="LevelPreview"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.141176, 0.141176, 0.141176, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LevelPreview/ColorRect"]
+reset_on_save = false
+anims/FadeIn = SubResource( 11 )
+anims/FadeOut = SubResource( 12 )
+
 [connection signal="ready" from="PathNodes" to="." method="setup_pathnodes"]
 [connection signal="timeout" from="StartTimer" to="." method="start_race" flags=6]
 [connection signal="timeout" from="EndTimer" to="." method="end_race" flags=6]
+[connection signal="preview_finished" from="LevelPreview" to="." method="_preview_finished"]

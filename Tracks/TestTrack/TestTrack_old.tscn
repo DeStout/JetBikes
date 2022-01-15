@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://Tracks/Assets/TrackComponents/ModNode/ModNode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tracks/TestTrack/TestTrackBase.tscn" type="PackedScene" id=2]
@@ -25,8 +25,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=5]
-extents = Vector3( 33, 7.25, 1 )
+[sub_resource type="BoxShape" id=57]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=6]
 _data = {
@@ -34,8 +34,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=7]
-extents = Vector3( 60.7069, 8.81014, 1 )
+[sub_resource type="BoxShape" id=58]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=8]
 _data = {
@@ -43,8 +43,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=9]
-extents = Vector3( 81.2255, 7.5014, 1 )
+[sub_resource type="BoxShape" id=59]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=10]
 _data = {
@@ -52,8 +52,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=11]
-extents = Vector3( 94.8076, 11.1072, 1 )
+[sub_resource type="BoxShape" id=60]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=12]
 _data = {
@@ -61,8 +61,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=13]
-extents = Vector3( 97.7215, 7.94472, 1 )
+[sub_resource type="BoxShape" id=61]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=14]
 _data = {
@@ -70,8 +70,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=15]
-extents = Vector3( 27.3589, 7.74111, 1 )
+[sub_resource type="BoxShape" id=62]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=16]
 _data = {
@@ -79,8 +79,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=17]
-extents = Vector3( 13.9237, 7.54149, 1 )
+[sub_resource type="BoxShape" id=63]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=18]
 _data = {
@@ -88,8 +88,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=19]
-extents = Vector3( 15.3552, 8.01225, 1 )
+[sub_resource type="BoxShape" id=64]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=20]
 _data = {
@@ -97,14 +97,17 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
+[sub_resource type="BoxShape" id=65]
+extents = Vector3( 20, 7.5, 1 )
+
 [sub_resource type="Curve3D" id=21]
 _data = {
 "points": PoolVector3Array(  ),
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=22]
-extents = Vector3( 57.9667, 7.86474, 1 )
+[sub_resource type="BoxShape" id=66]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=23]
 _data = {
@@ -112,8 +115,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=24]
-extents = Vector3( 32.176, 7.56483, 1 )
+[sub_resource type="BoxShape" id=67]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=25]
 _data = {
@@ -121,8 +124,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=26]
-extents = Vector3( 18.8761, 7.15348, 1 )
+[sub_resource type="BoxShape" id=68]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=27]
 _data = {
@@ -130,8 +133,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=28]
-extents = Vector3( 58.766, 9.026, 1 )
+[sub_resource type="BoxShape" id=69]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=29]
 _data = {
@@ -139,8 +142,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=30]
-extents = Vector3( 33.3773, 7.57866, 1 )
+[sub_resource type="BoxShape" id=70]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=31]
 _data = {
@@ -148,8 +151,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=32]
-extents = Vector3( 27.106, 7.89502, 1 )
+[sub_resource type="BoxShape" id=71]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=33]
 _data = {
@@ -159,6 +162,9 @@ _data = {
 
 [sub_resource type="BoxShape" id=34]
 extents = Vector3( 29.5742, 8.01842, 1 )
+
+[sub_resource type="BoxShape" id=72]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=35]
 _data = {
@@ -172,8 +178,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=37]
-extents = Vector3( 31.7516, 7.73422, 1 )
+[sub_resource type="BoxShape" id=73]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=38]
 _data = {
@@ -181,8 +187,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=39]
-extents = Vector3( 32.191, 19.1373, 1 )
+[sub_resource type="BoxShape" id=74]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=40]
 _data = {
@@ -190,8 +196,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=41]
-extents = Vector3( 34.4732, 7.68932, 1 )
+[sub_resource type="BoxShape" id=75]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=42]
 _data = {
@@ -199,8 +205,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=43]
-extents = Vector3( 34.9071, 22.3532, 1 )
+[sub_resource type="BoxShape" id=76]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=44]
 _data = {
@@ -208,8 +214,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=45]
-extents = Vector3( 30.8975, 8.36133, 1 )
+[sub_resource type="BoxShape" id=77]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=46]
 _data = {
@@ -217,8 +223,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=47]
-extents = Vector3( 41.1718, 17.3116, 1 )
+[sub_resource type="BoxShape" id=78]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=48]
 _data = {
@@ -226,8 +232,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=49]
-extents = Vector3( 19.8861, 7.1858, 1 )
+[sub_resource type="BoxShape" id=79]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=50]
 _data = {
@@ -235,8 +241,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=51]
-extents = Vector3( 20.7631, 8.5132, 1 )
+[sub_resource type="BoxShape" id=80]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="Curve3D" id=52]
 _data = {
@@ -244,8 +250,8 @@ _data = {
 "tilts": PoolRealArray(  )
 }
 
-[sub_resource type="BoxShape" id=53]
-extents = Vector3( 22.5049, 7.66523, 1 )
+[sub_resource type="BoxShape" id=81]
+extents = Vector3( 20, 7.5, 1 )
 
 [sub_resource type="BoxShape" id=54]
 extents = Vector3( 54.5578, 4.56957, 42.4315 )
@@ -291,176 +297,177 @@ transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -135.311, 37.1528, 64.4653 )
 [node name="PathNode0" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.28389, 88.7441, -166.966 )
 next_serial = 1
-boost_value = 50
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode0" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode0" index="1"]
 curve = SubResource( 4 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode0/Area" index="0"]
-shape = SubResource( 5 )
+shape = SubResource( 57 )
 
 [node name="PathNode1" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.932115, 0, 0.362162, 0, 1, 0, -0.362162, 0, 0.932115, -60.4097, 25.118, -350.921 )
 serial = 1
 next_serial = 2
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode1" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode1" index="1"]
 curve = SubResource( 6 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode1/Area" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.899689, 2.57261, 0 )
-shape = SubResource( 7 )
+shape = SubResource( 58 )
 
 [node name="PathNode2" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.778429, 0, 0.627732, 0, 1, 0, -0.627732, 0, 0.778429, -145.646, -1.52588e-05, -509.824 )
 serial = 2
 next_serial = 3
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode2" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode2" index="1"]
 curve = SubResource( 8 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode2/Area" index="0"]
 transform = Transform( 0.999979, -0.00645767, 0, 0.00645767, 0.999979, 0, 2.98023e-08, 2.32831e-10, 1, 0, 0, 0 )
-shape = SubResource( 9 )
+shape = SubResource( 59 )
 
 [node name="PathNode3" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.114783, 0.00473698, 0.993379, -0.0358534, 0.999357, -0.000622697, -0.992743, -0.0355446, 0.114879, -280.055, -11.9118, -594.985 )
 serial = 3
 next_serial = 4
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode3" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode3" index="1"]
 curve = SubResource( 10 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode3/Area" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, -3.72529e-09, -7.45058e-09, -3.49246e-09, 1, 0, 0, 0 )
-shape = SubResource( 11 )
+shape = SubResource( 60 )
 
 [node name="PathNode4" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( -0.52302, -0.0322825, 0.851709, -0.061606, 0.998101, 1.85911e-09, -0.850091, -0.0524703, -0.524016, -504.781, -22.5633, -578.145 )
 serial = 4
 next_serial = 5
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode4" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode4" index="1"]
 curve = SubResource( 12 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode4/Area" index="0"]
-shape = SubResource( 13 )
+shape = SubResource( 61 )
 
 [node name="PathNode5" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.999899, 0.0141891, 0, -0.0141891, 0.999899, 0, 0, 0, 1, -555.006, -15.5745, -446.755 )
 serial = 5
 next_serial = 6
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode5" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode5" index="1"]
 curve = SubResource( 14 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode5/Area" index="0"]
-shape = SubResource( 15 )
+shape = SubResource( 62 )
 
 [node name="PathNode6" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.996926, -0.0783547, 0, 0.0783547, 0.996926, 0, 0, 0, 1, -553.419, 21.1651, -257.407 )
 serial = 6
 next_serial = 7
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode6" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode6" index="1"]
 curve = SubResource( 16 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode6/Area" index="0"]
-shape = SubResource( 17 )
+shape = SubResource( 63 )
 
 [node name="PathNode7" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -552.741, 21.9307, -46.6721 )
 serial = 7
 next_serial = 8
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode7" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode7" index="1"]
 curve = SubResource( 18 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode7/Area" index="0"]
-shape = SubResource( 19 )
+shape = SubResource( 64 )
 
 [node name="PathNode8" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( -0.933757, -0.354701, 0.0478037, -0.355107, 0.934826, -1.32288e-09, -0.0446881, -0.0169754, -0.998857, -422.268, 51.7999, -75.6565 )
 serial = 8
 next_serial = 9
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode8" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode8" index="1"]
 curve = SubResource( 20 )
+
+[node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode8/Area" index="0"]
+shape = SubResource( 65 )
 
 [node name="PathNode9" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.979353, 0.0754431, -0.187553, -0.076806, 0.997046, 0, 0.186999, 0.0144052, 0.982255, -450.916, 78.4881, -334.107 )
 serial = 9
 next_serial = 10
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode9" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode9" index="1"]
 curve = SubResource( 21 )
 
-[node name="Area" parent="Minimap/Navigation/PathNodes/PathNode9" index="1"]
+[node name="Area" parent="Minimap/Navigation/PathNodes/PathNode9" index="2"]
 transform = Transform( 1, 1.32713e-08, 0, -1.39698e-09, 1, 6.51926e-09, 0, 0, 1, 0, 0, 0 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode9/Area" index="0"]
 transform = Transform( 1, 0, 0, 2.32831e-10, 1, 0, -5.96046e-08, -5.58794e-09, 1, 6.48593, 1.14441e-05, -4.57764e-05 )
-shape = SubResource( 22 )
+shape = SubResource( 66 )
 
 [node name="PathNode10" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( -0.433866, 0.0212256, 0.900727, 0.180555, 0.981491, 0.0638416, -0.882701, 0.190329, -0.429668, -369.455, 85.2126, -431.252 )
 serial = 10
 next_serial = 11
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode10" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode10" index="1"]
 curve = SubResource( 23 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode10/Area" index="0"]
 transform = Transform( 1, 5.96046e-08, 1.19209e-07, 1.04308e-07, 1, 2.98023e-08, 2.38419e-07, 1.49012e-08, 1, 0.431824, 0.486572, 0.000198364 )
-shape = SubResource( 24 )
+shape = SubResource( 67 )
 
 [node name="PathNode11" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.727751, -0.0180909, 0.685602, 0.0248509, 0.999691, 0, -0.685391, 0.0170379, 0.727976, -248.909, 93.2618, -385.21 )
 serial = 11
 next_serial = 12
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode11" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode11" index="1"]
 curve = SubResource( 25 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode11/Area" index="0"]
-shape = SubResource( 26 )
+shape = SubResource( 68 )
 
 [node name="PathNode12" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.994456, -0.0864789, -0.059829, 0.0866341, 0.99624, 3.0374e-10, 0.0596041, -0.00518324, 0.998209, -176.796, 138.803, -184.907 )
 function = 1
 serial = 12
 next_serial = 13
-boost_value = 50
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode12" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode12" index="1"]
 curve = SubResource( 27 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode12/Area" index="0"]
 transform = Transform( 1, 4.51109e-09, 0, -2.96859e-09, 1, 4.65661e-10, 0, 0, 1, 0, 0, 0 )
-shape = SubResource( 28 )
+shape = SubResource( 69 )
 
 [node name="PathNode13" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.470246, -0.011895, -0.882455, 0.0252871, 0.99968, 0, 0.882173, -0.0223148, 0.470396, -250.901, 39.8693, 145.994 )
 serial = 13
 next_serial = 14
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode13" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode13" index="1"]
 curve = SubResource( 29 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode13/Area" index="0"]
 transform = Transform( 0.998776, -0.0494599, 0, 0.0494599, 0.998777, -3.72529e-09, 0, 3.72529e-09, 1, -0.01297, -0.0658607, 9.15527e-05 )
-shape = SubResource( 30 )
+shape = SubResource( 70 )
 
 [node name="PathNode14" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.999258, 0.0385099, 0, -0.0385099, 0.999258, 0, 0, 0, 1, -365.746, 30.1963, 228.194 )
 serial = 14
 next_serial = 15
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode14" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode14" index="1"]
 curve = SubResource( 31 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode14/Area" index="0"]
-shape = SubResource( 32 )
+shape = SubResource( 71 )
 
 [node name="PathNode15a" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.468946, -0.0166054, 0.88307, 0.0353879, 0.999374, -2.48059e-10, -0.882517, 0.03125, 0.46924, -246.547, 44.3746, 308.903 )
@@ -468,11 +475,14 @@ serial = 15
 next_serial = 16
 route = 0
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode15a" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode15a" index="1"]
 curve = SubResource( 33 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode15a/Area" index="0"]
 shape = SubResource( 34 )
+
+[node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode15a/Area" index="1"]
+shape = SubResource( 72 )
 
 [node name="Path" type="Path" parent="Minimap/Navigation/PathNodes/PathNode15a"]
 curve = SubResource( 35 )
@@ -483,11 +493,11 @@ serial = 15
 next_serial = 16
 route = 1
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode15b" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode15b" index="1"]
 curve = SubResource( 36 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode15b/Area" index="0"]
-shape = SubResource( 37 )
+shape = SubResource( 73 )
 
 [node name="PathNode16a" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.447612, 0.0243515, 0.893896, -0.0543228, 0.998523, -3.47884e-09, -0.892576, -0.048559, 0.448274, -146.048, 51.4148, 370.129 )
@@ -495,11 +505,11 @@ serial = 16
 next_serial = 17
 route = 0
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode16a" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode16a" index="1"]
 curve = SubResource( 38 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode16a/Area" index="0"]
-shape = SubResource( 39 )
+shape = SubResource( 74 )
 
 [node name="PathNode16b" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 0.395577, 0, 0.918433, 0, 1, 0, -0.918433, 0, 0.395577, -181.892, 90.1677, 431.316 )
@@ -507,11 +517,11 @@ serial = 16
 next_serial = 17
 route = 1
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode16b" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode16b" index="1"]
 curve = SubResource( 40 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode16b/Area" index="0"]
-shape = SubResource( 41 )
+shape = SubResource( 75 )
 
 [node name="PathNode17a" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( -0.173568, -0.0135382, 0.984729, -0.0777631, 0.996972, 0, -0.981747, -0.0765756, -0.174095, -49.6094, 57.6719, 382.506 )
@@ -519,11 +529,11 @@ serial = 17
 next_serial = 18
 route = 0
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode17a" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode17a" index="1"]
 curve = SubResource( 42 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode17a/Area" index="0"]
-shape = SubResource( 43 )
+shape = SubResource( 76 )
 
 [node name="PathNode17b" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( -0.78188, 0, 0.623429, 0, 1, 0, -0.623429, 0, -0.78188, -40.4517, 99.6053, 387.56 )
@@ -531,11 +541,11 @@ serial = 17
 next_serial = 18
 route = 1
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode17b" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode17b" index="1"]
 curve = SubResource( 44 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode17b/Area" index="0"]
-shape = SubResource( 45 )
+shape = SubResource( 77 )
 
 [node name="PathNode18a" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( -0.986686, -0.0619733, 0.150364, -0.062686, 0.998033, -1.54519e-09, -0.150068, -0.0094257, -0.988631, 89.1442, 75.811, 262.397 )
@@ -543,11 +553,11 @@ serial = 18
 next_serial = 19
 route = 0
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode18a" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode18a" index="1"]
 curve = SubResource( 46 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode18a/Area" index="0"]
-shape = SubResource( 47 )
+shape = SubResource( 78 )
 
 [node name="PathNode18b" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( -0.947294, 0, 0.320365, 0, 1, 0, -0.320365, 0, -0.947294, 25.4886, 108.421, 247.773 )
@@ -555,32 +565,32 @@ serial = 18
 next_serial = 19
 route = 1
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode18b" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode18b" index="1"]
 curve = SubResource( 48 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode18b/Area" index="0"]
-shape = SubResource( 49 )
+shape = SubResource( 79 )
 
 [node name="PathNode19" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( -0.989337, 0.0805387, -0.121349, 0.0811383, 0.996703, 0, 0.120949, -0.00984608, -0.99261, 45.6784, 100.103, 115.696 )
 serial = 19
 next_serial = 20
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode19" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode19" index="1"]
 curve = SubResource( 50 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode19/Area" index="0"]
-shape = SubResource( 51 )
+shape = SubResource( 80 )
 
 [node name="PathNode20" parent="Minimap/Navigation/PathNodes" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 79.2816, 22.4189 )
 serial = 20
 
-[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode20" index="0"]
+[node name="Path" parent="Minimap/Navigation/PathNodes/PathNode20" index="1"]
 curve = SubResource( 52 )
 
 [node name="CollisionShape" parent="Minimap/Navigation/PathNodes/PathNode20/Area" index="0"]
-shape = SubResource( 53 )
+shape = SubResource( 81 )
 
 [node name="ModNodes" type="Node" parent="Minimap/Navigation"]
 

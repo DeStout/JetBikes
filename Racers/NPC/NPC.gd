@@ -140,19 +140,6 @@ func _set_target_speed(new_target_speed : int) -> void:
 	target_speed = new_target_speed
 
 
-#func _path_point_distance() -> void:
-#	if simple_path.size() > 0:
-#		var temp_2D_goal = Vector2(simple_path[current_goal].x, simple_path[current_goal].z)
-#		var temp_2D_global = Vector2(global_transform.origin.x, global_transform.origin.z)
-#		if temp_2D_global.distance_to(temp_2D_goal) < 5:
-#			if current_goal < simple_path.size()-1:
-#				current_goal += 1
-#		elif temp_2D_global.distance_to(temp_2D_goal) > 20:
-#			pathfind_next_node()
-#	else:
-#		pathfind_next_node()
-
-
 func update_path_node(new_path_node : PathNode) -> void:
 	if current_path_node == new_path_node:
 		if current_path_node.serial == 0:
@@ -168,22 +155,3 @@ func update_path_node(new_path_node : PathNode) -> void:
 #				current_path_node = temp_array[randi() % temp_array.size()]
 		else:
 			current_path_node = path_nodes[current_path_node.next_serial]
-#
-#		if new_path_node.function == new_path_node.FUNCTION.DEFAULT:
-#			pathfind_next_node()
-
-
-#func pathfind_next_node() -> void:
-#	var path_node_point : Vector3 = current_path_node.get_closest_point(global_transform.origin)
-#
-#	simple_path.empty()
-#	simple_path = navigation.get_simple_path(global_transform.origin, path_node_point, true)
-#	current_goal = 0
-#
-#	if Globals.SHOW_NPC_PATHFIND:
-#		draw_path.clear()
-#		draw_path.begin(Mesh.PRIMITIVE_LINES)
-#		draw_path.set_color(Color.red)
-#		for p in simple_path:
-#			draw_path.add_vertex(p)
-#		draw_path.end()

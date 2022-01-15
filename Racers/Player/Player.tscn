@@ -36,8 +36,7 @@ spring_length = 23.0
 [node name="CamPosHelper" type="Spatial" parent="CamRotationHelper/SpringArm" index="0"]
 
 [node name="Camera" type="Camera" parent="CamRotationHelper/SpringArm/CamPosHelper" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 8.9407e-08, 0, -5.96046e-08, 1, 0, 0, 0 )
-current = true
+transform = Transform( 1, 0, 0, 0, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, 0, 0 )
 fov = 40.0
 far = 2000.0
 script = ExtResource( 5 )

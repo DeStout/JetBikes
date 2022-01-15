@@ -300,6 +300,10 @@ func _set_boost(delta_boost : float) -> void:
 	HUD.set_boost(boost)
 
 
+func set_current() -> void:
+	$CamRotationHelper/SpringArm/CamPosHelper/Camera.current = true
+
+
 func start_race() -> void:
 	.start_race()
 	HUD.set_race_notice()

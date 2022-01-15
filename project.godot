@@ -88,10 +88,6 @@ run/main_scene="res://Game/Game.tscn"
 Globals="*res://Game/Singletons/Globals.gd"
 Network="*res://Game/Singletons/Network.gd"
 
-[debug]
-
-settings/stdout/verbose_stdout=true
-
 [display]
 
 window/size/width=2560

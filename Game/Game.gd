@@ -33,13 +33,13 @@ func start_single_player_game():
 	add_child(_single_player_track)
 	_single_player_track.connect("return_to_main", self, "return_to_main_menu")
 	
-	yield(get_tree().create_timer(2.0), "timeout")
+#	yield(get_tree().create_timer(2.0), "timeout")
 	
 	remove_child(main_menu)
 	remove_child(level_loader)
 	level_loader.queue_free()
 	
-	_single_player_track.begin_countdown()
+#	_single_player_track.begin_countdown()
 
 
 func setup_online_lobby(is_host : bool):

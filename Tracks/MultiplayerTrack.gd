@@ -3,7 +3,16 @@ extends Track
 signal return_to_lobby
 
 
-func _ready():
+#func _ready():
+#	$Players.master_player.HUD.setup_minimap($Minimap.get_texture(), \
+#		$Minimap/MinimapCamera, $Players.players)
+#
+#	Network.connect("start_timer_start", self, "begin_countdown")
+#	Network.track_ready()
+
+
+func setup_race() -> void:
+	.setup_race()
 	$Players.master_player.HUD.setup_minimap($Minimap.get_texture(), \
 		$Minimap/MinimapCamera, $Players.players)
 	

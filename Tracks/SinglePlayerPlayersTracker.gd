@@ -6,7 +6,7 @@ var npc_ : PackedScene
 var player_ : PackedScene = preload("res://Racers/Player/Player.tscn")
 var player : Player
 var crash_bike = preload("res://Racers/General/Bike/CrashBike.tscn")
-var path_follow_ = preload("res://Racers/NPC/PathFollow.tscn")
+var path_follow_ = preload("res://Racers/NPC/NPCFollow.tscn")
 var players : Array
 var path_nodes_size : int = 0
 
@@ -14,9 +14,10 @@ var path_nodes_size : int = 0
 func _ready() -> void:
 	if Globals.NPC_number != 0:
 		npc_ = preload("res://Racers/NPC/NPC.tscn")
-	_spawn_players()
-	players = get_children()
-	players.erase($CrashBikes)
+#	set_process(false)
+#	_spawn_players()
+#	players = get_children()
+#	players.erase($CrashBikes)
 
 
 func _process(delta : float) -> void:
@@ -24,7 +25,7 @@ func _process(delta : float) -> void:
 	_alert_players()
 
 
-func _spawn_players():
+func spawn_players():
 	player = player_.instance()
 	player.connect("finished_race", self, "finish_race")
 	add_child(player)
@@ -49,6 +50,9 @@ func _spawn_players():
 	
 	for spawn in range(Globals.NPC_number+1, 13):
 		get_node("PlayerSpawn"+str(spawn)).free()
+	
+	players = get_children()
+	players.erase($CrashBikes)
 
 
 func _setup_crash_bike(racer : Racer):
