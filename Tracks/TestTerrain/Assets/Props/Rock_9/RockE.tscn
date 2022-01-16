@@ -12,6 +12,8 @@ data = PoolVector3Array( 0.0011, 0.1771, -2.0266, -0.4594, 0.189, -2.8755, -0.27
 material/0 = ExtResource( 2 )
 
 [node name="StaticBody" type="StaticBody" parent="RootNode/Rock_9" index="0"]
+collision_layer = 2
+collision_mask = 17
 
 [node name="CollisionShape" type="CollisionShape" parent="RootNode/Rock_9/StaticBody" index="0"]
 shape = SubResource( 1 )

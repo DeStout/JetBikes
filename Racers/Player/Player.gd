@@ -136,6 +136,9 @@ func _physics_process(delta : float) -> void:
 		var move_force : float = 1 / (ground_distance / prev_move_distance) - ground_distance
 		move_force = clamp(move_force, -10, 10)
 		
+		if hop:
+			velocity += ground_normal * 7.5
+		
 		velocity += ground_normal * move_force
 		velocity += downhill * -Globals.GRAVITY * 0.25 * delta
 		
@@ -148,6 +151,9 @@ func _physics_process(delta : float) -> void:
 
 		prev_ground_distance = 0
 		velocity.y -= Globals.GRAVITY * delta
+		
+		if hop:
+			hop = false
 	
 	velocity += _check_kinematic_collision()
 	
@@ -192,6 +198,9 @@ func _get_key_input() -> void:
 			elif Input.is_action_just_released("Boost"):
 				is_boosting = false
 				_set_boost_sfx()
+		
+		if Input.is_action_just_pressed("Hop"):
+			hop = true
 
 
 func _input(event):

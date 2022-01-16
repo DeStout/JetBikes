@@ -40,6 +40,7 @@ var is_on_ground : bool = false
 var is_crashed : bool = false
 var is_swinging : bool = false
 var is_free_rotating : bool = false
+var hop : bool = false
 
 var bike_color : Color
 var bike_material : SpatialMaterial = SpatialMaterial.new()
