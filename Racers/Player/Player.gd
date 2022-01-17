@@ -26,7 +26,7 @@ const MOUSE_HORZ_SENSITIVITY : float  = 0.1
 const FREE_ROTATE_VERT_SENSITIVITY : float = 0.05
 const FREE_ROTATE_HORZ_SENSITIVITY : float = 0.05
 
-var has_cam_control : bool = true
+var has_cam_control : bool = false
 onready var default_spring_arm_orientation : Transform = $CamRotationHelper/SpringArm.transform
 
 var mouse_vert_invert : int = 1
@@ -137,6 +137,7 @@ func _physics_process(delta : float) -> void:
 		move_force = clamp(move_force, -10, 10)
 		
 		if hop:
+			$Audio_Hop.play()
 			velocity += ground_normal * 7.5
 		
 		velocity += ground_normal * move_force

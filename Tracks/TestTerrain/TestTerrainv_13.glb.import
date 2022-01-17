@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/TestTerrain_v10.glb-12ee44540e60533712550b0766fa966e.scn"
+path="res://.import/TestTerrainv_13.glb-92deb22826e9a726337135a36deda479.scn"
 
 [deps]
 
-source_file="res://Tracks/TestTerrain/TestTerrain_v10.glb"
-dest_files=[ "res://.import/TestTerrain_v10.glb-12ee44540e60533712550b0766fa966e.scn" ]
+source_file="res://Tracks/TestTerrain/TestTerrainv_13.glb"
+dest_files=[ "res://.import/TestTerrainv_13.glb-92deb22826e9a726337135a36deda479.scn" ]
 
 [params]
 
