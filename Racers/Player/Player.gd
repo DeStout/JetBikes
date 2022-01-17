@@ -138,7 +138,7 @@ func _physics_process(delta : float) -> void:
 		
 		if hop:
 			$Audio_Hop.play()
-			velocity += ground_normal * 7.5
+			velocity += ground_normal * HOP_IMPULSE
 		
 		velocity += ground_normal * move_force
 		velocity += downhill * -Globals.GRAVITY * 0.25 * delta
@@ -156,7 +156,7 @@ func _physics_process(delta : float) -> void:
 		if hop:
 			hop = false
 	
-	velocity += _check_kinematic_collision()
+	velocity += _check_kinematic_collision(delta)
 	
 	if is_braking:
 		if is_on_ground:

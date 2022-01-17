@@ -1,6 +1,7 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Tracks/Assets/TrackComponents/SwingPole/SwingPole.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Tracks/TestTerrain/Assets/D_Rainbow.png" type="Texture" id=2]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Props/Rock_6/RockC.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tracks/Assets/TrackComponents/PathNode/PathNode.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Tracks/TestTerrain/TestTerrainBase.tscn" type="PackedScene" id=5]
@@ -27,7 +28,7 @@
 
 [sub_resource type="ParticlesMaterial" id=13]
 emission_shape = 2
-emission_box_extents = Vector3( 45, 1, 5 )
+emission_box_extents = Vector3( 45, 1, 20 )
 flag_align_y = true
 flag_rotate_y = true
 direction = Vector3( 0, -1, 0 )
@@ -46,6 +47,11 @@ params_diffuse_mode = 4
 params_blend_mode = 1
 params_cull_mode = 2
 albedo_texture = ExtResource( 25 )
+transmission_enabled = true
+transmission = Color( 1, 1, 1, 1 )
+transmission_texture = ExtResource( 25 )
+proximity_fade_enable = true
+proximity_fade_distance = 42.59
 
 [sub_resource type="QuadMesh" id=15]
 material = SubResource( 14 )
@@ -68,11 +74,11 @@ spread = 0.0
 gravity = Vector3( 0, -10, 0 )
 initial_velocity = 73.74
 initial_velocity_random = 0.39
-angular_velocity = 50.0
-angular_velocity_random = 1.0
 tangential_accel = 1.84
 damping = 8.29
 damping_random = 1.0
+angle = -53.1
+angle_random = 1.0
 scale = 1.15
 scale_random = 1.0
 color_ramp = SubResource( 17 )
@@ -80,19 +86,40 @@ color_ramp = SubResource( 17 )
 [sub_resource type="SpatialMaterial" id=19]
 flags_transparent = true
 flags_do_not_receive_shadows = true
-params_diffuse_mode = 4
 params_blend_mode = 1
 params_cull_mode = 2
-params_billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
 albedo_color = Color( 1, 1, 1, 0.0509804 )
 albedo_texture = ExtResource( 24 )
+transmission_enabled = true
+transmission = Color( 1, 1, 1, 1 )
+transmission_texture = ExtResource( 24 )
+proximity_fade_enable = true
+proximity_fade_distance = 20.14
+distance_fade_mode = 1
+distance_fade_min_distance = 20.0
+distance_fade_max_distance = 75.0
 
 [sub_resource type="QuadMesh" id=20]
 material = SubResource( 19 )
 size = Vector2( 150, 150 )
+
+[sub_resource type="QuadMesh" id=21]
+size = Vector2( 250, 250 )
+
+[sub_resource type="SpatialMaterial" id=22]
+flags_transparent = true
+flags_do_not_receive_shadows = true
+params_billboard_mode = 1
+albedo_color = Color( 1, 1, 1, 0.0235294 )
+albedo_texture = ExtResource( 2 )
+transmission_enabled = true
+transmission = Color( 1, 1, 1, 1 )
+transmission_texture = ExtResource( 2 )
+proximity_fade_enable = true
+proximity_fade_distance = 3.3
+distance_fade_mode = 1
+distance_fade_min_distance = 25.0
+distance_fade_max_distance = 150.0
 
 [sub_resource type="Curve3D" id=8]
 _data = {
@@ -4988,136 +5015,151 @@ transform = Transform( 3.25374, 1.07903, -6.99077, 1.73909, -7.58075, -0.360653,
 [node name="RockB_8" parent="LevelGeo/Terrain" index="7" instance=ExtResource( 8 )]
 transform = Transform( 3.32818, 20.5147, 1.43428, 20.1393, -3.54539, 3.97729, 4.16074, 0.75116, -20.3986, -397.623, 169.977, -141.782 )
 
-[node name="RockB_2" parent="LevelGeo/Terrain" index="8" instance=ExtResource( 8 )]
+[node name="RockB_9" parent="LevelGeo/Terrain" index="8" instance=ExtResource( 8 )]
+transform = Transform( -7.27719, 18.0336, -34.3777, 38.5652, -0.646076, -8.50252, -4.44443, -35.1338, -17.4891, -612.879, 307.017, -587.046 )
+
+[node name="RockB_11" parent="LevelGeo/Terrain" index="9" instance=ExtResource( 8 )]
+transform = Transform( -9.10837, 10.6423, -36.9292, 38.3962, 4.16017, -8.27132, 1.66105, -37.8081, -11.305, -680.417, 244.415, -352.115 )
+
+[node name="RockB_2" parent="LevelGeo/Terrain" index="10" instance=ExtResource( 8 )]
 transform = Transform( 1.72166, 20.7602, 3.40377, 8.9384, -3.81343, 18.7375, 19.044, -0.0869555, -9.10228, -137.672, 98.4942, -4.32629 )
 
-[node name="RockB_5" parent="LevelGeo/Terrain" index="9" instance=ExtResource( 8 )]
+[node name="RockB_5" parent="LevelGeo/Terrain" index="11" instance=ExtResource( 8 )]
 transform = Transform( 0.0902162, 1.08785, 0.17836, 0.468379, -0.199827, 0.981859, 0.99792, -0.00455653, -0.476966, 175.024, 7.68336, -4.32629 )
 
-[node name="RockC" parent="LevelGeo/Terrain" index="10" instance=ExtResource( 3 )]
+[node name="RockC" parent="LevelGeo/Terrain" index="12" instance=ExtResource( 3 )]
 transform = Transform( 16.7849, 0, 0, 0, 16.7849, 0, 0, 0, 16.7849, -5.87968, 68.4139, 35.2164 )
 
-[node name="RockC6" parent="LevelGeo/Terrain" index="11" instance=ExtResource( 3 )]
+[node name="RockC6" parent="LevelGeo/Terrain" index="13" instance=ExtResource( 3 )]
 transform = Transform( -3.72053, 0.894073, 5.27752, -4.78411, -3.43815, -2.79022, 2.40081, -5.46568, 2.61846, -282.555, 130.304, 73.7015 )
 
-[node name="RockC8" parent="LevelGeo/Terrain" index="12" instance=ExtResource( 3 )]
+[node name="RockC8" parent="LevelGeo/Terrain" index="14" instance=ExtResource( 3 )]
 transform = Transform( -5.52469, 7.51455, 17.6001, -3.02299, 17.7462, -8.52583, -18.8969, -5.03584, -3.78166, -359.852, 156.539, 98.0567 )
 
-[node name="RockC11" parent="LevelGeo/Terrain" index="13" instance=ExtResource( 3 )]
+[node name="RockC11" parent="LevelGeo/Terrain" index="15" instance=ExtResource( 3 )]
 transform = Transform( 3.66745, -8.43483, -4.19774, 8.91838, 1.65543, 4.46538, -3.03807, -5.32267, 8.04095, -399.393, 179.415, 102.271 )
 
-[node name="RockC7" parent="LevelGeo/Terrain" index="14" instance=ExtResource( 3 )]
+[node name="RockC7" parent="LevelGeo/Terrain" index="16" instance=ExtResource( 3 )]
 transform = Transform( 3.19072, 0.41149, -5.66956, 5.68446, -0.242955, 3.18147, -0.0104786, -6.50119, -0.477746, -299.771, 139.411, 63.3849 )
 
-[node name="RockE" parent="LevelGeo/Terrain" index="15" instance=ExtResource( 18 )]
+[node name="RockE" parent="LevelGeo/Terrain" index="17" instance=ExtResource( 18 )]
 transform = Transform( 4.74421, 17.7539, -1.47142e-07, 1.62605, -0.434513, 18.2996, 17.6793, -4.72427, -1.6831, -363.406, 121.268, -28.147 )
 
-[node name="RockE8" parent="LevelGeo/Terrain" index="16" instance=ExtResource( 18 )]
+[node name="RockE8" parent="LevelGeo/Terrain" index="18" instance=ExtResource( 18 )]
 transform = Transform( 8.94598, 14.9668, 5.80289, 4.15026, -8.57383, 15.7154, 15.5066, -6.33983, -7.55391, -394.497, 138.637, 105.149 )
 
-[node name="RockE10" parent="LevelGeo/Terrain" index="17" instance=ExtResource( 18 )]
+[node name="RockE10" parent="LevelGeo/Terrain" index="19" instance=ExtResource( 18 )]
 transform = Transform( -1.88837, -18.2777, -0.266196, 1.62605, -0.434513, 18.2996, -18.2071, 1.85688, 1.66192, -307.537, 71.1598, -45.5822 )
 
-[node name="RockE3" parent="LevelGeo/Terrain" index="18" instance=ExtResource( 18 )]
+[node name="RockE3" parent="LevelGeo/Terrain" index="20" instance=ExtResource( 18 )]
 transform = Transform( 4.74421, 17.7539, -1.47142e-07, 1.62605, -0.434513, 18.2996, 17.6793, -4.72427, -1.6831, -473.689, 106.797, -185.485 )
 
-[node name="RockE4" parent="LevelGeo/Terrain" index="19" instance=ExtResource( 18 )]
+[node name="RockE4" parent="LevelGeo/Terrain" index="21" instance=ExtResource( 18 )]
 transform = Transform( 4.74421, 17.7539, -1.47142e-07, 1.62605, -0.434513, 18.2996, 17.6793, -4.72427, -1.6831, -562.427, 95.2629, -310.895 )
 
-[node name="RockE2" parent="LevelGeo/Terrain" index="20" instance=ExtResource( 18 )]
+[node name="RockE2" parent="LevelGeo/Terrain" index="22" instance=ExtResource( 18 )]
 transform = Transform( 36.4309, -7.62546, 29.1404, -11.917, -45.6485, 2.95322, 27.6639, -9.62235, -37.1031, -494.119, 286.539, 245.167 )
 
-[node name="RockE9" parent="LevelGeo/Terrain" index="21" instance=ExtResource( 18 )]
+[node name="RockE9" parent="LevelGeo/Terrain" index="23" instance=ExtResource( 18 )]
 transform = Transform( -3.82061, -14.7236, 36.8921, -1.08711, -37.0097, -14.8831, 39.7067, -2.42999, 3.14231, -693.302, 192.055, -24.0361 )
 
-[node name="RockE13" parent="LevelGeo/Terrain" index="22" instance=ExtResource( 18 )]
+[node name="RockE13" parent="LevelGeo/Terrain" index="24" instance=ExtResource( 18 )]
 transform = Transform( -5.81043, -14.6392, 2.42819, -2.37023, -1.65864, -15.6715, 14.6487, -6.07505, -1.57258, -679.994, 214.661, -77.6304 )
 
-[node name="RockE15" parent="LevelGeo/Terrain" index="23" instance=ExtResource( 18 )]
-transform = Transform( -0.168303, 30.3955, -4.25075, -6.74365, -4.18356, -29.648, -29.9412, 0.771406, 6.70151, -632.582, 174.062, -237.754 )
+[node name="RockE15" parent="LevelGeo/Terrain" index="25" instance=ExtResource( 18 )]
+transform = Transform( 3.09627, 28.6604, 10.5346, 15.7066, 7.58552, -25.2536, -26.1858, 7.93879, -13.9019, -645.064, 217.651, -202.234 )
 
-[node name="RockE5" parent="LevelGeo/Terrain" index="24" instance=ExtResource( 18 )]
+[node name="RockE5" parent="LevelGeo/Terrain" index="26" instance=ExtResource( 18 )]
 transform = Transform( 39.1316, -11.7536, -23.7717, -11.917, -45.6485, 2.95322, -23.6902, 3.54816, -40.7518, -385.438, 268.617, -391.549 )
 
-[node name="RockE6" parent="LevelGeo/Terrain" index="25" instance=ExtResource( 18 )]
+[node name="RockE6" parent="LevelGeo/Terrain" index="27" instance=ExtResource( 18 )]
 transform = Transform( 45.5472, -10.076, 7.64544, 11.817, 44.0873, -12.2961, -4.50957, 13.759, 44.9986, -362.848, 195.084, -297.579 )
 
-[node name="RockE11" parent="LevelGeo/Terrain" index="26" instance=ExtResource( 18 )]
+[node name="RockE11" parent="LevelGeo/Terrain" index="28" instance=ExtResource( 18 )]
 transform = Transform( -0.647156, 9.14608, 2.3315, 0.727409, 2.37835, -9.12796, -9.41049, -0.445132, -0.865906, 298.007, 27.3154, -115.4 )
 
-[node name="RockD" parent="LevelGeo/Terrain" index="27" instance=ExtResource( 17 )]
+[node name="RockD" parent="LevelGeo/Terrain" index="29" instance=ExtResource( 17 )]
 transform = Transform( -4.78611, -6.93586, 15.0621, 15.5332, 3.61245, 6.59927, -5.8046, 15.3858, 5.24048, -433.252, 161.538, 102.314 )
 
-[node name="RockD4" parent="LevelGeo/Terrain" index="28" instance=ExtResource( 17 )]
+[node name="RockD4" parent="LevelGeo/Terrain" index="30" instance=ExtResource( 17 )]
 transform = Transform( -2.31251, 1.97395, 4.36258, 4.36785, 2.85492, 1.02353, -1.96226, 4.02854, -2.86297, -614.245, 138.788, -15.8508 )
 
-[node name="RockD5" parent="LevelGeo/Terrain" index="29" instance=ExtResource( 17 )]
+[node name="RockD5" parent="LevelGeo/Terrain" index="31" instance=ExtResource( 17 )]
 transform = Transform( 1.53389, -0.981355, -0.22661, -0.551977, -1.16442, 1.3064, -0.842459, -1.02386, -1.26854, -602.592, 143.947, -29.3753 )
 
-[node name="RockD2" parent="LevelGeo/Terrain" index="30" instance=ExtResource( 17 )]
+[node name="RockD2" parent="LevelGeo/Terrain" index="32" instance=ExtResource( 17 )]
 transform = Transform( 3.05241, -0.090575, 4.21017, 4.20184, 0.41119, -3.03752, -0.279955, 5.18398, 0.314495, -315.954, 156.403, 49.921 )
 
-[node name="RockD3" parent="LevelGeo/Terrain" index="31" instance=ExtResource( 17 )]
+[node name="RockD3" parent="LevelGeo/Terrain" index="33" instance=ExtResource( 17 )]
 transform = Transform( -6.73504, -1.53835, -17.6523, -17.6484, -1.10368, 6.82974, -1.58203, 18.8612, -1.0401, -301.06, 147.016, 58.0822 )
 
-[node name="RockC2" parent="LevelGeo/Terrain" index="32" instance=ExtResource( 3 )]
+[node name="RockC2" parent="LevelGeo/Terrain" index="34" instance=ExtResource( 3 )]
 transform = Transform( 7.54621, 10.6433, -1.41974, 0, -1.73529, -13.0088, -10.7376, 7.47996, -0.997773, -558.102, 162.228, 114.195 )
 
-[node name="RockC5" parent="LevelGeo/Terrain" index="33" instance=ExtResource( 3 )]
+[node name="RockC5" parent="LevelGeo/Terrain" index="35" instance=ExtResource( 3 )]
 transform = Transform( 17.6849, -23.383, -9.29858, -1.71611e-06, -11.3652, 28.5799, -25.1641, -16.4332, -6.53489, -124.999, 169.594, 31.407 )
 
-[node name="RockC3" parent="LevelGeo/Terrain" index="34" instance=ExtResource( 3 )]
+[node name="RockC9" parent="LevelGeo/Terrain" index="36" instance=ExtResource( 3 )]
+transform = Transform( -23.7643, -19.9896, -13.7307, 24.2505, -19.438, -13.6726, 0.188849, -19.3761, 27.8816, -376.069, 288.997, -531.41 )
+
+[node name="RockC3" parent="LevelGeo/Terrain" index="37" instance=ExtResource( 3 )]
 transform = Transform( 4.7526, 6.70314, -0.894152, 0, -1.09288, -8.19295, -6.76251, 4.71087, -0.628397, -530.744, 135.368, -63.5703 )
 
-[node name="RockC4" parent="LevelGeo/Terrain" index="35" instance=ExtResource( 3 )]
+[node name="RockC4" parent="LevelGeo/Terrain" index="38" instance=ExtResource( 3 )]
 transform = Transform( -17.065, 15.2741, 6.81067, 3.12255, 12.4695, -20.141, -16.4296, -13.4949, -10.902, -669.472, 156.337, 47.0844 )
 
-[node name="RockA" parent="LevelGeo/Terrain" index="36" instance=ExtResource( 12 )]
+[node name="RockA" parent="LevelGeo/Terrain" index="39" instance=ExtResource( 12 )]
 transform = Transform( 37.5459, -8.16917, 0, 8.16917, 37.5459, 0, 0, 0, 38.4243, -580.08, 177.856, 119.709 )
 
-[node name="RockA5" parent="LevelGeo/Terrain" index="37" instance=ExtResource( 12 )]
+[node name="RockA5" parent="LevelGeo/Terrain" index="40" instance=ExtResource( 12 )]
 transform = Transform( 17.0441, -3.70843, 0, 3.70843, 17.0441, 0, 0, 0, 17.4429, -451.85, 121.264, 31.8317 )
 
-[node name="RockA3" parent="LevelGeo/Terrain" index="38" instance=ExtResource( 12 )]
+[node name="RockA3" parent="LevelGeo/Terrain" index="41" instance=ExtResource( 12 )]
 transform = Transform( 8.99236, -10.1144, -15.1219, 4.31453, 17.5727, -9.18798, 17.6737, 0.856308, 9.93702, -557.372, 193.9, 329.861 )
 
-[node name="RockA2" parent="LevelGeo/Terrain" index="39" instance=ExtResource( 12 )]
+[node name="RockA2" parent="LevelGeo/Terrain" index="42" instance=ExtResource( 12 )]
 transform = Transform( 10.2635, -2.23311, 31.0155, 6.96188, 31.9972, 0, -30.3064, 6.59402, 10.5036, -513.166, 164.344, 105.564 )
 
-[node name="RockA6" parent="LevelGeo/Terrain" index="40" instance=ExtResource( 12 )]
+[node name="RockA6" parent="LevelGeo/Terrain" index="43" instance=ExtResource( 12 )]
 transform = Transform( 11.8648, -4.0146, 32.5176, 5.77933, 34.2982, 2.12568, -32.2507, 4.66931, 12.344, -645.479, 112.423, -135.205 )
 
-[node name="RockA7" parent="LevelGeo/Terrain" index="41" instance=ExtResource( 12 )]
+[node name="RockA7" parent="LevelGeo/Terrain" index="44" instance=ExtResource( 12 )]
 transform = Transform( 4.79943, -3.89037, 14.011, -13.9935, 2.77502, 5.564, -3.95272, -14.5479, -2.68545, -607.363, 176.902, 75.0403 )
 
-[node name="RockA12" parent="LevelGeo/Terrain" index="42" instance=ExtResource( 12 )]
+[node name="RockA12" parent="LevelGeo/Terrain" index="45" instance=ExtResource( 12 )]
 transform = Transform( -4.03605, 7.22198, -1.71748, -7.09572, -4.32763, -1.52276, -2.18115, 0.714918, 8.13191, -618.03, 199.746, -107.679 )
 
-[node name="RockA15" parent="LevelGeo/Terrain" index="43" instance=ExtResource( 12 )]
+[node name="RockA15" parent="LevelGeo/Terrain" index="46" instance=ExtResource( 12 )]
 transform = Transform( -5.69215, -2.52341, -10.1608, -10.0073, -2.08676, 6.12444, -3.07613, 11.4581, -1.12231, -630.647, 172.621, -77.3508 )
 
-[node name="RockA13" parent="LevelGeo/Terrain" index="44" instance=ExtResource( 12 )]
+[node name="RockA13" parent="LevelGeo/Terrain" index="47" instance=ExtResource( 12 )]
 transform = Transform( -8.49463, -0.574107, 15.6134, -4.48111, 17.1147, -1.80869, -14.9675, -4.79814, -8.31968, -618.027, 166.418, -140.287 )
 
-[node name="RockA14" parent="LevelGeo/Terrain" index="45" instance=ExtResource( 12 )]
-transform = Transform( -16.4717, -23.4809, 11.8239, -3.06405, 15.5726, 26.6568, -26.1107, 12.9853, -10.5872, -615.355, 204.001, -130.416 )
+[node name="RockA14" parent="LevelGeo/Terrain" index="48" instance=ExtResource( 12 )]
+transform = Transform( -16.4717, -23.4809, 11.8239, -3.06405, 15.5726, 26.6568, -26.1107, 12.9853, -10.5872, -615.355, 216.611, -130.416 )
 
-[node name="RockA20" parent="LevelGeo/Terrain" index="46" instance=ExtResource( 12 )]
+[node name="RockA19" parent="LevelGeo/Terrain" index="49" instance=ExtResource( 12 )]
+transform = Transform( 30.8225, 0.0260973, 3.5277, -3.06405, 15.5726, 26.6568, -1.74829, -26.8323, 15.4741, -684.991, 246.512, -101.338 )
+
+[node name="RockA17" parent="LevelGeo/Terrain" index="50" instance=ExtResource( 12 )]
+transform = Transform( -16.1026, -14.0356, 22.4985, 4.62719, 24.4307, 18.5528, -26.1107, 12.9853, -10.5872, -613.297, 289.195, -553.33 )
+
+[node name="RockA20" parent="LevelGeo/Terrain" index="51" instance=ExtResource( 12 )]
 transform = Transform( 15.4198, 19.5653, 18.4907, -20.3725, 22.4104, -6.72364, -17.5973, -8.80054, 23.9867, -777.975, 175.862, -104.874 )
 
-[node name="RockA16" parent="LevelGeo/Terrain" index="47" instance=ExtResource( 12 )]
+[node name="RockA16" parent="LevelGeo/Terrain" index="52" instance=ExtResource( 12 )]
 transform = Transform( -35.246, -52.5951, -28.8668, -5.94288, -30.2543, 62.3794, -59.7011, 34.0624, 10.8327, -670.652, 204.001, 66.7241 )
 
-[node name="RockA18" parent="LevelGeo/Terrain" index="48" instance=ExtResource( 12 )]
+[node name="RockA18" parent="LevelGeo/Terrain" index="53" instance=ExtResource( 12 )]
 transform = Transform( -13.1771, -25.4513, -0.978037, 0.786008, -1.507, 28.6265, -25.4579, 13.1272, 1.39007, -763.95, 207.592, -8.0573 )
 
-[node name="RockA9" parent="LevelGeo/Terrain" index="49" instance=ExtResource( 12 )]
+[node name="RockA9" parent="LevelGeo/Terrain" index="54" instance=ExtResource( 12 )]
 transform = Transform( 9.34087, -1.6615, 6.29467, -5.81982, 2.80273, 9.37604, -2.91772, -10.9096, 1.45009, -520.933, 174.384, -44.7545 )
 
-[node name="RockA10" parent="LevelGeo/Terrain" index="50" instance=ExtResource( 12 )]
+[node name="RockA10" parent="LevelGeo/Terrain" index="55" instance=ExtResource( 12 )]
 transform = Transform( 10.7436, 27.8134, 13.5379, -6.19537, 15.9755, -27.9049, -30.3064, 6.59402, 10.5036, -338.915, 146.118, -172.255 )
 
-[node name="RockA8" parent="LevelGeo/Terrain" index="51" instance=ExtResource( 12 )]
+[node name="RockA8" parent="LevelGeo/Terrain" index="56" instance=ExtResource( 12 )]
 transform = Transform( -1.8038, -0.378904, 4.89033, 2.62939, 4.32391, 1.30487, -4.14068, 2.91081, -1.30176, -521.732, 125.615, -23.1264 )
 
 [node name="Truss" parent="LevelGeo/Race" index="0" instance=ExtResource( 13 )]
@@ -5458,7 +5500,7 @@ transform = Transform( -0.0433579, 0, 0.99906, 0, 1, 0, -0.99906, 0, -0.0433579,
 sign_texture = null
 
 [node name="Waterfall" type="Particles" parent="LevelGeo" index="3"]
-transform = Transform( 0.99876, 0, -0.0497909, 0, 1, 0, 0.0497909, 0, 0.99876, -221.762, 294.623, -670.06 )
+transform = Transform( 0.968021, 0, -0.25087, 0, 1, 0, 0.25087, 0, 0.968021, -221.762, 334.355, -674.996 )
 amount = 25
 speed_scale = 1.75
 explosiveness = 0.13
@@ -5468,12 +5510,20 @@ process_material = SubResource( 13 )
 draw_pass_1 = SubResource( 15 )
 
 [node name="Mist" type="Particles" parent="LevelGeo" index="4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -198.882, 8.35355, -683.332 )
+transform = Transform( 0.402379, 0, -0.915473, 0, 1, 0, 0.915473, 0, 0.402379, -224.587, 8.35355, -660.2 )
 amount = 16
 lifetime = 10.0
 visibility_aabb = AABB( -212.878, -215.234, -214.949, 437.047, 585.205, 417.535 )
 process_material = SubResource( 18 )
 draw_pass_1 = SubResource( 20 )
+
+[node name="Rainbow" type="MeshInstance" parent="LevelGeo" index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -222.874, 163.384, -669.684 )
+cast_shadow = 0
+generate_lightmap = false
+mesh = SubResource( 21 )
+software_skinning_transform_normals = false
+material/0 = SubResource( 22 )
 
 [node name="PlayerSpawn1" parent="Players" index="1"]
 transform = Transform( -0.114159, -0.119714, -0.986223, 0.0338823, 0.991666, -0.124296, 0.992885, -0.047605, -0.109151, -52.216, 27.3171, 38.5109 )

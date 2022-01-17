@@ -11,6 +11,7 @@ const STRIFE_DEACCELERATION : float = 0.9
 const DEACCELERATION : float  = 0.5
 const BRAKE_DEACCEL : float  = 1.5
 const AIR_BRAKE_DEACCEL : float  = 1.2
+const HOP_IMPULSE : float = 7.0
 
 #const MAX_SPEED : int = 180
 const MAX_FORWARD_VEL : int = 85
@@ -222,14 +223,14 @@ func _on_VisibilityTimer_timeout() -> void:
 	$EngineRotationHelper/Engine.visible = !$EngineRotationHelper/Engine.visible
 
 
-func _check_kinematic_collision() -> Vector3:
+func _check_kinematic_collision(delta : float) -> Vector3:
 	if get_slide_count():
 		for i in get_slide_count():
 			var collision : KinematicCollision = get_slide_collision(i)
 			if collision.collider.get_class() == "KinematicBody":
-#				var collision_factor : float = 1 - velocity.normalized().dot(collision.collider_velocity.normalized())
-#				print(collision.collider.name, " ", collision.collider_velocity, " ", collision.collider_velocity - velocity)
-				return collision.collider_velocity - velocity
+#				var collision_delta = delta * (-collision.normal.dot(collision.collider.velocity) * \
+#											(collision.collider.velocity - velocity))
+				return delta * (-collision.normal * collision.collider.velocity.length())
 	return Vector3.ZERO
 
 

@@ -94,7 +94,7 @@ func _physics_process(delta : float) -> void:
 		global_transform.basis = Basis(npc_quat.slerp(_align_to_normal(Vector3.UP), delta*4))
 		prev_ground_distance = 0
 		move_direction = Vector3(0, -Globals.GRAVITY, 0) * delta
-	move_direction += _check_kinematic_collision()
+	move_direction += _check_kinematic_collision(delta)
 
 	velocity += move_direction
 
