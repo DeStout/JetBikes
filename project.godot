@@ -208,10 +208,6 @@ Hop={
 3d_physics/layer_4="Water"
 3d_physics/layer_5="NPCs"
 
-[physics]
-
-3d/active_soft_world=false
-
 [rendering]
 
 quality/filters/msaa=4

@@ -296,7 +296,8 @@ func _set_speedometer() -> void:
 	var _y_velocity = Vector3(0, velocity.y, 0)
 	_y_velocity = _y_vector.dot(_y_velocity)
 	var modified_velocity : Vector3 = Vector3(velocity.x, _y_velocity, velocity.z)
-	HUD.set_speedometer(clamp(modified_velocity.length(), 0, MAX_BOOST_VEL))
+#	HUD.set_speedometer(clamp(modified_velocity.length(), 0, MAX_BOOST_VEL))
+	HUD.set_speedometer(modified_velocity.length())
 
 
 func _set_arrow_angle() -> void:

@@ -47,6 +47,7 @@ var bike_color : Color
 var bike_material : SpatialMaterial = SpatialMaterial.new()
 var windshield_material : SpatialMaterial = SpatialMaterial.new()
 onready var ground_particles : Particles = $GroundParticles
+var sparks_particles = load("res://Racers/General/Bike/Assets/Models/Sparks.tscn")
 
 var ground_normal = Vector3.UP
 var ground_point : Vector3
@@ -224,13 +225,18 @@ func _on_VisibilityTimer_timeout() -> void:
 
 
 func _check_kinematic_collision(delta : float) -> Vector3:
-	if get_slide_count():
-		for i in get_slide_count():
-			var collision : KinematicCollision = get_slide_collision(i)
-			if collision.collider.get_class() == "KinematicBody":
+	for i in get_slide_count():
+		var collision : KinematicCollision = get_slide_collision(i)
+		
+		var sparks : Particles = sparks_particles.instance()
+		sparks.global_transform.origin = to_local(collision.position)
+		sparks.emitting = true
+		add_child(sparks)
+		
+		if collision.collider.get_class() == "KinematicBody":
 #				var collision_delta = delta * (-collision.normal.dot(collision.collider.velocity) * \
 #											(collision.collider.velocity - velocity))
-				return delta * (-collision.normal * collision.collider.velocity.length())
+			return delta * (-collision.normal * collision.collider.velocity.length())
 	return Vector3.ZERO
 
 
@@ -309,7 +315,7 @@ func _set_target_speed(new_target_speed : int) -> void:
 func set_racer_color(new_color : Color) -> void:
 	bike_color = new_color
 #	$EngineRotationHelper/Engine/Shielding.set_surface_material(0, bike_material)
-	$EngineRotationHelper/Engine/WindShield.set_surface_material(0, windshield_material)
+	$EngineRotationHelper/Engine/Windshield.set_surface_material(0, windshield_material)
 #
 #	bike_material.params_cull_mode = SpatialMaterial.CULL_DISABLED
 	windshield_material.params_cull_mode = SpatialMaterial.CULL_DISABLED

@@ -5,9 +5,9 @@ const DEFAULT_POSITION : Vector3 = Vector3(0, -100, 0)
 var bike_material : SpatialMaterial = SpatialMaterial.new()
 var windshield_material : SpatialMaterial = SpatialMaterial.new()
 
-func _ready():
-	visible = false
-	global_transform.origin = DEFAULT_POSITION
+#func _ready():
+#	visible = false
+#	global_transform.origin = DEFAULT_POSITION
 
 
 func set_bike_color(new_color : Color) -> void:
@@ -31,7 +31,8 @@ func set_crash(racer : Racer):
 #	set_collision_layer_bit(0, true)
 	$CollisionShape.disabled = false
 	visible = true
-	apply_central_impulse(racer.velocity)
+	var impulse_velocity : Vector3 = Vector3(racer.velocity.x, racer.velocity.y * 0.0, racer.velocity.z)
+	apply_central_impulse(impulse_velocity)
 
 
 func remove_crash():
