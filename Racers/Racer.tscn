@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Racers/General/Bike/DetectRay.gd" type="Script" id=1]
 [ext_resource path="res://Racers/Player/AudioBoost.gd" type="Script" id=2]
@@ -11,8 +11,33 @@
 [ext_resource path="res://Racers/General/Bike/Assets/SFX/JetEngine.wav" type="AudioStream" id=9]
 [ext_resource path="res://Racers/General/Bike/Assets/SFX/DieselEngine.wav" type="AudioStream" id=10]
 [ext_resource path="res://Racers/General/Bike/Assets/SFX/Hop.wav" type="AudioStream" id=11]
-[ext_resource path="res://Racers/General/Bike/Assets/Models/Flame.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Racers/General/Bike/Assets/Models/Flame.tres" type="ArrayMesh" id=13]
 [ext_resource path="res://Racers/General/Bike/Bike06.tscn" type="PackedScene" id=16]
+
+[sub_resource type="Gradient" id=11]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=12]
+gradient = SubResource( 11 )
+
+[sub_resource type="Curve" id=9]
+_data = [ Vector2( 0, 0.973864 ), 0.0, 0.104027, 0, 0, Vector2( 1, 0.127273 ), -1.21012, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+lifetime_randomness = 0.08
+direction = Vector3( 0, 1, 0 )
+spread = 3.32
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 2.0
+linear_accel = 4.61
+scale_random = 1.0
+scale_curve = SubResource( 10 )
+color_ramp = SubResource( 12 )
+hue_variation = -0.2
+hue_variation_random = 0.23
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.75
@@ -59,8 +84,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 [node name="Rider" parent="EngineRotationHelper/Engine" instance=ExtResource( 3 )]
 transform = Transform( -1.25, 0, -1.09278e-07, 0, 1.25, 0, 1.09278e-07, 0, -1.25, 0, 0.58255, 0.641995 )
 
-[node name="Flame" parent="EngineRotationHelper/Engine" instance=ExtResource( 15 )]
-transform = Transform( 0.946177, 0, 0, 0, 0.946177, 0, 0, 0, 0.993911, -0.00428087, -0.511273, 1.76741 )
+[node name="Particles" type="Particles" parent="EngineRotationHelper/Engine"]
+transform = Transform( 1.03421, 0, 0, 0, -4.52066e-08, -1.03421, 0, 1.03421, -4.52066e-08, 0, -0.514, 1.53928 )
+cast_shadow = 0
+generate_lightmap = false
+amount = 10
+lifetime = 0.39
+speed_scale = 3.01
+visibility_aabb = AABB( -0.567687, -0.503016, -0.567215, 1.13406, 2.1497, 1.13323 )
+process_material = SubResource( 6 )
+draw_pass_1 = ExtResource( 13 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
@@ -190,6 +223,8 @@ visibility_aabb = AABB( -1.57502, -1.68518, -0.482215, 3.25055, 3.24511, 8.85 )
 local_coords = false
 process_material = SubResource( 2 )
 draw_pass_1 = SubResource( 4 )
+
+[node name="Sparks" type="Spatial" parent="."]
 
 [node name="CrashTimer" type="Timer" parent="."]
 wait_time = 2.0

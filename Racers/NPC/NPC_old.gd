@@ -1,7 +1,9 @@
 extends Racer
+#class_name NPC
 
 var target_speed : int = MAX_FORWARD_VEL
 
+var path_follow : PathFollow
 var draw_path : ImmediateGeometry = ImmediateGeometry.new()
 var simple_path : PoolVector3Array
 var current_goal : int = 0
@@ -9,8 +11,8 @@ var current_goal : int = 0
 
 func _process(_delta):
 	movement_input = Vector2(0, 1)
-	if path_nodes != null:
-		_path_point_distance()
+#	if path_nodes != null:
+#		_path_point_distance()
 
 
 func _physics_process(delta : float) -> void:	
@@ -83,7 +85,7 @@ func _physics_process(delta : float) -> void:
 		move_force = clamp(move_force, -11, 11)
 
 		move_direction += ground_normal * move_force * 1.1
-		move_direction += downhill * -Globals.GRAVITY * 0.25
+		move_direction += downhill * -Globals.GRAVITY * 0.25 * delta
 
 		prev_ground_distance = ground_distance
 
@@ -91,8 +93,8 @@ func _physics_process(delta : float) -> void:
 		var npc_quat = npc_basis.get_rotation_quat()
 		global_transform.basis = Basis(npc_quat.slerp(_align_to_normal(Vector3.UP), delta*4))
 		prev_ground_distance = 0
-		move_direction = Vector3(0, -Globals.GRAVITY, 0)
-	move_direction += _check_kinematic_collision()
+		move_direction = Vector3(0, -Globals.GRAVITY, 0) * delta
+#	move_direction += _check_kinematic_collision(delta)
 
 	velocity += move_direction
 
@@ -105,30 +107,37 @@ func _physics_process(delta : float) -> void:
 			velocity.z = _interpolate_float(velocity.z, 0, AIR_BRAKE_DEACCEL)
 	
 	prev_velocity = velocity
-	velocity = move_and_slide(velocity, Vector3(0,1,0))
+	velocity = move_and_slide(velocity, Vector3.UP, false, 4, 0.785, false)
 
 	is_on_ground = false
 
 
+func start_race() -> void:
+	.start_race()
+	path_follow.follow = true
+
+
+func finish_race() -> void:
+	.finish_race()
+	path_follow.follow = false
+
+
 func _aim() -> void:
-	look_at(simple_path[current_goal], global_transform.basis[1])
+	look_at(path_follow.global_transform.origin, global_transform.basis[1])
+
+
+func _crash() -> void:
+	._crash()
+	path_follow.follow = false
+
+
+func _crash_finished() -> void:
+	._crash_finished()
+	path_follow.follow = true
 
 
 func _set_target_speed(new_target_speed : int) -> void:
 	target_speed = new_target_speed
-
-
-func _path_point_distance() -> void:
-	if simple_path.size() > 0:
-		var temp_2D_goal = Vector2(simple_path[current_goal].x, simple_path[current_goal].z)
-		var temp_2D_global = Vector2(global_transform.origin.x, global_transform.origin.z)
-		if temp_2D_global.distance_to(temp_2D_goal) < 5:
-			if current_goal < simple_path.size()-1:
-				current_goal += 1
-		elif temp_2D_global.distance_to(temp_2D_goal) > 20:
-			pathfind_next_node()
-	else:
-		pathfind_next_node()
 
 
 func update_path_node(new_path_node : PathNode) -> void:
@@ -139,28 +148,10 @@ func update_path_node(new_path_node : PathNode) -> void:
 				emit_signal("finished_race", self)
 		if typeof(path_nodes[new_path_node.next_serial]) == TYPE_ARRAY:
 			var temp_array = path_nodes[new_path_node.next_serial]
-			if current_path_node.route >= 0:
-				current_path_node = temp_array[current_path_node.route]
-			else:
-				current_path_node = temp_array[randi() % temp_array.size()]
+			current_path_node = temp_array[0]
+#			if current_path_node.route >= 0:
+#				current_path_node = temp_array[current_path_node.route]
+#			else:
+#				current_path_node = temp_array[randi() % temp_array.size()]
 		else:
 			current_path_node = path_nodes[current_path_node.next_serial]
-		
-		if new_path_node.function == new_path_node.FUNCTION.DEFAULT:
-			pathfind_next_node()
-
-
-func pathfind_next_node() -> void:
-	var path_node_point : Vector3 = current_path_node.get_closest_point(global_transform.origin)
-	
-	simple_path.empty()
-	simple_path = navigation.get_simple_path(global_transform.origin, path_node_point, true)
-	current_goal = 0
-	
-	if Globals.SHOW_NPC_PATHFIND:
-		draw_path.clear()
-		draw_path.begin(Mesh.PRIMITIVE_LINES)
-		draw_path.set_color(Color.red)
-		for p in simple_path:
-			draw_path.add_vertex(p)
-		draw_path.end()

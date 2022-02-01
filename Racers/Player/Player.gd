@@ -23,8 +23,8 @@ const MAX_CAM_HEIGHT : float = 5.0
 const MOUSE_VERT_SENSITIVITY : float = 0.1
 const MOUSE_HORZ_SENSITIVITY : float  = 0.1
 
-const FREE_ROTATE_VERT_SENSITIVITY : float = 0.05
-const FREE_ROTATE_HORZ_SENSITIVITY : float = 0.05
+const FREE_ROTATE_VERT_SENSITIVITY : float = 0.04
+const FREE_ROTATE_HORZ_SENSITIVITY : float = 0.04
 
 var has_cam_control : bool = false
 onready var default_spring_arm_orientation : Transform = $CamRotationHelper/SpringArm.transform
@@ -55,9 +55,9 @@ func _physics_process(delta : float) -> void:
 		var basis_velocity : Vector3 = Vector3(velocity.dot(player_basis.x), \
 							velocity.dot(player_basis.y), velocity.dot(player_basis.z))
 		
-		if player_basis[1].dot(ground_normal) > 0:
-			var player_quat = player_basis.get_rotation_quat()
-			global_transform.basis = Basis(player_quat.slerp(_align_to_normal(ground_normal), delta*4))
+#		if player_basis[1].dot(ground_normal) > 0:
+#			var player_quat = player_basis.get_rotation_quat()
+#			global_transform.basis = Basis(player_quat.slerp(_align_to_normal(ground_normal), delta*4))
 		
 		if !is_braking:
 			var delta_move : Vector3
@@ -120,54 +120,53 @@ func _physics_process(delta : float) -> void:
 			velocity = player_basis.xform(basis_velocity)
 		
 		# Hover along surface normal and slide downhill
-		ground_normal = _get_ground_normal()
-		var downhill : Vector3 = Vector3(0, -1, 0).cross(ground_normal).cross(ground_normal)
-		var cast_point : Vector3 = _get_cast_point()
-		ground_point = _get_ground_point()
-		
-		var ground_distance : float = clamp(cast_point.length() - ground_point.length(), \
-			($CollisionShape/GroundDetect1.cast_to.length() - 0.1) * -0.5, \
-			($CollisionShape/GroundDetect1.cast_to.length() - 0.1) * 0.5)
-		var prev_move_distance : float = ground_distance - prev_ground_distance
-		
-		if prev_move_distance == 0:
-			prev_move_distance = 0.001
-			
-		var move_force : float = 1 / (ground_distance / prev_move_distance) - ground_distance
-		move_force = clamp(move_force, -10, 10)
+#		ground_normal = _get_ground_normal()
+#		var downhill : Vector3 = Vector3(0, -1, 0).cross(ground_normal).cross(ground_normal)
+#		var cast_point : Vector3 = _get_cast_point()
+#		ground_point = _get_ground_point()
+#
+#		var ground_distance : float = clamp(cast_point.length() - ground_point.length(), \
+#			($CollisionShape/GroundDetect1.cast_to.length() - 0.1) * -0.5, \
+#			($CollisionShape/GroundDetect1.cast_to.length() - 0.1) * 0.5)
+#		var prev_move_distance : float = ground_distance - prev_ground_distance
+#
+#		if prev_move_distance == 0:
+#			prev_move_distance = 0.001
+#
+#		var move_force : float = 1 / (ground_distance / prev_move_distance) - ground_distance
+#		move_force = clamp(move_force, -10, 10)
+#
+#		velocity += ground_normal * move_force
+#		velocity += downhill * -Globals.GRAVITY * 0.25 * delta
+#
+#		prev_ground_distance = ground_distance
 		
 		if hop:
 			$Audio_Hop.play()
 			velocity += ground_normal * HOP_IMPULSE
-		
-		velocity += ground_normal * move_force
-		velocity += downhill * -Globals.GRAVITY * 0.25 * delta
-		
-		prev_ground_distance = ground_distance
 	
 	# Else if not on ground
 	else:
-		var player_quat = player_basis.get_rotation_quat()
-		global_transform.basis = Basis(player_quat.slerp(_align_to_normal(Vector3.UP), delta*2))
-
-		prev_ground_distance = 0
-		velocity.y -= Globals.GRAVITY * delta
+#		var player_quat = player_basis.get_rotation_quat()
+#		global_transform.basis = Basis(player_quat.slerp(_align_to_normal(Vector3.UP), delta*2))
+#
+#		prev_ground_distance = 0
+#		velocity.y -= Globals.GRAVITY * delta
 		
 		if hop:
 			hop = false
 	
-	velocity += _check_kinematic_collision(delta)
+#	velocity += _check_kinematic_collision(delta)
 	
-	if is_braking:
-		if is_on_ground:
-			velocity.x = _interpolate_float(velocity.x, 0, BRAKE_DEACCEL)
-			velocity.z = _interpolate_float(velocity.z, 0, BRAKE_DEACCEL)
-		else:
-			velocity.x = _interpolate_float(velocity.x, 0, AIR_BRAKE_DEACCEL)
-			velocity.z = _interpolate_float(velocity.z, 0, AIR_BRAKE_DEACCEL)
+#	if is_braking:
+#		if is_on_ground:
+#			velocity.x = _interpolate_float(velocity.x, 0, BRAKE_DEACCEL)
+#			velocity.z = _interpolate_float(velocity.z, 0, BRAKE_DEACCEL)
+#		else:
+#			velocity.x = _interpolate_float(velocity.x, 0, AIR_BRAKE_DEACCEL)
+#			velocity.z = _interpolate_float(velocity.z, 0, AIR_BRAKE_DEACCEL)
 	
 	prev_velocity = velocity
-	
 	velocity = move_and_slide(velocity, Vector3.UP, false, 4, 0.785, false)
 	
 	_set_speedometer()

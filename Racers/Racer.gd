@@ -7,7 +7,7 @@ const FORWARD_ACCELERATION : float  = 0.95
 const STRIFE_ACCELERATION : float  = 0.85
 const REVERSE_ACCELERATION : float  = 0.75
 const BOOST_ACCELERATION : float  = 1.5
-const STRIFE_DEACCELERATION : float = 0.9
+const STRIFE_DEACCELERATION : float = 1.2
 const DEACCELERATION : float  = 0.5
 const BRAKE_DEACCEL : float  = 1.5
 const AIR_BRAKE_DEACCEL : float  = 1.2
@@ -50,13 +50,13 @@ onready var ground_particles : Particles = $GroundParticles
 var sparks_particles = load("res://Racers/General/Bike/Assets/Models/Sparks.tscn")
 
 var ground_normal = Vector3.UP
-var ground_point : Vector3
+#var ground_point : Vector3
 var prev_ground_distance : float = 0
 
 var lap_number : int = 0
 var placement : int = 0
 
-var navigation : Navigation
+#var navigation : Navigation
 var path : Path
 var path_nodes : Array
 var current_path_node : PathNode
@@ -75,11 +75,52 @@ func _process(delta):
 
 func _physics_process(delta):
 	_check_ray_collision()
+	_check_kinematic_collision(delta)
+	
 	_check_swing_poles(delta)
+	
 	_check_out_of_bounds()
 	_check_crash()
 	if is_crashed:
 		_crash()
+	
+	ground_normal = _get_ground_normal()
+	var racer_basis : Basis = global_transform.basis
+	var racer_quat = racer_basis.get_rotation_quat()
+	
+	if is_on_ground:
+		# Align Racer to ground normal
+		if racer_basis.y.dot(ground_normal) > 0:
+				global_transform.basis = Basis(racer_quat.slerp(_align_to_normal(ground_normal), delta * 4))
+		
+		# Hover along surface normal and slide downhill
+		var downhill : Vector3 = Vector3.DOWN.cross(ground_normal).cross(ground_normal)
+		
+		var ground_distance = _get_ground_point().dot(ground_normal)
+		var vertical_movement = velocity.dot(ground_normal)
+		
+		var K = 7
+		var move_force = ground_distance - (vertical_movement * K * delta)
+		
+		velocity += ground_normal * move_force
+		velocity += downhill * -Globals.GRAVITY * 0.25 * delta
+		
+		prev_ground_distance = ground_distance
+		
+	else:
+		print("\n")
+		global_transform.basis = Basis(racer_quat.slerp(_align_to_normal(Vector3.UP), delta))
+
+		prev_ground_distance = 0
+		velocity.y -= Globals.GRAVITY * delta
+	
+	if is_braking:
+		if is_on_ground:
+			velocity.x = _interpolate_float(velocity.x, 0, BRAKE_DEACCEL)
+			velocity.z = _interpolate_float(velocity.z, 0, BRAKE_DEACCEL)
+		else:
+			velocity.x = _interpolate_float(velocity.x, 0, AIR_BRAKE_DEACCEL)
+			velocity.z = _interpolate_float(velocity.z, 0, AIR_BRAKE_DEACCEL)
 
 
 func _check_ray_collision():
@@ -99,23 +140,27 @@ func _check_ray_collision():
 func _get_ground_normal() -> Vector3:
 	var ground_normal1 : Vector3 = $CollisionShape/GroundDetect1.get_collision_normal()
 	var ground_normal2 : Vector3 = $CollisionShape/GroundDetect2.get_collision_normal()
+	
+#	if ground_normal1 == Vector3.ZERO:
+#		ground_normal1 = Vector3.UP
+#	if ground_normal2 == Vector3.ZERO:
+#		ground_normal2 = Vector3.UP
+	
 	return ((ground_normal1 + ground_normal2) * 0.5).normalized()
 
 
 # Average the collision point of the $GroundDetects and return the local coordinates
 func _get_ground_point() -> Vector3:
-	var ground_point1 : Vector3 = $CollisionShape/GroundDetect1.get_collision_point()
-	var ground_point2 : Vector3 = $CollisionShape/GroundDetect2.get_collision_point()
+	var ground_point1 : Vector3 = to_local($CollisionShape/GroundDetect1.get_collision_point())
+	var ground_point2 : Vector3 = to_local($CollisionShape/GroundDetect2.get_collision_point())
 	
-	return to_local((ground_point1 + ground_point2) * 0.5)
-
-
-# Average and return center points of the $GroundCollisions
-func _get_cast_point() -> Vector3:
-	var cast_point1 = to_local($CollisionShape/GroundDetect1.global_transform.origin)
-	var cast_point2 = to_local($CollisionShape/GroundDetect2.global_transform.origin)
+	# If either ground_detect is not colliding set its point to inverse Z of other ground_detect
+	if ground_point1.is_equal_approx(to_local(Vector3.ZERO)):
+		ground_point1 = ground_point2 * Vector3(1, 1, -1)
+	if ground_point2.is_equal_approx(to_local(Vector3.ZERO)):
+		ground_point2 = ground_point1 * Vector3(1, 1, -1)
 	
-	return (cast_point1 + cast_point2) * 0.5 - Vector3(0, 1.1, 0)
+	return (ground_point1 + ground_point2) * 0.5
 
 
 func start_race() -> void:
@@ -137,8 +182,8 @@ func _path_node_distance() -> void:
 
 func _pitch_sfx():
 #	var temp_velocity : Vector2 = Vector2(velocity.x, velocity.z)
-	var player_basis : Basis = global_transform.basis
-	var temp_velocity : Vector2 = Vector2(velocity.dot(player_basis.x), velocity.dot(player_basis.z))
+	var racer_basis : Basis = global_transform.basis
+	var temp_velocity : Vector2 = Vector2(velocity.dot(racer_basis.x), velocity.dot(racer_basis.z))
 	var max_speed : float = MAX_BOOST_VEL
 	sfx_pitch = ((temp_velocity.length() * (MAX_SFX_PITCH - MIN_SFX_PITCH)) / max_speed) + MIN_SFX_PITCH
 	sfx_pitch = clamp(sfx_pitch, MIN_SFX_PITCH, MAX_SFX_PITCH)
@@ -223,21 +268,36 @@ func _crash_finished():
 func _on_VisibilityTimer_timeout() -> void:
 	$EngineRotationHelper/Engine.visible = !$EngineRotationHelper/Engine.visible
 
-
-func _check_kinematic_collision(delta : float) -> Vector3:
+#
+# Instance spark particles at collisions and send impulses to other KinematicBodies
+#
+func _check_kinematic_collision(delta : float) -> void:
 	for i in get_slide_count():
 		var collision : KinematicCollision = get_slide_collision(i)
 		
-		var sparks : Particles = sparks_particles.instance()
-		sparks.global_transform.origin = to_local(collision.position)
-		sparks.emitting = true
-		add_child(sparks)
+		# Add sparks particles
+		if velocity.length() > 10:
+			var sparks : Particles = sparks_particles.instance()
+			$Sparks.add_child(sparks)
+			sparks.transform.origin = to_local(collision.position)
+			sparks.emitting = true
+			if $Sparks.get_child_count() > 3:
+				var oldest : Particles = $Sparks.get_children().front()
+				for spark in $Sparks.get_children():
+					if spark.time_added < oldest.time_added:
+						oldest = spark
+				oldest.queue_free()
 		
-		if collision.collider.get_class() == "KinematicBody":
-#				var collision_delta = delta * (-collision.normal.dot(collision.collider.velocity) * \
-#											(collision.collider.velocity - velocity))
-			return delta * (-collision.normal * collision.collider.velocity.length())
-	return Vector3.ZERO
+		# Send impulse to colliding KinematicBody
+#		if collision.collider.get_class() == "KinematicBody":
+#			collision.collider.add_collision_impulse(name, -collision.normal.dot(prev_velocity.normalized()) * prev_velocity * delta)
+
+func add_collision_impulse(from : String, impulse : Vector3) -> void:
+	if from == "Player" or name == "Player":
+		print(from , " -> ", name, " ", impulse.length())
+		print(velocity.length())
+		velocity += impulse
+		print(velocity.length(), "\n")
 
 
 func add_remove_swing_pole(swing_pole : SwingPole) -> void:

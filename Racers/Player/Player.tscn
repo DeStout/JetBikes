@@ -22,7 +22,7 @@ normal_texture = ExtResource( 7 )
 [node name="Player" instance=ExtResource( 3 )]
 script = ExtResource( 4 )
 
-[node name="Shielding" parent="EngineRotationHelper/Engine" index="1"]
+[node name="Shielding" parent="EngineRotationHelper/Engine" index="2"]
 material/0 = SubResource( 1 )
 
 [node name="CamRotationHelper" type="Spatial" parent="." index="2"]
