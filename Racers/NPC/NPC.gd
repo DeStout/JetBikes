@@ -15,17 +15,15 @@ func _process(_delta):
 #		_path_point_distance()
 
 
-func _physics_process(delta : float) -> void:	
+func _physics_process(delta : float) -> void:
 	var move_direction : Vector3 = Vector3()
 	var npc_basis : Basis = global_transform.basis
 	var temp_velocity : Vector3 = velocity
 	temp_velocity.y = 0
 
 	if is_on_ground:
-		ground_normal = _get_ground_normal()
 		# Apply acceleration/deacceleration along NPC X vector based on input
 		if has_control:
-#			if !is_braking:
 			if movement_input.x != 0:
 				var delta_move : Vector3 = npc_basis[0] * movement_input.x * STRIFE_ACCELERATION
 				var strife_vel : Vector3 = npc_basis[0].dot(temp_velocity) * temp_velocity.normalized()
@@ -58,58 +56,10 @@ func _physics_process(delta : float) -> void:
 					move_direction += delta_move
 			else:
 				move_direction -= npc_basis[2].dot(temp_velocity) * npc_basis[2] * DEACCELERATION
-		
 
-		# Align NPC Y vector to ground normal
 		_aim()
-#		if npc_basis[1].dot(ground_normal) > 0:
-#			var npc_quat = npc_basis.get_rotation_quat()
-#			global_transform.basis = Basis(npc_quat.slerp(_align_to_normal(ground_normal), delta*4))
-#
-#		# Hover along surface normal and slide downhill
-#		var downhill : Vector3 = Vector3(0, -1, 0).cross(ground_normal).cross(ground_normal)
-#		var cast_point : Vector3 = _get_cast_point()
-#		ground_point = _get_ground_point()
-#
-#		var ground_distance : float = clamp(cast_point.length() - ground_point.length(), \
-#			($CollisionShape/GroundDetect1.cast_to.length() - 0.1) * -0.499, \
-#			($CollisionShape/GroundDetect2.cast_to.length() - 0.1) * 0.499)
-#		var prev_move_distance : float = ground_distance - prev_ground_distance
-#
-#		if prev_move_distance == 0:
-#			prev_move_distance = 0.001
-#		if ground_distance == 0:
-#			ground_distance = 0.001
-#
-#		var move_force : float = 1 / (ground_distance / (prev_move_distance)) - ground_distance
-#		move_force = clamp(move_force, -11, 11)
-#
-#		move_direction += ground_normal * move_force * 1.1
-#		move_direction += downhill * -Globals.GRAVITY * 0.25 * delta
-#
-#		prev_ground_distance = ground_distance
-#
-#	else:
-#		var npc_quat = npc_basis.get_rotation_quat()
-#		global_transform.basis = Basis(npc_quat.slerp(_align_to_normal(Vector3.UP), delta*4))
-#		prev_ground_distance = 0
-#		move_direction = Vector3(0, -Globals.GRAVITY, 0) * delta
-#	move_direction += _check_kinematic_collision(delta)
 
 	velocity += move_direction
-
-#	if is_braking:
-#		if is_on_ground:
-#			velocity.x = _interpolate_float(velocity.x, 0, BRAKE_DEACCEL)
-#			velocity.z = _interpolate_float(velocity.z, 0, BRAKE_DEACCEL)
-#		else:
-#			velocity.x = _interpolate_float(velocity.x, 0, AIR_BRAKE_DEACCEL)
-#			velocity.z = _interpolate_float(velocity.z, 0, AIR_BRAKE_DEACCEL)
-	
-	prev_velocity = velocity
-	velocity = move_and_slide(velocity, Vector3.UP, false, 4, 0.785, false)
-
-	is_on_ground = false
 
 
 func start_race() -> void:
@@ -123,7 +73,11 @@ func finish_race() -> void:
 
 
 func _aim() -> void:
+#	var angle_to_path : float = global_transform.basis.z.angle_to(path_follow.global_transform.origin)
+#	print(angle_to_path)
+
 	look_at(path_follow.global_transform.origin, global_transform.basis[1])
+
 
 
 func _crash() -> void:

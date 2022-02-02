@@ -43,25 +43,21 @@ func _process(delta : float) -> void:
 
 
 func _physics_process(delta : float) -> void:
-	_rotate_default(delta)
+	_rotate_to_default(delta)
 	_free_rotate(delta)
-	
+
 	var player_basis : Basis = global_transform.basis
-	
+
 	if is_on_ground:
-		
+
 		# Align player Y vector to ground normal
 		var move_direction : Vector3 = Vector3.ZERO
 		var basis_velocity : Vector3 = Vector3(velocity.dot(player_basis.x), \
 							velocity.dot(player_basis.y), velocity.dot(player_basis.z))
-		
-#		if player_basis[1].dot(ground_normal) > 0:
-#			var player_quat = player_basis.get_rotation_quat()
-#			global_transform.basis = Basis(player_quat.slerp(_align_to_normal(ground_normal), delta*4))
-		
+
 		if !is_braking:
 			var delta_move : Vector3
-			
+
 			#
 			# Apply acceleration/deacceleration along player X vector based on input
 			#
@@ -74,7 +70,7 @@ func _physics_process(delta : float) -> void:
 						MAX_STRIFE_VEL * sign(movement_input.x), STRIFE_ACCELERATION) - basis_velocity.x
 			else:
 				move_direction.x = _interpolate_float(basis_velocity.x, 0, STRIFE_DEACCELERATION) - basis_velocity.x
-			
+
 			#
 			# Apply acceleration/deacceleration along player Z vector based on input
 			#
@@ -101,81 +97,40 @@ func _physics_process(delta : float) -> void:
 						MAX_REVERSE_VEL, REVERSE_ACCELERATION) - basis_velocity.z
 			else:
 				move_direction.z = _interpolate_float(basis_velocity.z, 0, DEACCELERATION) - basis_velocity.z
-		
+
 			basis_velocity += move_direction
-			
+
 			# Throttle diagonal movement speed
 			var mod_basis_velocity : Vector3 = Vector3(basis_velocity.x, 0, basis_velocity.z)
 			if movement_input.y > 0 and movement_input.x != 0:
 				var max_forward_vel : float = MAX_FORWARD_VEL
 				if is_boosting:
 					max_forward_vel = MAX_BOOST_VEL
-					
+
 				if mod_basis_velocity.length() > max_forward_vel:
 					var max_z_vel : float = max_forward_vel * (basis_velocity.z / mod_basis_velocity.length())
 					var max_x_vel : float = max_forward_vel * (basis_velocity.x / mod_basis_velocity.length())
 					basis_velocity.z = _interpolate_float(basis_velocity.z, max_z_vel, DEACCELERATION * 2)
 					basis_velocity.x = _interpolate_float(basis_velocity.x, max_x_vel, DEACCELERATION * 2)
-			
+
 			velocity = player_basis.xform(basis_velocity)
-		
-		# Hover along surface normal and slide downhill
-#		ground_normal = _get_ground_normal()
-#		var downhill : Vector3 = Vector3(0, -1, 0).cross(ground_normal).cross(ground_normal)
-#		var cast_point : Vector3 = _get_cast_point()
-#		ground_point = _get_ground_point()
-#
-#		var ground_distance : float = clamp(cast_point.length() - ground_point.length(), \
-#			($CollisionShape/GroundDetect1.cast_to.length() - 0.1) * -0.5, \
-#			($CollisionShape/GroundDetect1.cast_to.length() - 0.1) * 0.5)
-#		var prev_move_distance : float = ground_distance - prev_ground_distance
-#
-#		if prev_move_distance == 0:
-#			prev_move_distance = 0.001
-#
-#		var move_force : float = 1 / (ground_distance / prev_move_distance) - ground_distance
-#		move_force = clamp(move_force, -10, 10)
-#
-#		velocity += ground_normal * move_force
-#		velocity += downhill * -Globals.GRAVITY * 0.25 * delta
-#
-#		prev_ground_distance = ground_distance
-		
+
 		if hop:
 			$Audio_Hop.play()
 			velocity += ground_normal * HOP_IMPULSE
-	
+
 	# Else if not on ground
 	else:
-#		var player_quat = player_basis.get_rotation_quat()
-#		global_transform.basis = Basis(player_quat.slerp(_align_to_normal(Vector3.UP), delta*2))
-#
-#		prev_ground_distance = 0
-#		velocity.y -= Globals.GRAVITY * delta
-		
 		if hop:
 			hop = false
-	
-#	velocity += _check_kinematic_collision(delta)
-	
-#	if is_braking:
-#		if is_on_ground:
-#			velocity.x = _interpolate_float(velocity.x, 0, BRAKE_DEACCEL)
-#			velocity.z = _interpolate_float(velocity.z, 0, BRAKE_DEACCEL)
-#		else:
-#			velocity.x = _interpolate_float(velocity.x, 0, AIR_BRAKE_DEACCEL)
-#			velocity.z = _interpolate_float(velocity.z, 0, AIR_BRAKE_DEACCEL)
-	
-	prev_velocity = velocity
-	velocity = move_and_slide(velocity, Vector3.UP, false, 4, 0.785, false)
-	
+
 	_set_speedometer()
 
 
 # Track what keyboard input is being pressed
 func _get_key_input() -> void:
 	movement_input = Vector2.ZERO
-		
+
 	if has_control:
 		if Input.is_action_pressed("Accelerate"):
 			movement_input.y += 1
@@ -185,12 +140,14 @@ func _get_key_input() -> void:
 			movement_input.x += 1
 		if Input.is_action_pressed("Reverse"):
 			movement_input.y -= 1
-			
+
 		if Input.is_action_just_pressed("Brake"):
 			is_braking = true
+			is_boosting = false
 		elif Input.is_action_just_released("Brake"):
 			is_braking = false
-		else:
+
+		if !is_braking:
 			if Input.is_action_just_pressed("Boost"):
 				if boost > 0 and movement_input.y > 0:
 					is_boosting = true
@@ -198,13 +155,13 @@ func _get_key_input() -> void:
 			elif Input.is_action_just_released("Boost"):
 				is_boosting = false
 				_set_boost_sfx()
-		
+
 		if Input.is_action_just_pressed("Hop"):
 			hop = true
 
 
 func _input(event):
-	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:	
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseButton:
 			if has_control:
 				if event.button_index == 1:
@@ -212,7 +169,7 @@ func _input(event):
 				if event.button_index == 2:
 					is_free_rotating = event.pressed
 					free_rotate_origin = Vector2.ZERO
-		
+
 		if event is InputEventMouseMotion:
 			# Free rotate the player
 			if is_free_rotating and !is_on_ground:
@@ -220,51 +177,51 @@ func _input(event):
 					engine_rot_help.rotation += engine.rotation
 					$CollisionShape.rotation += engine.rotation
 					engine.rotation = Vector3.ZERO
-					
+
 				free_rotate_origin.x = clamp(free_rotate_origin.x + event.relative.x * 0.07, -max_rotate_speed, max_rotate_speed)
 				free_rotate_origin.y = clamp(free_rotate_origin.y + event.relative.y * 0.07, -max_rotate_speed, max_rotate_speed)
-				
+
 			# Rotate the camera based on mouse movement
 			elif has_cam_control:
 				cam_rot_help.rotate_x(-deg2rad(event.relative.y * mouse_vert_invert * MOUSE_VERT_SENSITIVITY))
 				cam_rot_help.rotate_y(deg2rad(event.relative.x * mouse_horz_invert * MOUSE_HORZ_SENSITIVITY))
-				
+
 				var helper_rotation : Vector3 = cam_rot_help.rotation_degrees
 				helper_rotation.x = clamp(helper_rotation.x, -28, -5)
 				helper_rotation.y = clamp(helper_rotation.y, -30, 30)
 				helper_rotation.z = 0
 				cam_rot_help.rotation_degrees = helper_rotation
-				
+
 				# Rotate vehicle model based on turning sharpness
 				var velocity_ratio = clamp(velocity.length() / MAX_FORWARD_VEL, 0.0, 1.0)
-				engine.rotate_object_local(Vector3(0, 0, 1), deg2rad(helper_rotation.y * 0.08 * velocity_ratio))
+				engine.rotate_object_local(Vector3(0, 0, 1), deg2rad(helper_rotation.y * 0.02 * velocity_ratio))
 				var vehicle_rotation : Vector3 = engine.rotation_degrees
 				vehicle_rotation.z = clamp(vehicle_rotation.z, -45, 45)
 				engine.rotation_degrees = vehicle_rotation
 
 
 # Return Camera, Engine, and Collision back to default values
-func _rotate_default(delta : float) -> void:
+func _rotate_to_default(delta : float) -> void:
 	if has_cam_control:
 		if cam_rot_help.rotation_degrees.y != 0:
 			var yRot : float = cam_rot_help.rotation_degrees.y
-			yRot = yRot + (0 - yRot) * (delta * TURN_SPEED)
+			yRot = yRot + (-yRot * delta * TURN_SPEED)
 			cam_rot_help.rotation_degrees.y = yRot
 			rotate_object_local(Vector3.UP, deg2rad(yRot * delta * TURN_SPEED))
-	
+
 	if engine.rotation_degrees != Vector3.ZERO:
 		var engineRot : Vector3 = engine.rotation_degrees
-		engineRot = engineRot + (Vector3.ZERO - engineRot) * (delta * TURN_SPEED * 0.5)
+		engineRot = engineRot + (-engineRot * delta * TURN_SPEED * 0.5)
 		engine.rotation_degrees = engineRot
-	
+
 	if is_on_ground:
 		if engine_rot_help.rotation_degrees != Vector3.ZERO:
 			var engineRot : Vector3 = engine_rot_help.rotation_degrees
-			engineRot = engineRot + (Vector3.ZERO - engineRot) * (delta * TURN_SPEED * 0.5)
+			engineRot = engineRot + (-engineRot * delta * TURN_SPEED * 0.5)
 			engine_rot_help.rotation_degrees = engineRot
 		if $CollisionShape.rotation_degrees != Vector3.ZERO:
 			var engineRot : Vector3 = $CollisionShape.rotation_degrees
-			engineRot = engineRot + (Vector3.ZERO - engineRot) * (delta * TURN_SPEED * 0.5)
+			engineRot = engineRot + (-engineRot * delta * TURN_SPEED * 0.5)
 			$CollisionShape.rotation_degrees = engineRot
 
 

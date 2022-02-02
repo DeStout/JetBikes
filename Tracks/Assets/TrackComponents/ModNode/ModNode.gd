@@ -1,7 +1,7 @@
 class_name ModNode
 extends Area
 
-enum FUNCTION {NULL, PATHFIND, SET_SPEED, AUDIO_SFX}
+enum FUNCTION {NULL, SET_SPEED, AUDIO_SFX}
 export(FUNCTION) var function = FUNCTION.NULL
 export var value : int = 0
 

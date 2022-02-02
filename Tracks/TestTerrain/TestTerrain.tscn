@@ -5816,6 +5816,8 @@ anims/FadeOut = SubResource( 12 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31.0806, 48.6151 )
 mass = 500.0
 physics_material_override = SubResource( 24 )
+continuous_cd = true
+can_sleep = false
 
 [node name="CSGSphere" type="CSGSphere" parent="RigidBody" index="0"]
 radius = 5.0

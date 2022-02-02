@@ -10,11 +10,11 @@ func _ready():
 
 func _setup_race() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
+
 	$Players.connect("race_finished", self, "finish_race")
 	$Players.spawn_players()
 	$Players.setup_players($Path, path_nodes)
-	
+
 #	AudioServer.set_bus_mute(Globals.master_bus, true)
 	AudioServer.set_bus_mute(Globals.master_bus, false)
 	$MusicPlayer.play()
@@ -23,7 +23,7 @@ func _setup_race() -> void:
 # Called by $PathNodes' ready signal
 func setup_pathnodes() -> void:
 	path_nodes = $PathNodes.get_children()
-	
+
 	if path_nodes.size() > 0:
 		var path_nodes_array = []
 		var i : int = 0

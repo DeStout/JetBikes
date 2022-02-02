@@ -1,10 +1,9 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Racers/General/Bike/DetectRay.gd" type="Script" id=1]
 [ext_resource path="res://Racers/Player/AudioBoost.gd" type="Script" id=2]
 [ext_resource path="res://Racers/General/Bike/RiderPosed.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/LineRenderer/LineRenderer.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Racers/Racer.gd" type="Script" id=5]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Materials/GroundWetRocks/Ground_Wet_Rocks_001_basecolor.jpg" type="Texture" id=6]
 [ext_resource path="res://Racers/General/Bike/Assets/SFX/Boost.wav" type="AudioStream" id=7]
 [ext_resource path="res://addons/LineRenderer/line.png" type="Texture" id=8]
@@ -74,7 +73,6 @@ albedo_texture = ExtResource( 8 )
 
 [node name="Racer" type="KinematicBody"]
 collision_mask = 15
-script = ExtResource( 5 )
 
 [node name="EngineRotationHelper" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )

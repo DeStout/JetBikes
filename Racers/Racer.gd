@@ -50,8 +50,6 @@ onready var ground_particles : Particles = $GroundParticles
 var sparks_particles = load("res://Racers/General/Bike/Assets/Models/Sparks.tscn")
 
 var ground_normal = Vector3.UP
-#var ground_point : Vector3
-var prev_ground_distance : float = 0
 
 var lap_number : int = 0
 var placement : int = 0
@@ -75,45 +73,38 @@ func _process(delta):
 
 func _physics_process(delta):
 	_check_ray_collision()
-	_check_kinematic_collision(delta)
-	
-	_check_swing_poles(delta)
-	
 	_check_out_of_bounds()
 	_check_crash()
 	if is_crashed:
 		_crash()
-	
+
+	_check_swing_poles(delta)
+
 	ground_normal = _get_ground_normal()
 	var racer_basis : Basis = global_transform.basis
 	var racer_quat = racer_basis.get_rotation_quat()
-	
+
 	if is_on_ground:
 		# Align Racer to ground normal
 		if racer_basis.y.dot(ground_normal) > 0:
 				global_transform.basis = Basis(racer_quat.slerp(_align_to_normal(ground_normal), delta * 4))
-		
+
 		# Hover along surface normal and slide downhill
-		var downhill : Vector3 = Vector3.DOWN.cross(ground_normal).cross(ground_normal)
-		
+
 		var ground_distance = _get_ground_point().dot(ground_normal)
 		var vertical_movement = velocity.dot(ground_normal)
-		
-		var K = 7
+		var K = 7 # Spring constant
 		var move_force = ground_distance - (vertical_movement * K * delta)
-		
+
+		var downhill : Vector3 = Vector3.DOWN.cross(ground_normal).cross(ground_normal)
+
 		velocity += ground_normal * move_force
 		velocity += downhill * -Globals.GRAVITY * 0.25 * delta
-		
-		prev_ground_distance = ground_distance
-		
-	else:
-		print("\n")
-		global_transform.basis = Basis(racer_quat.slerp(_align_to_normal(Vector3.UP), delta))
 
-		prev_ground_distance = 0
+	else:
+		global_transform.basis = Basis(racer_quat.slerp(_align_to_normal(Vector3.UP), delta))
 		velocity.y -= Globals.GRAVITY * delta
-	
+
 	if is_braking:
 		if is_on_ground:
 			velocity.x = _interpolate_float(velocity.x, 0, BRAKE_DEACCEL)
@@ -121,6 +112,38 @@ func _physics_process(delta):
 		else:
 			velocity.x = _interpolate_float(velocity.x, 0, AIR_BRAKE_DEACCEL)
 			velocity.z = _interpolate_float(velocity.z, 0, AIR_BRAKE_DEACCEL)
+
+	var kinematic_collision = move_and_collide(velocity * delta, false, true, false)
+	if kinematic_collision:
+		_check_kinematic_collision(kinematic_collision, delta)
+		velocity = velocity.slide(kinematic_collision.normal)
+
+#
+# Instance spark particles at collisions and send impulses to other KinematicBodies
+#
+func _check_kinematic_collision(collision : KinematicCollision, delta : float) -> void:
+	# Add sparks particles
+	if velocity.length() > 10:
+		var sparks : Particles = sparks_particles.instance()
+		$Sparks.add_child(sparks)
+		sparks.transform.origin = to_local(collision.position)
+		sparks.emitting = true
+		if $Sparks.get_child_count() > 3:
+			var oldest : Particles = $Sparks.get_children().front()
+			for spark in $Sparks.get_children():
+				if spark.time_added < oldest.time_added:
+					oldest = spark
+			oldest.queue_free()
+
+	# Send impulse to colliding KinematicBody
+	if collision.collider.get_class() == "KinematicBody":
+		var impulse = -collision.normal.dot(velocity) * velocity.normalized()
+		collision.collider.add_collision_impulse(impulse)
+#		velocity -= impulse
+
+
+func add_collision_impulse(impulse : Vector3) -> void:
+	velocity += impulse
 
 
 func _check_ray_collision():
@@ -130,7 +153,7 @@ func _check_ray_collision():
 				is_on_ground = true
 			else:
 				is_on_ground = false
-			
+
 		elif ray_detect.type == "Side" and ray_detect.is_colliding():
 			if ray_detect.global_transform.basis.z.dot(Vector3.DOWN) < -0.66:
 				is_crashed = true
@@ -140,12 +163,12 @@ func _check_ray_collision():
 func _get_ground_normal() -> Vector3:
 	var ground_normal1 : Vector3 = $CollisionShape/GroundDetect1.get_collision_normal()
 	var ground_normal2 : Vector3 = $CollisionShape/GroundDetect2.get_collision_normal()
-	
+
 #	if ground_normal1 == Vector3.ZERO:
 #		ground_normal1 = Vector3.UP
 #	if ground_normal2 == Vector3.ZERO:
 #		ground_normal2 = Vector3.UP
-	
+
 	return ((ground_normal1 + ground_normal2) * 0.5).normalized()
 
 
@@ -153,13 +176,13 @@ func _get_ground_normal() -> Vector3:
 func _get_ground_point() -> Vector3:
 	var ground_point1 : Vector3 = to_local($CollisionShape/GroundDetect1.get_collision_point())
 	var ground_point2 : Vector3 = to_local($CollisionShape/GroundDetect2.get_collision_point())
-	
+
 	# If either ground_detect is not colliding set its point to inverse Z of other ground_detect
 	if ground_point1.is_equal_approx(to_local(Vector3.ZERO)):
 		ground_point1 = ground_point2 * Vector3(1, 1, -1)
 	if ground_point2.is_equal_approx(to_local(Vector3.ZERO)):
 		ground_point2 = ground_point1 * Vector3(1, 1, -1)
-	
+
 	return (ground_point1 + ground_point2) * 0.5
 
 
@@ -229,13 +252,13 @@ func _check_crash():
 func _crash():
 	if !$CrashTimer.time_left:
 		crash_bike.set_crash(self)
-		
+
 		visible = false
 		has_control = false
 		is_swinging = false
 		is_free_rotating = false
 		is_boosting = false
-		
+
 		$CollisionShape.disabled = true
 		_set_boost_sfx()
 		ground_particles.emitting = false
@@ -253,7 +276,7 @@ func _crash_finished():
 	$CollisionShape.rotation = Vector3.ZERO
 	if current_path_node != null:
 		look_at(current_path_node.global_transform.origin, Vector3.UP)
-	
+
 	visible = true
 	if Globals.race_on_going == true:
 		has_control = true
@@ -261,43 +284,12 @@ func _crash_finished():
 #	$VisibilityTimer.stop()
 	ground_particles.emitting = true
 	crash_bike.remove_crash()
-	
+
 	is_crashed = false
 
 
 func _on_VisibilityTimer_timeout() -> void:
 	$EngineRotationHelper/Engine.visible = !$EngineRotationHelper/Engine.visible
-
-#
-# Instance spark particles at collisions and send impulses to other KinematicBodies
-#
-func _check_kinematic_collision(delta : float) -> void:
-	for i in get_slide_count():
-		var collision : KinematicCollision = get_slide_collision(i)
-		
-		# Add sparks particles
-		if velocity.length() > 10:
-			var sparks : Particles = sparks_particles.instance()
-			$Sparks.add_child(sparks)
-			sparks.transform.origin = to_local(collision.position)
-			sparks.emitting = true
-			if $Sparks.get_child_count() > 3:
-				var oldest : Particles = $Sparks.get_children().front()
-				for spark in $Sparks.get_children():
-					if spark.time_added < oldest.time_added:
-						oldest = spark
-				oldest.queue_free()
-		
-		# Send impulse to colliding KinematicBody
-#		if collision.collider.get_class() == "KinematicBody":
-#			collision.collider.add_collision_impulse(name, -collision.normal.dot(prev_velocity.normalized()) * prev_velocity * delta)
-
-func add_collision_impulse(from : String, impulse : Vector3) -> void:
-	if from == "Player" or name == "Player":
-		print(from , " -> ", name, " ", impulse.length())
-		print(velocity.length())
-		velocity += impulse
-		print(velocity.length(), "\n")
 
 
 func add_remove_swing_pole(swing_pole : SwingPole) -> void:
@@ -325,18 +317,18 @@ func _swing(swing_pole : SwingPole, delta : float) -> void:
 	var swing_distance = global_transform.origin.distance_to(swing_pole.global_transform.origin)
 	var pull_strength = (swing_distance / swing_pole.swing_length) * swing_pole.swing_strength
 	var delta_velocity = Vector3.ZERO
-	
+
 	if (global_transform.origin + velocity * delta).distance_to(swing_pole.global_transform.origin) > swing_pole.swing_length:
 		var delta_origin = global_transform.origin + velocity * delta
 		var new_dest : Vector3 = (delta_origin).direction_to(swing_pole.global_transform.origin)
 		new_dest *= swing_pole.swing_length
 		delta_velocity = (global_transform.origin - new_dest) - delta_origin
-		
+
 	velocity += (swing_pole.global_transform.origin - global_transform.origin) * pull_strength
 	velocity -= delta_velocity
-	
+
 	$LaserLine.set_laser_line(swing_pole.global_transform.origin)
-	
+
 	_set_boost(swing_cost)
 
 
@@ -344,8 +336,6 @@ func mod_node_enter(new_mod_node : ModNode) -> void:
 	match new_mod_node.function:
 #		new_mod_node.FUNCTION.NULL:
 #			print("NULL!?")
-		new_mod_node.FUNCTION.PATHFIND:
-			pathfind_next_node()
 		new_mod_node.FUNCTION.SET_SPEED:
 			_set_target_speed(new_mod_node.value)
 #		new_mod_node.FUNCTION.AUDIO_SFX:
@@ -356,16 +346,10 @@ func mod_node_exit(new_mod_node : ModNode) -> void:
 	match new_mod_node.function:
 #		new_mod_node.FUNCTION.NULL:
 #			print("NULL!?")
-		new_mod_node.FUNCTION.PATHFIND:
-			pass
 		new_mod_node.FUNCTION.SET_SPEED:
 			_set_target_speed(MAX_FORWARD_VEL)
 #		new_mod_node.FUNCTION.AUDIO_SFX:
 #			_set_audio_sfx(new_mod_node.value)
-
-
-func pathfind_next_node() -> void:
-	pass
 
 
 func _set_target_speed(new_target_speed : int) -> void:
@@ -386,11 +370,11 @@ func set_racer_color(new_color : Color) -> void:
 	var helmet = $EngineRotationHelper/Engine/Rider.get_node("Helmet").get_node("Helmet")
 	var visor = $EngineRotationHelper/Engine/Rider.get_node("Helmet").get_node("Visor")
 	var spoiler = $EngineRotationHelper/Engine/Rider.get_node("Helmet").get_node("Spoiler")
-	
+
 	$EngineRotationHelper/Engine/Shielding.get_surface_material(0).albedo_color = bike_color
 	windshield_material.albedo_color = bike_color
 	windshield_material.albedo_color.a = 90.0 / 255.0
-	
+
 	helmet.get_surface_material(0).albedo_color = bike_color
 	visor.get_surface_material(0).albedo_color = bike_color
 	spoiler.get_surface_material(0).albedo_color = bike_color

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Racers/Player/HUD/Minimap.gd" type="Script" id=2]
@@ -36,25 +36,10 @@ size = 72
 extra_spacing_char = 12
 font_data = ExtResource( 6 )
 
-[sub_resource type="Gradient" id=7]
-offsets = PoolRealArray( 0 )
-colors = PoolColorArray( 0, 0.640625, 0.167664, 1 )
-
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 7 )
-
-[sub_resource type="StyleBoxTexture" id=9]
-texture = SubResource( 8 )
-region_rect = Rect2( 0, 0, 2048, 1 )
-
-[sub_resource type="StyleBoxFlat" id=10]
-bg_color = Color( 0.109804, 0.113725, 0.121569, 1 )
-
 [sub_resource type="ViewportTexture" id=11]
 viewport_path = NodePath("ArrowView")
 
 [node name="HUD" type="Control"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -124,9 +109,9 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 96.2808
-margin_top = 1300.4
+margin_top = 1376.0
 margin_right = -2247.72
-margin_bottom = -110.6
+margin_bottom = -35.0001
 custom_styles/fg = SubResource( 4 )
 custom_styles/bg = SubResource( 5 )
 max_value = 250.0
@@ -154,31 +139,15 @@ __meta__ = {
 [node name="Speed" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 96.0
-margin_top = 1329.0
-margin_right = -2248.0
+margin_left = 58.0
+margin_top = 1217.16
+margin_right = -2361.0
+margin_bottom = -147.838
+rect_scale = Vector2( 2.05922, 2.05922 )
 custom_fonts/font = SubResource( 12 )
 text = "0"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SpeedBar" type="ProgressBar" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 63.0
-margin_top = 1338.0
-margin_right = -2008.0
-margin_bottom = -64.0
-custom_styles/fg = SubResource( 9 )
-custom_styles/bg = SubResource( 10 )
-max_value = 125.0
-step = 1.0
-value = 100.0
-percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }

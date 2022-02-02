@@ -38,7 +38,9 @@ func set_placement(new_placement : int):
 
 
 func set_arrow_angle(new_angle : float):
-	$ArrowView/Arrow/ArrowMesh.rotation.y = new_angle
+	var arrow_rotation = $ArrowView/Arrow/ArrowMesh.rotation.y
+	arrow_rotation = lerp_angle(arrow_rotation, new_angle, new_angle - arrow_rotation)
+#	$ArrowView/Arrow/ArrowMesh.rotation.y = new_angle
 
 
 func set_race_notice(new_text = "", is_visible = false):
