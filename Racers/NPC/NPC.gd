@@ -32,7 +32,7 @@ func _physics_process(delta : float) -> void:
 			else:
 				move_direction -= npc_basis[0].dot(temp_velocity) * npc_basis[0].normalized() * DEACCELERATION
 
-			# Apply acceleration/deacceleration along NPC Z vector based on input
+#			# Apply acceleration/deacceleration along NPC Z vector based on input
 			if movement_input.y > 0:
 				if !is_boosting:
 					var delta_move : Vector3 = npc_basis[2] * -movement_input.y * FORWARD_ACCELERATION
@@ -57,7 +57,7 @@ func _physics_process(delta : float) -> void:
 			else:
 				move_direction -= npc_basis[2].dot(temp_velocity) * npc_basis[2] * DEACCELERATION
 
-		_aim()
+		_aim(delta)
 
 	velocity += move_direction
 
@@ -72,12 +72,9 @@ func finish_race() -> void:
 	path_follow.follow = false
 
 
-func _aim() -> void:
-#	var angle_to_path : float = global_transform.basis.z.angle_to(path_follow.global_transform.origin)
-#	print(angle_to_path)
-
-	look_at(path_follow.global_transform.origin, global_transform.basis[1])
-
+func _aim(delta) -> void:
+	var look_at = global_transform.looking_at(path_follow.global_transform.origin, global_transform.basis.y)
+	global_transform = global_transform.interpolate_with(look_at, TURN_SPEED * delta)
 
 
 func _crash() -> void:

@@ -20,7 +20,7 @@ func setup_minimap(new_minimap : Texture, new_minimap_camera : Camera, new_playe
 
 func set_speedometer(new_speed : float):
 #	$SpeedBar.value = new_speed
-	$Speed.text = str(int(new_speed))
+	$Speed.text = str(int(new_speed * 3.6)) + " kph"
 
 
 func set_boost(new_boost : float):
@@ -37,10 +37,10 @@ func set_placement(new_placement : int):
 		$PlaceLabel.text = str(new_placement)
 
 
-func set_arrow_angle(new_angle : float):
+func set_arrow_angle(new_angle : float, delta : float):
+	var rotation_speed = 8
 	var arrow_rotation = $ArrowView/Arrow/ArrowMesh.rotation.y
-	arrow_rotation = lerp_angle(arrow_rotation, new_angle, new_angle - arrow_rotation)
-#	$ArrowView/Arrow/ArrowMesh.rotation.y = new_angle
+	$ArrowView/Arrow/ArrowMesh.rotation.y = lerp_angle(arrow_rotation, new_angle, delta * rotation_speed)
 
 
 func set_race_notice(new_text = "", is_visible = false):

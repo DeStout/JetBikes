@@ -38,7 +38,7 @@ var max_rotate_speed : int = 200
 func _process(delta : float) -> void:
 	_get_key_input()
 	if current_path_node != null:
-		_set_arrow_angle()
+		_set_arrow_angle(delta)
 	_adjust_cam_fov_dist()
 
 
@@ -192,7 +192,7 @@ func _input(event):
 				helper_rotation.z = 0
 				cam_rot_help.rotation_degrees = helper_rotation
 
-				# Rotate vehicle model based on turning sharpness
+				# Lean the vehicle model based on turning sharpness
 				var velocity_ratio = clamp(velocity.length() / MAX_FORWARD_VEL, 0.0, 1.0)
 				engine.rotate_object_local(Vector3(0, 0, 1), deg2rad(helper_rotation.y * 0.02 * velocity_ratio))
 				var vehicle_rotation : Vector3 = engine.rotation_degrees
@@ -211,7 +211,7 @@ func _rotate_to_default(delta : float) -> void:
 
 	if engine.rotation_degrees != Vector3.ZERO:
 		var engineRot : Vector3 = engine.rotation_degrees
-		engineRot = engineRot + (-engineRot * delta * TURN_SPEED * 0.5)
+		engineRot = engineRot + (-engineRot * delta * TURN_SPEED * 2)
 		engine.rotation_degrees = engineRot
 
 	if is_on_ground:
@@ -256,10 +256,10 @@ func _set_speedometer() -> void:
 	HUD.set_speedometer(modified_velocity.length())
 
 
-func _set_arrow_angle() -> void:
+func _set_arrow_angle(delta : float) -> void:
 	var closest_path_node_point : Vector3 = current_path_node.get_closest_point(global_transform.origin)
 	var vec2_path : Vector2 = Vector2(to_local(closest_path_node_point).x, to_local(closest_path_node_point).z).normalized()
-	HUD.set_arrow_angle(-(vec2_path.angle() + (PI / 2)))
+	HUD.set_arrow_angle(-(vec2_path.angle() + (PI / 2)), delta)
 
 
 func _set_boost(delta_boost : float) -> void:

@@ -28,7 +28,7 @@ func _ready() -> void:
 	box_shape.extents.y = height
 	$Box.width = width * 2
 	$Box.height = height * 2
-	
+
 	box_shape.connect("changed", self, "_update")
 	_update()
 
@@ -84,15 +84,15 @@ func _update() -> void:
 func get_closest_point(point_to : Vector3) -> Vector3:
 	point_to = to_local(point_to)
 	var node_vector : Vector3 = node_points[1] - node_points[0]
-	
+
 	var point_to_node_begin : Vector3 = point_to - node_points[0]
 	if node_vector.dot(point_to_node_begin) < 0.0:
 		return to_global(node_points[0])
-	
+
 	var point_to_node_end : Vector3 = point_to - node_points[1]
 	if node_vector.dot(point_to_node_end) > 0.0:
 		return to_global(node_points[1])
-		
+
 	var intersection_length : float = ((point_to_node_begin.x) * (node_vector.x) + \
 		(point_to_node_begin.y) * (node_vector.y) + \
 		(point_to_node_begin.z) * (node_vector.z)) / pow(node_vector.length(), 2)

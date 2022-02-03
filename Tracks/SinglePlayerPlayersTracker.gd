@@ -31,26 +31,26 @@ func spawn_players():
 	add_child(player)
 	player.global_transform = get_node("PlayerSpawn"+str(Globals.NPC_number+1)).global_transform
 	player.set_racer_color(Globals.player_color)
-	
+
 	_setup_crash_bike(player)
-	
+
 	if Globals.NPC_number > 0:
 		for NPC_num in range(Globals.NPC_number):
 			var new_NPC = npc_.instance()
 			new_NPC.connect("finished_race", self, "finish_race")
 			add_child(new_NPC)
-			
+
 			new_NPC.name = "NPC" + str(NPC_num + 1)
 			new_NPC.global_transform = get_node("PlayerSpawn"+str(NPC_num+1)).global_transform
 			new_NPC.set_racer_color(Color(randf(), randf(), randf()))
 
 			_setup_crash_bike(new_NPC)
-			
+
 			get_node("PlayerSpawn"+str(NPC_num+1)).free()
-	
+
 	for spawn in range(Globals.NPC_number+1, 13):
 		get_node("PlayerSpawn"+str(spawn)).free()
-	
+
 	players = get_children()
 	players.erase($CrashBikes)
 
@@ -58,24 +58,22 @@ func spawn_players():
 func _setup_crash_bike(racer : Racer):
 	racer.crash_bike = crash_bike.instance()
 	$CrashBikes.add_child(racer.crash_bike)
-	
+
 	racer.crash_bike.set_bike_color(racer.get_racer_color())
 
 
 func setup_players(path, path_nodes):
 	path_nodes_size = path_nodes.size()
-	
+
 	player.HUD.set_max_laps(Globals.laps_number)
-#	player.navigation = track_navigation
 	player.path = path
 	player.path_nodes = path_nodes
 	player.current_path_node = path_nodes[0]
-	
+
 	for npc_temp in players:
 		if npc_temp is NPC:
-#			npc_temp.navigation = track_navigation
 			npc_temp.path = path
-			
+
 			var new_path_follow = path_follow_.instance()
 			path.add_child(new_path_follow)
 			new_path_follow.rotation_mode = PathFollow.ROTATION_ORIENTED
@@ -83,10 +81,9 @@ func setup_players(path, path_nodes):
 			new_path_follow.h_offset = randf() * path_variability - (path_variability / 2)
 			npc_temp.path_follow = new_path_follow
 			new_path_follow.npc = npc_temp
-			
+
 			npc_temp.path_nodes = path_nodes
 			npc_temp.current_path_node = path_nodes[0]
-#			npc_temp.pathfind_next_node()
 
 
 func start_race() -> void:
@@ -124,7 +121,7 @@ func _sort_placement(player1 : KinematicBody, player2 : KinematicBody) -> bool:
 			player1_serial = path_nodes_size
 		if player2_serial == 0:
 			player2_serial = path_nodes_size
-			
+
 		if player1_serial > player2_serial:
 			return true
 		elif player2_serial > player1_serial:
