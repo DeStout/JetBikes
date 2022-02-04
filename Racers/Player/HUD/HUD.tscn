@@ -32,7 +32,7 @@ outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=12]
-size = 72
+size = 35
 extra_spacing_char = 12
 font_data = ExtResource( 6 )
 
@@ -139,10 +139,11 @@ __meta__ = {
 [node name="Speed" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 58.0
-margin_top = 1217.16
-margin_right = -2361.0
-margin_bottom = -147.838
+margin_left = 38.0
+margin_top = 1277.7
+margin_right = -2362.0
+margin_bottom = -102.303
+grow_horizontal = 2
 rect_scale = Vector2( 2.05922, 2.05922 )
 custom_fonts/font = SubResource( 12 )
 text = "0"

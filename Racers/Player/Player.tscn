@@ -42,6 +42,7 @@ far = 2000.0
 script = ExtResource( 5 )
 
 [node name="HUD" parent="CamRotationHelper/SpringArm/CamPosHelper/Camera" index="0" instance=ExtResource( 2 )]
+visible = false
 
 [node name="PauseMenu" parent="CamRotationHelper/SpringArm/CamPosHelper/Camera" index="1" instance=ExtResource( 1 )]
 script = ExtResource( 6 )

@@ -19,8 +19,7 @@ func setup_minimap(new_minimap : Texture, new_minimap_camera : Camera, new_playe
 
 
 func set_speedometer(new_speed : float):
-#	$SpeedBar.value = new_speed
-	$Speed.text = str(int(new_speed * 3.6)) + " kph"
+	$Speed.text = str(int(new_speed * 3.6))
 
 
 func set_boost(new_boost : float):

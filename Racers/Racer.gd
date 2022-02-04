@@ -102,7 +102,8 @@ func _physics_process(delta):
 		velocity += downhill * -Globals.GRAVITY * 0.25 * delta
 
 	else:
-		global_transform.basis = Basis(racer_quat.slerp(_align_to_normal(Vector3.UP), delta))
+		# Return player
+		global_transform.basis = Basis(racer_quat.slerp(_align_to_normal(Vector3.UP), delta * 2))
 		velocity.y -= Globals.GRAVITY * delta
 
 	if is_braking:

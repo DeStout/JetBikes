@@ -14,10 +14,6 @@ var path_nodes_size : int = 0
 func _ready() -> void:
 	if Globals.NPC_number != 0:
 		npc_ = preload("res://Racers/NPC/NPC.tscn")
-#	set_process(false)
-#	_spawn_players()
-#	players = get_children()
-#	players.erase($CrashBikes)
 
 
 func _process(delta : float) -> void:
@@ -76,9 +72,6 @@ func setup_players(path, path_nodes):
 
 			var new_path_follow = path_follow_.instance()
 			path.add_child(new_path_follow)
-			new_path_follow.rotation_mode = PathFollow.ROTATION_ORIENTED
-			var path_variability = 20
-			new_path_follow.h_offset = randf() * path_variability - (path_variability / 2)
 			npc_temp.path_follow = new_path_follow
 			new_path_follow.npc = npc_temp
 

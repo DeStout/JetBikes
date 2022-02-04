@@ -11,9 +11,9 @@ func _ready():
 func _setup_race() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-	$Players.connect("race_finished", self, "finish_race")
-	$Players.spawn_players()
-	$Players.setup_players($Path, path_nodes)
+	$ViewportContainer/Viewport/Players.connect("race_finished", self, "finish_race")
+	$ViewportContainer/Viewport/Players.spawn_players()
+	$ViewportContainer/Viewport/Players.setup_players($Path, path_nodes)
 
 #	AudioServer.set_bus_mute(Globals.master_bus, true)
 	AudioServer.set_bus_mute(Globals.master_bus, false)
@@ -55,7 +55,7 @@ func begin_countdown() -> void:
 
 func start_race() -> void:
 	Globals.race_on_going = true
-	$Players.start_race()
+	$ViewportContainer/Viewport/Players.start_race()
 
 
 func finish_race() -> void:

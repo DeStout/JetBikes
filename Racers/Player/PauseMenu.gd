@@ -12,7 +12,7 @@ onready var music_level : LineEdit = $BG/Options/Music/Level
 
 func _ready():
 	set_process_input(false)
-	
+
 	sfx_slider.min_value = Globals.MIN_SFX_LEVEL
 	sfx_slider.max_value = Globals.MAX_SFX_LEVEL
 	music_slider.min_value = Globals.MIN_MUSIC_LEVEL
@@ -32,7 +32,7 @@ func _open_options_menu() -> void:
 	$BG/Main.visible = false
 	$BG/Options.visible = true
 	$BG/Controls.visible = false
-	
+
 	sfx_slider.value = Globals.sfx_level
 	sfx_level.text = str(_convert_decibal_to_percent(Globals.sfx_level, sfx_slider))
 	music_slider.value = Globals.music_level
@@ -84,4 +84,4 @@ func _convert_decibal_to_percent(decibal : float, slider : Slider) -> int:
 
 func _convert_percent_to_decibal(new_percent : int, slider : Slider) -> float:
 	return -new_percent * (slider.min_value - slider.max_value) / 100 + slider.min_value
-	
+

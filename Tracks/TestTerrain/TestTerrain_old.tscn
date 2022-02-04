@@ -1,11 +1,10 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Tracks/Assets/TrackComponents/SwingPole/SwingPole.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Tracks/radial_blur.gdshader" type="Shader" id=2]
+[ext_resource path="res://Tracks/Track.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Props/Rock_6/RockC.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tracks/Assets/TrackComponents/PathNode/PathNode.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Tracks/TestTerrain/TestTerrainBase.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Tracks/Track.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Game/Music/Juno Reactor - Pistolero.mp3" type="AudioStream" id=7]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Props/Rock_5/RockB.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Props/Agave/Agave.tscn" type="PackedScene" id=9]
@@ -26,12 +25,6 @@
 [ext_resource path="res://Tracks/TestTerrain/Assets/D_Mist.png" type="Texture" id=24]
 [ext_resource path="res://Tracks/TestTerrain/Assets/D_Waterfall.png" type="Texture" id=25]
 [ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=26]
-
-[sub_resource type="ShaderMaterial" id=21]
-shader = ExtResource( 2 )
-shader_param/blur_center = Vector2( 0.5, 0.5 )
-shader_param/blur_power = 0.012
-shader_param/sampling_count = 6
 
 [sub_resource type="ParticlesMaterial" id=13]
 emission_shape = 2
@@ -74,7 +67,7 @@ width = 1024
 
 [sub_resource type="ParticlesMaterial" id=18]
 emission_shape = 2
-emission_box_extents = Vector3( 150, 1, 10 )
+emission_box_extents = Vector3( 75, 1, 10 )
 flag_rotate_y = true
 direction = Vector3( 0, 1, 0 )
 spread = 0.0
@@ -84,9 +77,9 @@ initial_velocity_random = 0.39
 tangential_accel = 1.84
 damping = 8.29
 damping_random = 1.0
-angle = -116.5
-angle_random = 0.53
-scale = 2.0
+angle = -53.1
+angle_random = 1.0
+scale = 1.15
 scale_random = 1.0
 color_ramp = SubResource( 17 )
 
@@ -152,15 +145,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="TestTerrain" instance=ExtResource( 6 )]
-
-[node name="ViewportContainer" parent="." index="0"]
-material = SubResource( 21 )
-
-[node name="Viewport" parent="ViewportContainer" index="0"]
-msaa = 1
-render_target_update_mode = 3
-shadow_atlas_size = 1
+[node name="TestTerrain" instance=ExtResource( 2 )]
 
 [node name="TestTerrain" parent="ViewportContainer/Viewport/LevelGeo" index="0" instance=ExtResource( 5 )]
 
@@ -5491,7 +5476,6 @@ sign_texture = null
 
 [node name="Waterfall" type="Particles" parent="ViewportContainer/Viewport/LevelGeo" index="3"]
 transform = Transform( 0.968021, 0, -0.25087, 0, 1, 0, 0.25087, 0, 0.968021, -221.762, 334.355, -674.996 )
-visible = false
 amount = 25
 speed_scale = 1.75
 explosiveness = 0.13
@@ -5501,10 +5485,10 @@ process_material = SubResource( 13 )
 draw_pass_1 = SubResource( 15 )
 
 [node name="Mist" type="Particles" parent="ViewportContainer/Viewport/LevelGeo" index="4"]
-transform = Transform( -0.996351, 0, 0.0853475, 0, 1, 0, -0.0853475, 0, -0.996351, -176.379, 8.35355, -656.07 )
+transform = Transform( 0.402379, 0, -0.915473, 0, 1, 0, 0.915473, 0, 0.402379, -224.587, 8.35355, -660.2 )
 amount = 16
 lifetime = 10.0
-visibility_aabb = AABB( -295.138, -199.342, -228.484, 585.517, 572.158, 457.577 )
+visibility_aabb = AABB( -212.878, -215.234, -214.949, 437.047, 585.205, 417.535 )
 process_material = SubResource( 18 )
 draw_pass_1 = SubResource( 20 )
 
@@ -5844,5 +5828,5 @@ serial = 12
 [node name="Path" parent="." index="3"]
 curve = ExtResource( 23 )
 
-[node name="MusicPlayer" parent="." index="6"]
+[node name="MusicPlayer" parent="." index="8"]
 stream = ExtResource( 7 )

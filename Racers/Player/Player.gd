@@ -211,7 +211,7 @@ func _rotate_to_default(delta : float) -> void:
 
 	if engine.rotation_degrees != Vector3.ZERO:
 		var engineRot : Vector3 = engine.rotation_degrees
-		engineRot = engineRot + (-engineRot * delta * TURN_SPEED * 2)
+		engineRot = engineRot + (-engineRot * delta * TURN_SPEED * 0.5)
 		engine.rotation_degrees = engineRot
 
 	if is_on_ground:
