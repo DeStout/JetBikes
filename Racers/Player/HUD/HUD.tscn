@@ -1,23 +1,23 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Racers/Player/HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://Racers/Player/HUD/Minimap.gd" type="Script" id=2]
 [ext_resource path="res://Racers/Player/HUD/Arrow/Arrow.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Racers/Player/HUD/HUD.gd" type="Script" id=4]
-[ext_resource path="res://icon_484x484.png" type="Texture" id=5]
-[ext_resource path="res://Game/Assets/Fonts/NinePin/Nine Pin.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Game/Assets/Fonts/NinePin/Nine Pin.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://icon_484x484.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
-font_data = ExtResource( 1 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 125
-font_data = ExtResource( 1 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 150
-font_data = ExtResource( 1 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.776471, 0.254902, 0.254902, 1 )
@@ -29,12 +29,12 @@ bg_color = Color( 0.109804, 0.113725, 0.121569, 1 )
 size = 22
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 1 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=12]
 size = 35
 extra_spacing_char = 12
-font_data = ExtResource( 6 )
+font_data = ExtResource( 5 )
 
 [sub_resource type="ViewportTexture" id=11]
 viewport_path = NodePath("ArrowView")
@@ -47,7 +47,7 @@ grow_vertical = 2
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource( 4 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -172,7 +172,7 @@ region_rect = Rect2( 0, 0, 256, 256 )
 [node name="Minimap" type="Sprite" parent="."]
 position = Vector2( 2176, 32 )
 scale = Vector2( 0.727273, 0.727273 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 centered = false
 offset = Vector2( -0.000244141, 0 )
 script = ExtResource( 2 )

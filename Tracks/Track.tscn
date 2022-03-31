@@ -4,11 +4,11 @@
 [ext_resource path="res://Tracks/Assets/TrackComponents/PreviewFollow.gd" type="Script" id=3]
 [ext_resource path="res://Tracks/LevelPreview.gd" type="Script" id=4]
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=35]
 size = 72
 font_data = ExtResource( 2 )
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=36]
 resource_name = "FadeIn"
 length = 0.4
 tracks/0/type = "value"
@@ -24,7 +24,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=37]
 resource_name = "FadeOut"
 length = 0.4
 tracks/0/type = "value"
@@ -40,90 +40,26 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="TestTerrain" type="Spatial"]
+[node name="Track" type="Spatial"]
 transform = Transform( 1.00013, 0, 0, 0, 1.00013, 0, 0, 0, 1.00013, 0, 0, 0 )
 
-[node name="ViewportContainer" type="ViewportContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-stretch = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="LevelGeo" type="Spatial" parent="."]
 
-[node name="Viewport" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 2560, 1440 )
-handle_input_locally = false
-audio_listener_enable_3d = true
-shadow_atlas_size = 4
+[node name="Terrain" type="Spatial" parent="LevelGeo"]
 
-[node name="LevelGeo" type="Node" parent="ViewportContainer/Viewport"]
+[node name="Race" type="Spatial" parent="LevelGeo"]
 
-[node name="Terrain" type="Node" parent="ViewportContainer/Viewport/LevelGeo"]
+[node name="Players" type="Spatial" parent="."]
 
-[node name="Race" type="Node" parent="ViewportContainer/Viewport/LevelGeo"]
+[node name="CrashBikes" type="Spatial" parent="Players"]
 
-[node name="Players" type="Node" parent="ViewportContainer/Viewport"]
+[node name="SwingPoles" type="Spatial" parent="."]
 
-[node name="CrashBikes" type="Node" parent="ViewportContainer/Viewport/Players"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 
-[node name="SwingPoles" type="Node" parent="ViewportContainer/Viewport"]
-
-[node name="LevelPreview" type="Path" parent="ViewportContainer/Viewport"]
-transform = Transform( 1.00013, 0, 0, 0, 1.00013, 0, 0, 0, 1.00013, -553.175, 138.757, 591.03 )
-curve = null
-script = ExtResource( 4 )
-
-[node name="PreviewFollow" type="PathFollow" parent="ViewportContainer/Viewport/LevelPreview"]
-transform = Transform( -0.998407, -0.0295002, 0.048092, 0, 0.852444, 0.522739, -0.0564252, 0.521986, -0.850956, -0.0490723, -0.060318, 0.069458 )
-rotation_mode = 4
-script = ExtResource( 3 )
-
-[node name="PreviewCamera" type="Camera" parent="ViewportContainer/Viewport/LevelPreview/PreviewFollow"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
-current = true
-
-[node name="Label" type="Label" parent="ViewportContainer/Viewport/LevelPreview/PreviewFollow/PreviewCamera"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 1260.0
-custom_fonts/font = SubResource( 10 )
-text = "Press Any Button"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="ViewportContainer/Viewport/LevelPreview"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-color = Color( 0.141176, 0.141176, 0.141176, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ViewportContainer/Viewport/LevelPreview/ColorRect"]
-reset_on_save = false
-anims/FadeIn = SubResource( 11 )
-anims/FadeOut = SubResource( 12 )
-
-[node name="DirectionalLight" type="DirectionalLight" parent="ViewportContainer/Viewport"]
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.99987, 0, 0, 0, 0.99987, 0, 0, 0, 0.99987, 0, 0, 0 )
 layers = 0
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="ViewportContainer/Viewport"]
-
-[node name="Minimap" type="Viewport" parent="ViewportContainer/Viewport"]
-size = Vector2( 484, 484 )
-transparent_bg = true
-debug_draw = 1
-render_target_v_flip = true
-
-[node name="MinimapCamera" type="Camera" parent="ViewportContainer/Viewport/Minimap"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
-projection = 1
 
 [node name="PathNodes" type="Node" parent="."]
 
@@ -133,6 +69,56 @@ projection = 1
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5329, 27.0195, 40.9375 )
 visible = false
 curve = null
+
+[node name="LevelPreview" type="Path" parent="."]
+curve = null
+script = ExtResource( 4 )
+
+[node name="PreviewFollow" type="PathFollow" parent="LevelPreview"]
+transform = Transform( -0.998407, -0.0295002, 0.048092, 0, 0.852444, 0.522739, -0.0564252, 0.521986, -0.850956, -0.0490723, -0.060318, 0.069458 )
+rotation_mode = 4
+script = ExtResource( 3 )
+
+[node name="PreviewCamera" type="Camera" parent="LevelPreview/PreviewFollow"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+current = true
+
+[node name="Label" type="Label" parent="LevelPreview/PreviewFollow/PreviewCamera"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1260.0
+custom_fonts/font = SubResource( 35 )
+text = "Press Any Button"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="LevelPreview"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.141176, 0.141176, 0.141176, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LevelPreview/ColorRect"]
+reset_on_save = false
+anims/FadeIn = SubResource( 36 )
+anims/FadeOut = SubResource( 37 )
+
+[node name="Minimap" type="Viewport" parent="."]
+size = Vector2( 484, 484 )
+transparent_bg = true
+debug_draw = 1
+render_target_v_flip = true
+
+[node name="MinimapCamera" type="Camera" parent="Minimap"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+projection = 1
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 5.0
@@ -149,7 +135,7 @@ bus = "Music"
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 bus = "SFX"
 
-[connection signal="preview_finished" from="ViewportContainer/Viewport/LevelPreview" to="." method="_preview_finished"]
 [connection signal="ready" from="PathNodes" to="." method="setup_pathnodes"]
+[connection signal="preview_finished" from="LevelPreview" to="." method="_preview_finished"]
 [connection signal="timeout" from="StartTimer" to="." method="start_race" flags=6]
 [connection signal="timeout" from="EndTimer" to="." method="end_race" flags=6]

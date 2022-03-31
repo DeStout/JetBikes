@@ -20,21 +20,21 @@ func _physics_process(delta):
 	engine_rotation = $EngineRotationHelper.rotation + \
 					$EngineRotationHelper/Engine.rotation
 	engine_rotation = Basis(Quat(engine_rotation))
-	
+
 	rset("puppet_velocity", velocity)
 	rset("puppet_transform", global_transform)
 	rset("puppet_engine_rotation", engine_rotation)
-	
+
 	rpc("swing", is_swinging)
 	if is_crashed:
 		rset("crashbike_puppet_transform", crash_bike.global_transform)
-	
+
 #	if !rset_twentieth_timer.time_left:
 #		rset("puppet_velocity", velocity)
 #		rset_twentieth_timer.start(0.05)
 #
 #		rpc("swing", is_swinging)
-##		print("RSet: Twentieth")
+#		print("RSet: Twentieth")
 #
 #	if !rset_quarter_timer.time_left:
 #		rset("puppet_transform", global_transform)

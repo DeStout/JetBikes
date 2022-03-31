@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Bark006_1K_Color.png-20d5e05ab73b6893a864fbc1984ef5c3.s3tc.stex"
-path.etc2="res://.import/Bark006_1K_Color.png-20d5e05ab73b6893a864fbc1984ef5c3.etc2.stex"
+path.s3tc="res://.import/LeafSet019_1K_Color.png-1f5eb2134482f2060d3c7f4ae7d269ce.s3tc.stex"
+path.etc2="res://.import/LeafSet019_1K_Color.png-1f5eb2134482f2060d3c7f4ae7d269ce.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Tracks/TestTerrain/Assets/Props/Pine/Bark/Bark006_1K_Color.png"
-dest_files=[ "res://.import/Bark006_1K_Color.png-20d5e05ab73b6893a864fbc1984ef5c3.s3tc.stex", "res://.import/Bark006_1K_Color.png-20d5e05ab73b6893a864fbc1984ef5c3.etc2.stex" ]
+source_file="res://Tracks/TestTerrain/Assets/Props/Pines/Needles/LeafSet019_1K_Color.png"
+dest_files=[ "res://.import/LeafSet019_1K_Color.png-1f5eb2134482f2060d3c7f4ae7d269ce.s3tc.stex", "res://.import/LeafSet019_1K_Color.png-1f5eb2134482f2060d3c7f4ae7d269ce.etc2.stex" ]
 
 [params]
 

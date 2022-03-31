@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/LeafSet019_1K_Displacement.png-ca030d950f9f478ed832c20f38bc30bb.stex"
+path="res://.import/LeafSet019_1K_Displacement.png-1ba123e3896f7481aac468dd512999ea.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tracks/TestTerrain/Assets/Props/Pine/Needles/LeafSet019_1K_Displacement.png"
-dest_files=[ "res://.import/LeafSet019_1K_Displacement.png-ca030d950f9f478ed832c20f38bc30bb.stex" ]
+source_file="res://Tracks/TestTerrain/Assets/Props/Pines/Needles/LeafSet019_1K_Displacement.png"
+dest_files=[ "res://.import/LeafSet019_1K_Displacement.png-1ba123e3896f7481aac468dd512999ea.stex" ]
 
 [params]
 

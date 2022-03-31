@@ -11,7 +11,7 @@ var _multiplayer_track : Track = null
 
 func _ready() -> void:
 	Network.connect("setup_track", self, "setup_track")
-	
+
 	# Called by Host and Client
 	get_tree().connect("network_peer_connected", self, "_peer_connected")
 	get_tree().connect("network_peer_disconnected", self, "_peer_disconnected")
@@ -23,12 +23,12 @@ func _ready() -> void:
 
 func setup_track() -> void:
 	Network.update_player_ready(false)
-	
+
 	_multiplayer_track = Network.level_dict[Network.level_dict_keys[Network.multiplayer_level]].instance()
-	
+
 	remove_child(_lobby)
 	add_child(_multiplayer_track)
-	
+
 	_multiplayer_track.connect("return_to_lobby", self, "return_to_lobby")
 	_multiplayer_track.get_node("Players").master_player \
 					.pause_menu.connect("leave_race", self, "return_to_main")
@@ -55,7 +55,7 @@ func setup_lobby_network(is_host : bool) -> void:
 func _peer_connected(new_peer_ID : int) -> void:
 	print("New Peer Connected: " + str(new_peer_ID))
 	Network.add_peer(new_peer_ID)
-	
+
 	if get_tree().is_network_server():
 		Network.give_new_peer_player_data(new_peer_ID)
 
@@ -92,11 +92,11 @@ func _server_disconnected() -> void:
 
 func return_to_lobby() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	
+
 	if is_instance_valid(_multiplayer_track):
 		_multiplayer_track.queue_free()
 		remove_child(_multiplayer_track)
-		
+
 		add_child(_lobby)
 		_lobby.reset_lobby()
 

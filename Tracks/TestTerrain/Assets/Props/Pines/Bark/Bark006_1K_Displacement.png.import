@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/LeafSet019_1K_Color.png-86a40f2a52cea4fdbead00f32b836265.s3tc.stex"
-path.etc2="res://.import/LeafSet019_1K_Color.png-86a40f2a52cea4fdbead00f32b836265.etc2.stex"
+path.s3tc="res://.import/Bark006_1K_Displacement.png-53c223e77bc2d0e35c9fdad87b213ec4.s3tc.stex"
+path.etc2="res://.import/Bark006_1K_Displacement.png-53c223e77bc2d0e35c9fdad87b213ec4.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Tracks/TestTerrain/Assets/Props/Pine/Needles/LeafSet019_1K_Color.png"
-dest_files=[ "res://.import/LeafSet019_1K_Color.png-86a40f2a52cea4fdbead00f32b836265.s3tc.stex", "res://.import/LeafSet019_1K_Color.png-86a40f2a52cea4fdbead00f32b836265.etc2.stex" ]
+source_file="res://Tracks/TestTerrain/Assets/Props/Pines/Bark/Bark006_1K_Displacement.png"
+dest_files=[ "res://.import/Bark006_1K_Displacement.png-53c223e77bc2d0e35c9fdad87b213ec4.s3tc.stex", "res://.import/Bark006_1K_Displacement.png-53c223e77bc2d0e35c9fdad87b213ec4.etc2.stex" ]
 
 [params]
 
@@ -25,7 +25,7 @@ flags/repeat=true
 flags/filter=true
 flags/mipmaps=true
 flags/anisotropic=false
-flags/srgb=1
+flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false

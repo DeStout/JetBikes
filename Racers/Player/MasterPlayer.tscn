@@ -19,7 +19,7 @@ normal_texture = ExtResource( 4 )
 collision_mask = 14
 script = ExtResource( 2 )
 
-[node name="Shielding" parent="EngineRotationHelper/Engine" index="1"]
+[node name="Shielding" parent="EngineRotationHelper/Engine" index="2"]
 material/0 = SubResource( 1 )
 
 [editable path="EngineRotationHelper/Engine"]

@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Arrow.glb-07933a5491561d368c9ffd4091b904e0.scn"
+path="res://.import/TestTerrainv_14.glb-8bbf4387e441a42745a86682c959c2b8.scn"
 
 [deps]
 
-source_file="res://Racers/Player/HUD/Arrow/Arrow.glb"
-dest_files=[ "res://.import/Arrow.glb-07933a5491561d368c9ffd4091b904e0.scn" ]
+source_file="res://Tracks/TestTerrain/TestTerrainv_14.glb"
+dest_files=[ "res://.import/TestTerrainv_14.glb-8bbf4387e441a42745a86682c959c2b8.scn" ]
 
 [params]
 
@@ -21,7 +21,7 @@ materials/location=1
 materials/storage=1
 materials/keep_on_reimport=true
 meshes/octahedral_compression=true
-meshes/compress=true
+meshes/compress=4286
 meshes/ensure_tangents=true
 meshes/storage=0
 meshes/light_baking=0

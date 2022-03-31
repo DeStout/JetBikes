@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Tracks/Assets/TrackComponents/Sign/Frame.tres" type="Material" id=1]
 [ext_resource path="res://Tracks/Assets/TrackComponents/Sign/M_Checkpoint_D.png" type="Texture" id=2]
@@ -189,13 +189,15 @@ nodes/fragment/24/node = SubResource( 13 )
 nodes/fragment/24/position = Vector2( 220, 0 )
 nodes/fragment/connections = PoolIntArray( 9, 0, 10, 0, 10, 0, 11, 1, 8, 0, 9, 0, 5, 0, 4, 0, 4, 0, 0, 6, 13, 0, 9, 1, 15, 0, 11, 0, 12, 0, 17, 0, 17, 1, 15, 1, 17, 0, 14, 1, 16, 0, 14, 0, 14, 0, 15, 0, 24, 0, 0, 0, 24, 0, 0, 5, 11, 0, 24, 0, 9, 0, 10, 0, 10, 0, 11, 1, 8, 0, 9, 0, 5, 0, 4, 0, 4, 0, 0, 6, 13, 0, 9, 1, 15, 0, 11, 0, 12, 0, 17, 0, 17, 1, 15, 1, 17, 0, 14, 1, 16, 0, 14, 0, 14, 0, 15, 0, 24, 0, 0, 0, 24, 0, 0, 5, 11, 0, 24, 0 )
 
-[sub_resource type="StreamTexture" id=19]
-flags = 7
+[sub_resource type="StreamTexture" id=29]
+resource_local_to_scene = true
+flags = 23
 load_path = "res://.import/M_WrongWay_D.png-16b1e22d895f0d314abb9a0bd7ad2aa6.s3tc.stex"
 
-[sub_resource type="ShaderMaterial" id=20]
+[sub_resource type="ShaderMaterial" id=26]
+resource_local_to_scene = true
 shader = SubResource( 18 )
-shader_param/Sign_Texture = SubResource( 19 )
+shader_param/Sign_Texture = SubResource( 29 )
 
 [sub_resource type="SpatialMaterial" id=21]
 vertex_color_use_as_albedo = true
@@ -214,10 +216,13 @@ surfaces/0 = {
 "vertex_count": 4
 }
 
-[sub_resource type="ShaderMaterial" id=23]
+[sub_resource type="ShaderMaterial" id=28]
 resource_local_to_scene = true
 shader = ExtResource( 5 )
 shader_param/Sign_Texture = ExtResource( 2 )
+
+[sub_resource type="BoxShape" id=24]
+extents = Vector3( 10.5, 3, 0.4 )
 
 [node name="Sign" type="Spatial"]
 script = ExtResource( 3 )
@@ -229,8 +234,14 @@ material/0 = ExtResource( 1 )
 
 [node name="BackSign" type="MeshInstance" parent="."]
 mesh = SubResource( 4 )
-material/0 = SubResource( 20 )
+material/0 = SubResource( 26 )
 
 [node name="ForwardSign" type="MeshInstance" parent="."]
 mesh = SubResource( 22 )
-material/0 = SubResource( 23 )
+material/0 = SubResource( 28 )
+
+[node name="Body" type="StaticBody" parent="."]
+collision_layer = 4
+
+[node name="Shape" type="CollisionShape" parent="Body"]
+shape = SubResource( 24 )

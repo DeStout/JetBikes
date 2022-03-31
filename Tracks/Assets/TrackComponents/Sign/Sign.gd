@@ -14,7 +14,7 @@ func _ready():
 
 func _set_sign_texture(new_sign_texture : Texture) -> void:
 	sign_texture = new_sign_texture
-	
+
 	if forward_sign == null:
 		return
 	else:
