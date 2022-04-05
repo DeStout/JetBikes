@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=35]
+size = 72
+font_data = ExtResource( 1 )
+
+[node name="PreviewCamera" type="Camera"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+current = true
+far = 1000.0
+
+[node name="Label" type="Label" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1260.0
+custom_fonts/font = SubResource( 35 )
+text = "Press Any Button"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

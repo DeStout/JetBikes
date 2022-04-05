@@ -13,7 +13,7 @@ func _setup_race() -> void:
 
 	$Players.connect("race_finished", self, "finish_race")
 	$Players.spawn_players()
-	$Players.setup_players($Path, path_nodes)
+	$Players.setup_players($TrackPath, path_nodes)
 
 #	AudioServer.set_bus_mute(Globals.master_bus, true)
 	AudioServer.set_bus_mute(Globals.master_bus, false)

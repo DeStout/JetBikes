@@ -1,4 +1,4 @@
-[gd_scene load_steps=214 format=2]
+[gd_scene load_steps=216 format=2]
 
 [ext_resource path="res://Tracks/Assets/TrackComponents/SwingPole/SwingPole.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tracks/Assets/TrackComponents/Sign/M_WrongWay_D.png" type="Texture" id=2]
@@ -9,7 +9,7 @@
 [ext_resource path="res://Game/Music/Juno Reactor - Pistolero.mp3" type="AudioStream" id=7]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Props/Rock_5/RockB.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Props/Pines/Pine2.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Tracks/TestTerrain/Assets/Props/Pines/Pine3.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Tracks/TestTerrain/Assets/Props/Pines/Pine-bush.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Props/Pines/Pine1.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Props/Rock_2/RockA.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Tracks/Assets/TrackComponents/Truss/Truss.tscn" type="PackedScene" id=13]
@@ -18,7 +18,8 @@
 [ext_resource path="res://Tracks/Assets/TrackComponents/Sign/Checkpoint.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Props/Rock_7/RockD.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Props/Rock_9/RockE.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Tracks/TestTerrain/curve.tres" type="Curve3D" id=23]
+[ext_resource path="res://Tracks/TestTerrain/Assets/Props/Pines/Pine2.mesh" type="ArrayMesh" id=19]
+[ext_resource path="res://Tracks/Assets/TrackComponents/PreviewFollow.gd" type="Script" id=20]
 [ext_resource path="res://Tracks/TestTerrain/Assets/D_Mist.png" type="Texture" id=24]
 [ext_resource path="res://Tracks/TestTerrain/Assets/D_Waterfall.png" type="Texture" id=25]
 [ext_resource path="res://Tracks/Assets/TrackComponents/Sign/M_Sign_D.png" type="Texture" id=27]
@@ -2921,6 +2922,13 @@ distance_fade_max_distance = 50.0
 material = SubResource( 19 )
 size = Vector2( 150, 150 )
 
+[sub_resource type="Curve3D" id=203]
+bake_interval = 0.1
+_data = {
+"points": PoolVector3Array( -94.4631, 5.60415, -1.70802, 94.4631, -5.60415, 1.70802, -44.622, 4.39957, -4.05608, -42.5233, 3.26863, 8.10398, 42.5233, -3.26863, -8.10398, 108.684, -4.22592, -3.72493, -77.7889, 8.28384, 87.2208, 77.7889, -8.28384, -87.2208, 308.776, -19.5088, -113.399 ),
+"tilts": PoolRealArray( 0, 0, 0 )
+}
+
 [node name="TestTerrain" instance=ExtResource( 6 )]
 
 [node name="TestTerrain" parent="LevelGeo" index="0" instance=ExtResource( 5 )]
@@ -2983,7 +2991,7 @@ transform = Transform( 16.7849, 0, 0, 0, 16.7849, 0, 0, 0, 16.7849, -5.87968, 68
 transform = Transform( 32.8521, 0, 0, 0, 16.9245, 28.1571, 0, -28.1571, 16.9245, 272.132, 84.4941, 638.108 )
 
 [node name="RockC14" parent="LevelGeo/Terrain" index="19" instance=ExtResource( 3 )]
-transform = Transform( 27.7978, 14.3987, 9.96112, -11.9122, 1.85574, 30.5601, 12.8314, -29.4703, 6.7912, 294.888, -6.21392, 384.748 )
+transform = Transform( 24.2974, 14.4382, 16.7463, -18.0071, -1.51804, 27.4355, 12.8314, -29.4703, 6.7912, 273.744, 26.0686, 429.813 )
 
 [node name="RockC6" parent="LevelGeo/Terrain" index="20" instance=ExtResource( 3 )]
 transform = Transform( -3.72053, 0.894073, 5.27752, -4.78411, -3.43815, -2.79022, 2.40081, -5.46568, 2.61846, -282.555, 130.304, 73.7015 )
@@ -3120,250 +3128,309 @@ transform = Transform( 30.8225, 0.0260973, 3.5277, -3.06405, 15.5726, 26.6568, -
 [node name="RockA17" parent="LevelGeo/Terrain" index="64" instance=ExtResource( 12 )]
 transform = Transform( -16.1026, -14.0356, 22.4985, 4.62719, 24.4307, 18.5528, -26.1107, 12.9853, -10.5872, -613.297, 289.195, -553.33 )
 
-[node name="RockA20" parent="LevelGeo/Terrain" index="65" instance=ExtResource( 12 )]
+[node name="RockA25" parent="LevelGeo/Terrain" index="65" instance=ExtResource( 12 )]
+transform = Transform( 26.1924, -12.9136, 10.4724, 4.62719, 24.4307, 18.5528, -15.9693, -14.1016, 22.5522, -409.572, 196.115, -620.643 )
+
+[node name="RockA20" parent="LevelGeo/Terrain" index="66" instance=ExtResource( 12 )]
 transform = Transform( 15.4198, 19.5653, 18.4907, -20.3725, 22.4104, -6.72364, -17.5973, -8.80054, 23.9867, -777.975, 175.862, -104.874 )
 
-[node name="RockA16" parent="LevelGeo/Terrain" index="66" instance=ExtResource( 12 )]
+[node name="RockA16" parent="LevelGeo/Terrain" index="67" instance=ExtResource( 12 )]
 transform = Transform( -35.246, -52.5951, -28.8668, -5.94288, -30.2543, 62.3794, -59.7011, 34.0624, 10.8327, -670.652, 204.001, 66.7241 )
 
-[node name="RockA21" parent="LevelGeo/Terrain" index="67" instance=ExtResource( 12 )]
+[node name="RockA21" parent="LevelGeo/Terrain" index="68" instance=ExtResource( 12 )]
 transform = Transform( -35.246, 1.49324, -59.9776, -5.94289, -69.3064, 1.76686, -59.7011, 6.01747, 35.2334, -248.611, 317.82, 108.574 )
 
-[node name="RockA22" parent="LevelGeo/Terrain" index="68" instance=ExtResource( 12 )]
+[node name="RockA22" parent="LevelGeo/Terrain" index="69" instance=ExtResource( 12 )]
 transform = Transform( -25.6601, -24.2088, -59.9776, 45.5057, -52.6111, 1.76686, -45.9631, -38.5723, 35.2334, 72.5142, 187.146, 600.91 )
 
-[node name="RockA24" parent="LevelGeo/Terrain" index="69" instance=ExtResource( 12 )]
+[node name="RockA24" parent="LevelGeo/Terrain" index="70" instance=ExtResource( 12 )]
 transform = Transform( 8.29967, -25.7551, -3.52257, 6.16394, -1.64244, 26.5316, -25.2535, -8.86539, 5.31821, -281.676, 117.968, 578.175 )
 
-[node name="RockA23" parent="LevelGeo/Terrain" index="70" instance=ExtResource( 12 )]
+[node name="RockA23" parent="LevelGeo/Terrain" index="71" instance=ExtResource( 12 )]
 transform = Transform( -7.1959, -6.78891, -16.8196, 12.7612, -14.7538, 0.495483, -12.8895, -10.8169, 9.88055, -81.8078, 206.562, 270.349 )
 
-[node name="RockA18" parent="LevelGeo/Terrain" index="71" instance=ExtResource( 12 )]
+[node name="RockA18" parent="LevelGeo/Terrain" index="72" instance=ExtResource( 12 )]
 transform = Transform( -13.1771, -25.4513, -0.978037, 0.786008, -1.507, 28.6265, -25.4579, 13.1272, 1.39007, -763.95, 207.592, -8.0573 )
 
-[node name="RockA9" parent="LevelGeo/Terrain" index="72" instance=ExtResource( 12 )]
+[node name="RockA9" parent="LevelGeo/Terrain" index="73" instance=ExtResource( 12 )]
 transform = Transform( 9.34087, -1.6615, 6.29467, -5.81982, 2.80273, 9.37604, -2.91772, -10.9096, 1.45009, -520.933, 174.384, -44.7545 )
 
-[node name="RockA10" parent="LevelGeo/Terrain" index="73" instance=ExtResource( 12 )]
+[node name="RockA10" parent="LevelGeo/Terrain" index="74" instance=ExtResource( 12 )]
 transform = Transform( 10.7436, 27.8134, 13.5379, -6.19537, 15.9755, -27.9049, -30.3064, 6.59402, 10.5036, -338.915, 146.118, -172.255 )
 
-[node name="RockA11" parent="LevelGeo/Terrain" index="74" instance=ExtResource( 12 )]
+[node name="RockA11" parent="LevelGeo/Terrain" index="75" instance=ExtResource( 12 )]
 transform = Transform( 4.78583, -0.961018, -0.0409109, 0.940773, 4.71978, -0.81731, 0.200461, 0.793406, 4.81245, 148.316, 124.146, -371.21 )
 
-[node name="RockA8" parent="LevelGeo/Terrain" index="75" instance=ExtResource( 12 )]
+[node name="RockA8" parent="LevelGeo/Terrain" index="76" instance=ExtResource( 12 )]
 transform = Transform( -1.8038, -0.378904, 4.89033, 2.62939, 4.32391, 1.30487, -4.14068, 2.91081, -1.30176, -521.732, 125.615, -23.1264 )
 
-[node name="Pine" parent="LevelGeo/Terrain" index="76" instance=ExtResource( 11 )]
+[node name="Pine" parent="LevelGeo/Terrain" index="77" instance=ExtResource( 11 )]
 transform = Transform( 7.72498, 0.781814, 0, -0.781814, 7.72498, 0, 0, 0, 7.76444, -308.547, 68.1667, -80.53 )
 skeleton = NodePath("../..")
 
-[node name="Pine53" parent="LevelGeo/Terrain" index="77" instance=ExtResource( 9 )]
+[node name="Pine53" parent="LevelGeo/Terrain" index="78" instance=ExtResource( 9 )]
 transform = Transform( 4.56973, 1.05996, 0.0937879, -1.02532, 4.49669, -0.86211, -0.284642, 0.819151, 4.61115, -341.804, 116.289, -114.538 )
 skeleton = NodePath("../Pine47")
 
-[node name="Pine47" parent="LevelGeo/Terrain" index="78" instance=ExtResource( 11 )]
+[node name="Pine47" parent="LevelGeo/Terrain" index="79" instance=ExtResource( 11 )]
 transform = Transform( 7.72498, 0.781814, 0, -0.772261, 7.63059, 1.21008, 0.121844, -1.20393, 7.66957, -361.45, 120.862, -58.2331 )
 skeleton = NodePath("../..")
 
-[node name="Pine10" parent="LevelGeo/Terrain" index="79" instance=ExtResource( 11 )]
+[node name="Pine10" parent="LevelGeo/Terrain" index="80" instance=ExtResource( 11 )]
 transform = Transform( 8.1656, 0.826407, 0, -0.826407, 8.1656, 0, 0, 0, 8.20731, -221.109, 71.3115, -130.85 )
 skeleton = NodePath("../..")
 
-[node name="Pine11" parent="LevelGeo/Terrain" index="80" instance=ExtResource( 11 )]
+[node name="Pine11" parent="LevelGeo/Terrain" index="81" instance=ExtResource( 11 )]
 transform = Transform( 3.27087, 0.366164, -1.54641, -0.331032, 3.61801, 0.156506, 1.55431, 0, 3.28758, 132.406, 128.484, -399.17 )
 skeleton = NodePath("../..")
 
-[node name="Pine12" parent="LevelGeo/Terrain" index="81" instance=ExtResource( 11 )]
+[node name="Pine12" parent="LevelGeo/Terrain" index="82" instance=ExtResource( 11 )]
 transform = Transform( 6.25663, 0.633209, 0, -0.633209, 6.25663, 0, 0, 0, 6.28859, 129.783, 124.548, -377.491 )
 skeleton = NodePath("../..")
 
-[node name="Pine13" parent="LevelGeo/Terrain" index="82" instance=ExtResource( 11 )]
+[node name="Pine13" parent="LevelGeo/Terrain" index="83" instance=ExtResource( 11 )]
 transform = Transform( 5.29856, 0.633209, 3.32726, -0.536246, 6.25663, -0.336739, -3.34426, 0, 5.32563, 137.745, 120.398, -323.291 )
 skeleton = NodePath("../..")
 
-[node name="Pine14" parent="LevelGeo/Terrain" index="83" instance=ExtResource( 11 )]
+[node name="Pine14" parent="LevelGeo/Terrain" index="84" instance=ExtResource( 11 )]
 transform = Transform( 4.47443, 0.226614, -2.91487, -0.455778, 5.31777, -0.286208, 2.88793, 0.488154, 4.47101, 87.9298, 117.62, -359.218 )
 skeleton = NodePath("../..")
 
-[node name="Pine17" parent="LevelGeo/Terrain" index="84" instance=ExtResource( 11 )]
+[node name="Pine17" parent="LevelGeo/Terrain" index="85" instance=ExtResource( 11 )]
 transform = Transform( 4.47443, 0.226614, -2.91487, -0.455778, 5.31777, -0.286208, 2.88793, 0.488154, 4.47101, 35.9368, 136.715, -410.611 )
 skeleton = NodePath("../..")
 
-[node name="Pine15" parent="LevelGeo/Terrain" index="85" instance=ExtResource( 11 )]
+[node name="Pine15" parent="LevelGeo/Terrain" index="86" instance=ExtResource( 11 )]
 transform = Transform( -0.512443, -0.436677, -7.29744, -0.624917, 7.29119, -0.39242, 7.28374, 0.594834, -0.547076, 101.1, 129.962, -423.321 )
 skeleton = NodePath("../..")
 
-[node name="Pine16" parent="LevelGeo/Terrain" index="86" instance=ExtResource( 11 )]
+[node name="Pine16" parent="LevelGeo/Terrain" index="87" instance=ExtResource( 11 )]
 transform = Transform( 2.65173, -0.0388292, -4.87563, -0.471724, 5.52196, -0.300535, 4.85291, 0.557976, 2.63493, 118.867, 116.631, -310.736 )
 skeleton = NodePath("../..")
 
-[node name="Pine18" parent="LevelGeo/Terrain" index="87" instance=ExtResource( 11 )]
+[node name="Pine18" parent="LevelGeo/Terrain" index="88" instance=ExtResource( 11 )]
 transform = Transform( 5.51015, -0.0388293, 0.664616, 0.105173, 5.52196, -0.549348, -0.65739, 0.557976, 5.48283, 82.4662, 116.491, -283.905 )
 skeleton = NodePath("../..")
 
-[node name="Pine19" parent="LevelGeo/Terrain" index="88" instance=ExtResource( 11 )]
+[node name="Pine19" parent="LevelGeo/Terrain" index="89" instance=ExtResource( 11 )]
 transform = Transform( 7.54845, -0.053193, 0.91047, 0.144079, 7.56464, -0.752562, -0.90057, 0.764381, 7.51103, 396.811, 15.5334, -277.416 )
 skeleton = NodePath("../..")
 
-[node name="Pine21" parent="LevelGeo/Terrain" index="89" instance=ExtResource( 11 )]
+[node name="Pine21" parent="LevelGeo/Terrain" index="90" instance=ExtResource( 11 )]
 transform = Transform( 7.54846, -0.053193, 0.910471, 0.144079, 7.56464, -0.752562, -0.900571, 0.764382, 7.51104, 532.361, 34.2178, -427.916 )
 skeleton = NodePath("../..")
 
-[node name="Pine23" parent="LevelGeo/Terrain" index="90" instance=ExtResource( 11 )]
-transform = Transform( 5.04187, -0.215311, -1.19901, 0.0982895, 5.16054, -0.513391, 1.21421, 0.476312, 5.02028, 573.342, 89.3163, -418.335 )
-skeleton = NodePath("../..")
+[node name="Pine44" parent="LevelGeo/Terrain" index="91" instance=ExtResource( 9 )]
+transform = Transform( 8.1019, -0.345988, -1.92672, 0.157944, 8.29259, -0.82498, 1.95114, 0.765397, 8.06721, 573.342, 89.3163, -418.335 )
+skeleton = NodePath("")
 
-[node name="Pine24" parent="LevelGeo/Terrain" index="91" instance=ExtResource( 11 )]
+[node name="Pine24" parent="LevelGeo/Terrain" index="92" instance=ExtResource( 11 )]
 transform = Transform( 6.4714, -0.276359, -1.53896, 0.126158, 6.62372, -0.658954, 1.55848, 0.611362, 6.44369, 623.861, 100.783, -277.553 )
 skeleton = NodePath("../..")
 
-[node name="Pine26" parent="LevelGeo/Terrain" index="92" instance=ExtResource( 11 )]
+[node name="Pine26" parent="LevelGeo/Terrain" index="93" instance=ExtResource( 11 )]
 transform = Transform( 6.4714, -0.276359, -1.53896, 0.126158, 6.62372, -0.658955, 1.55848, 0.611362, 6.44369, 499.355, 65.4103, 218.999 )
 skeleton = NodePath("../..")
 
-[node name="Pine27" parent="LevelGeo/Terrain" index="93" instance=ExtResource( 11 )]
+[node name="Pine27" parent="LevelGeo/Terrain" index="94" instance=ExtResource( 11 )]
 transform = Transform( 9.60409, -0.410138, -2.28395, 0.187228, 9.83014, -0.977942, 2.31291, 0.90731, 9.56296, 529.746, 74.8454, 207.506 )
 skeleton = NodePath("../..")
 
-[node name="Pine25" parent="LevelGeo/Terrain" index="94" instance=ExtResource( 11 )]
-transform = Transform( 6.4714, -0.276359, -1.53896, 0.126158, 6.62372, -0.658954, 1.55848, 0.611362, 6.44369, 542.845, 42.8357, -289.18 )
-skeleton = NodePath("../..")
+[node name="Pine23" parent="LevelGeo/Terrain" index="95" instance=ExtResource( 9 )]
+transform = Transform( 8.07254, -0.344735, -1.91973, 0.157372, 8.26256, -0.821992, 1.94408, 0.762624, 8.03798, 542.845, 42.8357, -289.18 )
+skeleton = NodePath("")
 
-[node name="Pine22" parent="LevelGeo/Terrain" index="95" instance=ExtResource( 11 )]
+[node name="Pine22" parent="LevelGeo/Terrain" index="96" instance=ExtResource( 11 )]
 transform = Transform( 2.54834, -0.490127, -4.4388, 0.0974322, 5.11553, -0.508914, 4.46471, 0.168116, 2.54465, 516.059, 31.403, -428.142 )
 skeleton = NodePath("../..")
 
-[node name="Pine20" parent="LevelGeo/Terrain" index="96" instance=ExtResource( 11 )]
+[node name="Pine20" parent="LevelGeo/Terrain" index="97" instance=ExtResource( 11 )]
 transform = Transform( 5.00129, 0.32874, 4.26195, 0.124671, 6.54565, -0.651188, -4.27279, 0.575777, 4.9696, 418.211, 24.016, -271.014 )
 skeleton = NodePath("../..")
 
-[node name="Pine3" parent="LevelGeo/Terrain" index="97" instance=ExtResource( 11 )]
+[node name="Pine3" parent="LevelGeo/Terrain" index="98" instance=ExtResource( 11 )]
 transform = Transform( 12.7731, 1.29272, 0, -1.29272, 12.7731, 0, 0, 0, 12.8384, 354.301, 67.836, 500.262 )
 skeleton = NodePath("../..")
 
-[node name="Pine8" parent="LevelGeo/Terrain" index="98" instance=ExtResource( 11 )]
+[node name="Pine8" parent="LevelGeo/Terrain" index="99" instance=ExtResource( 11 )]
 transform = Transform( 5.56368, 1.29272, -11.4977, -0.563077, 12.7731, 1.16364, 11.5565, 0, 5.5921, 374.782, 37.8735, 638.408 )
 skeleton = NodePath("../..")
 
-[node name="Pine9" parent="LevelGeo/Terrain" index="99" instance=ExtResource( 11 )]
+[node name="Pine9" parent="LevelGeo/Terrain" index="100" instance=ExtResource( 11 )]
 transform = Transform( 7.80523, 1.04975, -6.72979, -0.799238, 10.3059, 0.680621, 6.76411, 0.00639992, 7.84604, 372.182, 41.473, 614.01 )
 skeleton = NodePath("../..")
 
-[node name="Pine4" parent="LevelGeo/Terrain" index="100" instance=ExtResource( 11 )]
+[node name="Pine4" parent="LevelGeo/Terrain" index="101" instance=ExtResource( 11 )]
 transform = Transform( 4.88505, -0.670784, -8.33887, -0.494396, 9.61643, -1.06318, 8.35119, 0.961676, 4.8149, 483.28, 44.7207, 402.728 )
 skeleton = NodePath("../..")
 
-[node name="Pine31" parent="LevelGeo/Terrain" index="101" instance=ExtResource( 11 )]
+[node name="Pine31" parent="LevelGeo/Terrain" index="102" instance=ExtResource( 11 )]
 transform = Transform( 4.88505, -0.670785, -8.33887, -0.494396, 9.61643, -1.06318, 8.35119, 0.961676, 4.8149, 353.457, 52.3175, 298.443 )
 skeleton = NodePath("../..")
 
-[node name="Pine6" parent="LevelGeo/Terrain" index="102" instance=ExtResource( 11 )]
+[node name="Pine6" parent="LevelGeo/Terrain" index="103" instance=ExtResource( 11 )]
 transform = Transform( 3.51465, -0.482609, -5.99958, -0.355703, 6.91874, -0.764924, 6.00844, 0.691898, 3.46418, 499.086, 40.3642, 329.788 )
 skeleton = NodePath("../..")
 
-[node name="Pine28" parent="LevelGeo/Terrain" index="103" instance=ExtResource( 11 )]
+[node name="Pine28" parent="LevelGeo/Terrain" index="104" instance=ExtResource( 11 )]
 transform = Transform( 3.51465, -0.48261, -5.99958, -0.355703, 6.91875, -0.764924, 6.00845, 0.691899, 3.46418, 203.529, 79.7681, 290.948 )
 skeleton = NodePath("../..")
 
-[node name="Pine34" parent="LevelGeo/Terrain" index="104" instance=ExtResource( 11 )]
+[node name="Pine34" parent="LevelGeo/Terrain" index="105" instance=ExtResource( 11 )]
 transform = Transform( 5.09104, -0.699069, -8.69051, -0.515243, 10.0219, -1.10801, 8.70336, 1.00223, 5.01794, 229.976, 94.5635, 387.36 )
 skeleton = NodePath("../..")
 
-[node name="Pine35" parent="LevelGeo/Terrain" index="105" instance=ExtResource( 11 )]
+[node name="Pine35" parent="LevelGeo/Terrain" index="106" instance=ExtResource( 11 )]
 transform = Transform( 3.57158, -0.490426, -6.09676, 1.60305, 6.88835, 0.384992, 5.90265, -1.574, 3.58448, 136.648, 148.844, 351.202 )
 skeleton = NodePath("../..")
 
-[node name="Pine36" parent="LevelGeo/Terrain" index="106" instance=ExtResource( 11 )]
+[node name="Pine36" parent="LevelGeo/Terrain" index="107" instance=ExtResource( 11 )]
 transform = Transform( -2.36997, 0.785485, -4.18584, 1.60687, 4.60118, -0.0463634, 3.94414, -1.40257, -2.49631, 82.5205, 159.539, 346.048 )
 skeleton = NodePath("../..")
 
-[node name="Pine30" parent="LevelGeo/Terrain" index="107" instance=ExtResource( 11 )]
+[node name="Pine30" parent="LevelGeo/Terrain" index="108" instance=ExtResource( 11 )]
 transform = Transform( 3.51465, -0.48261, -5.99958, -0.355703, 6.91875, -0.764924, 6.00845, 0.6919, 3.46419, 22.6346, 125.207, 159.545 )
 skeleton = NodePath("../..")
 
-[node name="Pine32" parent="LevelGeo/Terrain" index="108" instance=ExtResource( 11 )]
+[node name="Pine32" parent="LevelGeo/Terrain" index="109" instance=ExtResource( 11 )]
 transform = Transform( 0.0805852, -0.958948, -8.71115, -0.447265, 8.69973, -0.961824, 8.75237, 0.453409, 0.0310701, 33.4761, 110.473, 267.053 )
 skeleton = NodePath("../..")
 
-[node name="Pine33" parent="LevelGeo/Terrain" index="109" instance=ExtResource( 11 )]
+[node name="Pine33" parent="LevelGeo/Terrain" index="110" instance=ExtResource( 11 )]
 transform = Transform( -7.39129, -0.891265, -4.6244, -0.447265, 8.69973, -0.961825, 4.68822, -0.575158, -7.38241, -25.3173, 128.029, 247.787 )
 skeleton = NodePath("../..")
 
-[node name="Pine37" parent="LevelGeo/Terrain" index="110" instance=ExtResource( 11 )]
+[node name="Pine37" parent="LevelGeo/Terrain" index="111" instance=ExtResource( 11 )]
 transform = Transform( -7.39129, -0.891265, -4.6244, -0.447266, 8.69973, -0.961826, 4.68822, -0.575158, -7.38241, -310.853, 117.285, 535.999 )
 skeleton = NodePath("../..")
 
-[node name="Pine38" parent="LevelGeo/Terrain" index="111" instance=ExtResource( 11 )]
+[node name="Pine38" parent="LevelGeo/Terrain" index="112" instance=ExtResource( 11 )]
 transform = Transform( -4.64664, -0.560306, -2.90719, -0.28118, 5.4692, -0.604665, 2.94731, -0.361581, -4.64106, -350.33, 117.786, 600.118 )
 skeleton = NodePath("../..")
 
-[node name="Pine44" parent="LevelGeo/Terrain" index="112" instance=ExtResource( 11 )]
+[node name="Pine41" parent="LevelGeo/Terrain" index="113" instance=ExtResource( 9 )]
 transform = Transform( -11.302, -0.0940715, 4.40477, -0.619055, 12.0412, -1.33125, -4.36209, -1.46513, -11.2237, -370.962, 116.896, 588.831 )
+skeleton = NodePath("")
+
+[node name="Pine39" parent="LevelGeo/Terrain" index="114" instance=ExtResource( 11 )]
+transform = Transform( -4.64664, -0.560307, -2.90719, -0.28118, 5.4692, -0.604665, 2.94732, -0.361581, -4.64106, -382.488, 125.048, 639.725 )
 skeleton = NodePath("../..")
 
-[node name="Pine39" parent="LevelGeo/Terrain" index="113" instance=ExtResource( 11 )]
-transform = Transform( -4.64664, -0.560307, -2.90719, -0.28118, 5.4692, -0.604665, 2.94732, -0.361581, -4.64106, -373.43, 125.048, 643.523 )
-skeleton = NodePath("../..")
-
-[node name="Pine40" parent="LevelGeo/Terrain" index="114" instance=ExtResource( 11 )]
+[node name="Pine40" parent="LevelGeo/Terrain" index="115" instance=ExtResource( 11 )]
 transform = Transform( -4.59938, -0.554609, -2.87764, 0.10848, 5.31924, -1.19856, 2.92858, -1.06805, -4.47495, -338.7, 169.539, 647.999 )
 skeleton = NodePath("../..")
 
-[node name="Pine41" parent="LevelGeo/Terrain" index="115" instance=ExtResource( 11 )]
-transform = Transform( -3.52902, 0.299596, 1.01021, 0.0732588, 3.59219, -0.80941, -1.05116, -0.755485, -3.44799, -377.241, 169.539, 646.028 )
-skeleton = NodePath("../..")
+[node name="Pine43" parent="LevelGeo/Terrain" index="116" instance=ExtResource( 9 )]
+transform = Transform( -5.84885, 0.496538, 1.67428, 0.121416, 5.95355, -1.34148, -1.74215, -1.25211, -5.71456, -372.304, 173.281, 646.787 )
+skeleton = NodePath("")
 
-[node name="Pine42" parent="LevelGeo/Terrain" index="116" instance=ExtResource( 11 )]
+[node name="Pine42" parent="LevelGeo/Terrain" index="117" instance=ExtResource( 11 )]
 transform = Transform( -7.23993, 0.614633, 2.07248, 0.150293, 7.36952, -1.66054, -2.15649, -1.54991, -7.07369, -584.135, 141.877, 633.173 )
 skeleton = NodePath("../..")
 
-[node name="Pine45" parent="LevelGeo/Terrain" index="117" instance=ExtResource( 11 )]
+[node name="Pine45" parent="LevelGeo/Terrain" index="118" instance=ExtResource( 11 )]
 transform = Transform( -10.1127, 0.858516, 2.89484, 0.20993, 10.2937, -2.31943, -3.01218, -2.16491, -9.8805, -596.958, 155.071, 241.812 )
 skeleton = NodePath("../..")
 
-[node name="Pine46" parent="LevelGeo/Terrain" index="118" instance=ExtResource( 11 )]
+[node name="Pine46" parent="LevelGeo/Terrain" index="119" instance=ExtResource( 11 )]
 transform = Transform( -10.1127, 0.858516, 2.89484, 0.20993, 10.2937, -2.31943, -3.01218, -2.16491, -9.8805, -430.097, 138.365, 92.0588 )
 skeleton = NodePath("../..")
 
-[node name="Pine49" parent="LevelGeo/Terrain" index="119" instance=ExtResource( 9 )]
+[node name="Pine61" parent="LevelGeo/Terrain" index="120" instance=ExtResource( 11 )]
+transform = Transform( -4.24225, 2.42295, 5.85141, 1.36823, 7.22717, -2.00064, -6.18367, -0.0631358, -4.45701, -319.935, 105.355, 41.6455 )
+skeleton = NodePath("../..")
+
+[node name="Pine49" parent="LevelGeo/Terrain" index="121" instance=ExtResource( 9 )]
 transform = Transform( -12.6109, -1.30832, -6.94771, 0.287575, 14.101, -3.17731, 7.06395, -2.9097, -12.2739, -482.701, 127.296, 53.5729 )
 skeleton = NodePath("")
 
-[node name="Pine48" parent="LevelGeo/Terrain" index="120" instance=ExtResource( 11 )]
+[node name="Pine48" parent="LevelGeo/Terrain" index="122" instance=ExtResource( 11 )]
 transform = Transform( 7.39015, 3.92875, -11.7884, 0.593001, 13.5887, 4.90042, 12.4117, -2.98846, 6.78493, -599.656, 139.383, 33.2383 )
 skeleton = NodePath("../..")
 
-[node name="Pine51" parent="LevelGeo/Terrain" index="121" instance=ExtResource( 11 )]
+[node name="Pine51" parent="LevelGeo/Terrain" index="123" instance=ExtResource( 11 )]
 transform = Transform( 3.77881, 0.593511, -6.65118, 1.09632, 7.48352, 1.29064, 6.58702, -1.586, 3.60083, -525.298, 123.953, -137.756 )
 skeleton = NodePath("../..")
 
-[node name="Pine50" parent="LevelGeo/Terrain" index="122" instance=ExtResource( 9 )]
-transform = Transform( 4.13644, 2.19901, -6.59826, 0.331917, 7.60589, 2.74288, 6.94713, -1.67271, 3.79769, -603.822, 140.18, -44.4807 )
+[node name="Pine50" parent="LevelGeo/Terrain" index="124" instance=ExtResource( 9 )]
+transform = Transform( 5.09409, 2.70811, -8.12586, 0.408761, 9.36677, 3.3779, 8.5555, -2.05997, 4.67691, -603.822, 140.18, -44.4807 )
 skeleton = NodePath("")
 
-[node name="Pine52" parent="LevelGeo/Terrain" index="123" instance=ExtResource( 9 )]
+[node name="Pine52" parent="LevelGeo/Terrain" index="125" instance=ExtResource( 9 )]
 transform = Transform( 4.00176, 0.740501, -6.99432, 1.09827, 7.88271, 1.46291, 6.94714, -1.67271, 3.7977, -591.247, 184.936, -252.851 )
 skeleton = NodePath("")
 
-[node name="Pine43" parent="LevelGeo/Terrain" index="124" instance=ExtResource( 11 )]
-transform = Transform( -5.04192, 0.428032, 1.44329, 0.104665, 5.13216, -1.1564, -1.50179, -1.07936, -4.92614, -600.32, 141.877, 607.093 )
-skeleton = NodePath("../..")
+[node name="Pine54" parent="LevelGeo/Terrain" index="126" instance=ExtResource( 9 )]
+transform = Transform( -8.11921, 0.689278, 2.32419, 0.168546, 8.26453, -1.8622, -2.41839, -1.73814, -7.93277, -600.32, 141.877, 607.093 )
+skeleton = NodePath("")
 
-[node name="Pine29" parent="LevelGeo/Terrain" index="125" instance=ExtResource( 11 )]
+[node name="Pine29" parent="LevelGeo/Terrain" index="127" instance=ExtResource( 11 )]
 transform = Transform( 2.16911, -0.297849, -3.70273, -0.219527, 4.27, -0.472084, 3.7082, 0.427015, 2.13797, 204.945, 79.6785, 257.644 )
 skeleton = NodePath("../..")
 
-[node name="Pine7" parent="LevelGeo/Terrain" index="126" instance=ExtResource( 11 )]
+[node name="Pine7" parent="LevelGeo/Terrain" index="128" instance=ExtResource( 11 )]
 transform = Transform( 3.27252, -0.449362, -5.58626, -0.331199, 6.4421, -0.712228, 5.5945, 0.644232, 3.22553, 587.656, 40.0783, 342.536 )
 skeleton = NodePath("../..")
 
-[node name="Pine5" parent="LevelGeo/Terrain" index="127" instance=ExtResource( 11 )]
+[node name="Pine5" parent="LevelGeo/Terrain" index="129" instance=ExtResource( 11 )]
 transform = Transform( 4.88505, -0.670784, -8.33887, -0.494396, 9.61643, -1.06318, 8.35119, 0.961676, 4.8149, 323.696, 76.8534, 477.165 )
 skeleton = NodePath("../..")
 
-[node name="Pine2" parent="LevelGeo/Terrain" index="128" instance=ExtResource( 11 )]
-transform = Transform( 0.368503, -0.0451616, -5.2448, 0.806005, 6.57672, 0, 5.20585, -0.637999, 0.37126, -254.73, 67.6488, 13.489 )
+[node name="Pine2" parent="LevelGeo/Terrain" index="130" instance=ExtResource( 11 )]
+transform = Transform( 0.619614, -0.0759364, -8.81881, 1.35525, 11.0583, 0, 8.75331, -1.07276, 0.624251, -254.73, 67.6488, 13.489 )
+mesh = ExtResource( 19 )
 skeleton = NodePath("../..")
+
+[node name="Pine25" parent="LevelGeo/Terrain" index="131" instance=ExtResource( 9 )]
+transform = Transform( 11.6434, 0, 0, 0, 11.6434, 0, 0, 0, 11.6434, -572.06, 129.069, -151.657 )
+skeleton = NodePath("")
+
+[node name="Pine55" parent="LevelGeo/Terrain" index="132" instance=ExtResource( 9 )]
+transform = Transform( 12.6771, 1.87937, -0.106338, -1.87863, 12.6774, 0.0924241, 0.11874, -0.0758343, 12.8154, -375.733, 200.61, -654.384 )
+skeleton = NodePath("../../..")
+
+[node name="Pine56" parent="LevelGeo/Terrain" index="133" instance=ExtResource( 11 )]
+transform = Transform( 15.1788, 0, 0, 0, 15.1788, 0, 0, 0, 15.1788, -481.033, 195.855, -637.304 )
+skeleton = NodePath("../../..")
+
+[node name="Pine57" parent="LevelGeo/Terrain" index="134" instance=ExtResource( 10 )]
+transform = Transform( 9.84575, 0, 0, 0, 9.84575, 0, 0, 0, 9.84575, -328.301, 111.404, -10.482 )
+skeleton = NodePath("")
+
+[node name="Pine58" parent="LevelGeo/Terrain" index="135" instance=ExtResource( 10 )]
+transform = Transform( -3.1721, 0, 11.467, 0, 11.8977, 0, -11.467, 0, -3.1721, -348.686, 119.586, 51.5734 )
+skeleton = NodePath("")
+
+[node name="Pine59" parent="LevelGeo/Terrain" index="136" instance=ExtResource( 10 )]
+transform = Transform( 5.8158, 0, -10.3793, 0, 11.8977, 0, 10.3793, 0, 5.8158, -368.863, 123.425, -53.5764 )
+skeleton = NodePath("")
+
+[node name="Pine60" parent="LevelGeo/Terrain" index="137" instance=ExtResource( 9 )]
+transform = Transform( 11.6846, 0, 0, 0, 11.6846, 0, 0, 0, 11.6846, -341.657, 115.325, -11.8506 )
+
+[node name="Pine62" parent="LevelGeo/Terrain" index="138" instance=ExtResource( 10 )]
+transform = Transform( 19.1501, 0, 0, 0, 19.1501, 0, 0, 0, 19.1501, -157.295, 73.8399, -13.2777 )
+skeleton = NodePath("../../..")
+
+[node name="Pine63" parent="LevelGeo/Terrain" index="139" instance=ExtResource( 10 )]
+transform = Transform( 11.7427, 0, 0, 0, 11.7427, 0, 0, 0, 11.7427, -138.4, 73.8399, 58.013 )
+skeleton = NodePath("../../..")
+
+[node name="Pine64" parent="LevelGeo/Terrain" index="140" instance=ExtResource( 10 )]
+transform = Transform( 7.31812, 0, 0, 0, 7.31812, 0, 0, 0, 7.31812, -232.554, 67.2492, -95.1617 )
+skeleton = NodePath("../../..")
+
+[node name="Pine65" parent="LevelGeo/Terrain" index="141" instance=ExtResource( 10 )]
+transform = Transform( 13.338, 0, 0, 0, 13.338, 0, 0, 0, 13.338, -304.194, 72.2472, -655.886 )
+skeleton = NodePath("../../..")
+
+[node name="Pine66" parent="LevelGeo/Terrain" index="142" instance=ExtResource( 10 )]
+transform = Transform( -3.03577, 0, -12.9879, 0, 13.338, 0, 12.9879, 0, -3.03577, -311.331, 79.9625, -660.054 )
+skeleton = NodePath("../../..")
+
+[node name="Pine67" parent="LevelGeo/Terrain" index="143" instance=ExtResource( 10 )]
+transform = Transform( -3.36726, 8.67116, -14.4061, 1.97358, 14.7944, 8.44357, 16.6982, 0, -3.90301, -365.506, 198.586, -660.054 )
+skeleton = NodePath("../../..")
 
 [node name="Truss" parent="LevelGeo/Race" index="0" instance=ExtResource( 13 )]
 transform = Transform( -0.180021, 0, 0.983663, 0, 1, 0, -0.983663, 0, -0.180021, 27.8749, 39.455, 40.4709 )
@@ -4185,22 +4252,39 @@ width = 20.715
 height = 19.479
 serial = 11
 
-[node name="Path" parent="." index="7"]
-curve = ExtResource( 23 )
+[node name="PreviewPath1" type="Path" parent="LevelPreview" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -81.968, 35.4425, 46.0152 )
+curve = SubResource( 203 )
 
-[node name="PreviewFollow" parent="LevelPreview" index="0"]
-offset = nan
+[node name="PathFollow" type="PathFollow" parent="LevelPreview/PreviewPath1" index="0"]
+transform = Transform( 0.043871, 0.053722, 0.997481, -0.00146163, 0.998557, -0.0537036, -0.999036, 0.000898184, 0.0438812, 4.68461, 1.60116, -2.53664 )
+offset = 53.7119
+rotation_mode = 4
+loop = false
+script = ExtResource( 20 )
+
+[node name="PreviewPath2" type="Path" parent="LevelPreview" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 265.911, 35.4425, -117.703 )
+curve = SubResource( 203 )
+
+[node name="PathFollow" type="PathFollow" parent="LevelPreview/PreviewPath2" index="0"]
+transform = Transform( -0.190478, 0.0705191, 0.979064, 0.0129047, 0.997512, -0.0693241, -0.981605, -0.000570222, -0.190896, 117.512, -4.87556, -5.41718 )
+offset = 166.185
+rotation_mode = 4
+loop = false
+script = ExtResource( 20 )
 
 [node name="MinimapCamera" parent="Minimap" index="0"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 400, -69 )
+visible = false
 size = 1541.0
 far = 1000.0
 
 [node name="MusicPlayer" parent="." index="12"]
 stream = ExtResource( 7 )
 
-[node name="Pine" parent="." index="14" instance=ExtResource( 10 )]
-transform = Transform( 11.6434, 0, 0, 0, 11.6434, 0, 0, 0, 11.6434, -572.06, 129.069, -151.657 )
+[connection signal="path_finished" from="LevelPreview/PreviewPath1/PathFollow" to="LevelPreview" method="switch_cameras"]
+[connection signal="path_finished" from="LevelPreview/PreviewPath2/PathFollow" to="LevelPreview" method="switch_cameras"]
 
 [editable path="LevelGeo/Race/Checkpoint1a"]
 [editable path="LevelGeo/Race/Checkpoint1b"]

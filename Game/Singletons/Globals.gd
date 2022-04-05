@@ -5,7 +5,6 @@ var INFINITE_BOOST : bool = false
 
 var test_track_ = "res://Tracks/TestTrack/SinglePlayerTestTrack.tscn"
 var test_terrain_ = "res://Tracks/TestTerrain/SinglePlayerTestTerrain.tscn"
-#var valley_ = "res://Tracks/Valley/SinglePlayerValley.tscn"
 var level_dict : Dictionary = {
 	"test_track" : test_track_,
 	"test_terrain" : test_terrain_
@@ -21,10 +20,10 @@ const DEFAULT_NPC_NUMBER : int = 11
 const MIN_NPC_NUMBER : int = 0
 const MAX_NPC_NUMBER : int = 11
 
-#const DEFAULT_SFX_LEVEL : int = -30
-const DEFAULT_SFX_LEVEL : int = -48
-#const DEFAULT_MUSIC_LEVEL : int = -40
-const DEFAULT_MUSIC_LEVEL : int = -48
+const DEFAULT_SFX_LEVEL : int = -30
+#const DEFAULT_SFX_LEVEL : int = -48
+const DEFAULT_MUSIC_LEVEL : int = -40
+#const DEFAULT_MUSIC_LEVEL : int = -48
 const MIN_SFX_LEVEL : int = -48
 const MAX_SFX_LEVEL : int = -12
 const MIN_MUSIC_LEVEL : int = -48

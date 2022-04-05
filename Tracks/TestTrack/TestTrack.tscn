@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Tracks/Assets/TrackComponents/LevelPreview.gd" type="Script" id=4]
+[ext_resource path="res://Tracks/Assets/TrackComponents/LevelPreview.gd" type="Script" id=1]
+[ext_resource path="res://Tracks/TestTrack/TestTrackBase.tscn" type="PackedScene" id=2]
 
 [sub_resource type="Curve3D" id=3]
 _data = {
@@ -45,6 +46,8 @@ transform = Transform( 1.00013, 0, 0, 0, 1.00013, 0, 0, 0, 1.00013, 0, 0, 0 )
 
 [node name="LevelGeo" type="Spatial" parent="."]
 
+[node name="TestTrack" parent="LevelGeo" instance=ExtResource( 2 )]
+
 [node name="Terrain" type="Spatial" parent="LevelGeo"]
 
 [node name="Race" type="Spatial" parent="LevelGeo"]
@@ -61,7 +64,7 @@ transform = Transform( 1.00013, 0, 0, 0, 1.00013, 0, 0, 0, 1.00013, 0, 0, 0 )
 transform = Transform( 0.99987, 0, 0, 0, 0.99987, 0, 0, 0, 0.99987, 0, 0, 0 )
 layers = 0
 
-[node name="TrackPath" type="Path" parent="."]
+[node name="NPCPath" type="Path" parent="."]
 curve = SubResource( 3 )
 
 [node name="PathNodes" type="Node" parent="."]
@@ -69,7 +72,7 @@ curve = SubResource( 3 )
 [node name="ModNodes" type="Node" parent="."]
 
 [node name="LevelPreview" type="Spatial" parent="."]
-script = ExtResource( 4 )
+script = ExtResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="LevelPreview"]
 anchor_right = 1.0

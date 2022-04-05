@@ -1,22 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Tracks/TestTerrain/Assets/Props/Pines/Needles/Needles.tres" type="Material" id=1]
-[ext_resource path="res://Tracks/TestTerrain/Assets/Props/Pines/Bark/Bark.tres" type="Material" id=2]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Props/Pines/Pine2.mesh" type="ArrayMesh" id=3]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.29
-height = 6.0
+height = 4.0
 
 [node name="Pine" type="MeshInstance"]
 mesh = ExtResource( 3 )
-material/0 = ExtResource( 2 )
-material/1 = ExtResource( 1 )
+material/0 = null
+material/1 = null
 
 [node name="Body" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 collision_layer = 4
 collision_mask = 17
 
 [node name="Shape" type="CollisionShape" parent="Body"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 shape = SubResource( 1 )
