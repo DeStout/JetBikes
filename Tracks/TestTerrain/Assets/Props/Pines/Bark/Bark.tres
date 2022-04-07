@@ -1,14 +1,14 @@
-[gd_resource type="SpatialMaterial" load_steps=6 format=2]
+[gd_resource type="SpatialMaterial" load_steps=5 format=2]
 
 [ext_resource path="res://Tracks/TestTerrain/Assets/Props/Pines/Bark/Bark006_1K_AmbientOcclusion.png" type="Texture" id=1]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Props/Pines/Bark/Bark006_1K_NormalGL.png" type="Texture" id=2]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Props/Pines/Bark/Bark006_1K_Displacement.png" type="Texture" id=3]
-[ext_resource path="res://Tracks/TestTerrain/Assets/Props/Pines/Bark/Bark006_1K_Roughness.png" type="Texture" id=4]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Props/Pines/Bark/Bark006_1K_Color.png" type="Texture" id=5]
 
 [resource]
 albedo_texture = ExtResource( 5 )
-roughness_texture = ExtResource( 4 )
+metallic = 0.07
+metallic_specular = 0.2
 normal_enabled = true
 normal_scale = -1.95
 normal_texture = ExtResource( 2 )

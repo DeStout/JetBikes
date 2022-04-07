@@ -1,4 +1,4 @@
-extends AudioStreamPlayer3D
+extends AudioStreamPlayer
 
 const DEFAULT_PITCH : float = 1.0
 const MAX_PITCH : float = 1.1

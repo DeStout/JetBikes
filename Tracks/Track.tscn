@@ -1,12 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Tracks/Assets/TrackComponents/LevelPreview.gd" type="Script" id=4]
-
-[sub_resource type="Curve3D" id=3]
-_data = {
-"points": PoolVector3Array(  ),
-"tilts": PoolRealArray(  )
-}
 
 [sub_resource type="Animation" id=1]
 resource_name = "FadeIn"
@@ -61,12 +55,11 @@ transform = Transform( 1.00013, 0, 0, 0, 1.00013, 0, 0, 0, 1.00013, 0, 0, 0 )
 transform = Transform( 0.99987, 0, 0, 0, 0.99987, 0, 0, 0, 0.99987, 0, 0, 0 )
 layers = 0
 
-[node name="TrackPath" type="Path" parent="."]
-curve = SubResource( 3 )
+[node name="TrackPath" type="Spatial" parent="."]
 
-[node name="PathNodes" type="Node" parent="."]
+[node name="PathNodes" type="Spatial" parent="."]
 
-[node name="ModNodes" type="Node" parent="."]
+[node name="ModNodes" type="Spatial" parent="."]
 
 [node name="LevelPreview" type="Spatial" parent="."]
 script = ExtResource( 4 )

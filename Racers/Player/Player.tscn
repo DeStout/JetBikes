@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Tracks/radial_blur_spatial.gdshader" type="Shader" id=1]
 [ext_resource path="res://Racers/Player/HUD/HUD.tscn" type="PackedScene" id=2]
@@ -9,6 +9,11 @@
 [ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_NormalGL_scaled.png" type="Texture" id=7]
 [ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_Metalness.png" type="Texture" id=8]
 [ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_Roughness.png" type="Texture" id=9]
+[ext_resource path="res://Racers/Player/AudioBoost.gd" type="Script" id=10]
+[ext_resource path="res://Racers/General/Bike/Assets/SFX/Hop.wav" type="AudioStream" id=11]
+[ext_resource path="res://Racers/General/Bike/Assets/SFX/JetEngine.wav" type="AudioStream" id=12]
+[ext_resource path="res://Racers/General/Bike/Assets/SFX/DieselEngine.wav" type="AudioStream" id=13]
+[ext_resource path="res://Racers/General/Bike/Assets/SFX/Boost.wav" type="AudioStream" id=14]
 
 [sub_resource type="SpatialMaterial" id=1]
 resource_local_to_scene = true
@@ -59,5 +64,30 @@ script = ExtResource( 5 )
 visible = false
 mesh = SubResource( 3 )
 material/0 = null
+
+[node name="Audio_Jet" type="AudioStreamPlayer" parent="." index="8"]
+stream = ExtResource( 12 )
+volume_db = -18.0
+autoplay = true
+bus = "Player_SFX"
+
+[node name="Audio_Diesel" type="AudioStreamPlayer" parent="." index="9"]
+stream = ExtResource( 13 )
+volume_db = -5.0
+pitch_scale = 2.82
+autoplay = true
+bus = "Player_SFX"
+
+[node name="Audio_Boost" type="AudioStreamPlayer" parent="." index="10"]
+stream = ExtResource( 14 )
+volume_db = -5.0
+bus = "Player_SFX"
+script = ExtResource( 10 )
+
+[node name="Audio_Hop" type="AudioStreamPlayer" parent="." index="11"]
+stream = ExtResource( 11 )
+volume_db = -5.0
+pitch_scale = 1.13
+bus = "Player_SFX"
 
 [editable path="EngineRotationHelper/Engine"]

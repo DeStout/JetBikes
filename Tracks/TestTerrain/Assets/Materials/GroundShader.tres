@@ -1,0 +1,83 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=2]
+
+[ext_resource path="res://Tracks/TestTerrain/Assets/Materials/Rock29/Rock029_1K_Color.png" type="Texture" id=1]
+[ext_resource path="res://Tracks/TestTerrain/D_TT2.png" type="Texture" id=2]
+[ext_resource path="res://Tracks/TestTerrain/Assets/Materials/Ground1/Ground048_1K_Color.png" type="Texture" id=3]
+
+[sub_resource type="Shader" id=11]
+code = "// Credit to Joel_127
+// https://godotengine.org/qa/43461/there-alternative-blenders-shader-godot-visual-shader-editor
+
+shader_type spatial;
+
+uniform sampler2D splat_texture;
+
+uniform sampler2D base_texture : hint_albedo;
+uniform sampler2D red_texture : hint_albedo;
+uniform sampler2D blue_texture : hint_albedo;
+uniform sampler2D green_texture : hint_albedo;
+
+uniform sampler2D base_normal : hint_normal;
+uniform sampler2D green_normal : hint_normal;
+
+uniform float specular;
+uniform float roughness : hint_range(0,1);
+uniform float mix_factor : hint_range(0,1);
+
+uniform float uv1_scale;
+uniform float uv1_macro_scale;
+
+varying vec2 uv1;
+varying vec2 uv1_macro;
+
+varying vec3 _normal;
+
+
+void vertex()
+{
+    uv1=UV*uv1_scale;
+    uv1_macro=UV*uv1_macro_scale;
+}
+
+void fragment()
+{
+    vec3 splat_color = texture(splat_texture, UV).rgb;
+
+    //add macro details
+    vec3 col_tex_base_macro  = texture(base_texture, uv1_macro).rgb;
+    vec3 col_tex_green_macro = texture(green_texture, uv1_macro).rgb;
+
+    vec3 albedo_macro = mix(col_tex_base_macro, col_tex_green_macro, splat_color.g);
+
+    //tiled small textures
+    vec3 col_tex_base  = texture(base_texture, uv1).rgb;
+    vec3 col_tex_red   = texture(red_texture, uv1).rgb;
+    vec3 col_tex_green = texture(green_texture, uv1).rgb;
+    vec3 col_tex_blue  = texture(blue_texture, uv1).rgb;
+	
+	vec3 norm_tex_base = texture(base_normal, uv1_macro).rgb;
+	vec3 norm_tex_green = texture(green_normal, uv1_macro).rgb;
+
+    vec3 albedo = mix(col_tex_base, col_tex_green, splat_color.g);
+    albedo = mix(albedo, col_tex_red, splat_color.r);
+    albedo = mix(albedo, col_tex_blue, splat_color.b);
+	
+    ALBEDO = mix(albedo, albedo_macro, mix_factor);
+	NORMALMAP = mix(norm_tex_base, norm_tex_green, splat_color.g);
+	NORMALMAP_DEPTH = 0.55;
+
+    METALLIC = 0.0;
+    ROUGHNESS = roughness;
+    SPECULAR = specular;
+}"
+
+[resource]
+shader = SubResource( 11 )
+shader_param/specular = 0.0
+shader_param/roughness = 1.0
+shader_param/mix_factor = 1.0
+shader_param/uv1_scale = 1.0
+shader_param/uv1_macro_scale = 20.0
+shader_param/splat_texture = ExtResource( 2 )
+shader_param/base_texture = ExtResource( 1 )
+shader_param/green_texture = ExtResource( 3 )

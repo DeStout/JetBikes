@@ -101,6 +101,10 @@ window/stretch/aspect="keep"
 
 enabled=PoolStringArray( "res://addons/zylann.scatter/plugin.cfg" )
 
+[global]
+
+shadow=false
+
 [gui]
 
 theme/use_hidpi=true
@@ -210,4 +214,6 @@ Hop={
 
 [rendering]
 
+quality/directional_shadow/size=8192
+quality/shadows/filter_mode=2
 quality/filters/msaa=4

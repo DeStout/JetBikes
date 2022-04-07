@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Racers/Racer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Racers/NPC/NPC.gd" type="Script" id=2]
 [ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_NormalGL_scaled.png" type="Texture" id=3]
 [ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_Metalness.png" type="Texture" id=4]
 [ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_Roughness.png" type="Texture" id=5]
+[ext_resource path="res://Racers/General/Bike/Assets/SFX/Hop.wav" type="AudioStream" id=7]
+[ext_resource path="res://Racers/General/Bike/Assets/SFX/JetEngine.wav" type="AudioStream" id=8]
+[ext_resource path="res://Racers/General/Bike/Assets/SFX/DieselEngine.wav" type="AudioStream" id=9]
+[ext_resource path="res://Racers/General/Bike/Assets/SFX/Boost.wav" type="AudioStream" id=10]
 
 [sub_resource type="SpatialMaterial" id=1]
 resource_local_to_scene = true
@@ -22,5 +26,39 @@ script = ExtResource( 2 )
 
 [node name="Shielding" parent="EngineRotationHelper/Engine" index="2"]
 material/0 = SubResource( 1 )
+
+[node name="Audio_Jet" type="AudioStreamPlayer3D" parent="." index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+stream = ExtResource( 8 )
+unit_db = -2.5
+unit_size = 15.0
+max_db = 0.0
+autoplay = true
+bus = "Player_SFX"
+
+[node name="Audio_Diesel" type="AudioStreamPlayer3D" parent="." index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+stream = ExtResource( 9 )
+unit_db = 2.5
+unit_size = 15.0
+max_db = 0.0
+pitch_scale = 2.82
+autoplay = true
+bus = "Player_SFX"
+
+[node name="Audio_Boost" type="AudioStreamPlayer3D" parent="." index="9"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+stream = ExtResource( 10 )
+unit_size = 15.0
+max_db = 0.0
+bus = "Player_SFX"
+
+[node name="Audio_Hop" type="AudioStreamPlayer3D" parent="." index="10"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+stream = ExtResource( 7 )
+unit_db = 2.5
+unit_size = 15.0
+pitch_scale = 1.13
+bus = "Player_SFX"
 
 [editable path="EngineRotationHelper/Engine"]

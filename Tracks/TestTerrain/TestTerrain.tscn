@@ -1,4 +1,4 @@
-[gd_scene load_steps=216 format=2]
+[gd_scene load_steps=222 format=2]
 
 [ext_resource path="res://Tracks/Assets/TrackComponents/SwingPole/SwingPole.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tracks/Assets/TrackComponents/Sign/M_WrongWay_D.png" type="Texture" id=2]
@@ -45,7 +45,7 @@ operator = 2
 [sub_resource type="VisualShaderNodeVectorCompose" id=10]
 output_port_for_preview = 0
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=11]
+[sub_resource type="VisualShaderNodeScalarConstant" id=206]
 constant = 0.571
 
 [sub_resource type="VisualShaderNodeVectorDecompose" id=12]
@@ -168,7 +168,7 @@ nodes/fragment/14/node = SubResource( 9 )
 nodes/fragment/14/position = Vector2( -620, -240 )
 nodes/fragment/15/node = SubResource( 10 )
 nodes/fragment/15/position = Vector2( -380, -80 )
-nodes/fragment/16/node = SubResource( 11 )
+nodes/fragment/16/node = SubResource( 206 )
 nodes/fragment/16/position = Vector2( -860, -260 )
 nodes/fragment/17/node = SubResource( 12 )
 nodes/fragment/17/position = Vector2( -900, -160 )
@@ -2922,11 +2922,48 @@ distance_fade_max_distance = 50.0
 material = SubResource( 19 )
 size = Vector2( 150, 150 )
 
-[sub_resource type="Curve3D" id=203]
+[sub_resource type="Curve3D" id=209]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 26.2025, 26.192, 39.9652, -7.15785, 0.663217, 20.1737, 7.15785, -0.663217, -20.1737, 204.619, 16.3416, -34.2486, -17.8608, -1.2372, 18.7801, 17.8608, 1.2372, -18.7801, 248.67, 17.314, -103.465, -19.5829, 0.0289879, 32.0884, 19.5829, -0.0289879, -32.0884, 304.406, 16.3175, -161.023, 0, 0, 0, 0, 0, 0, 333.692, 18.1324, -215.35 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=211]
+_data = {
+"points": PoolVector3Array( -34.6752, -2.64282, 58.979, 34.6752, 2.64282, -58.979, 362.473, 14.7274, -264.149, -66.8052, -8.69315, 19.0058, 66.8052, 8.69315, -19.0058, 492.365, 28.0835, -396.738, 5.5116, -3.51265, -67.8082, -5.5116, 3.51265, 67.8082, 577.434, 51.5947, -266.349 ),
+"tilts": PoolRealArray( 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=210]
+_data = {
+"points": PoolVector3Array( -44.4224, -22.8978, -3.37703, 44.4224, 22.8978, 3.37703, 394.781, 27.9187, -254.244, -37.8533, 16.1209, 12.0921, 37.8533, -16.1209, -12.0921, 556.69, 50.0795, -260.638 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=212]
+_data = {
+"points": PoolVector3Array( -1.76752, -10.1044, -93.9105, 1.76752, 10.1044, 93.9105, 583.16, 53.7546, -230.904, 32.6697, 15.9605, -64.9779, -32.6697, -15.9605, 64.9779, 512.285, 58.7078, 69.2018, 32.0675, -4.42598, -79.3698, -32.0675, 4.42598, 79.3698, 417.33, 48.2415, 302.886, 112.143, -22.5385, 35.8083, -112.143, 22.5385, -35.8083, 255.57, 73.0935, 303.299 ),
+"tilts": PoolRealArray( 0, 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=207]
 bake_interval = 0.1
 _data = {
-"points": PoolVector3Array( -94.4631, 5.60415, -1.70802, 94.4631, -5.60415, 1.70802, -44.622, 4.39957, -4.05608, -42.5233, 3.26863, 8.10398, 42.5233, -3.26863, -8.10398, 108.684, -4.22592, -3.72493, -77.7889, 8.28384, 87.2208, 77.7889, -8.28384, -87.2208, 308.776, -19.5088, -113.399 ),
-"tilts": PoolRealArray( 0, 0, 0 )
+"points": PoolVector3Array( -108.818, 6.92139, -40.9076, 108.818, -6.92139, 40.9076, -49.7787, 5.2217, -9.44472, -89.2994, 5.12754, 89.7765, 89.2994, -5.12754, -89.7765, 277.146, -12.1171, -84.7469 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=208]
+bake_interval = 0.1
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 20.8178, -6.14801, -4.17761, 0, 0, 0, 0, 0, 0, -206.566, 14.134, -43.5078 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=213]
+_data = {
+"points": PoolVector3Array(  ),
+"tilts": PoolRealArray(  )
 }
 
 [node name="TestTerrain" instance=ExtResource( 6 )]
@@ -3069,7 +3106,7 @@ transform = Transform( 3.05241, -0.090575, 4.21017, 4.20184, 0.41119, -3.03752, 
 transform = Transform( -25.327, 5.38212, 54.0244, -2.50173, 59.4345, -7.09393, -54.2342, -5.25503, -24.9017, 522.721, -31.7652, 695.215 )
 
 [node name="RockD7" parent="LevelGeo/Terrain" index="45" instance=ExtResource( 17 )]
-transform = Transform( 13.923, -2.6204, 17.5905, -11.3952, 15.8372, 11.3786, -13.6543, -15.8889, 8.44054, -497.385, 87.5841, 612.251 )
+transform = Transform( 21.009, 2.48878, -7.9099, 7.27327, 4.81695, 20.8336, 3.98259, -21.9259, 3.67913, -486.58, 88.5574, 631.109 )
 
 [node name="RockD3" parent="LevelGeo/Terrain" index="46" instance=ExtResource( 17 )]
 transform = Transform( -6.73504, -1.53835, -17.6523, -17.6484, -1.10368, 6.82974, -1.58203, 18.8612, -1.0401, -301.06, 147.016, 58.0822 )
@@ -3144,7 +3181,7 @@ transform = Transform( -35.246, 1.49324, -59.9776, -5.94289, -69.3064, 1.76686, 
 transform = Transform( -25.6601, -24.2088, -59.9776, 45.5057, -52.6111, 1.76686, -45.9631, -38.5723, 35.2334, 72.5142, 187.146, 600.91 )
 
 [node name="RockA24" parent="LevelGeo/Terrain" index="70" instance=ExtResource( 12 )]
-transform = Transform( 8.29967, -25.7551, -3.52257, 6.16394, -1.64244, 26.5316, -25.2535, -8.86539, 5.31821, -281.676, 117.968, 578.175 )
+transform = Transform( 8.29967, -25.7551, -3.52257, 6.16394, -1.64244, 26.5316, -25.2535, -8.86539, 5.31821, -281.676, 103.905, 578.175 )
 
 [node name="RockA23" parent="LevelGeo/Terrain" index="71" instance=ExtResource( 12 )]
 transform = Transform( -7.1959, -6.78891, -16.8196, 12.7612, -14.7538, 0.495483, -12.8895, -10.8169, 9.88055, -81.8078, 206.562, 270.349 )
@@ -4113,7 +4150,21 @@ light_color = Color( 1, 0.670588, 0.231373, 1 )
 shadow_enabled = true
 shadow_color = Color( 0.262745, 0.0901961, 0, 1 )
 shadow_reverse_cull_face = true
+directional_shadow_mode = 0
+directional_shadow_depth_range = 1
 directional_shadow_max_distance = 750.0
+
+[node name="Path1" type="Path" parent="TrackPath" index="0"]
+curve = SubResource( 209 )
+
+[node name="Path2a" type="Path" parent="TrackPath" index="1"]
+curve = SubResource( 211 )
+
+[node name="Path2b" type="Path" parent="TrackPath" index="2"]
+curve = SubResource( 210 )
+
+[node name="Path3" type="Path" parent="TrackPath" index="3"]
+curve = SubResource( 212 )
 
 [node name="PathNode0" parent="PathNodes" index="0" instance=ExtResource( 4 )]
 transform = Transform( 0.159831, -0.0198032, -0.986946, 0.0128951, 0.999756, -0.017972, 0.987061, -0.00985346, 0.160047, 26.8975, 42.5405, 39.929 )
@@ -4254,22 +4305,22 @@ serial = 11
 
 [node name="PreviewPath1" type="Path" parent="LevelPreview" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -81.968, 35.4425, 46.0152 )
-curve = SubResource( 203 )
+visible = false
+curve = SubResource( 207 )
 
 [node name="PathFollow" type="PathFollow" parent="LevelPreview/PreviewPath1" index="0"]
-transform = Transform( 0.043871, 0.053722, 0.997481, -0.00146163, 0.998557, -0.0537036, -0.999036, 0.000898184, 0.0438812, 4.68461, 1.60116, -2.53664 )
-offset = 53.7119
+transform = Transform( 0.351717, 0.0556333, 0.934262, -1.86265e-09, 0.998234, -0.0594184, -0.936107, 0.0209027, 0.351024, -49.7787, 5.2217, -9.44472 )
 rotation_mode = 4
 loop = false
 script = ExtResource( 20 )
 
 [node name="PreviewPath2" type="Path" parent="LevelPreview" index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 265.911, 35.4425, -117.703 )
-curve = SubResource( 203 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 502.57, 73.1608, 376.006 )
+visible = false
+curve = SubResource( 208 )
 
 [node name="PathFollow" type="PathFollow" parent="LevelPreview/PreviewPath2" index="0"]
-transform = Transform( -0.190478, 0.0705191, 0.979064, 0.0129047, 0.997512, -0.0693241, -0.981605, -0.000570222, -0.190896, 117.512, -4.87556, -5.41718 )
-offset = 166.185
+transform = Transform( -0.170434, 0.0862677, -0.98149, -9.31321e-10, 0.996163, 0.0875399, 0.985367, 0.0149213, -0.169764, 20.8178, -6.14801, -4.17761 )
 rotation_mode = 4
 loop = false
 script = ExtResource( 20 )
@@ -4282,6 +4333,9 @@ far = 1000.0
 
 [node name="MusicPlayer" parent="." index="12"]
 stream = ExtResource( 7 )
+
+[node name="Path" type="Path" parent="." index="14"]
+curve = SubResource( 213 )
 
 [connection signal="path_finished" from="LevelPreview/PreviewPath1/PathFollow" to="LevelPreview" method="switch_cameras"]
 [connection signal="path_finished" from="LevelPreview/PreviewPath2/PathFollow" to="LevelPreview" method="switch_cameras"]
