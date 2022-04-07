@@ -55,7 +55,7 @@ transform = Transform( 1.00013, 0, 0, 0, 1.00013, 0, 0, 0, 1.00013, 0, 0, 0 )
 transform = Transform( 0.99987, 0, 0, 0, 0.99987, 0, 0, 0, 0.99987, 0, 0, 0 )
 layers = 0
 
-[node name="TrackPath" type="Spatial" parent="."]
+[node name="TrackPath2" type="Spatial" parent="."]
 
 [node name="PathNodes" type="Spatial" parent="."]
 

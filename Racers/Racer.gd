@@ -33,6 +33,7 @@ var prev_velocity : Vector3 = Vector3.ZERO
 var boost : float = 125.0
 var boost_cost : float = -1.0
 var swing_cost : float = -0.66
+var crash_threshold : int = -75
 
 var has_control : bool = false
 var is_boosting : bool = false
@@ -72,14 +73,6 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	_check_ray_collision()
-	_check_out_of_bounds()
-	_check_crash()
-	if is_crashed:
-		_crash()
-
-	_check_swing_poles(delta)
-
 	ground_normal = _get_ground_normal()
 	var racer_basis : Basis = global_transform.basis
 	var racer_quat = racer_basis.get_rotation_quat()
@@ -118,6 +111,14 @@ func _physics_process(delta):
 	if kinematic_collision:
 		_check_kinematic_collision(kinematic_collision, delta)
 		velocity = velocity.slide(kinematic_collision.normal)
+
+	_check_ray_collision()
+	_check_out_of_bounds()
+	_check_crash()
+	if is_crashed:
+		_crash()
+	_check_swing_poles(delta)
+	prev_velocity = velocity
 
 #
 # Instance spark particles at collisions and send impulses to other KinematicBodies
@@ -246,7 +247,7 @@ func _check_out_of_bounds():
 func _check_crash():
 	var prev_horizontal_vel = Vector2(prev_velocity.x, prev_velocity.z)
 	var horizontal_vel = Vector2(velocity.x, velocity.z)
-	if horizontal_vel.length() - prev_horizontal_vel.length() < -80:
+	if horizontal_vel.length() - prev_horizontal_vel.length() < float(crash_threshold):
 		is_crashed = true
 
 
@@ -308,7 +309,7 @@ func _check_swing_poles(delta : float) -> void:
 			if global_transform.origin.distance_to(swing_pole.global_transform.origin) < \
 					global_transform.origin.distance_to(closest_pole.global_transform.origin):
 				closest_pole = swing_pole
-		if is_swinging and  boost > 0:
+		if is_swinging and boost > 0:
 			_swing(closest_pole, delta)
 		else:
 			$LaserLine.set_laser_line()

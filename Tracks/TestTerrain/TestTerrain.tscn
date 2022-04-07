@@ -2962,8 +2962,8 @@ _data = {
 
 [sub_resource type="Curve3D" id=213]
 _data = {
-"points": PoolVector3Array(  ),
-"tilts": PoolRealArray(  )
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 9.42531, 25.7915, 45.3514 ),
+"tilts": PoolRealArray( 0 )
 }
 
 [node name="TestTerrain" instance=ExtResource( 6 )]
@@ -4154,16 +4154,16 @@ directional_shadow_mode = 0
 directional_shadow_depth_range = 1
 directional_shadow_max_distance = 750.0
 
-[node name="Path1" type="Path" parent="TrackPath" index="0"]
+[node name="Path1" type="Path" parent="TrackPath2" index="0"]
 curve = SubResource( 209 )
 
-[node name="Path2a" type="Path" parent="TrackPath" index="1"]
+[node name="Path2a" type="Path" parent="TrackPath2" index="1"]
 curve = SubResource( 211 )
 
-[node name="Path2b" type="Path" parent="TrackPath" index="2"]
+[node name="Path2b" type="Path" parent="TrackPath2" index="2"]
 curve = SubResource( 210 )
 
-[node name="Path3" type="Path" parent="TrackPath" index="3"]
+[node name="Path3" type="Path" parent="TrackPath2" index="3"]
 curve = SubResource( 212 )
 
 [node name="PathNode0" parent="PathNodes" index="0" instance=ExtResource( 4 )]
@@ -4334,7 +4334,7 @@ far = 1000.0
 [node name="MusicPlayer" parent="." index="12"]
 stream = ExtResource( 7 )
 
-[node name="Path" type="Path" parent="." index="14"]
+[node name="TrackPath" type="Path" parent="." index="14"]
 curve = SubResource( 213 )
 
 [connection signal="path_finished" from="LevelPreview/PreviewPath1/PathFollow" to="LevelPreview" method="switch_cameras"]
