@@ -33,7 +33,7 @@ var prev_velocity : Vector3 = Vector3.ZERO
 var boost : float = 125.0
 var boost_cost : float = -1.0
 var swing_cost : float = -0.66
-var crash_threshold : int = -75
+var crash_threshold : int = -60
 
 var has_control : bool = false
 var is_boosting : bool = false
