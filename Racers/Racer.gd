@@ -217,7 +217,7 @@ func _pitch_sfx():
 
 
 func _set_boost_sfx():
-	$Audio_Boost.set_playing(is_boosting)
+	$Audio_Boost._set_playing(is_boosting)
 
 
 func _set_boost(delta_boost : float) -> void:
