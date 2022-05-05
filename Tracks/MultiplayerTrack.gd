@@ -3,12 +3,9 @@ extends Track
 signal return_to_lobby
 
 
-#func _ready():
-#	$Players.master_player.HUD.setup_minimap($Minimap.get_texture(), \
-#		$Minimap/MinimapCamera, $Players.players)
-#
-#	Network.connect("start_timer_start", self, "begin_countdown")
-#	Network.track_ready()
+func _ready():
+	$Players.master_player.HUD.setup_minimap($Minimap.get_texture(), \
+		$Minimap/MinimapCamera, $Players.players)
 
 
 func setup_race() -> void:
@@ -17,7 +14,7 @@ func setup_race() -> void:
 		$Minimap/MinimapCamera, $Players.players)
 
 	Network.connect("start_timer_start", self, "begin_countdown")
-	Network.track_ready()
+#	Network.track_ready()
 
 
 func _process(delta) -> void:
@@ -29,11 +26,15 @@ func remove_dead_peer(dead_peer_ID : int) -> void:
 	$Players.remove_dead_peer(dead_peer_ID)
 
 
-func begin_countdown():
-	.begin_countdown()
+func _preview_finished() -> void:
+	$Players.master_player.set_current()
+	$Players.master_player.has_cam_control = true
 
-	$Players.master_player.pause_menu.set_process_input(true)
+
+func begin_countdown():
+#	$Players.master_player.pause_menu.set_process_input(true)
 	$Players.master_player.HUD.visible = true
+	.begin_countdown()
 
 
 func start_race() -> void:

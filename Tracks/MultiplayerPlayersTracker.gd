@@ -3,8 +3,8 @@ extends Node
 signal race_finished
 
 var npc_ : PackedScene
-var player_ : PackedScene = load("res://Racers/Player/MasterPlayer.tscn")
-var puppet_racer_ : PackedScene = load("res://Racers/PuppetRacer/PuppetRacer.tscn")
+var player_ : PackedScene = preload("res://Racers/Player/MasterPlayer.tscn")
+var puppet_racer_ : PackedScene = preload("res://Racers/PuppetRacer/PuppetRacer.tscn")
 var crash_bike = preload("res://Racers/General/Bike/CrashBike.tscn")
 
 var master_player : Player
@@ -73,6 +73,7 @@ func spawn_players():
 #			Network.multiplayer_npc_amount))
 		var player_spawn : Spatial = get_node("PlayerSpawn" + str(Network.MAX_CONNECTIONS - \
 			player_num + 1))
+		print("PlayerSpawn" + str(Network.MAX_CONNECTIONS - player_num + 1))
 
 		if new_player is PuppetRacer:
 			new_player.puppet_transform = player_spawn.global_transform
@@ -131,6 +132,12 @@ func start_race() -> void:
 	for racer in players:
 		if racer is Racer:
 			racer.start_race()
+
+
+func _preview_finished() -> void:
+	._preview_finished()
+	$Players.master_player.set_current()
+	$Players.master_player.has_cam_control = true
 
 
 func finish_race(winner_name) -> void:

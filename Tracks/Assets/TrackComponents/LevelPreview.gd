@@ -66,15 +66,15 @@ func _process(delta):
 
 
 func _input(event):
-	if event is InputEventKey or event is InputEventMouseButton:
-		set_process(false)
-		set_process_input(false)
-		preview_camera.get_node("Label").visible = false
-		$ColorRect/AnimationPlayer.play("FadeOut")
-		yield($ColorRect/AnimationPlayer, "animation_finished")
-		paths[path_index].get_node("PathFollow").end_preview()
-		emit_signal("preview_finished")
-		$ColorRect/AnimationPlayer.play("FadeIn")
+	if (event is InputEventKey and !event.scancode == KEY_ESCAPE) or event is InputEventMouseButton:
+			set_process(false)
+			set_process_input(false)
+			preview_camera.get_node("Label").visible = false
+			$ColorRect/AnimationPlayer.play("FadeOut")
+			yield($ColorRect/AnimationPlayer, "animation_finished")
+			paths[path_index].get_node("PathFollow").end_preview()
+			emit_signal("preview_finished")
+			$ColorRect/AnimationPlayer.play("FadeIn")
 
 
 func _get_paths() -> void:

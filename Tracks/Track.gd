@@ -12,7 +12,7 @@ func _setup_race() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 	$Players.connect("race_finished", self, "finish_race")
-	$Players.spawn_players()
+#	$Players.spawn_players()
 	$Players.setup_players($TrackPath, path_nodes)
 
 #	AudioServer.set_bus_mute(Globals.master_bus, true)

@@ -3079,10 +3079,12 @@ material/0 = SubResource( 314 )
 script = ExtResource( 5 )
 
 [node name="PathFollow" parent="LevelPreview/PreviewPath1" index="0"]
-transform = Transform( 0.043871, 0.053722, 0.997481, -0.00146163, 0.998557, -0.0537036, -0.999036, 0.000898184, 0.0438812, 4.68461, 1.60116, -2.53664 )
+transform = Transform( 0.52527, 0.151619, -0.837226, 0, 0.984, 0.178159, 0.850935, -0.0935922, 0.516807, 223.747, -20.5505, -46.9367 )
 
 [node name="PathFollow" parent="LevelPreview/PreviewPath2" index="0"]
-transform = Transform( 0.043871, 0.053722, 0.997481, -0.00146163, 0.998557, -0.0537036, -0.999036, 0.000898184, 0.0438812, 4.68461, 1.60116, -2.53664 )
+transform = Transform( -0.216655, 0.101852, -0.970812, -1.86264e-09, 0.994544, 0.104318, 0.976248, 0.0226035, -0.215448, 23.6845, 7.97358, -9.75912 )
+
+[connection signal="preview_finished" from="LevelPreview" to="." method="_preview_finished"]
 
 [editable path="LevelGeo/Race/Checkpoint1a"]
 [editable path="LevelGeo/Race/Checkpoint1b"]

@@ -16,16 +16,15 @@ func _setup_race() -> void:
 
 
 func _preview_finished() -> void:
-	._preview_finished()
 	$Players.player.set_current()
 	$Players.player.has_cam_control = true
+	._preview_finished()
 
 
 func begin_countdown() -> void:
-	.begin_countdown()
-
 	$Players.player.pause_menu.set_process_input(true)
 	$Players.player.HUD.visible = true
+	.begin_countdown()
 
 
 func start_race() -> void:

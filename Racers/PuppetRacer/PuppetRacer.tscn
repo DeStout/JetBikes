@@ -1,27 +1,38 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Racers/Player/AudioBoost.gd" type="Script" id=1]
-[ext_resource path="res://Racers/General/Bike/RacerModel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Racers/General/Bike/DetectRay.gd" type="Script" id=1]
+[ext_resource path="res://Racers/General/Bike/RiderPosed.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/LineRenderer/LineRenderer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Racers/General/Bike/Assets/Models/Flame.tres" type="ArrayMesh" id=4]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Materials/GroundWetRocks/Ground_Wet_Rocks_001_basecolor.jpg" type="Texture" id=5]
-[ext_resource path="res://Racers/General/Bike/Assets/SFX/Boost.wav" type="AudioStream" id=6]
 [ext_resource path="res://addons/LineRenderer/line.png" type="Texture" id=7]
-[ext_resource path="res://Racers/General/Bike/Assets/SFX/JetEngine.wav" type="AudioStream" id=8]
-[ext_resource path="res://Racers/General/Bike/Assets/SFX/DieselEngine.wav" type="AudioStream" id=9]
 [ext_resource path="res://Racers/PuppetRacer/PuppetRacer.gd" type="Script" id=10]
-[ext_resource path="res://Racers/General/Bike/Assets/Models/Bike05.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_Roughness.png" type="Texture" id=12]
-[ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_NormalGL_scaled.png" type="Texture" id=13]
-[ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_Metalness.png" type="Texture" id=14]
+[ext_resource path="res://Racers/General/Bike/Bike06.tscn" type="PackedScene" id=11]
 
-[sub_resource type="SpatialMaterial" id=6]
-resource_local_to_scene = true
-params_cull_mode = 2
-metallic_texture = ExtResource( 14 )
-roughness_texture = ExtResource( 12 )
-normal_enabled = true
-normal_scale = 1.0
-normal_texture = ExtResource( 13 )
+[sub_resource type="Gradient" id=11]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=12]
+gradient = SubResource( 11 )
+
+[sub_resource type="Curve" id=9]
+_data = [ Vector2( 0, 0.973864 ), 0.0, 0.104027, 0, 0, Vector2( 1, 0.127273 ), -1.21012, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+lifetime_randomness = 0.08
+direction = Vector3( 0, 1, 0 )
+spread = 3.32
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 2.0
+linear_accel = 4.61
+scale_random = 1.0
+scale_curve = SubResource( 10 )
+color_ramp = SubResource( 12 )
+hue_variation = -0.2
+hue_variation_random = 0.23
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.75
@@ -57,49 +68,111 @@ albedo_color = Color( 1, 0.254902, 0.447059, 0.262745 )
 albedo_texture = ExtResource( 7 )
 
 [node name="PuppetRacer" type="KinematicBody"]
-collision_mask = 14
+collision_mask = 15
 script = ExtResource( 10 )
 
-[node name="Engine" parent="." instance=ExtResource( 11 )]
+[node name="EngineRotationHelper" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
-[node name="Shielding" parent="Engine" index="1"]
-material/0 = SubResource( 6 )
+[node name="Engine" parent="EngineRotationHelper" instance=ExtResource( 11 )]
 
-[node name="RacerModel" parent="Engine" instance=ExtResource( 2 )]
-transform = Transform( -0.02, 0, -1.74846e-09, 0, 0.02, 0, 1.74846e-09, 0, -0.02, 0, -1.10989, 0.751 )
+[node name="Rider" parent="EngineRotationHelper/Engine" instance=ExtResource( 2 )]
+transform = Transform( -1.25, 0, -1.09278e-07, 0, 1.25, 0, 1.09278e-07, 0, -1.25, 0, 0.58255, 0.641995 )
+
+[node name="Particles" type="Particles" parent="EngineRotationHelper/Engine"]
+transform = Transform( 1.03421, 0, 0, 0, -4.52066e-08, -1.03421, 0, 1.03421, -4.52066e-08, 0, -0.514, 1.53928 )
+cast_shadow = 0
+generate_lightmap = false
+amount = 10
+lifetime = 0.39
+speed_scale = 3.01
+visibility_aabb = AABB( -0.567687, -0.503016, -0.567215, 1.13406, 2.1497, 1.13323 )
+process_material = SubResource( 6 )
+draw_pass_1 = ExtResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
 shape = SubResource( 1 )
 
-[node name="Audio_Jet" type="AudioStreamPlayer3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.887, 0 )
-stream = ExtResource( 8 )
-unit_db = -10.0
-unit_size = 15.0
-autoplay = true
-bus = "Player_SFX"
-doppler_tracking = 2
-
-[node name="Audio_Diesel" type="AudioStreamPlayer3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.887, 0 )
-stream = ExtResource( 9 )
-unit_db = -5.0
-unit_size = 15.0
-pitch_scale = 2.82
-autoplay = true
-bus = "Player_SFX"
-doppler_tracking = 2
-
-[node name="Audio_Boost" type="AudioStreamPlayer3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-stream = ExtResource( 6 )
-unit_db = -5.0
-unit_size = 15.0
-bus = "Player_SFX"
-doppler_tracking = 2
+[node name="GroundDetect1" type="RayCast" parent="CollisionShape"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.65, -0.75 )
+enabled = true
+cast_to = Vector3( 0, -2.1, 0 )
+collision_mask = 14
 script = ExtResource( 1 )
+type = "Ground"
+
+[node name="GroundDetect2" type="RayCast" parent="CollisionShape"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.65, 0.75 )
+enabled = true
+cast_to = Vector3( 0, -2.1, 0 )
+collision_mask = 14
+script = ExtResource( 1 )
+type = "Ground"
+
+[node name="UpDetect1" type="RayCast" parent="CollisionShape"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.75, -1.25 )
+enabled = true
+cast_to = Vector3( 0, 0, -0.3 )
+collision_mask = 6
+script = ExtResource( 1 )
+type = "Side"
+
+[node name="UpDetect2" type="RayCast" parent="CollisionShape"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.75, 1.25 )
+enabled = true
+cast_to = Vector3( 0, 0, -0.3 )
+collision_mask = 6
+script = ExtResource( 1 )
+type = "Side"
+
+[node name="LeftDetect1" type="RayCast" parent="CollisionShape"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.75, 0, -1.25 )
+enabled = true
+cast_to = Vector3( 0, 0, -0.3 )
+collision_mask = 6
+script = ExtResource( 1 )
+type = "Side"
+
+[node name="LeftDetect2" type="RayCast" parent="CollisionShape"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.75, 0, 1.25 )
+enabled = true
+cast_to = Vector3( 0, 0, -0.3 )
+collision_mask = 6
+script = ExtResource( 1 )
+type = "Side"
+
+[node name="RightDetect1" type="RayCast" parent="CollisionShape"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.75, 0, -1.25 )
+enabled = true
+cast_to = Vector3( 0, 0, -0.3 )
+collision_mask = 6
+script = ExtResource( 1 )
+type = "Side"
+
+[node name="RightDetect2" type="RayCast" parent="CollisionShape"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.75, 0, 1.25 )
+enabled = true
+cast_to = Vector3( 0, 0, -0.3 )
+collision_mask = 6
+script = ExtResource( 1 )
+type = "Side"
+
+[node name="FrontDetect" type="RayCast" parent="CollisionShape"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
+enabled = true
+cast_to = Vector3( 0, 0, -0.5 )
+collision_mask = 6
+script = ExtResource( 1 )
+type = "Side"
+
+[node name="RearDetect" type="RayCast" parent="CollisionShape"]
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 2 )
+enabled = true
+cast_to = Vector3( 0, 0, -0.5 )
+collision_mask = 6
+script = ExtResource( 1 )
+type = "Side"
 
 [node name="GroundParticles" type="Particles" parent="."]
 generate_lightmap = false
@@ -111,8 +184,28 @@ local_coords = false
 process_material = SubResource( 2 )
 draw_pass_1 = SubResource( 4 )
 
+[node name="Sparks" type="Spatial" parent="."]
+
+[node name="CrashTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="VisibilityTimer" type="Timer" parent="."]
+wait_time = 0.2
+
 [node name="LaserLine" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 material_override = SubResource( 5 )
 
-[editable path="Engine"]
+[connection signal="is_colliding" from="CollisionShape/GroundDetect1" to="." method="check_ray_collision"]
+[connection signal="is_colliding" from="CollisionShape/GroundDetect2" to="." method="check_ray_collision"]
+[connection signal="is_colliding" from="CollisionShape/UpDetect1" to="." method="check_ray_collision"]
+[connection signal="is_colliding" from="CollisionShape/UpDetect2" to="." method="check_ray_collision"]
+[connection signal="is_colliding" from="CollisionShape/LeftDetect1" to="." method="check_ray_collision"]
+[connection signal="is_colliding" from="CollisionShape/LeftDetect2" to="." method="check_ray_collision"]
+[connection signal="is_colliding" from="CollisionShape/RightDetect1" to="." method="check_ray_collision"]
+[connection signal="is_colliding" from="CollisionShape/RightDetect2" to="." method="check_ray_collision"]
+[connection signal="is_colliding" from="CollisionShape/FrontDetect" to="." method="check_ray_collision"]
+[connection signal="is_colliding" from="CollisionShape/RearDetect" to="." method="check_ray_collision"]
+[connection signal="timeout" from="CrashTimer" to="." method="_crash_finished"]
+[connection signal="timeout" from="VisibilityTimer" to="." method="_on_VisibilityTimer_timeout"]

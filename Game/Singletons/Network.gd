@@ -36,10 +36,10 @@ class PlayerData:
 	var global_trans : Transform = Transform(Basis(Vector3.ZERO))
 	var engine_rot : Vector3 = Vector3.ZERO
 	var placement : int = 0
-	
+
 	func data_to_dict() -> Dictionary:
 		var temp_dict = {}
-		
+
 		temp_dict.network_ID = network_ID
 		temp_dict.player_name = player_name
 		temp_dict.placeholder_name = placeholder_name
@@ -48,9 +48,9 @@ class PlayerData:
 		temp_dict.global_trans = global_trans
 		temp_dict.engine_rot = engine_rot
 		temp_dict.placement = placement
-		
+
 		return temp_dict
-	
+
 	func dict_to_data(new_player_data : Dictionary) -> void:
 		network_ID = new_player_data.network_ID
 		player_name = new_player_data.player_name
@@ -80,7 +80,7 @@ remotesync func setup_online_multiplayer_race() -> void:
 		for player in player_list:
 			if player_list[player].player_name == "":
 				player_list[player].player_name = player_list[player].placeholder_name
-		
+
 		# Signal to MultiplayerManager
 		emit_signal("setup_track")
 
@@ -120,20 +120,20 @@ func set_IP_address(new_ip_address : String = _DEFAULT_IP) -> void:
 
 func init_host() -> int:
 	var port_result = upnp.add_port_mapping(_DEFAULT_PORT)
-	
+
 	var peer = NetworkedMultiplayerENet.new()
 	var connection = peer.create_server(_DEFAULT_PORT, MAX_CONNECTIONS)
 	if connection == OK:
 #		peer.set_bind_ip(_ip_address)
 		get_tree().set_network_peer(peer)
-	
+
 		self_data.placeholder_name = "Host"
 		self_data.network_ID = 1
 		self_data.is_ready = true
 		player_list[1] = self_data
-	
+
 		print("IP Address: " + _ip_address)
-	
+
 	print("Server Connection Code: " + str(connection))
 	return connection
 
@@ -143,9 +143,9 @@ func init_client() -> int:
 	var connection = peer.create_client(_ip_address, _DEFAULT_PORT)
 	if connection == OK:
 		get_tree().set_network_peer(peer)
-		
+
 		self_data.network_ID = get_tree().get_network_unique_id()
-	
+
 	print("Client Connection Code: " + str(connection))
 	return connection
 
@@ -155,9 +155,9 @@ func add_peer(new_peer_ID : int) -> void:
 	new_peer_data.network_ID = new_peer_ID
 	new_peer_data.placeholder_name = "Player" + str(player_list.size()+1)
 	player_list[new_peer_ID] = new_peer_data
-	
+
 	max_npc_num -= 1
-	
+
 	emit_signal("update_lobby", "Peer Added")
 
 
@@ -193,7 +193,7 @@ remotesync func update_player_info(new_player_name : String, new_player_color : 
 	else:
 		player_list[get_tree().get_rpc_sender_id()].player_name = new_player_name
 		player_list[get_tree().get_rpc_sender_id()].color = new_player_color
-		
+
 		emit_signal("update_lobby", "Player Info")
 
 
@@ -204,7 +204,7 @@ remotesync func update_player_ready(player_ready : bool) -> void:
 		rpc("update_player_ready", player_ready)
 	else:
 		player_list[get_tree().get_rpc_sender_id()].is_ready = player_ready
-		
+
 		emit_signal("update_lobby", "Player Ready")
 
 
@@ -215,16 +215,16 @@ remotesync func update_race_info(new_level_select : int, new_laps_amount : int, 
 		Network.multiplayer_level = new_level_select
 		Network.multiplayer_lap_amount = new_laps_amount
 		Network.multiplayer_npc_amount = new_npc_amount
-		
+
 		emit_signal("update_lobby", "Race Info")
 
 
 func remove_dead_peer(dead_peer_ID : int) -> void:
 	player_list.erase(dead_peer_ID)
 	update_placeholder_names()
-	
+
 	max_npc_num += 1
-	
+
 	emit_signal("update_lobby", "Peer Removed")
 
 

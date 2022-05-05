@@ -14,6 +14,7 @@ var path_nodes_size : int = 0
 func _ready() -> void:
 	if Globals.NPC_number != 0:
 		npc_ = preload("res://Racers/NPC/NPC.tscn")
+	spawn_players()
 
 
 func _process(delta : float) -> void:

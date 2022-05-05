@@ -22,7 +22,7 @@ var swing_poles : Array
 
 func _physics_process(delta):
 	global_transform.basis.slerp(puppet_transform.basis, delta)
-	$Engine.global_transform.basis.slerp(puppet_engine_rotation, delta)
+	$EngineRotationHelper.global_transform.basis.slerp(puppet_engine_rotation, delta)
 	move_and_slide(puppet_velocity)
 
 
@@ -35,14 +35,14 @@ func _set_puppet_transform(new_puppet_transform : Transform) -> void:
 puppet func set_crashed(is_crashed : bool) -> void:
 	if is_crashed:
 		crash_bike.visible = true
-		
+
 		visible = false
 		$CollisionShape.disabled = true
 #		_set_boost_sfx()
 		$GroundParticles.emitting = false
 	else:
 		crash_bike.visible = false
-		
+
 		visible = true
 		$CollisionShape.disabled = false
 		$GroundParticles.emitting = true
@@ -75,19 +75,41 @@ puppet func swing(var is_swinging : bool):
 
 
 func set_racer_color(new_color : Color) -> void:
+#	bike_color = new_color
+##	$Engine/SteeringColumn.set_surface_material(0, bike_material)
+#	$Engine/WindShield.set_surface_material(0, windshield_material)
+#
+##	bike_material.params_cull_mode = SpatialMaterial.CULL_DISABLED
+#	windshield_material.params_cull_mode = SpatialMaterial.CULL_DISABLED
+#	windshield_material.flags_transparent = true
+#
+##	bike_material.albedo_color = new_color
+#	yield(get_tree(), "idle_frame")
+#	$Engine/Shielding.get_surface_material(0).albedo_color = bike_color
+#	windshield_material.albedo_color = bike_color
+#	windshield_material.albedo_color.a = 90.0 / 255.0
+
 	bike_color = new_color
-#	$Engine/SteeringColumn.set_surface_material(0, bike_material)
-	$Engine/WindShield.set_surface_material(0, windshield_material)
-	
+#	$EngineRotationHelper/Engine/Shielding.set_surface_material(0, bike_material)
+	$EngineRotationHelper/Engine/Windshield.set_surface_material(0, windshield_material)
+#
 #	bike_material.params_cull_mode = SpatialMaterial.CULL_DISABLED
 	windshield_material.params_cull_mode = SpatialMaterial.CULL_DISABLED
 	windshield_material.flags_transparent = true
-	
+#
 #	bike_material.albedo_color = new_color
 	yield(get_tree(), "idle_frame")
-	$Engine/Shielding.get_surface_material(0).albedo_color = bike_color
+	var helmet = $EngineRotationHelper/Engine/Rider.get_node("Helmet").get_node("Helmet")
+	var visor = $EngineRotationHelper/Engine/Rider.get_node("Helmet").get_node("Visor")
+	var spoiler = $EngineRotationHelper/Engine/Rider.get_node("Helmet").get_node("Spoiler")
+
+	$EngineRotationHelper/Engine/Shielding.get_surface_material(0).albedo_color = bike_color
 	windshield_material.albedo_color = bike_color
 	windshield_material.albedo_color.a = 90.0 / 255.0
+
+	helmet.get_surface_material(0).albedo_color = bike_color
+	visor.get_surface_material(0).albedo_color = bike_color
+	spoiler.get_surface_material(0).albedo_color = bike_color
 
 
 func get_racer_color() -> Color:
