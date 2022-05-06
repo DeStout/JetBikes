@@ -4482,6 +4482,7 @@ far = 1000.0
 [node name="MusicPlayer" parent="." index="13"]
 stream = ExtResource( 7 )
 
+[connection signal="preview_finished" from="LevelPreview" to="." method="_preview_finished"]
 [connection signal="path_finished" from="LevelPreview/PreviewPath1/PathFollow" to="LevelPreview" method="switch_cameras"]
 [connection signal="path_finished" from="LevelPreview/PreviewPath2/PathFollow" to="LevelPreview" method="switch_cameras"]
 

@@ -17,6 +17,8 @@ func _start_race():
 	Globals.level = level_select
 	Globals.laps_number = solo_lap_amount
 	Globals.NPC_number = solo_NPC_amount
+	Globals.is_multiplayer = false
+	# Emits to Game
 	emit_signal("setup_single_player_race")
 
 

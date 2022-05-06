@@ -1,18 +1,44 @@
 class_name Track
 extends Spatial
 
+signal return_to_main
+
 onready var path_nodes : Array
 
 
-func _ready():
+func _init() -> void:
+	if !Globals.is_multiplayer:
+		$Players.set_script(preload("res://Tracks/SinglePlayerPlayersTracker.gd"))
+	else:
+		$Players.set_script(preload("res://Tracks/MultiplayerPlayersTracker.gd"))
+
+
+func _ready() -> void:
 	_setup_race()
+	if !Globals.is_multiplayer:
+		$Players.player.HUD.setup_minimap($Minimap.get_texture(), \
+							$Minimap/MinimapCamera, $Players.players)
+		$Players.player.pause_menu.connect("leave_race", self, "end_race")
+	else:
+		$Players.master_player.HUD.setup_minimap($Minimap.get_texture(), \
+							$Minimap/MinimapCamera, $Players.players)
+		$Players.master_player.pause_menu.connect("leave_race", self, "end_race")
+
+		Network.connect("start_timer_start", self, "begin_countdown")
+
+
+func _process(delta) -> void:
+	if $StartTimer.time_left:
+		if !Globals.is_multiplayer:
+			$Players.player.HUD.set_race_notice("%d" % ($StartTimer.time_left + 1), true)
+		else:
+			$Players.master_player.HUD.set_race_notice("%d" % ($StartTimer.time_left + 1), true)
 
 
 func _setup_race() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 	$Players.connect("race_finished", self, "finish_race")
-#	$Players.spawn_players()
 	$Players.setup_players($TrackPath, path_nodes)
 
 #	AudioServer.set_bus_mute(Globals.master_bus, true)
@@ -46,16 +72,34 @@ func setup_pathnodes() -> void:
 
 
 func _preview_finished():
+	if !Globals.is_multiplayer:
+		$Players.player.set_current()
+		$Players.player.has_cam_control = true
+	else:
+		$Players.master_player.set_current()
+		$Players.master_player.has_cam_control = true
 	begin_countdown()
 
 
 func begin_countdown() -> void:
 	$StartTimer.start()
+	if !Globals.is_multiplayer:
+		$Players.player.HUD.visible = true
+	else:
+		$Players.master_player.HUD.visible = true
 
 
 func start_race() -> void:
 	Globals.race_on_going = true
+	if !Globals.is_multiplayer:
+		$Players.player.HUD.set_race_notice()
+	else:
+		$Players.master_player.HUD.set_race_notice()
 	$Players.start_race()
+
+# Multiplayer function
+func remove_dead_peer(dead_peer_ID : int) -> void:
+	$Players.remove_dead_peer(dead_peer_ID)
 
 
 func finish_race() -> void:
@@ -65,3 +109,4 @@ func finish_race() -> void:
 
 func end_race() -> void:
 	$MusicPlayer.stop()
+	emit_signal("return_to_main")

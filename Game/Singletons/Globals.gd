@@ -11,6 +11,7 @@ var level_dict : Dictionary = {
 	}
 var level_dict_keys : Array = level_dict.keys()
 var DEFAULT_LEVEL = 1
+var is_multiplayer = false
 
 const DEFAULT_LAP_NUMBER : int = 3
 const MIN_LAP_NUMBER : int = 1

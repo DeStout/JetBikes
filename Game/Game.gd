@@ -15,31 +15,26 @@ func _ready():
 	randomize()
 
 	main_menu.single_player_menu.connect("setup_single_player_race", self, "start_single_player_game")
-	main_menu.online_menu.connect("setup_online_lobby", self, "setup_online_lobby")
 
-	online_multiplayer_manager = online_multiplayer_manager_.instance()
+	main_menu.online_menu.connect("setup_online_lobby", self, "setup_online_lobby")
 	online_multiplayer_manager.connect("return_to_main", self, "return_to_main_menu")
+	online_multiplayer_manager = online_multiplayer_manager_.instance()
 
 
 func start_single_player_game():
-#	_single_player_track = Globals.level_dict[Globals.level_dict_keys[Globals.level]].instance()
-
 	var level_loader = level_loader_.instance()
 	add_child(level_loader)
 	level_loader.load_track(Globals.level_dict[Globals.level_dict_keys[Globals.level]])
 	_single_player_track = yield(level_loader, "track_loaded")
 
 	_single_player_track = _single_player_track.instance()
+	_single_player_track.set_script(load("res://Tracks/Track.gd"))
 	add_child(_single_player_track)
 	_single_player_track.connect("return_to_main", self, "return_to_main_menu")
-
-#	yield(get_tree().create_timer(2.0), "timeout")
 
 	remove_child(main_menu)
 	remove_child(level_loader)
 	level_loader.queue_free()
-
-#	_single_player_track.begin_countdown()
 
 
 func setup_online_lobby(is_host : bool):
