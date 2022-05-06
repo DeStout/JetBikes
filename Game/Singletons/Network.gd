@@ -33,6 +33,7 @@ class PlayerData:
 	var placeholder_name : String = ""
 	var color : Color = Color(0.184314, 0.788235, 1)
 	var is_ready : bool = false
+	var preview_finished : bool = false
 	var global_trans : Transform = Transform(Basis(Vector3.ZERO))
 	var engine_rot : Vector3 = Vector3.ZERO
 	var placement : int = 0
@@ -45,6 +46,7 @@ class PlayerData:
 		temp_dict.placeholder_name = placeholder_name
 		temp_dict.color = color
 		temp_dict.is_ready = is_ready
+		temp_dict.preview_finished = preview_finished
 		temp_dict.global_trans = global_trans
 		temp_dict.engine_rot = engine_rot
 		temp_dict.placement = placement
@@ -57,6 +59,7 @@ class PlayerData:
 		placeholder_name = new_player_data.placeholder_name
 		color = new_player_data.color
 		is_ready = new_player_data.is_ready
+		preview_finished = new_player_data.preview_finished
 		global_trans = new_player_data.global_trans
 		engine_rot = new_player_data.engine_rot
 		placement = new_player_data.placement
@@ -85,16 +88,16 @@ remotesync func setup_online_multiplayer_race() -> void:
 		emit_signal("setup_track")
 
 
-remotesync func track_ready() -> void:
+remotesync func track_ready(track_ready : bool) -> void:
 	if get_tree().get_rpc_sender_id() == 0:
-		self_data.is_ready = true
-		rpc("track_ready")
+		self_data.preview_finished = track_ready
+		rpc("track_ready", track_ready)
 	else:
-		player_list[get_tree().get_rpc_sender_id()].is_ready = true
+		player_list[get_tree().get_rpc_sender_id()].preview_finished = track_ready
 		if get_tree().is_network_server():
 			for player in player_list:
-				if !player_list[player].is_ready:
-					break
+				if !player_list[player].preview_finished:
+					return
 			rpc("start_race")
 
 
@@ -199,7 +202,6 @@ remotesync func update_player_info(new_player_name : String, new_player_color : 
 
 remotesync func update_player_ready(player_ready : bool) -> void:
 	if get_tree().get_rpc_sender_id() == 0:
-		print("Player Ready: ", player_ready)
 		self_data.is_ready = player_ready
 		player_list[get_tree().get_network_unique_id()].is_ready = player_ready
 		rpc("update_player_ready", player_ready)

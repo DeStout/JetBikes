@@ -78,7 +78,7 @@ func _preview_finished():
 	else:
 		$Players.master_player.set_current()
 		$Players.master_player.has_cam_control = true
-		Network.track_ready()
+		Network.track_ready(true)
 
 
 func begin_countdown() -> void:

@@ -24,7 +24,7 @@ func _ready() -> void:
 
 func setup_track() -> void:
 	Globals.is_multiplayer = true
-	Network.update_player_ready(false)
+#	Network.update_player_ready(false)
 
 	var level_loader = level_loader_.instance()
 	add_child(level_loader)

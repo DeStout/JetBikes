@@ -49,4 +49,5 @@ func update_lobby_info(update_type : String) -> void:
 
 
 func reset_lobby() -> void:
+	.reset_lobby()
 	toggle_racer_ready(false)
