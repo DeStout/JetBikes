@@ -44,7 +44,7 @@ func _physics_process(delta):
 
 
 func check_lap_number() -> void:
-	if lap_number > Network.multiplayer_lap_amount:
+	if lap_number > Globals.multiplayer_laps_number:
 		Network.player_finished()
 	else:
 		HUD.set_lap(lap_number)

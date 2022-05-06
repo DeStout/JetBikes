@@ -3,8 +3,8 @@ extends Node
 # Debug Options
 var INFINITE_BOOST : bool = false
 
-var test_track_ = "res://Tracks/TestTrack/SinglePlayerTestTrack.tscn"
-var test_terrain_ = "res://Tracks/TestTerrain/SinglePlayerTestTerrain.tscn"
+var test_track_ = "res://Tracks/TestTrack/TestTrack.tscn"
+var test_terrain_ = "res://Tracks/TestTerrain/TestTerrain.tscn"
 var level_dict : Dictionary = {
 	"test_track" : test_track_,
 	"test_terrain" : test_terrain_
@@ -17,7 +17,7 @@ const DEFAULT_LAP_NUMBER : int = 3
 const MIN_LAP_NUMBER : int = 1
 const MAX_LAP_NUMBER : int = 99
 
-const DEFAULT_NPC_NUMBER : int = 11
+const DEFAULT_NPC_NUMBER : int = 0
 const MIN_NPC_NUMBER : int = 0
 const MAX_NPC_NUMBER : int = 11
 
@@ -42,6 +42,10 @@ const GRAVITY = 150
 var level : int = DEFAULT_LEVEL
 var laps_number : int = DEFAULT_LAP_NUMBER
 var NPC_number : int = DEFAULT_NPC_NUMBER
+var multiplayer_level : int = DEFAULT_LEVEL
+var multiplayer_laps_number : int = DEFAULT_LAP_NUMBER
+var multiplayer_NPC_number : int = DEFAULT_NPC_NUMBER
+var max_NPC_number : int = 11
 
 
 var race_on_going : bool = false

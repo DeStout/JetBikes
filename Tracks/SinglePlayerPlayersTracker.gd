@@ -11,7 +11,7 @@ var players : Array
 var path_nodes_size : int = 0
 
 
-func _ready() -> void:
+func _init() -> void:
 	if Globals.NPC_number != 0:
 		npc_ = preload("res://Racers/NPC/NPC.tscn")
 	spawn_players()

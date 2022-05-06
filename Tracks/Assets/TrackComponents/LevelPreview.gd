@@ -73,7 +73,10 @@ func _input(event):
 			$ColorRect/AnimationPlayer.play("FadeOut")
 			yield($ColorRect/AnimationPlayer, "animation_finished")
 			paths[path_index].get_node("PathFollow").end_preview()
+
+			# Signal to Track _preview_finished
 			emit_signal("preview_finished")
+
 			$ColorRect/AnimationPlayer.play("FadeIn")
 
 

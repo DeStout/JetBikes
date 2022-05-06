@@ -5,16 +5,16 @@ onready var num_laps = $MenuFrame/LobbyFrame/HostSettingsPanel/Laps/NumLaps
 onready var num_npcs = $MenuFrame/LobbyFrame/HostSettingsPanel/NPCs/NumNPCs
 onready var race_button = $MenuFrame/LobbyFrame/HostSettingsPanel/Buttons/RaceButton
 
-var level_select : int = Network.multiplayer_level
-var lap_amount : int = Network.multiplayer_lap_amount
-var npc_amount : int = Network.multiplayer_npc_amount
+var level_select : int = Globals.multiplayer_level
+var lap_amount : int = Globals.multiplayer_laps_number
+var npc_amount : int = Globals.multiplayer_NPC_number
 
 
 func _ready():
-	level_name.text = Network.level_dict_keys[level_select]
+	level_name.text = Globals.level_dict_keys[level_select]
 	num_laps.text = str(lap_amount)
-	num_npcs.text = str(npc_amount)
-	num_npcs.text = str(npc_amount)
+#	num_npcs.text = str(npc_amount)
+	num_npcs.text = str(0)
 
 	update_lobby_info("Lobby Created")
 
@@ -44,19 +44,19 @@ func reset_lobby():
 func _level_select_left():
 	level_select -= 1
 	if level_select < 0:
-		level_select = Network.level_dict_keys.size() - 1
-	level_name.text = Network.level_dict_keys[level_select]
-	Network.multiplayer_level = level_select
+		level_select = Globals.level_dict_keys.size() - 1
+	level_name.text = Globals.level_dict_keys[level_select]
+	Globals.multiplayer_level = level_select
 
 	Network.update_race_info(level_select, lap_amount, npc_amount)
 
 
 func _level_select_right():
 	level_select += 1
-	if level_select > Network.level_dict_keys.size() - 1:
+	if level_select > Globals.level_dict_keys.size() - 1:
 		level_select = 0
-	level_name.text = Network.level_dict_keys[level_select]
-	Network.multiplayer_level = level_select
+	level_name.text = Globals.level_dict_keys[level_select]
+	Globals.multiplayer_level = level_select
 
 	Network.update_race_info(level_select, lap_amount, npc_amount)
 
@@ -66,7 +66,7 @@ func _decrease_lap_amount():
 	if lap_amount < Globals.MIN_LAP_NUMBER:
 		lap_amount = Globals.MAX_LAP_NUMBER
 	num_laps.text = str(lap_amount)
-	Network.multiplayer_lap_amount = lap_amount
+	Globals.multiplayer_laps_number = lap_amount
 
 	Network.update_race_info(level_select, lap_amount, npc_amount)
 
@@ -76,16 +76,16 @@ func _increase_lap_amount():
 	if lap_amount > Globals.MAX_LAP_NUMBER:
 		lap_amount = Globals.MIN_LAP_NUMBER
 	num_laps.text = str(lap_amount)
-	Network.multiplayer_lap_amount = lap_amount
+	Globals.multiplayer_laps_number = lap_amount
 
 	Network.update_race_info(level_select, lap_amount, npc_amount)
 
 
 func _check_max_npcs():
-	if npc_amount > Network.max_npc_num:
-		npc_amount = Network.max_npc_num
+	if npc_amount > Globals.MAX_NPC_NUMBER:
+		npc_amount = Globals.MAX_NPC_NUMBER
 		num_npcs.text = str(npc_amount)
-		Network.multiplayer_npc_amount = npc_amount
+		Globals.multiplayer_NPC_number = npc_amount
 
 		Network.update_race_info(level_select, lap_amount, npc_amount)
 
@@ -93,18 +93,18 @@ func _check_max_npcs():
 func _decrease_NPC_amount():
 #	npc_amount -= 1
 	if npc_amount < Globals.MIN_NPC_NUMBER:
-		npc_amount = Network.max_npc_num
+		npc_amount = Globals.MAX_NPC_NUMBER
 	num_npcs.text = str(npc_amount)
-	Network.multiplayer_npc_amount = npc_amount
+	Globals.multiplayer_NPC_number = npc_amount
 
 #	Network.update_race_info(level_select, lap_amount, npc_amount)
 
 
 func _increase_NPC_amount():
 #	npc_amount += 1
-	if npc_amount > Network.max_npc_num:
+	if npc_amount > Globals.MAX_NPC_NUMBER:
 		npc_amount = Globals.MIN_NPC_NUMBER
 	num_npcs.text = str(npc_amount)
-	Network.multiplayer_npc_amount = npc_amount
+	Globals.multiplayer_NPC_number = npc_amount
 
 #	Network.update_race_info(level_select, lap_amount, npc_amount)

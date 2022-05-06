@@ -6,7 +6,8 @@ var host_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/HostLobby.tscn")
 var client_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/ClientLobby.tscn")
 var _lobby : Control
 
-var _multiplayer_track : Track = null
+var level_loader_ = preload("res://Menus/LoadingMenu/LoadingMenu.tscn")
+var _multiplayer_track = null
 
 
 func _ready() -> void:
@@ -22,16 +23,20 @@ func _ready() -> void:
 
 
 func setup_track() -> void:
+	Globals.is_multiplayer = true
 	Network.update_player_ready(false)
 
-	_multiplayer_track = Network.level_dict[Network.level_dict_keys[Network.multiplayer_level]].instance()
+	var level_loader = level_loader_.instance()
+	add_child(level_loader)
+	level_loader.load_track(Globals.level_dict[Globals.level_dict_keys[Globals.level]])
+	_multiplayer_track = yield(level_loader, "track_loaded")
+
+	_multiplayer_track = _multiplayer_track.instance()
+	add_child(_multiplayer_track)
+	_multiplayer_track.connect("return_to_main", self, "return_to_lobby")
 
 	remove_child(_lobby)
-	add_child(_multiplayer_track)
-
-	_multiplayer_track.connect("return_to_lobby", self, "return_to_lobby")
-	_multiplayer_track.get_node("Players").master_player \
-					.pause_menu.connect("leave_race", self, "return_to_main")
+	level_loader.queue_free()
 
 
 func setup_lobby_network(is_host : bool) -> void:

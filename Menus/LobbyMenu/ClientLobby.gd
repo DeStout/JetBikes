@@ -17,7 +17,7 @@ func _ready():
 	Network.connect("connected_to_host", self, "connected_to_host")
 	$MenuFrame/ConnectingFrame.cancel_button = $MenuFrame/LobbyFrame/CancelPanel/CancelButton
 	update_lobby_info("Lobby Created")
-	
+
 	# Restrict Client from joining "ghost" server
 	for attempts in range(20):
 		if connected_to_host:
@@ -41,10 +41,10 @@ func toggle_racer_ready(racer_ready : bool):
 
 func update_lobby_info(update_type : String) -> void:
 	.update_lobby_info(update_type)
-	
-	level_name.text = Globals.level_dict_keys[Network.multiplayer_level]
-	num_laps.text = str(Network.multiplayer_lap_amount)
-#	num_npcs.text = str(Network.multiplayer_npc_amount)
+
+	level_name.text = Globals.level_dict_keys[Globals.multiplayer_level]
+	num_laps.text = str(Globals.multiplayer_laps_number)
+#	num_npcs.text = str(Globals.multiplayer_NPC_number)
 	num_npcs.text = str(0)
 
 

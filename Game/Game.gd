@@ -16,9 +16,9 @@ func _ready():
 
 	main_menu.single_player_menu.connect("setup_single_player_race", self, "start_single_player_game")
 
+	online_multiplayer_manager = online_multiplayer_manager_.instance()
 	main_menu.online_menu.connect("setup_online_lobby", self, "setup_online_lobby")
 	online_multiplayer_manager.connect("return_to_main", self, "return_to_main_menu")
-	online_multiplayer_manager = online_multiplayer_manager_.instance()
 
 
 func start_single_player_game():
@@ -28,12 +28,11 @@ func start_single_player_game():
 	_single_player_track = yield(level_loader, "track_loaded")
 
 	_single_player_track = _single_player_track.instance()
-	_single_player_track.set_script(load("res://Tracks/Track.gd"))
 	add_child(_single_player_track)
 	_single_player_track.connect("return_to_main", self, "return_to_main_menu")
 
 	remove_child(main_menu)
-	remove_child(level_loader)
+#	remove_child(level_loader)
 	level_loader.queue_free()
 
 

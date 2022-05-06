@@ -12,7 +12,7 @@ var players : Array
 var path_nodes_size : int = 0
 
 
-func _ready() -> void:
+func _init() -> void:
 	Network.connect("finish_race", self, "finish_race")
 
 	if Globals.NPC_number != 0:
@@ -105,7 +105,7 @@ func _setup_crash_bike(player):
 func setup_players(path, path_nodes):
 	path_nodes_size = path_nodes.size()
 
-	master_player.HUD.set_max_laps(Network.multiplayer_lap_amount)
+	master_player.HUD.set_max_laps(Globals.multiplayer_laps_number)
 #	master_player.navigation = track_navigation
 	master_player.path = path
 	master_player.path_nodes = path_nodes

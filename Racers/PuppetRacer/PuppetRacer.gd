@@ -21,8 +21,12 @@ var swing_poles : Array
 
 
 func _physics_process(delta):
-	global_transform.basis.slerp(puppet_transform.basis, delta)
-	$EngineRotationHelper.global_transform.basis.slerp(puppet_engine_rotation, delta)
+	var puppet_quat = global_transform.basis.get_rotation_quat()
+	global_transform.basis = Basis(puppet_quat.slerp(puppet_transform.basis.orthonormalized(), delta))
+
+	var engine_quat = $EngineRotationHelper.transform.basis.get_rotation_quat()
+	$EngineRotationHelper.transform.basis = Basis(engine_quat.slerp(puppet_engine_rotation.orthonormalized(), delta))
+
 	move_and_slide(puppet_velocity)
 
 
@@ -30,6 +34,10 @@ func _set_puppet_transform(new_puppet_transform : Transform) -> void:
 	puppet_transform = new_puppet_transform
 	global_transform = puppet_transform
 #	global_transform.basis.slerp(puppet_transform.basis, 1)
+
+
+func add_collision_impulse(impulse) -> void:
+	pass
 
 
 puppet func set_crashed(is_crashed : bool) -> void:

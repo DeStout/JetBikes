@@ -6,22 +6,21 @@ signal return_to_main
 onready var path_nodes : Array
 
 
-func _init() -> void:
+func _ready() -> void:
 	if !Globals.is_multiplayer:
 		$Players.set_script(preload("res://Tracks/SinglePlayerPlayersTracker.gd"))
 	else:
 		$Players.set_script(preload("res://Tracks/MultiplayerPlayersTracker.gd"))
 
-
-func _ready() -> void:
 	_setup_race()
+
 	if !Globals.is_multiplayer:
 		$Players.player.HUD.setup_minimap($Minimap.get_texture(), \
-							$Minimap/MinimapCamera, $Players.players)
+						$Minimap/MinimapCamera, $Players.players)
 		$Players.player.pause_menu.connect("leave_race", self, "end_race")
 	else:
 		$Players.master_player.HUD.setup_minimap($Minimap.get_texture(), \
-							$Minimap/MinimapCamera, $Players.players)
+						$Minimap/MinimapCamera, $Players.players)
 		$Players.master_player.pause_menu.connect("leave_race", self, "end_race")
 
 		Network.connect("start_timer_start", self, "begin_countdown")
@@ -75,10 +74,11 @@ func _preview_finished():
 	if !Globals.is_multiplayer:
 		$Players.player.set_current()
 		$Players.player.has_cam_control = true
+		begin_countdown()
 	else:
 		$Players.master_player.set_current()
 		$Players.master_player.has_cam_control = true
-	begin_countdown()
+		Network.track_ready()
 
 
 func begin_countdown() -> void:
