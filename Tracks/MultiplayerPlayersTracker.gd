@@ -13,10 +13,11 @@ var path_nodes_size : int = 0
 
 
 func _init() -> void:
+	Network.connect("remove_disconnected_racer", self, "remove_lame_racer")
 	Network.connect("finish_race", self, "finish_race")
 
-	if Globals.NPC_number != 0:
-		npc_ = load("res://Racers/NPC/NPC.tscn")
+#	if Globals.NPC_number != 0:
+#		npc_ = load("res://Racers/NPC/NPC.tscn")
 	spawn_players()
 	players = get_children()
 	players.erase($CrashBikes)
@@ -73,7 +74,7 @@ func spawn_players():
 #			Network.multiplayer_npc_amount))
 		var player_spawn : Spatial = get_node("PlayerSpawn" + str(Network.MAX_CONNECTIONS - \
 			player_num + 1))
-		print("PlayerSpawn" + str(Network.MAX_CONNECTIONS - player_num + 1))
+#		print("PlayerSpawn" + str(Network.MAX_CONNECTIONS - player_num + 1))
 
 		if new_player is PuppetRacer:
 			new_player.puppet_transform = player_spawn.global_transform
@@ -125,7 +126,7 @@ func remove_lame_racer(lame_peer_ID) -> void:
 		if lame_peer.get_network_master() == lame_peer_ID:
 			players.remove(players.find(lame_peer))
 			lame_peer.queue_free()
-			break
+			return
 
 
 func start_race() -> void:

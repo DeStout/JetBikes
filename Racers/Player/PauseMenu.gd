@@ -3,6 +3,9 @@ extends Control
 
 
 signal leave_race
+signal block_control
+
+var is_paused = false
 
 onready var sfx_slider : HSlider = $BG/Options/SFX/Slider
 onready var sfx_level : LineEdit = $BG/Options/SFX/Level
@@ -25,7 +28,19 @@ func _input(event) -> void:
 
 
 func _toggle_pause():
-	pass
+	is_paused = !is_paused
+	visible = is_paused
+
+	if !is_paused:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		_close_menus()
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+	if !Globals.is_multiplayer:
+		get_tree().paused = is_paused
+	else:
+		emit_signal("block_control", is_paused)
 
 
 func _open_options_menu() -> void:
@@ -49,6 +64,12 @@ func _close_menus() -> void:
 	$BG/Main.visible = true
 	$BG/Options.visible = false
 	$BG/Controls.visible = false
+
+
+func _quit_race():
+	get_tree().paused = false
+	# Signals to Track
+	emit_signal("leave_race")
 
 
 func _update_sfx_sound_values(new_value):

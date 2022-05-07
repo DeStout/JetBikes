@@ -24,7 +24,6 @@ func _ready() -> void:
 
 func setup_track() -> void:
 	Globals.is_multiplayer = true
-#	Network.update_player_ready(false)
 
 	var level_loader = level_loader_.instance()
 	add_child(level_loader)
@@ -102,8 +101,9 @@ func return_to_lobby() -> void:
 		_multiplayer_track.queue_free()
 		remove_child(_multiplayer_track)
 
-		add_child(_lobby)
-		_lobby.reset_lobby()
+	Network.is_in_race(false)
+	add_child(_lobby)
+	_lobby.reset_lobby()
 
 
 func return_to_main() -> void:

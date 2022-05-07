@@ -54,7 +54,9 @@ func update_lobby_info(update_type : String) -> void:
 
 func reset_lobby():
 	Network.track_ready(false)
+	Network.is_in_race(false)
 
 
 func _on_CancelButton_pressed() -> void:
+	# Signal to Network (close_network_connection)
 	emit_signal("return_to_main")

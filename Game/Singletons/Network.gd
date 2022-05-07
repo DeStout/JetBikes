@@ -4,6 +4,7 @@ signal connected_to_host
 signal update_lobby
 signal setup_track
 signal start_timer_start
+signal remove_disconnected_racer
 signal finish_race
 
 const MAX_CONNECTIONS : int = 12
@@ -34,6 +35,7 @@ class PlayerData:
 	var color : Color = Color(0.184314, 0.788235, 1)
 	var is_ready : bool = false
 	var preview_finished : bool = false
+	var is_in_race : bool = false
 	var global_trans : Transform = Transform(Basis(Vector3.ZERO))
 	var engine_rot : Vector3 = Vector3.ZERO
 	var placement : int = 0
@@ -47,6 +49,7 @@ class PlayerData:
 		temp_dict.color = color
 		temp_dict.is_ready = is_ready
 		temp_dict.preview_finished = preview_finished
+		temp_dict.is_in_race = is_in_race
 		temp_dict.global_trans = global_trans
 		temp_dict.engine_rot = engine_rot
 		temp_dict.placement = placement
@@ -60,6 +63,7 @@ class PlayerData:
 		color = new_player_data.color
 		is_ready = new_player_data.is_ready
 		preview_finished = new_player_data.preview_finished
+		is_in_race = new_player_data.is_in_race
 		global_trans = new_player_data.global_trans
 		engine_rot = new_player_data.engine_rot
 		placement = new_player_data.placement
@@ -86,6 +90,25 @@ remotesync func setup_online_multiplayer_race() -> void:
 
 		# Signal to MultiplayerManager
 		emit_signal("setup_track")
+
+
+remotesync func is_in_race(is_in_race : bool) -> void:
+	if get_tree().get_rpc_sender_id() == 0:
+		self_data.is_in_race = is_in_race
+		rpc("is_in_race", is_in_race)
+	else:
+		player_list[get_tree().get_rpc_sender_id()].is_in_race = is_in_race
+
+		if get_tree().is_network_server():
+			if is_in_race == false:
+				print(get_tree().get_network_unique_id(), " Player has disconnected from race: " + str(get_tree().get_rpc_sender_id()))
+				# RPC Remove puppet of sender_id
+				rpc("remove_disconnected_racer", get_tree().get_rpc_sender_id())
+
+
+remotesync func remove_disconnected_racer(racer_id : int) -> void:
+	# Signal to MultiplayerPlayersTracker (remove_lame_racer)
+	emit_signal("remove_disconnected_racer", racer_id)
 
 
 remotesync func track_ready(track_ready : bool) -> void:
@@ -211,13 +234,13 @@ remotesync func update_player_ready(player_ready : bool) -> void:
 		emit_signal("update_lobby", "Player Ready")
 
 
-remotesync func update_race_info(new_level_select : int, new_laps_amount : int, new_npc_amount : int) -> void:
+remotesync func update_race_info(new_level_select : int, new_laps_number : int, new_npc_number : int) -> void:
 	if get_tree().get_rpc_sender_id() == 0:
-		rpc("update_race_info", new_level_select, new_laps_amount, new_npc_amount)
+		rpc("update_race_info", new_level_select, new_laps_number, new_npc_number)
 	else:
 		Globals.multiplayer_level = new_level_select
-		Globals.multiplayer_laps_number = new_laps_amount
-		Globals.multiplayer_NPC_number = new_npc_amount
+		Globals.multiplayer_laps_number = new_laps_number
+		Globals.multiplayer_NPC_number = new_npc_number
 
 		emit_signal("update_lobby", "Race Info")
 

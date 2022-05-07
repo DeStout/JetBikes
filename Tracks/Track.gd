@@ -12,7 +12,13 @@ func _ready() -> void:
 	else:
 		$Players.set_script(preload("res://Tracks/MultiplayerPlayersTracker.gd"))
 
-	_setup_race()
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+#	AudioServer.set_bus_mute(Globals.master_bus, true)
+	AudioServer.set_bus_mute(Globals.master_bus, false)
+	$MusicPlayer.play()
+
+	$Players.connect("race_finished", self, "finish_race")
+	$Players.setup_players($TrackPath, path_nodes)
 
 	if !Globals.is_multiplayer:
 		$Players.player.HUD.setup_minimap($Minimap.get_texture(), \
@@ -23,6 +29,7 @@ func _ready() -> void:
 						$Minimap/MinimapCamera, $Players.players)
 		$Players.master_player.pause_menu.connect("leave_race", self, "end_race")
 
+		Network.is_in_race(true)
 		Network.connect("start_timer_start", self, "begin_countdown")
 
 
@@ -32,17 +39,6 @@ func _process(delta) -> void:
 			$Players.player.HUD.set_race_notice("%d" % ($StartTimer.time_left + 1), true)
 		else:
 			$Players.master_player.HUD.set_race_notice("%d" % ($StartTimer.time_left + 1), true)
-
-
-func _setup_race() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-	$Players.connect("race_finished", self, "finish_race")
-	$Players.setup_players($TrackPath, path_nodes)
-
-#	AudioServer.set_bus_mute(Globals.master_bus, true)
-	AudioServer.set_bus_mute(Globals.master_bus, false)
-	$MusicPlayer.play()
 
 
 # Called by $PathNodes' ready signal
@@ -109,4 +105,5 @@ func finish_race() -> void:
 
 func end_race() -> void:
 	$MusicPlayer.stop()
+	# Signal to Game for single player or MultiplayerManager for multiplayer
 	emit_signal("return_to_main")

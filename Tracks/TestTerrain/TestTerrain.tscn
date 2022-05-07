@@ -4266,6 +4266,7 @@ directional_shadow_depth_range = 1
 directional_shadow_max_distance = 750.0
 
 [node name="TrackPath" type="Path" parent="." index="5"]
+visible = false
 curve = SubResource( 213 )
 
 [node name="TrackPath2" parent="." index="6"]

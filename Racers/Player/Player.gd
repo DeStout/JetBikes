@@ -160,6 +160,10 @@ func _get_key_input() -> void:
 			hop = true
 
 
+func has_control(is_paused : bool) -> void:
+	has_control = !is_paused
+
+
 func _input(event):
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseButton:
