@@ -55,7 +55,7 @@ class PlayerData:
 		temp_dict.placement = placement
 
 		return temp_dict
-
+#
 	func dict_to_data(new_player_data : Dictionary) -> void:
 		network_ID = new_player_data.network_ID
 		player_name = new_player_data.player_name
@@ -119,8 +119,9 @@ remotesync func track_ready(track_ready : bool) -> void:
 		player_list[get_tree().get_rpc_sender_id()].preview_finished = track_ready
 		if get_tree().is_network_server():
 			for player in player_list:
-				if !player_list[player].preview_finished:
-					return
+				if player_list[player].is_in_race:
+					if !player_list[player].preview_finished:
+						return
 			rpc("start_race")
 
 

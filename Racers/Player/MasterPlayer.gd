@@ -21,13 +21,17 @@ func _physics_process(delta):
 					$EngineRotationHelper/Engine.rotation
 	engine_rotation = Basis(Quat(engine_rotation))
 
-	rset("puppet_velocity", velocity)
-	rset("puppet_transform", global_transform)
-	rset("puppet_engine_rotation", engine_rotation)
+	for player_id in Network.player_list:
+		if player_id != Network.self_data.network_ID:
+			var player = Network.player_list[player_id]
+			if player.is_in_race:
+				rset_id(player.network_ID, "puppet_velocity", velocity)
+				rset_id(player.network_ID, "puppet_transform", global_transform)
+				rset_id(player.network_ID, "puppet_engine_rotation", engine_rotation)
 
-	rpc("swing", is_swinging)
-	if is_crashed:
-		rset("crashbike_puppet_transform", crash_bike.global_transform)
+				rpc_id(player.network_ID, "swing", is_swinging)
+				if is_crashed:
+					rset_id(player.network_ID, "crashbike_puppet_transform", crash_bike.global_transform)
 
 #	if !rset_twentieth_timer.time_left:
 #		rset("puppet_velocity", velocity)

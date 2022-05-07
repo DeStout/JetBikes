@@ -101,7 +101,6 @@ func return_to_lobby() -> void:
 		_multiplayer_track.queue_free()
 		remove_child(_multiplayer_track)
 
-	Network.is_in_race(false)
 	add_child(_lobby)
 	_lobby.reset_lobby()
 

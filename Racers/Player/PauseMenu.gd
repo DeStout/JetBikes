@@ -68,7 +68,9 @@ func _close_menus() -> void:
 
 func _quit_race():
 	get_tree().paused = false
-	# Signals to Track
+	if Globals.is_multiplayer:
+		Network.is_in_race(false)
+	# Signals to Track (end_race)
 	emit_signal("leave_race")
 
 
