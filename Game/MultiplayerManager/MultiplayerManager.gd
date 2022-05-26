@@ -12,6 +12,7 @@ var _multiplayer_track = null
 
 func _ready() -> void:
 	Network.connect("setup_track", self, "setup_track")
+	Network.connect("end_race", self, "return_to_lobby")
 
 	# Called by Host and Client
 	get_tree().connect("network_peer_connected", self, "_peer_connected")
@@ -101,7 +102,9 @@ func return_to_lobby() -> void:
 		_multiplayer_track.queue_free()
 		remove_child(_multiplayer_track)
 
+	print("Race Finished - Returning to Lobby")
 	add_child(_lobby)
+	yield(_lobby, "tree_entered")
 	_lobby.reset_lobby()
 
 
@@ -110,6 +113,7 @@ func return_to_main() -> void:
 		_multiplayer_track.queue_free()
 	if is_instance_valid(_lobby):
 		_lobby.queue_free()
+
 	Network.close_network_connection()
 	print("Lobby Closed - Returning to Main Menu")
 	emit_signal("return_to_main")

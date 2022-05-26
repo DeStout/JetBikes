@@ -293,9 +293,14 @@ func update_path_node(new_path_node : PathNode) -> void:
 
 
 func check_lap_number() -> void:
-	if lap_number > Globals.laps_number:
-		emit_signal("finished_race", self)
-	HUD.set_lap(lap_number)
+	if lap_number > Globals.laps_number or lap_number > Globals.multiplayer_laps_number:
+		if !Globals.is_multiplayer:
+			# Signal to SinglePlayerPlayersTracker (finish_race)
+			emit_signal("finished_race", self.name)
+		else:
+			Network.player_finished()
+	else:
+		HUD.set_lap(lap_number)
 
 
 func _crash():

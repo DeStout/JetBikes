@@ -96,7 +96,7 @@ func update_path_node(new_path_node : PathNode) -> void:
 		if current_path_node.serial == 0:
 			lap_number += 1
 			if lap_number > Globals.laps_number:
-				emit_signal("finished_race", self)
+				emit_signal("finished_race", self.name)
 		if typeof(path_nodes[new_path_node.next_serial]) == TYPE_ARRAY:
 			var temp_array = path_nodes[new_path_node.next_serial]
 			current_path_node = temp_array[0]

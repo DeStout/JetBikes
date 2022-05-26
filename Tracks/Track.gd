@@ -105,5 +105,5 @@ func finish_race() -> void:
 
 func end_race() -> void:
 	$MusicPlayer.stop()
-	# Signal to Game for single player or MultiplayerManager for multiplayer
+	# Signal to Game (return_to_main_menu) or MultiplayerManager (return_to_lobby)
 	emit_signal("return_to_main")

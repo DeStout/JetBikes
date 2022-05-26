@@ -87,6 +87,7 @@ run/main_scene="res://Game/Game.tscn"
 
 Globals="*res://Game/Singletons/Globals.gd"
 Network="*res://Game/Singletons/Network.gd"
+Debug="*res://Game/Singletons/Debug.gd"
 
 [display]
 
@@ -96,10 +97,6 @@ window/size/test_width=1600
 window/size/test_height=900
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
-
-[editor_plugins]
-
-enabled=PoolStringArray( "res://addons/zylann.scatter/plugin.cfg" )
 
 [global]
 
@@ -217,3 +214,4 @@ Hop={
 quality/directional_shadow/size=8192
 quality/shadows/filter_mode=2
 quality/filters/msaa=4
+environment/default_environment="res://default_env.tres"

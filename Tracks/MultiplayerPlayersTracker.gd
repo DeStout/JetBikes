@@ -54,14 +54,12 @@ func spawn_players():
 	var player_num : int = 1
 
 	var player_keys : Array = Network.player_list.keys()
-#	player_keys.invert()
 
 	for player in player_keys:
 		var new_player
 		if player == get_tree().get_network_unique_id():
 			new_player = player_.instance()
 			master_player = new_player
-#			new_player.connect("finished_race", self, "finish_race")
 		else:
 			new_player = puppet_racer_.instance()
 
@@ -107,7 +105,6 @@ func setup_players(path, path_nodes):
 	path_nodes_size = path_nodes.size()
 
 	master_player.HUD.set_max_laps(Globals.multiplayer_laps_number)
-#	master_player.navigation = track_navigation
 	master_player.path = path
 	master_player.path_nodes = path_nodes
 	master_player.current_path_node = path_nodes[0]
@@ -115,7 +112,6 @@ func setup_players(path, path_nodes):
 	if get_tree().get_network_unique_id() == 1:
 		for npc_temp in players:
 			if npc_temp is NPC:
-#				npc_temp.navigation = track_navigation
 				npc_temp.path_nodes = path_nodes
 				npc_temp.current_path_node = path_nodes[0]
 				npc_temp.pathfind_next_node()
@@ -145,7 +141,7 @@ func finish_race(winner_name) -> void:
 	master_player.HUD.set_race_notice("Finished!\n" + winner_name + " wins!", true)
 	# Called to Racer
 	master_player.finish_race()
-	# Signal to Track
+	# Signal to Track (finish_race)
 	emit_signal("race_finished")
 
 

@@ -6,6 +6,7 @@ signal setup_track
 signal start_timer_start
 signal remove_disconnected_racer
 signal finish_race
+signal end_race
 
 const MAX_CONNECTIONS : int = 12
 const _DEFAULT_PORT : int = 34500
@@ -81,7 +82,7 @@ func _ready():
 #
 remotesync func setup_online_multiplayer_race() -> void:
 	if get_tree().get_rpc_sender_id() == 0:
-		get_tree().network_peer.refuse_new_connections = true
+#		get_tree().network_peer.refuse_new_connections = true
 		rpc("setup_online_multiplayer_race")
 	else:
 		for player in player_list:
@@ -101,8 +102,9 @@ remotesync func is_in_race(is_in_race : bool) -> void:
 
 		if get_tree().is_network_server():
 			if is_in_race == false:
-				print(get_tree().get_network_unique_id(), " Player has disconnected from race: " + str(get_tree().get_rpc_sender_id()))
-				# RPC Remove puppet of sender_id
+				if get_tree().get_rpc_sender_id() == self_data.network_ID:
+					rpc("end_race")
+					return
 				rpc("remove_disconnected_racer", get_tree().get_rpc_sender_id())
 
 
@@ -134,8 +136,14 @@ remotesync func player_finished() -> void:
 	if get_tree().get_rpc_sender_id() == 0:
 		rpc("player_finished")
 	else:
-		# Signal to MultiplayerPlayersTracker
+		# Signal to MultiplayerPlayersTracker (finish_race)
 		emit_signal("finish_race", player_list[get_tree().get_rpc_sender_id()].player_name)
+
+
+remotesync func end_race() -> void:
+	if !get_tree().is_network_server():
+		# Signals to MultiplayerManager (return_to_lobby)
+		emit_signal("end_race")
 
 
 #

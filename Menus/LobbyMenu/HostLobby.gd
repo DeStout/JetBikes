@@ -39,7 +39,7 @@ func update_lobby_info(update_type : String):
 func reset_lobby():
 	.reset_lobby()
 	Network.update_player_ready(true)
-	get_tree().network_peer.refuse_new_connections = false
+#	get_tree().network_peer.refuse_new_connections = false
 
 
 func _level_select_left():

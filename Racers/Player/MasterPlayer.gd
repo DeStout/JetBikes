@@ -47,13 +47,6 @@ func _physics_process(delta):
 ##		print("RSet: Quarter")
 
 
-func check_lap_number() -> void:
-	if lap_number > Globals.multiplayer_laps_number:
-		Network.player_finished()
-	else:
-		HUD.set_lap(lap_number)
-
-
 func _crash() -> void:
 	._crash()
 	rpc("set_crashed", true)
