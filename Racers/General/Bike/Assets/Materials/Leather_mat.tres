@@ -1,9 +1,8 @@
-[gd_resource type="SpatialMaterial" load_steps=5 format=2]
+[gd_resource type="SpatialMaterial" load_steps=4 format=2]
 
 [ext_resource path="res://Racers/General/Bike/Assets/Materials/Leather/Leather026_1K_Color.png" type="Texture" id=1]
 [ext_resource path="res://Racers/General/Bike/Assets/Materials/Leather/Leather026_1K_NormalGL.png" type="Texture" id=2]
 [ext_resource path="res://Racers/General/Bike/Assets/Materials/Leather/Leather026_1K_Roughness.png" type="Texture" id=3]
-[ext_resource path="res://Racers/General/Bike/Assets/Materials/AO_Bike.png" type="Texture" id=4]
 
 [resource]
 albedo_color = Color( 0, 0, 0, 1 )
@@ -13,9 +12,4 @@ roughness_texture = ExtResource( 3 )
 normal_enabled = true
 normal_scale = 2.18
 normal_texture = ExtResource( 2 )
-ao_enabled = true
-ao_light_affect = 1.0
-ao_texture = ExtResource( 4 )
-ao_on_uv2 = true
-ao_texture_channel = 0
 uv1_scale = Vector3( 2.5, 2.5, 1 )
