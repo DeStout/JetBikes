@@ -97,7 +97,7 @@ margin_bottom = 3.0
 size_flags_horizontal = 0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 3 )
-text = "test_track"
+text = "test_tererain"
 align = 1
 valign = 1
 __meta__ = {
@@ -230,6 +230,7 @@ __meta__ = {
 }
 
 [node name="ConnectingFrame" type="ColorRect" parent="MenuFrame" index="1"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 704.0

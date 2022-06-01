@@ -93,3 +93,4 @@ bus = "Player_SFX"
 [connection signal="block_control" from="CamRotationHelper/SpringArm/CamPosHelper/Camera/PauseMenu" to="." method="has_control"]
 
 [editable path="EngineRotationHelper/Engine"]
+[editable path="EngineRotationHelper/Engine/mannequin_rider6"]

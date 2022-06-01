@@ -8,6 +8,7 @@ onready var cam_rot_help : Spatial = $CamRotationHelper
 onready var camera : Camera = $CamRotationHelper/SpringArm/CamPosHelper/Camera
 onready var HUD : Control = $CamRotationHelper/SpringArm/CamPosHelper/Camera/HUD
 onready var pause_menu : Control = $CamRotationHelper/SpringArm/CamPosHelper/Camera/PauseMenu
+onready var animation_tree : AnimationTree = $EngineRotationHelper/Engine/Rider.get_node("AnimationTree")
 
 const MIN_CAM_FOV : float = 40.0
 const MAX_CAM_FOV : float = 75.0
@@ -202,6 +203,9 @@ func _input(event):
 				var vehicle_rotation : Vector3 = engine.rotation_degrees
 				vehicle_rotation.z = clamp(vehicle_rotation.z, -45, 45)
 				engine.rotation_degrees = vehicle_rotation
+
+				#Animate the character based on mouse relative motion
+				animation_tree["parameters/Blend1D/blend_position"] = vehicle_rotation.z / -45
 
 
 # Return Camera, Engine, and Collision back to default values

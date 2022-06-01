@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/RiderPosed.glb-f247c0b00912e471c519b7756b5c5799.scn"
+path="res://.import/mannequin_rider6.glb-386d497adebd348f73b07ae6bd794d79.scn"
 
 [deps]
 
-source_file="res://Racers/General/Bike/Assets/Models/RiderPosed.glb"
-dest_files=[ "res://.import/RiderPosed.glb-f247c0b00912e471c519b7756b5c5799.scn" ]
+source_file="res://mannequin_rider6.glb"
+dest_files=[ "res://.import/mannequin_rider6.glb-386d497adebd348f73b07ae6bd794d79.scn" ]
 
 [params]
 
@@ -20,8 +20,9 @@ nodes/use_legacy_names=false
 materials/location=1
 materials/storage=1
 materials/keep_on_reimport=true
-meshes/compress=true
-meshes/ensure_tangents=false
+meshes/octahedral_compression=true
+meshes/compress=4286
+meshes/ensure_tangents=true
 meshes/storage=0
 meshes/light_baking=0
 meshes/lightmap_texel_size=0.1

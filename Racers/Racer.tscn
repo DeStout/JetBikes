@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Racers/General/Bike/DetectRay.gd" type="Script" id=1]
-[ext_resource path="res://Racers/General/Bike/Mannequiny.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Racers/General/Bike/Mannequiny_anim.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/LineRenderer/LineRenderer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Materials/GroundWetRocks/Ground_Wet_Rocks_001_basecolor.jpg" type="Texture" id=6]
 [ext_resource path="res://addons/LineRenderer/line.png" type="Texture" id=8]
@@ -85,8 +85,8 @@ visibility_aabb = AABB( -0.567687, -0.503016, -0.567215, 1.13406, 2.1497, 1.1332
 process_material = SubResource( 6 )
 draw_pass_1 = ExtResource( 13 )
 
-[node name="Rider" parent="EngineRotationHelper/Engine" instance=ExtResource( 2 )]
-transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0 )
+[node name="Rider" parent="EngineRotationHelper/Engine" instance=ExtResource( 3 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
