@@ -370,15 +370,15 @@ func set_racer_color(new_color : Color) -> void:
 #	bike_material.albedo_color = new_color
 	yield(get_tree(), "idle_frame")
 	var helmet = $EngineRotationHelper/Engine/Rider \
-					.get_node("Mannequiny/Skeleton/HelmetAttachment/Helmet").get_node("Helmet")
+					.get_node("Rider/Skeleton/HelmetAttachment/Helmet").get_node("Helmet")
 	var visor = $EngineRotationHelper/Engine/Rider \
-					.get_node("Mannequiny/Skeleton/HelmetAttachment/Helmet").get_node("Visor")
+					.get_node("Rider/Skeleton/HelmetAttachment/Helmet").get_node("Visor")
 	var spoiler = $EngineRotationHelper/Engine/Rider \
-					.get_node("Mannequiny/Skeleton/HelmetAttachment/Helmet").get_node("Spoiler")
+					.get_node("Rider/Skeleton/HelmetAttachment/Helmet").get_node("Spoiler")
 #	var bootL = $EngineRotationHelper/Engine/Rider.get_node("Boot_L").get_node("Boot")
 #	var bootR = $EngineRotationHelper/Engine/Rider.get_node("Boot_R").get_node("Boot")
 	var airbag = $EngineRotationHelper/Engine/Rider \
-					.get_node("Mannequiny/Skeleton/AirbagAttachment/Airbag").get_node("Airbag")
+					.get_node("Rider/Skeleton/AirbagAttachment/Airbag").get_node("Airbag")
 
 	$EngineRotationHelper/Engine/Shielding.get_surface_material(0).albedo_color = bike_color
 	windshield_material.albedo_color = bike_color

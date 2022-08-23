@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Racers/General/Bike/Assets/Models/Flame.tres" type="ArrayMesh" id=1]
+
+[sub_resource type="Gradient" id=11]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=12]
+gradient = SubResource( 11 )
+
+[sub_resource type="Curve" id=9]
+_data = [ Vector2( 0, 0.973864 ), 0.0, 0.104027, 0, 0, Vector2( 1, 0.127273 ), -1.21012, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+lifetime_randomness = 0.08
+direction = Vector3( 0, 1, 0 )
+spread = 3.32
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 2.0
+linear_accel = 4.61
+scale_random = 1.0
+scale_curve = SubResource( 10 )
+color_ramp = SubResource( 12 )
+hue_variation = -0.2
+hue_variation_random = 0.23
+
+[node name="Particles" type="Particles"]
+transform = Transform( 1.03421, 0, 0, 0, -4.52066e-08, -1.03421, 0, 1.03421, -4.52066e-08, 0, -0.514, 1.53928 )
+cast_shadow = 0
+generate_lightmap = false
+amount = 10
+lifetime = 0.39
+speed_scale = 3.01
+visibility_aabb = AABB( -0.567687, -0.503016, -0.567215, 1.13406, 2.1497, 1.13323 )
+process_material = SubResource( 6 )
+draw_pass_1 = ExtResource( 1 )

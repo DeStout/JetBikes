@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/mannequin_rider6.glb-386d497adebd348f73b07ae6bd794d79.scn"
+path="res://.import/mannequin_rider7.glb-6b79b8fa4e805d754258929e62bfbff6.scn"
 
 [deps]
 
-source_file="res://mannequin_rider6.glb"
-dest_files=[ "res://.import/mannequin_rider6.glb-386d497adebd348f73b07ae6bd794d79.scn" ]
+source_file="res://Racers/General/Bike/mannequin_rider7.glb"
+dest_files=[ "res://.import/mannequin_rider7.glb-6b79b8fa4e805d754258929e62bfbff6.scn" ]
 
 [params]
 

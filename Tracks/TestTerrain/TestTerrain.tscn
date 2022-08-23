@@ -69,7 +69,7 @@ operator = 2
 
 [sub_resource type="VisualShader" id=18]
 code = "shader_type spatial;
-render_mode specular_schlick_ggx;
+render_mode specular_schlick_ggx, async_visible;
 
 uniform sampler2D Sign_Texture : hint_black_albedo;
 uniform sampler2D tex_frg_4;
@@ -221,7 +221,7 @@ operator = 2
 [sub_resource type="VisualShader" id=176]
 resource_local_to_scene = true
 code = "shader_type spatial;
-render_mode specular_schlick_ggx, world_vertex_coords;
+render_mode specular_schlick_ggx, async_visible, world_vertex_coords;
 
 uniform sampler2D Sign_Texture : hint_black_albedo;
 uniform sampler2D tex_frg_4;
@@ -352,7 +352,7 @@ shader_param/Sign_Texture = SubResource( 156 )
 [sub_resource type="VisualShader" id=158]
 resource_local_to_scene = true
 code = "shader_type spatial;
-render_mode specular_schlick_ggx, world_vertex_coords;
+render_mode specular_schlick_ggx, async_visible, world_vertex_coords;
 
 uniform sampler2D Sign_Texture : hint_black_albedo;
 uniform sampler2D tex_frg_4;
@@ -521,7 +521,7 @@ operator = 2
 [sub_resource type="VisualShader" id=191]
 resource_local_to_scene = true
 code = "shader_type spatial;
-render_mode specular_schlick_ggx, world_vertex_coords;
+render_mode specular_schlick_ggx, async_visible, world_vertex_coords;
 
 uniform sampler2D Sign_Texture : hint_black_albedo;
 uniform sampler2D tex_frg_4;
@@ -652,7 +652,7 @@ shader_param/Sign_Texture = SubResource( 54 )
 [sub_resource type="VisualShader" id=193]
 resource_local_to_scene = true
 code = "shader_type spatial;
-render_mode specular_schlick_ggx, world_vertex_coords;
+render_mode specular_schlick_ggx, async_visible, world_vertex_coords;
 
 uniform sampler2D Sign_Texture : hint_black_albedo;
 uniform sampler2D tex_frg_4;
@@ -783,7 +783,7 @@ shader_param/Sign_Texture = SubResource( 57 )
 [sub_resource type="VisualShader" id=195]
 resource_local_to_scene = true
 code = "shader_type spatial;
-render_mode specular_schlick_ggx, world_vertex_coords;
+render_mode specular_schlick_ggx, async_visible, world_vertex_coords;
 
 uniform sampler2D Sign_Texture : hint_black_albedo;
 uniform sampler2D tex_frg_4;
@@ -909,7 +909,7 @@ shader_param/Sign_Texture = ExtResource( 2 )
 [sub_resource type="VisualShader" id=197]
 resource_local_to_scene = true
 code = "shader_type spatial;
-render_mode specular_schlick_ggx, world_vertex_coords;
+render_mode specular_schlick_ggx, async_visible, world_vertex_coords;
 
 uniform sampler2D Sign_Texture : hint_black_albedo;
 uniform sampler2D tex_frg_4;
@@ -1034,7 +1034,7 @@ shader = SubResource( 18 )
 [sub_resource type="VisualShader" id=161]
 resource_local_to_scene = true
 code = "shader_type spatial;
-render_mode specular_schlick_ggx, world_vertex_coords;
+render_mode specular_schlick_ggx, async_visible, world_vertex_coords;
 
 uniform sampler2D Sign_Texture : hint_black_albedo;
 uniform sampler2D tex_frg_4;
@@ -1159,7 +1159,7 @@ shader = SubResource( 18 )
 [sub_resource type="VisualShader" id=164]
 resource_local_to_scene = true
 code = "shader_type spatial;
-render_mode specular_schlick_ggx, world_vertex_coords;
+render_mode specular_schlick_ggx, async_visible, world_vertex_coords;
 
 uniform sampler2D Sign_Texture : hint_black_albedo;
 uniform sampler2D tex_frg_4;
@@ -1284,7 +1284,7 @@ shader = SubResource( 18 )
 [sub_resource type="VisualShader" id=167]
 resource_local_to_scene = true
 code = "shader_type spatial;
-render_mode specular_schlick_ggx, world_vertex_coords;
+render_mode specular_schlick_ggx, async_visible, world_vertex_coords;
 
 uniform sampler2D Sign_Texture : hint_black_albedo;
 uniform sampler2D tex_frg_4;
@@ -1409,7 +1409,7 @@ shader = SubResource( 18 )
 [sub_resource type="VisualShader" id=170]
 resource_local_to_scene = true
 code = "shader_type spatial;
-render_mode specular_schlick_ggx, world_vertex_coords;
+render_mode specular_schlick_ggx, async_visible, world_vertex_coords;
 
 uniform sampler2D Sign_Texture : hint_black_albedo;
 uniform sampler2D tex_frg_4;
@@ -1534,7 +1534,7 @@ shader = SubResource( 18 )
 [sub_resource type="VisualShader" id=173]
 resource_local_to_scene = true
 code = "shader_type spatial;
-render_mode specular_schlick_ggx, world_vertex_coords;
+render_mode specular_schlick_ggx, async_visible, world_vertex_coords;
 
 uniform sampler2D Sign_Texture : hint_black_albedo;
 uniform sampler2D tex_frg_4;
@@ -1659,7 +1659,7 @@ shader = SubResource( 18 )
 [sub_resource type="VisualShader" id=78]
 resource_local_to_scene = true
 code = "shader_type spatial;
-render_mode specular_schlick_ggx, world_vertex_coords;
+render_mode specular_schlick_ggx, async_visible, world_vertex_coords;
 
 uniform sampler2D Sign_Texture : hint_black_albedo;
 uniform sampler2D tex_frg_4;
@@ -1790,7 +1790,7 @@ shader_param/Sign_Texture = SubResource( 81 )
 [sub_resource type="VisualShader" id=199]
 resource_local_to_scene = true
 code = "shader_type spatial;
-render_mode specular_schlick_ggx, world_vertex_coords;
+render_mode specular_schlick_ggx, async_visible, world_vertex_coords;
 
 uniform sampler2D Sign_Texture : hint_black_albedo;
 uniform sampler2D tex_frg_4;
@@ -1921,7 +1921,7 @@ shader_param/Sign_Texture = SubResource( 84 )
 [sub_resource type="VisualShader" id=201]
 resource_local_to_scene = true
 code = "shader_type spatial;
-render_mode specular_schlick_ggx, world_vertex_coords;
+render_mode specular_schlick_ggx, async_visible, world_vertex_coords;
 
 uniform sampler2D Sign_Texture : hint_black_albedo;
 uniform sampler2D tex_frg_4;
@@ -2315,7 +2315,7 @@ operator = 2
 [sub_resource type="VisualShader" id=26]
 resource_local_to_scene = true
 code = "shader_type spatial;
-render_mode specular_schlick_ggx, world_vertex_coords;
+render_mode specular_schlick_ggx, async_visible, world_vertex_coords;
 
 uniform sampler2D Sign_Texture : hint_black_albedo;
 uniform sampler2D tex_frg_4;
@@ -2440,7 +2440,7 @@ shader_param/Sign_Texture = SubResource( 148 )
 [sub_resource type="VisualShader" id=28]
 resource_local_to_scene = true
 code = "shader_type spatial;
-render_mode specular_schlick_ggx, world_vertex_coords;
+render_mode specular_schlick_ggx, async_visible, world_vertex_coords;
 
 uniform sampler2D Sign_Texture : hint_black_albedo;
 uniform sampler2D tex_frg_4;
@@ -2565,7 +2565,7 @@ shader_param/Sign_Texture = SubResource( 150 )
 [sub_resource type="VisualShader" id=30]
 resource_local_to_scene = true
 code = "shader_type spatial;
-render_mode specular_schlick_ggx, world_vertex_coords;
+render_mode specular_schlick_ggx, async_visible, world_vertex_coords;
 
 uniform sampler2D Sign_Texture : hint_black_albedo;
 uniform sampler2D tex_frg_4;
@@ -2690,7 +2690,7 @@ shader_param/Sign_Texture = SubResource( 152 )
 [sub_resource type="VisualShader" id=32]
 resource_local_to_scene = true
 code = "shader_type spatial;
-render_mode specular_schlick_ggx, world_vertex_coords;
+render_mode specular_schlick_ggx, async_visible, world_vertex_coords;
 
 uniform sampler2D Sign_Texture : hint_black_albedo;
 uniform sampler2D tex_frg_4;

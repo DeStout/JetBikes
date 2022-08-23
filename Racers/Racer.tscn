@@ -1,9 +1,8 @@
 [gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Racers/General/Bike/DetectRay.gd" type="Script" id=1]
-[ext_resource path="res://Racers/General/Bike/Mannequiny_anim.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Racers/General/Bike/Mannequiny.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/LineRenderer/LineRenderer.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Tracks/TestTerrain/Assets/Materials/GroundWetRocks/Ground_Wet_Rocks_001_basecolor.jpg" type="Texture" id=6]
 [ext_resource path="res://addons/LineRenderer/line.png" type="Texture" id=8]
 [ext_resource path="res://Racers/General/Bike/Assets/Models/Flame.tres" type="ArrayMesh" id=13]
 [ext_resource path="res://Racers/General/Bike/Bike06.tscn" type="PackedScene" id=16]
@@ -46,18 +45,28 @@ initial_velocity_random = 0.19
 angle = 96.0
 angle_random = 0.87
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="StreamTexture" id=18]
+resource_local_to_scene = true
+flags = 23
+load_path = "res://.import/Ground_Wet_Rocks_001_basecolor.jpg-a0fbb18c585726abdb0ec09d20fc0763.s3tc.stex"
+
+[sub_resource type="SpatialMaterial" id=19]
+resource_local_to_scene = true
 flags_transparent = true
+flags_use_shadow_to_opacity = true
+flags_unshaded = true
+flags_vertex_lighting = true
+vertex_color_use_as_albedo = true
 params_blend_mode = 1
 params_billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
-albedo_color = Color( 0.47451, 0.439216, 0.321569, 0.266667 )
-albedo_texture = ExtResource( 6 )
+albedo_color = Color( 0.47451, 0.439216, 0.321569, 0.223529 )
+albedo_texture = SubResource( 18 )
 
 [sub_resource type="QuadMesh" id=4]
-material = SubResource( 3 )
+material = SubResource( 19 )
 size = Vector2( 2, 2 )
 
 [sub_resource type="SpatialMaterial" id=5]
@@ -85,8 +94,7 @@ visibility_aabb = AABB( -0.567687, -0.503016, -0.567215, 1.13406, 2.1497, 1.1332
 process_material = SubResource( 6 )
 draw_pass_1 = ExtResource( 13 )
 
-[node name="Rider" parent="EngineRotationHelper/Engine" instance=ExtResource( 3 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+[node name="Rider" parent="EngineRotationHelper/Engine" instance=ExtResource( 2 )]
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )

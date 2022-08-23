@@ -157,6 +157,18 @@ func _get_key_input() -> void:
 				is_boosting = false
 				_set_boost_sfx()
 
+		if Input.is_action_just_pressed("Grapple"):
+			is_swinging = true
+		elif Input.is_action_just_released("Grapple"):
+			is_swinging = false
+
+		if Input.is_action_just_pressed("FreeRotate"):
+			is_free_rotating = true
+			free_rotate_origin = Vector2.ZERO
+		elif Input.is_action_just_released("FreeRotate"):
+			is_free_rotating = false
+			free_rotate_origin = Vector2.ZERO
+
 		if Input.is_action_just_pressed("Hop"):
 			hop = true
 
@@ -169,13 +181,12 @@ func _input(event):
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseButton:
 			if has_control:
-				if event.button_index == 1:
-					is_swinging = event.pressed
+#				if event.button_index == 1:
+#					is_swinging = event.pressed
 				if event.button_index == 2:
 					is_free_rotating = event.pressed
 					free_rotate_origin = Vector2.ZERO
-
-		if event is InputEventMouseMotion:
+		if event is InputEventMouseMotion or event is InputEventJoypadMotion:
 			# Free rotate the player
 			if is_free_rotating and !is_on_ground:
 				if engine.rotation != Vector3.ZERO:
@@ -183,13 +194,26 @@ func _input(event):
 					$CollisionShape.rotation += engine.rotation
 					engine.rotation = Vector3.ZERO
 
-				free_rotate_origin.x = clamp(free_rotate_origin.x + event.relative.x * 0.07, -max_rotate_speed, max_rotate_speed)
-				free_rotate_origin.y = clamp(free_rotate_origin.y + event.relative.y * 0.07, -max_rotate_speed, max_rotate_speed)
+				if event is InputEventMouseMotion:
+					free_rotate_origin.x = clamp(free_rotate_origin.x + event.relative.x * 0.07, -max_rotate_speed, max_rotate_speed)
+					free_rotate_origin.y = clamp(free_rotate_origin.y + event.relative.y * 0.07, -max_rotate_speed, max_rotate_speed)
+
+				elif event is InputEventJoypadMotion:
+					if event.axis == JOY_AXIS_0:
+						free_rotate_origin.x = clamp(free_rotate_origin.x + event.axis_value * 20, -max_rotate_speed, max_rotate_speed)
+					if event.axis == JOY_AXIS_1:
+						free_rotate_origin.y = clamp(free_rotate_origin.y + event.axis_value * 20, -max_rotate_speed, max_rotate_speed)
 
 			# Rotate the camera based on mouse movement
 			elif has_cam_control:
-				cam_rot_help.rotate_x(-deg2rad(event.relative.y * mouse_vert_invert * MOUSE_VERT_SENSITIVITY))
-				cam_rot_help.rotate_y(deg2rad(event.relative.x * mouse_horz_invert * MOUSE_HORZ_SENSITIVITY))
+				if event is InputEventMouseMotion:
+					cam_rot_help.rotate_x(-deg2rad(event.relative.y * mouse_vert_invert * MOUSE_VERT_SENSITIVITY))
+					cam_rot_help.rotate_y(deg2rad(event.relative.x * mouse_horz_invert * MOUSE_HORZ_SENSITIVITY))
+				elif event is InputEventJoypadMotion:
+					if event.axis == JOY_AXIS_3:
+						cam_rot_help.rotate_x(-deg2rad(event.axis_value))
+					if event.axis == JOY_AXIS_2:
+						cam_rot_help.rotate_y(-deg2rad(event.axis_value))
 
 				var helper_rotation : Vector3 = cam_rot_help.rotation_degrees
 				helper_rotation.x = clamp(helper_rotation.x, -28, -5)
@@ -199,13 +223,10 @@ func _input(event):
 
 				# Lean the vehicle model based on turning sharpness
 				var velocity_ratio = clamp(velocity.length() / MAX_FORWARD_VEL, 0.0, 1.0)
-				engine.rotate_object_local(Vector3(0, 0, 1), deg2rad(helper_rotation.y * 0.02 * velocity_ratio))
+				engine.rotate_object_local(Vector3(0, 0, 1), deg2rad(helper_rotation.y * 0.1 * velocity_ratio))
 				var vehicle_rotation : Vector3 = engine.rotation_degrees
 				vehicle_rotation.z = clamp(vehicle_rotation.z, -45, 45)
 				engine.rotation_degrees = vehicle_rotation
-
-				#Animate the character based on mouse relative motion
-				animation_tree["parameters/Blend1D/blend_position"] = vehicle_rotation.z / -45
 
 
 # Return Camera, Engine, and Collision back to default values
@@ -221,6 +242,8 @@ func _rotate_to_default(delta : float) -> void:
 		var engineRot : Vector3 = engine.rotation_degrees
 		engineRot = engineRot + (-engineRot * delta * TURN_SPEED * 0.5)
 		engine.rotation_degrees = engineRot
+
+		animation_tree["parameters/Blend1D/blend_position"] = engine.rotation_degrees.z / -45
 
 	if is_on_ground:
 		if engine_rot_help.rotation_degrees != Vector3.ZERO:
@@ -285,6 +308,7 @@ func start_race() -> void:
 
 
 func update_path_node(new_path_node : PathNode) -> void:
+	print(Globals.laps_number)
 	if current_path_node.serial == new_path_node.serial:
 		_set_boost(new_path_node.boost_value)
 		if current_path_node.serial == 0:
@@ -297,12 +321,11 @@ func update_path_node(new_path_node : PathNode) -> void:
 
 
 func check_lap_number() -> void:
-	if lap_number > Globals.laps_number or lap_number > Globals.multiplayer_laps_number:
-		if !Globals.is_multiplayer:
-			# Signal to SinglePlayerPlayersTracker (finish_race)
-			emit_signal("finished_race", self.name)
-		else:
-			Network.player_finished()
+	if !Globals.is_multiplayer and lap_number > Globals.laps_number:
+		# Signal to SinglePlayerPlayersTracker (finish_race)
+		emit_signal("finished_race", self.name)
+	elif Globals.is_multiplayer and lap_number > Globals.multiplayer_laps_number:
+		Network.player_finished()
 	else:
 		HUD.set_lap(lap_number)
 

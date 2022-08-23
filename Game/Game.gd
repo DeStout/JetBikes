@@ -1,7 +1,7 @@
 class_name Game
 extends Node
 
-onready var main_menu = $MainMenu
+onready var main_menu = $MainMenu3D
 
 var online_multiplayer_manager_ = load("res://Game/MultiplayerManager/MultiplayerManager.tscn")
 var online_multiplayer_manager
@@ -17,8 +17,8 @@ func _ready():
 	main_menu.single_player_menu.connect("setup_single_player_race", self, "start_single_player_game")
 
 	online_multiplayer_manager = online_multiplayer_manager_.instance()
-	main_menu.online_menu.connect("setup_online_lobby", self, "setup_online_lobby")
-	online_multiplayer_manager.connect("return_to_main", self, "return_to_main_menu")
+#	main_menu.online_menu.connect("setup_online_lobby", self, "setup_online_lobby")
+#	online_multiplayer_manager.connect("return_to_main", self, "return_to_main_menu")
 
 
 func start_single_player_game():
