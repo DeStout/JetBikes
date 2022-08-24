@@ -17,8 +17,8 @@ func _ready():
 	main_menu.single_player_menu.connect("setup_single_player_race", self, "start_single_player_game")
 
 	online_multiplayer_manager = online_multiplayer_manager_.instance()
-#	main_menu.online_menu.connect("setup_online_lobby", self, "setup_online_lobby")
-#	online_multiplayer_manager.connect("return_to_main", self, "return_to_main_menu")
+	main_menu.online_menu.connect("setup_online_lobby", self, "setup_online_lobby")
+	online_multiplayer_manager.connect("return_to_main", self, "return_to_main_menu")
 
 
 func start_single_player_game():
@@ -42,7 +42,8 @@ func setup_online_lobby(is_host : bool):
 		online_multiplayer_manager = online_multiplayer_manager.instance()
 		online_multiplayer_manager.connect("return_to_main", self, "return_to_main_menu")
 
-	remove_child(main_menu)
+#	remove_child(main_menu)
+	main_menu.hide_all()
 
 	add_child(online_multiplayer_manager)
 	online_multiplayer_manager.setup_lobby_network(is_host)
@@ -58,4 +59,5 @@ func return_to_main_menu():
 	if has_node(online_multiplayer_manager.name):
 		remove_child(online_multiplayer_manager)
 
-	add_child(main_menu)
+#	add_child(main_menu)
+	main_menu.return_to_main()

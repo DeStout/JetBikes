@@ -50,7 +50,7 @@ margin_right = -64.0
 margin_bottom = -64.2881
 grow_horizontal = 2
 grow_vertical = 2
-color = Color( 0.141176, 0.141176, 0.141176, 1 )
+color = Color( 0.152941, 0.152941, 0.152941, 0 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -67,7 +67,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-color = Color( 0.25098, 0.25098, 0.25098, 1 )
+color = Color( 0.25098, 0.25098, 0.25098, 0 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -232,8 +232,8 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 5 )
 custom_constants/vseparation = 0
+custom_fonts/font = SubResource( 5 )
 items = [ "Item 0", null, false, "Item 1", null, false, "Item 2", null, false, "Item 3", null, false ]
 max_columns = 4
 same_column_width = true
@@ -283,9 +283,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 10
 custom_fonts/font = ExtResource( 2 )
 text = "Cancel"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="text_changed" from="MenuFrame/LobbyFrame/RacerSettingsPanel/RacerName" to="." method="_racer_name_changed"]
 [connection signal="color_changed" from="MenuFrame/LobbyFrame/RacerSettingsPanel/VehicleColor" to="." method="_racer_color_changed"]

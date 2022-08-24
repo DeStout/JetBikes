@@ -2,8 +2,8 @@ extends Node
 
 signal return_to_main
 
-var host_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/HostLobby.tscn")
-var client_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/ClientLobby.tscn")
+var host_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/HostLobby3D.tscn")
+var client_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/ClientLobby3D.tscn")
 var _lobby : Control
 
 var level_loader_ = preload("res://Menus/LoadingMenu/LoadingMenu.tscn")

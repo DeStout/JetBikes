@@ -6,7 +6,7 @@ var time_elapsed := 0.0
 
 
 func _process(delta):
-	get_node("../Control/FPS").text = "FPS: " + str(Engine.get_frames_per_second())
+	get_node("../Menu/FPS").text = "FPS: " + str(Engine.get_frames_per_second())
 
 
 func _physics_process(delta: float) -> void:

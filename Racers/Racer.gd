@@ -16,7 +16,7 @@ const HOP_IMPULSE : float = 7.0
 #const MAX_SPEED : int = 180
 const MAX_FORWARD_VEL : int = 85
 const MAX_STRIFE_VEL : int = 65
-const MAX_REVERSE_VEL : int =  50
+const MAX_REVERSE_VEL : int = 50
 const MAX_BOOST_VEL : int = 125
 const TURN_SPEED : int = 8
 

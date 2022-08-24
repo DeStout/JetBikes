@@ -30,20 +30,28 @@ const FREE_ROTATE_HORZ_SENSITIVITY : float = 0.04
 var has_cam_control : bool = false
 onready var default_spring_arm_orientation : Transform = $CamRotationHelper/SpringArm.transform
 
+var num_joypads := 0
+
 var mouse_vert_invert : int = 1
 var mouse_horz_invert : int = -1
 var free_rotate_origin : Vector2 = Vector2.ZERO
 var max_rotate_speed : int = 200
 
 
+func _ready() -> void:
+	num_joypads = Input.get_connected_joypads().size()
+
+
 func _process(delta : float) -> void:
-	_get_key_input()
+	_get_control_input()
 	if current_path_node != null:
 		_set_arrow_angle(delta)
 	_adjust_cam_fov_dist()
 
 
 func _physics_process(delta : float) -> void:
+	if num_joypads:
+		_get_joypad_input(delta)
 	_rotate_to_default(delta)
 	_free_rotate(delta)
 
@@ -65,10 +73,10 @@ func _physics_process(delta : float) -> void:
 			if movement_input.x != 0:
 				if abs(basis_velocity.x) > MAX_STRIFE_VEL and sign(movement_input.x) == sign(basis_velocity.x):
 					move_direction.x = _interpolate_float(basis_velocity.x, \
-						MAX_STRIFE_VEL * sign(movement_input.x), STRIFE_DEACCELERATION * 0.5) - basis_velocity.x
+						MAX_STRIFE_VEL * movement_input.x, STRIFE_DEACCELERATION * 0.5) - basis_velocity.x
 				else:
 					move_direction.x = _interpolate_float(basis_velocity.x, \
-						MAX_STRIFE_VEL * sign(movement_input.x), STRIFE_ACCELERATION) - basis_velocity.x
+						MAX_STRIFE_VEL * movement_input.x, STRIFE_ACCELERATION) - basis_velocity.x
 			else:
 				move_direction.x = _interpolate_float(basis_velocity.x, 0, STRIFE_DEACCELERATION) - basis_velocity.x
 
@@ -85,17 +93,17 @@ func _physics_process(delta : float) -> void:
 
 				if basis_velocity.z < -max_forward_vel:
 					move_direction.z = _interpolate_float(basis_velocity.z, \
-						-max_forward_vel, DEACCELERATION * 0.5) - basis_velocity.z
+						-max_forward_vel * movement_input.y, DEACCELERATION * 0.5) - basis_velocity.z
 				else:
 					move_direction.z = _interpolate_float(basis_velocity.z, \
-						-max_forward_vel, acceleration) - basis_velocity.z
+						-max_forward_vel * movement_input.y, acceleration) - basis_velocity.z
 			elif movement_input.y < 0:
 				if basis_velocity.z < MAX_REVERSE_VEL:
 					move_direction.z = _interpolate_float(basis_velocity.z, \
-						MAX_REVERSE_VEL, DEACCELERATION * 0.5) - basis_velocity.z
+						MAX_REVERSE_VEL * -movement_input.y, DEACCELERATION * 0.5) - basis_velocity.z
 				else:
 					move_direction.z = _interpolate_float(basis_velocity.z, \
-						MAX_REVERSE_VEL, REVERSE_ACCELERATION) - basis_velocity.z
+						MAX_REVERSE_VEL * -movement_input.y, REVERSE_ACCELERATION) - basis_velocity.z
 			else:
 				move_direction.z = _interpolate_float(basis_velocity.z, 0, DEACCELERATION) - basis_velocity.z
 
@@ -129,18 +137,18 @@ func _physics_process(delta : float) -> void:
 
 
 # Track what keyboard input is being pressed
-func _get_key_input() -> void:
+func _get_control_input() -> void:
 	movement_input = Vector2.ZERO
 
 	if has_control:
 		if Input.is_action_pressed("Accelerate"):
-			movement_input.y += 1
-		if Input.is_action_pressed("Strife_Left"):
-			movement_input.x -= 1
-		if Input.is_action_pressed("Strife_Right"):
-			movement_input.x += 1
+			movement_input.y += Input.get_action_strength("Accelerate")
+		if Input.is_action_pressed("StrifeLeft"):
+			movement_input.x -= Input.get_action_strength("StrifeLeft")
+		if Input.is_action_pressed("StrifeRight"):
+			movement_input.x += Input.get_action_strength("StrifeRight")
 		if Input.is_action_pressed("Reverse"):
-			movement_input.y -= 1
+			movement_input.y -= Input.get_action_strength("Reverse")
 
 		if Input.is_action_just_pressed("Brake"):
 			is_braking = true
@@ -173,47 +181,57 @@ func _get_key_input() -> void:
 			hop = true
 
 
+func _get_joypad_input(delta) -> void:
+	# Rotate the Camera
+	cam_rot_help.rotate_y(6 * deg2rad(Input.get_action_strength("CamLeft") - Input.get_action_strength("CamRight")))
+	cam_rot_help.rotate_x(5 * -deg2rad(Input.get_action_strength("CamDown") - Input.get_action_strength("CamUp")))
+
+	# Clamp Camera rotation
+	var helper_rotation : Vector3 = cam_rot_help.rotation_degrees
+	helper_rotation.x = clamp(helper_rotation.x, -28, -5)
+	helper_rotation.y = clamp(helper_rotation.y, -30, 30)
+	helper_rotation.z = 0
+	cam_rot_help.rotation_degrees = helper_rotation
+
+	# Lean the vehicle model based on turning sharpness
+	var velocity_ratio = clamp(velocity.length() / MAX_FORWARD_VEL, 0.0, 1.0)
+	engine.rotate_object_local(Vector3(0, 0, 1), deg2rad(helper_rotation.y * 0.1 * velocity_ratio))
+	var vehicle_rotation : Vector3 = engine.rotation_degrees
+	vehicle_rotation.z = clamp(vehicle_rotation.z, -45, 45)
+	engine.rotation_degrees = vehicle_rotation
+
+
+	if is_free_rotating and !is_on_ground:
+		if engine.rotation != Vector3.ZERO:
+			engine_rot_help.rotation += engine.rotation
+			$CollisionShape.rotation += engine.rotation
+			engine.rotation = Vector3.ZERO
+		var horz_rotation = Input.get_action_strength("StrifeRight") - Input.get_action_strength("StrifeLeft")
+		var vert_rotation = Input.get_action_strength("Reverse") - Input.get_action_strength("Accelerate")
+		free_rotate_origin.x = clamp(free_rotate_origin.x + horz_rotation * 10, -max_rotate_speed, max_rotate_speed)
+		free_rotate_origin.y = clamp(free_rotate_origin.y + vert_rotation * 10, -max_rotate_speed, max_rotate_speed)
+
+
 func has_control(is_paused : bool) -> void:
 	has_control = !is_paused
 
 
 func _input(event):
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		if event is InputEventMouseButton:
-			if has_control:
-#				if event.button_index == 1:
-#					is_swinging = event.pressed
-				if event.button_index == 2:
-					is_free_rotating = event.pressed
-					free_rotate_origin = Vector2.ZERO
-		if event is InputEventMouseMotion or event is InputEventJoypadMotion:
+		if event is InputEventMouseMotion:
 			# Free rotate the player
 			if is_free_rotating and !is_on_ground:
 				if engine.rotation != Vector3.ZERO:
 					engine_rot_help.rotation += engine.rotation
 					$CollisionShape.rotation += engine.rotation
 					engine.rotation = Vector3.ZERO
-
-				if event is InputEventMouseMotion:
-					free_rotate_origin.x = clamp(free_rotate_origin.x + event.relative.x * 0.07, -max_rotate_speed, max_rotate_speed)
-					free_rotate_origin.y = clamp(free_rotate_origin.y + event.relative.y * 0.07, -max_rotate_speed, max_rotate_speed)
-
-				elif event is InputEventJoypadMotion:
-					if event.axis == JOY_AXIS_0:
-						free_rotate_origin.x = clamp(free_rotate_origin.x + event.axis_value * 20, -max_rotate_speed, max_rotate_speed)
-					if event.axis == JOY_AXIS_1:
-						free_rotate_origin.y = clamp(free_rotate_origin.y + event.axis_value * 20, -max_rotate_speed, max_rotate_speed)
+				free_rotate_origin.x = clamp(free_rotate_origin.x + event.relative.x * 0.07, -max_rotate_speed, max_rotate_speed)
+				free_rotate_origin.y = clamp(free_rotate_origin.y + event.relative.y * 0.07, -max_rotate_speed, max_rotate_speed)
 
 			# Rotate the camera based on mouse movement
 			elif has_cam_control:
-				if event is InputEventMouseMotion:
-					cam_rot_help.rotate_x(-deg2rad(event.relative.y * mouse_vert_invert * MOUSE_VERT_SENSITIVITY))
-					cam_rot_help.rotate_y(deg2rad(event.relative.x * mouse_horz_invert * MOUSE_HORZ_SENSITIVITY))
-				elif event is InputEventJoypadMotion:
-					if event.axis == JOY_AXIS_3:
-						cam_rot_help.rotate_x(-deg2rad(event.axis_value))
-					if event.axis == JOY_AXIS_2:
-						cam_rot_help.rotate_y(-deg2rad(event.axis_value))
+				cam_rot_help.rotate_x(-deg2rad(event.relative.y * mouse_vert_invert * MOUSE_VERT_SENSITIVITY))
+				cam_rot_help.rotate_y(deg2rad(event.relative.x * mouse_horz_invert * MOUSE_HORZ_SENSITIVITY))
 
 				var helper_rotation : Vector3 = cam_rot_help.rotation_degrees
 				helper_rotation.x = clamp(helper_rotation.x, -28, -5)
@@ -243,6 +261,7 @@ func _rotate_to_default(delta : float) -> void:
 		engineRot = engineRot + (-engineRot * delta * TURN_SPEED * 0.5)
 		engine.rotation_degrees = engineRot
 
+		# Animate Rider lean with turn
 		animation_tree["parameters/Blend1D/blend_position"] = engine.rotation_degrees.z / -45
 
 	if is_on_ground:
@@ -308,7 +327,6 @@ func start_race() -> void:
 
 
 func update_path_node(new_path_node : PathNode) -> void:
-	print(Globals.laps_number)
 	if current_path_node.serial == new_path_node.serial:
 		_set_boost(new_path_node.boost_value)
 		if current_path_node.serial == 0:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_NormalGL.png" type="Texture" id=2]
@@ -16,11 +16,13 @@
 [ext_resource path="res://Menus/Assets/Images/Splash.png" type="Texture" id=14]
 [ext_resource path="res://Menus/MainMenu/Assets/Sprites/LeftTriangle.bmp" type="Texture" id=15]
 [ext_resource path="res://Menus/MainMenu/Assets/Sprites/RightTriangle.bmp" type="Texture" id=16]
-[ext_resource path="res://Menus/MainMenu/3DMenu/MainMenu_3D.gd" type="Script" id=17]
+[ext_resource path="res://Menus/MainMenu/3DMenu/MainMenu3D.gd" type="Script" id=17]
 [ext_resource path="res://Menus/Assets/MenuFont.tres" type="DynamicFont" id=18]
 [ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=19]
 [ext_resource path="res://Menus/MainMenu/3DMenu/SinglePlayerMenu.gd" type="Script" id=20]
 [ext_resource path="res://Menus/MainMenu/3DMenu/OptionsMenu.gd" type="Script" id=21]
+[ext_resource path="res://Menus/MainMenu/ControlsMenu/ControlsMenu.png" type="Texture" id=22]
+[ext_resource path="res://Menus/MainMenu/3DMenu/OnlineMenu.gd" type="Script" id=23]
 
 [sub_resource type="GIProbeData" id=15]
 bounds = AABB( -5, -5, -5, 10, 10, 10 )
@@ -192,6 +194,30 @@ font_data = ExtResource( 19 )
 size = 28
 font_data = ExtResource( 19 )
 
+[sub_resource type="DynamicFont" id=33]
+size = 48
+font_data = ExtResource( 19 )
+
+[sub_resource type="DynamicFont" id=34]
+size = 64
+font_data = ExtResource( 19 )
+
+[sub_resource type="DynamicFont" id=35]
+size = 64
+font_data = ExtResource( 19 )
+
+[sub_resource type="DynamicFont" id=36]
+size = 36
+font_data = ExtResource( 19 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 36
+font_data = ExtResource( 19 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 20
+font_data = ExtResource( 19 )
+
 [sub_resource type="DynamicFont" id=28]
 size = 48
 font_data = ExtResource( 19 )
@@ -210,7 +236,6 @@ font_data = ExtResource( 19 )
 
 [sub_resource type="DynamicFont" id=32]
 size = 32
-extra_spacing_top = 5
 font_data = ExtResource( 19 )
 
 [node name="MainMenu" type="Spatial"]
@@ -246,12 +271,8 @@ material/0 = SubResource( 4 )
 [node name="Particles" parent="BGRot/Racer/EngineRotationHelper/Engine" index="5"]
 visibility_aabb = AABB( -0.561094, -0.495488, -0.553337, 1.12888, 2.18098, 1.11117 )
 
-[node name="Skeleton" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider" index="0"]
-bones/11/bound_children = [  ]
-bones/13/bound_children = [  ]
-
 [node name="HelmetAttachment" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider/Skeleton" index="1"]
-transform = Transform( 0.999992, -0.00294874, -0.00260557, 0.00166003, 0.916475, -0.400088, 0.00356767, 0.40008, 0.916474, -0.00108238, 0.605131, 0.218817 )
+transform = Transform( 0.924797, -0.243309, 0.292491, 0.316223, 0.919032, -0.235336, -0.21155, 0.310129, 0.926858, 0.310943, 0.482913, 0.241308 )
 
 [node name="Helmet" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider/Skeleton/HelmetAttachment/Helmet" index="0"]
 material/0 = SubResource( 24 )
@@ -263,7 +284,7 @@ material/0 = SubResource( 25 )
 material/0 = SubResource( 25 )
 
 [node name="AirbagAttachment" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider/Skeleton" index="2"]
-transform = Transform( 0.999999, -0.00174057, 0.00057612, 0.00134666, 0.484045, -0.875042, 0.0012442, 0.875041, 0.484047, -0.000334743, 0.465687, -0.0768995 )
+transform = Transform( 0.963236, 0.205067, -0.173562, -0.203594, 0.135676, -0.969609, -0.175286, 0.969298, 0.172439, 0.235782, 0.4328, -0.0745817 )
 
 [node name="Airbag" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider/Skeleton/AirbagAttachment/Airbag" index="0"]
 material/0 = SubResource( 26 )
@@ -315,17 +336,18 @@ spot_attenuation = 3.4822
 spot_angle = 47.09
 spot_angle_attenuation = 0.812254
 
-[node name="Control" type="Control" parent="."]
+[node name="Menu" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Sprite" type="Sprite" parent="Control"]
+[node name="BG" type="Sprite" parent="Menu"]
 visible = false
 position = Vector2( 1280, 720 )
 scale = Vector2( 1, 1.05109 )
 texture = ExtResource( 14 )
 
-[node name="MainMenu" type="GridContainer" parent="Control"]
+[node name="MainMenu" type="GridContainer" parent="Menu"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1396.63
@@ -333,7 +355,7 @@ margin_top = 428.376
 margin_right = -310.366
 margin_bottom = -644.624
 
-[node name="SinglePlayerButton" type="Button" parent="Control/MainMenu"]
+[node name="SinglePlayerButton" type="Button" parent="Menu/MainMenu"]
 margin_right = 306.0
 margin_bottom = 67.0
 focus_mode = 0
@@ -344,7 +366,7 @@ text = "Single Player"
 flat = true
 align = 0
 
-[node name="MultiplayerButton" type="Button" parent="Control/MainMenu"]
+[node name="MultiplayerButton" type="Button" parent="Menu/MainMenu"]
 margin_top = 75.0
 margin_right = 451.0
 margin_bottom = 142.0
@@ -352,12 +374,11 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 theme = SubResource( 13 )
-disabled = true
 text = "Online Multiplayer"
 flat = true
 align = 0
 
-[node name="OptionsButton" type="Button" parent="Control/MainMenu"]
+[node name="OptionsButton" type="Button" parent="Menu/MainMenu"]
 margin_top = 150.0
 margin_right = 190.0
 margin_bottom = 217.0
@@ -369,7 +390,7 @@ text = "Options"
 flat = true
 align = 0
 
-[node name="ControlsButton" type="Button" parent="Control/MainMenu"]
+[node name="ControlsButton" type="Button" parent="Menu/MainMenu"]
 margin_top = 225.0
 margin_right = 204.0
 margin_bottom = 292.0
@@ -377,12 +398,11 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 theme = SubResource( 13 )
-disabled = true
 text = "Controls"
 flat = true
 align = 0
 
-[node name="QuitButton" type="Button" parent="Control/MainMenu"]
+[node name="QuitButton" type="Button" parent="Menu/MainMenu"]
 margin_top = 300.0
 margin_right = 106.0
 margin_bottom = 367.0
@@ -394,7 +414,7 @@ text = "Quit"
 flat = true
 align = 0
 
-[node name="SinglePlayerMenu" type="Control" parent="Control"]
+[node name="SinglePlayerMenu" type="Control" parent="Menu"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 0.951
@@ -404,7 +424,7 @@ margin_right = -175.316
 margin_bottom = -365.608
 script = ExtResource( 20 )
 
-[node name="SinglePlayerLabel" type="Label" parent="Control/SinglePlayerMenu"]
+[node name="SinglePlayerLabel" type="Label" parent="Menu/SinglePlayerMenu"]
 anchor_right = 1.0
 anchor_bottom = 0.998
 margin_left = 64.0002
@@ -418,7 +438,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Level" type="Control" parent="Control/SinglePlayerMenu"]
+[node name="Level" type="Control" parent="Menu/SinglePlayerMenu"]
 anchor_left = 0.064
 anchor_top = 0.18
 anchor_right = 0.56
@@ -435,7 +455,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelLabel" type="Label" parent="Control/SinglePlayerMenu/Level"]
+[node name="LevelLabel" type="Label" parent="Menu/SinglePlayerMenu/Level"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 8.0
@@ -450,7 +470,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelName" type="Label" parent="Control/SinglePlayerMenu/Level"]
+[node name="LevelName" type="Label" parent="Menu/SinglePlayerMenu/Level"]
 anchor_top = 0.353
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -467,7 +487,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelLeft" type="Button" parent="Control/SinglePlayerMenu/Level"]
+[node name="LevelLeft" type="Button" parent="Menu/SinglePlayerMenu/Level"]
 anchor_top = 0.353
 anchor_right = 0.258
 anchor_bottom = 1.0
@@ -492,7 +512,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelRight" type="Button" parent="Control/SinglePlayerMenu/Level"]
+[node name="LevelRight" type="Button" parent="Menu/SinglePlayerMenu/Level"]
 anchor_left = 0.742
 anchor_top = 0.353
 anchor_right = 1.0
@@ -518,7 +538,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Laps" type="Control" parent="Control/SinglePlayerMenu"]
+[node name="Laps" type="Control" parent="Menu/SinglePlayerMenu"]
 anchor_left = 0.064
 anchor_top = 0.18
 anchor_right = 0.56
@@ -535,7 +555,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LapsLabel" type="Label" parent="Control/SinglePlayerMenu/Laps"]
+[node name="LapsLabel" type="Label" parent="Menu/SinglePlayerMenu/Laps"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = 0.0200043
@@ -550,7 +570,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NumLaps" type="Label" parent="Control/SinglePlayerMenu/Laps"]
+[node name="NumLaps" type="Label" parent="Menu/SinglePlayerMenu/Laps"]
 anchor_top = 0.333
 anchor_right = 1.0
 anchor_bottom = 1.067
@@ -568,7 +588,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LapsDecrease" type="Button" parent="Control/SinglePlayerMenu/Laps"]
+[node name="LapsDecrease" type="Button" parent="Menu/SinglePlayerMenu/Laps"]
 anchor_top = 0.333
 anchor_right = 0.276
 anchor_bottom = 1.068
@@ -593,7 +613,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LapsIncrease" type="Button" parent="Control/SinglePlayerMenu/Laps"]
+[node name="LapsIncrease" type="Button" parent="Menu/SinglePlayerMenu/Laps"]
 anchor_left = 0.793
 anchor_top = 0.333
 anchor_right = 1.069
@@ -619,7 +639,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NPCs" type="Control" parent="Control/SinglePlayerMenu"]
+[node name="NPCs" type="Control" parent="Menu/SinglePlayerMenu"]
 anchor_left = 0.064
 anchor_top = 0.18
 anchor_right = 0.56
@@ -636,7 +656,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NPCsLabel" type="Label" parent="Control/SinglePlayerMenu/NPCs"]
+[node name="NPCsLabel" type="Label" parent="Menu/SinglePlayerMenu/NPCs"]
 anchor_right = 1.0
 anchor_bottom = 1.143
 margin_bottom = -0.0160065
@@ -651,7 +671,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NumNPCs" type="Label" parent="Control/SinglePlayerMenu/NPCs"]
+[node name="NumNPCs" type="Label" parent="Menu/SinglePlayerMenu/NPCs"]
 anchor_top = 0.357
 anchor_right = 1.0
 anchor_bottom = 1.143
@@ -667,7 +687,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NPCDecrease" type="Button" parent="Control/SinglePlayerMenu/NPCs"]
+[node name="NPCDecrease" type="Button" parent="Menu/SinglePlayerMenu/NPCs"]
 anchor_top = 0.357
 anchor_right = 0.275
 anchor_bottom = 1.143
@@ -692,7 +712,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NPCIncrease" type="Button" parent="Control/SinglePlayerMenu/NPCs"]
+[node name="NPCIncrease" type="Button" parent="Menu/SinglePlayerMenu/NPCs"]
 anchor_left = 0.791
 anchor_top = 0.357
 anchor_right = 1.067
@@ -718,7 +738,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Buttons" type="GridContainer" parent="Control/SinglePlayerMenu"]
+[node name="Buttons" type="GridContainer" parent="Menu/SinglePlayerMenu"]
 anchor_left = 0.559
 anchor_top = 0.18
 anchor_right = 0.999
@@ -733,7 +753,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 8
 custom_constants/vseparation = 16
 
-[node name="RaceButton" type="Button" parent="Control/SinglePlayerMenu/Buttons"]
+[node name="RaceButton" type="Button" parent="Menu/SinglePlayerMenu/Buttons"]
 margin_right = 325.0
 margin_bottom = 88.0
 focus_mode = 0
@@ -750,7 +770,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CancelButton" type="Button" parent="Control/SinglePlayerMenu/Buttons"]
+[node name="BackButton" type="Button" parent="Menu/SinglePlayerMenu/Buttons"]
 margin_top = 104.0
 margin_right = 325.0
 margin_bottom = 192.0
@@ -761,14 +781,14 @@ theme = SubResource( 13 )
 custom_fonts/font = ExtResource( 18 )
 shortcut_in_tooltip = false
 action_mode = 0
-text = "Cancel"
+text = "Back"
 flat = true
 align = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorPicker" type="ColorPickerButton" parent="Control/SinglePlayerMenu"]
+[node name="ColorPicker" type="ColorPickerButton" parent="Menu/SinglePlayerMenu"]
 anchor_right = 1.001
 anchor_bottom = 1.0
 margin_left = 679.345
@@ -782,7 +802,157 @@ align = 0
 color = Color( 0.184314, 0.788235, 1, 1 )
 edit_alpha = false
 
-[node name="OptionsMenu" type="Control" parent="Control"]
+[node name="OnlineMenu" type="Control" parent="Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1434.18
+margin_top = 451.111
+margin_right = -200.773
+margin_bottom = -501.273
+script = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OnlineLabel" type="Label" parent="Menu/OnlineMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -708.0
+margin_bottom = -373.0
+custom_fonts/font = SubResource( 33 )
+text = "Online"
+
+[node name="HostJoin" type="HBoxContainer" parent="Menu/OnlineMenu"]
+anchor_top = 0.168
+anchor_right = 1.149
+anchor_bottom = 1.0
+margin_left = -20.8374
+margin_top = 0.080513
+margin_right = -541.716
+margin_bottom = -277.616
+grow_vertical = 2
+custom_constants/separation = 32
+alignment = 1
+
+[node name="HostBox" type="CheckBox" parent="Menu/OnlineMenu/HostJoin"]
+margin_left = 58.0
+margin_right = 267.0
+margin_bottom = 128.0
+custom_fonts/font = SubResource( 34 )
+text = "Host"
+
+[node name="JoinBox" type="CheckBox" parent="Menu/OnlineMenu/HostJoin"]
+margin_left = 299.0
+margin_right = 483.0
+margin_bottom = 128.0
+custom_fonts/font = SubResource( 35 )
+text = "Join"
+
+[node name="IPAdress" type="GridContainer" parent="Menu/OnlineMenu"]
+anchor_top = 0.127
+anchor_right = 0.569
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 147.664
+margin_right = -20.3547
+margin_bottom = -150.025
+custom_constants/hseparation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Menu/OnlineMenu/IPAdress"]
+margin_right = 493.0
+margin_bottom = 50.0
+custom_fonts/font = SubResource( 36 )
+text = "IP Address:"
+
+[node name="IPText" type="LineEdit" parent="Menu/OnlineMenu/IPAdress"]
+margin_top = 58.0
+margin_right = 493.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+custom_fonts/font = SubResource( 5 )
+text = "127.0.0.1"
+max_length = 15
+context_menu_enabled = false
+clear_button_enabled = true
+placeholder_text = "IP Address"
+caret_blink = true
+
+[node name="Timer2" type="Timer" parent="Menu/OnlineMenu/IPAdress/IPText"]
+wait_time = 0.65
+
+[node name="PopupMenu2" type="PopupMenu" parent="Menu/OnlineMenu/IPAdress/IPText"]
+items = [ "Cut", null, 0, false, false, 0, 268435544, null, "", false, "Copy", null, 0, false, false, 1, 268435523, null, "", false, "Paste", null, 0, false, false, 2, 268435542, null, "", false, "", null, 0, false, false, -1, 0, null, "", true, "Select All", null, 0, false, false, 4, 268435521, null, "", false, "Clear", null, 0, false, false, 3, 0, null, "", false, "", null, 0, false, false, -1, 0, null, "", true, "Undo", null, 0, false, false, 5, 268435546, null, "", false, "Redo", null, 0, false, false, 6, 301989978, null, "", false ]
+
+[node name="Timer3" type="Timer" parent="Menu/OnlineMenu/IPAdress/IPText"]
+wait_time = 0.65
+
+[node name="PopupMenu3" type="PopupMenu" parent="Menu/OnlineMenu/IPAdress/IPText"]
+items = [ "Cut", null, 0, false, false, 0, 268435544, null, "", false, "Copy", null, 0, false, false, 1, 268435523, null, "", false, "Paste", null, 0, false, false, 2, 268435542, null, "", false, "", null, 0, false, false, -1, 0, null, "", true, "Select All", null, 0, false, false, 4, 268435521, null, "", false, "Clear", null, 0, false, false, 3, 0, null, "", false, "", null, 0, false, false, -1, 0, null, "", true, "Undo", null, 0, false, false, 5, 268435546, null, "", false, "Redo", null, 0, false, false, 6, 301989978, null, "", false ]
+
+[node name="OptimistLabel" type="Label" parent="Menu/OnlineMenu"]
+visible = false
+anchor_top = 0.127
+anchor_right = 0.569
+anchor_bottom = 1.0
+margin_top = 224.12
+margin_right = -16.168
+custom_fonts/font = SubResource( 6 )
+text = "It's good to be an optimist"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="Menu/OnlineMenu/OptimistLabel"]
+
+[node name="Buttons" type="GridContainer" parent="Menu/OnlineMenu"]
+anchor_right = 1.082
+anchor_bottom = 1.0
+margin_left = 60.0
+margin_top = 399.877
+margin_right = -388.907
+margin_bottom = 48.2611
+custom_constants/vseparation = 8
+columns = 2
+
+[node name="RaceButton" type="Button" parent="Menu/OnlineMenu/Buttons"]
+margin_right = 272.0
+margin_bottom = 88.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = SubResource( 13 )
+custom_fonts/font = ExtResource( 18 )
+disabled = true
+flat = true
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="Button" parent="Menu/OnlineMenu/Buttons"]
+margin_left = 280.0
+margin_right = 551.0
+margin_bottom = 88.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = SubResource( 13 )
+custom_fonts/font = ExtResource( 18 )
+text = "Back"
+flat = true
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionsMenu" type="Control" parent="Menu"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -795,7 +965,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionsLabel" type="Label" parent="Control/OptionsMenu"]
+[node name="OptionsLabel" type="Label" parent="Menu/OptionsMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 0.231995
@@ -809,7 +979,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SFX" type="Control" parent="Control/OptionsMenu"]
+[node name="SFX" type="Control" parent="Menu/OptionsMenu"]
 anchor_top = 0.127
 anchor_right = 0.569
 anchor_bottom = 1.002
@@ -821,7 +991,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Control/OptionsMenu/SFX"]
+[node name="Label" type="Label" parent="Menu/OptionsMenu/SFX"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -8.0
@@ -832,7 +1002,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Level" type="LineEdit" parent="Control/OptionsMenu/SFX"]
+[node name="Level" type="LineEdit" parent="Menu/OptionsMenu/SFX"]
 anchor_top = 0.286
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -853,7 +1023,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slider" type="HSlider" parent="Control/OptionsMenu/SFX"]
+[node name="Slider" type="HSlider" parent="Menu/OptionsMenu/SFX"]
 anchor_top = 0.286
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -873,7 +1043,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Music" type="Control" parent="Control/OptionsMenu"]
+[node name="Music" type="Control" parent="Menu/OptionsMenu"]
 anchor_top = 0.127
 anchor_right = 0.569
 anchor_bottom = 1.002
@@ -885,7 +1055,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Control/OptionsMenu/Music"]
+[node name="Label" type="Label" parent="Menu/OptionsMenu/Music"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_vertical = 0
@@ -896,7 +1066,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Level" type="LineEdit" parent="Control/OptionsMenu/Music"]
+[node name="Level" type="LineEdit" parent="Menu/OptionsMenu/Music"]
 anchor_top = 0.286
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -917,7 +1087,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slider" type="HSlider" parent="Control/OptionsMenu/Music"]
+[node name="Slider" type="HSlider" parent="Menu/OptionsMenu/Music"]
 anchor_top = 0.286
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -937,7 +1107,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Buttons" type="GridContainer" parent="Control/OptionsMenu"]
+[node name="Buttons" type="GridContainer" parent="Menu/OptionsMenu"]
 anchor_left = 0.569
 anchor_top = 0.127
 anchor_right = 1.0
@@ -953,8 +1123,7 @@ size_flags_vertical = 9
 custom_constants/vseparation = 8
 columns = 2
 
-[node name="ApplyButton" type="Button" parent="Control/OptionsMenu/Buttons"]
-margin_left = 100.0
+[node name="ApplyButton" type="Button" parent="Menu/OptionsMenu/Buttons"]
 margin_right = 440.0
 margin_bottom = 88.0
 focus_mode = 0
@@ -962,32 +1131,30 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = SubResource( 13 )
 custom_fonts/font = ExtResource( 18 )
-shortcut_in_tooltip = false
-action_mode = 0
 text = "Apply"
 flat = true
+align = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CancelButton" type="Button" parent="Control/OptionsMenu/Buttons"]
+[node name="BackButton" type="Button" parent="Menu/OptionsMenu/Buttons"]
 margin_left = 448.0
-margin_right = 788.0
+margin_right = 888.0
 margin_bottom = 88.0
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = SubResource( 13 )
 custom_fonts/font = ExtResource( 18 )
-shortcut_in_tooltip = false
-action_mode = 0
-text = "Cancel"
+text = "Back"
 flat = true
+align = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ControlsMenu" type="Control" parent="Control"]
+[node name="ControlsMenu" type="Control" parent="Menu"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -996,49 +1163,40 @@ margin_top = 428.376
 margin_right = -561.366
 margin_bottom = 15.376
 size_flags_vertical = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="SinglePlayerLabel" type="Label" parent="Control/ControlsMenu"]
+[node name="ControlsLabel" type="Label" parent="Menu/ControlsMenu"]
 anchor_left = -3.002
 anchor_right = 1.237
 anchor_bottom = 1.233
-margin_left = 1813.21
-margin_top = 8.12204
-margin_right = -536.148
-margin_bottom = -1191.17
+margin_left = 1775.41
+margin_top = -233.783
+margin_right = -573.946
+margin_bottom = -1433.07
 custom_fonts/font = SubResource( 31 )
 text = "Controls"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="ControlsLabel" type="Label" parent="Control/ControlsMenu"]
-anchor_left = -3.002
-anchor_right = 1.237
-anchor_bottom = 1.233
-margin_left = 1877.21
-margin_top = 122.122
-margin_right = -271.148
-margin_bottom = -758.169
-custom_fonts/font = SubResource( 32 )
-text = "Mouse - Steer
-WASD - Movement
-Shift - Boost
-Ctrl - Brake
-Left Click - Swing
-Right Click - Free Rotate
-Esc - Pause Menu"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Sprite" type="Sprite" parent="Menu/ControlsMenu"]
+position = Vector2( 448.532, 322.54 )
+texture = ExtResource( 22 )
 
-[node name="FPS" type="Label" parent="Control"]
-visible = false
+[node name="BackButton" type="Button" parent="Menu/ControlsMenu"]
+margin_left = 778.632
+margin_top = 686.084
+margin_right = 1103.63
+margin_bottom = 774.084
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = SubResource( 13 )
+custom_fonts/font = ExtResource( 18 )
+shortcut_in_tooltip = false
+action_mode = 0
+text = "Back"
+flat = true
+align = 0
+
+[node name="FPS" type="Label" parent="Menu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2406.0
@@ -1047,24 +1205,44 @@ margin_right = -43.0
 margin_bottom = -39.0
 text = "FPS:"
 
-[connection signal="pressed" from="Control/MainMenu/SinglePlayerButton" to="." method="_single_player_menu"]
-[connection signal="pressed" from="Control/MainMenu/OptionsButton" to="." method="_options_menu"]
-[connection signal="pressed" from="Control/MainMenu/QuitButton" to="." method="_on_QuitButton_pressed"]
-[connection signal="button_down" from="Control/SinglePlayerMenu/Level/LevelLeft" to="Control/SinglePlayerMenu" method="_level_select_left"]
-[connection signal="button_down" from="Control/SinglePlayerMenu/Level/LevelRight" to="Control/SinglePlayerMenu" method="_level_select_right"]
-[connection signal="pressed" from="Control/SinglePlayerMenu/Laps/LapsDecrease" to="Control/SinglePlayerMenu" method="_decrease_lap_amount"]
-[connection signal="pressed" from="Control/SinglePlayerMenu/Laps/LapsIncrease" to="Control/SinglePlayerMenu" method="_increase_lap_amount"]
-[connection signal="button_down" from="Control/SinglePlayerMenu/NPCs/NPCDecrease" to="Control/SinglePlayerMenu" method="_decrease_NPC_amount"]
-[connection signal="button_down" from="Control/SinglePlayerMenu/NPCs/NPCIncrease" to="Control/SinglePlayerMenu" method="_increase_NPC_amount"]
-[connection signal="pressed" from="Control/SinglePlayerMenu/Buttons/RaceButton" to="Control/SinglePlayerMenu" method="_start_race"]
-[connection signal="pressed" from="Control/SinglePlayerMenu/Buttons/CancelButton" to="." method="_return_to_main"]
-[connection signal="color_changed" from="Control/SinglePlayerMenu/ColorPicker" to="Control/SinglePlayerMenu" method="_select_color"]
-[connection signal="text_entered" from="Control/OptionsMenu/SFX/Level" to="Control/OptionsMenu" method="_update_sfx_sound_values"]
-[connection signal="value_changed" from="Control/OptionsMenu/SFX/Slider" to="Control/OptionsMenu" method="_update_sfx_sound_values"]
-[connection signal="text_entered" from="Control/OptionsMenu/Music/Level" to="Control/OptionsMenu" method="_update_music_sound_values"]
-[connection signal="value_changed" from="Control/OptionsMenu/Music/Slider" to="Control/OptionsMenu" method="_update_music_sound_values"]
-[connection signal="pressed" from="Control/OptionsMenu/Buttons/ApplyButton" to="Control/OptionsMenu" method="_apply_settings"]
-[connection signal="pressed" from="Control/OptionsMenu/Buttons/CancelButton" to="." method="_return_to_main"]
+[node name="ClientBtn" type="Button" parent="Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2226.0
+margin_top = 64.0
+margin_right = -62.0
+margin_bottom = -1285.0
+custom_fonts/font = SubResource( 32 )
+text = "Launch Client"
+
+[connection signal="pressed" from="Menu/MainMenu/SinglePlayerButton" to="." method="_single_player_menu"]
+[connection signal="pressed" from="Menu/MainMenu/MultiplayerButton" to="." method="_multiplayer_menu"]
+[connection signal="pressed" from="Menu/MainMenu/OptionsButton" to="." method="_options_menu"]
+[connection signal="pressed" from="Menu/MainMenu/ControlsButton" to="." method="_controls_menu"]
+[connection signal="pressed" from="Menu/MainMenu/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="button_down" from="Menu/SinglePlayerMenu/Level/LevelLeft" to="Menu/SinglePlayerMenu" method="_level_select_left"]
+[connection signal="button_down" from="Menu/SinglePlayerMenu/Level/LevelRight" to="Menu/SinglePlayerMenu" method="_level_select_right"]
+[connection signal="pressed" from="Menu/SinglePlayerMenu/Laps/LapsDecrease" to="Menu/SinglePlayerMenu" method="_decrease_lap_amount"]
+[connection signal="pressed" from="Menu/SinglePlayerMenu/Laps/LapsIncrease" to="Menu/SinglePlayerMenu" method="_increase_lap_amount"]
+[connection signal="button_down" from="Menu/SinglePlayerMenu/NPCs/NPCDecrease" to="Menu/SinglePlayerMenu" method="_decrease_NPC_amount"]
+[connection signal="button_down" from="Menu/SinglePlayerMenu/NPCs/NPCIncrease" to="Menu/SinglePlayerMenu" method="_increase_NPC_amount"]
+[connection signal="pressed" from="Menu/SinglePlayerMenu/Buttons/RaceButton" to="Menu/SinglePlayerMenu" method="_start_race"]
+[connection signal="pressed" from="Menu/SinglePlayerMenu/Buttons/BackButton" to="." method="return_to_main"]
+[connection signal="color_changed" from="Menu/SinglePlayerMenu/ColorPicker" to="Menu/SinglePlayerMenu" method="_select_color"]
+[connection signal="pressed" from="Menu/OnlineMenu/HostJoin/HostBox" to="Menu/OnlineMenu" method="_host"]
+[connection signal="pressed" from="Menu/OnlineMenu/HostJoin/JoinBox" to="Menu/OnlineMenu" method="_join"]
+[connection signal="text_changed" from="Menu/OnlineMenu/IPAdress/IPText" to="Menu/OnlineMenu" method="_ip_set"]
+[connection signal="timeout" from="Menu/OnlineMenu/OptimistLabel/Timer" to="Menu/OnlineMenu" method="_unoptimist"]
+[connection signal="pressed" from="Menu/OnlineMenu/Buttons/RaceButton" to="Menu/OnlineMenu" method="_setup_online_lobby"]
+[connection signal="pressed" from="Menu/OnlineMenu/Buttons/BackButton" to="." method="return_to_main"]
+[connection signal="text_entered" from="Menu/OptionsMenu/SFX/Level" to="Menu/OptionsMenu" method="_update_sfx_sound_values"]
+[connection signal="value_changed" from="Menu/OptionsMenu/SFX/Slider" to="Menu/OptionsMenu" method="_update_sfx_sound_values"]
+[connection signal="text_entered" from="Menu/OptionsMenu/Music/Level" to="Menu/OptionsMenu" method="_update_music_sound_values"]
+[connection signal="value_changed" from="Menu/OptionsMenu/Music/Slider" to="Menu/OptionsMenu" method="_update_music_sound_values"]
+[connection signal="pressed" from="Menu/OptionsMenu/Buttons/ApplyButton" to="Menu/OptionsMenu" method="_apply_settings"]
+[connection signal="pressed" from="Menu/OptionsMenu/Buttons/BackButton" to="." method="return_to_main"]
+[connection signal="pressed" from="Menu/ControlsMenu/BackButton" to="." method="return_to_main"]
+[connection signal="pressed" from="Menu/ClientBtn" to="." method="_new_client"]
 
 [editable path="BGRot/Racer"]
 [editable path="BGRot/Racer/EngineRotationHelper/Engine"]
