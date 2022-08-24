@@ -24,6 +24,7 @@ func _ready() -> void:
 
 
 func setup_track() -> void:
+	get_parent().remove_child(get_parent().main_menu)
 	Globals.is_multiplayer = true
 
 	var level_loader = level_loader_.instance()
@@ -104,6 +105,8 @@ func return_to_lobby() -> void:
 
 	print("Race Finished - Returning to Lobby")
 	add_child(_lobby)
+	get_parent().add_child(get_parent().main_menu)
+	get_parent().move_child(self, 1)
 	yield(_lobby, "tree_entered")
 	_lobby.reset_lobby()
 

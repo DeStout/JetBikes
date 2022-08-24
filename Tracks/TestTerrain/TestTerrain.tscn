@@ -4458,7 +4458,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -81.968, 35.4425, 46.0152 )
 curve = SubResource( 214 )
 
 [node name="PathFollow" type="PathFollow" parent="LevelPreview/PreviewPath1" index="0"]
-transform = Transform( 0.52527, 0.151619, -0.837148, 0, 0.984, 0.178143, 0.850936, -0.0935922, 0.516759, 223.747, -20.5505, -46.9367 )
+transform = Transform( 0.259442, 0.0825163, -0.962048, 0.0405869, 0.994541, 0.0962112, 0.964904, -0.0640204, 0.254627, 165.955, -12.6905, -25.1394 )
+offset = 60.0132
 rotation_mode = 4
 loop = false
 script = ExtResource( 20 )

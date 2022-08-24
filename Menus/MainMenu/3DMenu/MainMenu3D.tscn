@@ -172,6 +172,10 @@ resource_local_to_scene = true
 material = SubResource( 23 )
 size = Vector2( 2, 2 )
 
+[sub_resource type="DynamicFont" id=32]
+size = 32
+font_data = ExtResource( 19 )
+
 [sub_resource type="DynamicFont" id=11]
 size = 48
 font_data = ExtResource( 1 )
@@ -234,10 +238,6 @@ font_data = ExtResource( 19 )
 size = 48
 font_data = ExtResource( 19 )
 
-[sub_resource type="DynamicFont" id=32]
-size = 32
-font_data = ExtResource( 19 )
-
 [node name="MainMenu" type="Spatial"]
 script = ExtResource( 17 )
 
@@ -270,6 +270,10 @@ material/0 = SubResource( 4 )
 
 [node name="Particles" parent="BGRot/Racer/EngineRotationHelper/Engine" index="5"]
 visibility_aabb = AABB( -0.561094, -0.495488, -0.553337, 1.12888, 2.18098, 1.11117 )
+
+[node name="Skeleton" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider" index="0"]
+bones/11/bound_children = [  ]
+bones/13/bound_children = [  ]
 
 [node name="HelmetAttachment" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider/Skeleton" index="1"]
 transform = Transform( 0.924797, -0.243309, 0.292491, 0.316223, 0.919032, -0.235336, -0.21155, 0.310129, 0.926858, 0.310943, 0.482913, 0.241308 )
@@ -346,8 +350,17 @@ position = Vector2( 1280, 720 )
 scale = Vector2( 1, 1.05109 )
 texture = ExtResource( 14 )
 
+[node name="ClientBtn" type="Button" parent="Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2226.0
+margin_top = 64.0
+margin_right = -62.0
+margin_bottom = -1285.0
+custom_fonts/font = SubResource( 32 )
+text = "Launch Client"
+
 [node name="MainMenu" type="GridContainer" parent="Menu"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1396.63
@@ -803,6 +816,7 @@ color = Color( 0.184314, 0.788235, 1, 1 )
 edit_alpha = false
 
 [node name="OnlineMenu" type="Control" parent="Menu"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1434.18
@@ -1182,9 +1196,9 @@ position = Vector2( 448.532, 322.54 )
 texture = ExtResource( 22 )
 
 [node name="BackButton" type="Button" parent="Menu/ControlsMenu"]
-margin_left = 778.632
+margin_left = 886.985
 margin_top = 686.084
-margin_right = 1103.63
+margin_right = 1211.98
 margin_bottom = 774.084
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -1197,6 +1211,7 @@ flat = true
 align = 0
 
 [node name="FPS" type="Label" parent="Menu"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2406.0
@@ -1205,16 +1220,7 @@ margin_right = -43.0
 margin_bottom = -39.0
 text = "FPS:"
 
-[node name="ClientBtn" type="Button" parent="Menu"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 2226.0
-margin_top = 64.0
-margin_right = -62.0
-margin_bottom = -1285.0
-custom_fonts/font = SubResource( 32 )
-text = "Launch Client"
-
+[connection signal="pressed" from="Menu/ClientBtn" to="." method="_new_client"]
 [connection signal="pressed" from="Menu/MainMenu/SinglePlayerButton" to="." method="_single_player_menu"]
 [connection signal="pressed" from="Menu/MainMenu/MultiplayerButton" to="." method="_multiplayer_menu"]
 [connection signal="pressed" from="Menu/MainMenu/OptionsButton" to="." method="_options_menu"]
@@ -1242,7 +1248,6 @@ text = "Launch Client"
 [connection signal="pressed" from="Menu/OptionsMenu/Buttons/ApplyButton" to="Menu/OptionsMenu" method="_apply_settings"]
 [connection signal="pressed" from="Menu/OptionsMenu/Buttons/BackButton" to="." method="return_to_main"]
 [connection signal="pressed" from="Menu/ControlsMenu/BackButton" to="." method="return_to_main"]
-[connection signal="pressed" from="Menu/ClientBtn" to="." method="_new_client"]
 
 [editable path="BGRot/Racer"]
 [editable path="BGRot/Racer/EngineRotationHelper/Engine"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Racers/Player/PauseMenu.gd" type="Script" id=1]
 [ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Menus/MainMenu/ControlsMenu/ControlsMenu.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -296,9 +297,6 @@ margin_left = 64.0
 margin_top = 64.0
 margin_right = -64.0
 margin_bottom = -64.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ControlsLabel" type="Label" parent="BG/Controls"]
 anchor_left = -0.083
@@ -317,7 +315,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Sprite" type="Sprite" parent="BG/Controls"]
+position = Vector2( 1088, 512 )
+scale = Vector2( 0.721466, 0.721466 )
+texture = ExtResource( 3 )
+
 [node name="Controls" type="Label" parent="BG/Controls"]
+visible = false
 anchor_left = -0.029
 anchor_top = 0.182
 anchor_right = 1.029

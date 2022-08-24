@@ -33,6 +33,7 @@ func start_single_player_game():
 
 	remove_child(main_menu)
 #	remove_child(level_loader)
+#	main_menu.hide_all()
 	level_loader.queue_free()
 
 
@@ -58,6 +59,10 @@ func return_to_main_menu():
 
 	if has_node(online_multiplayer_manager.name):
 		remove_child(online_multiplayer_manager)
+		main_menu._multiplayer_menu()
+	else:
+		main_menu._single_player_menu()
 
-#	add_child(main_menu)
-	main_menu.return_to_main()
+	if !has_node(main_menu.name):
+		add_child(main_menu)
+#	main_menu.return_to_main()
