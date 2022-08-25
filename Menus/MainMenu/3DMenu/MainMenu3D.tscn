@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_NormalGL.png" type="Texture" id=2]
@@ -180,11 +180,17 @@ font_data = ExtResource( 19 )
 size = 48
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxEmpty" id=12]
+[sub_resource type="StyleBoxLine" id=39]
+color = Color( 0.85098, 1, 0, 1 )
+thickness = 3
+vertical = true
+
+[sub_resource type="StyleBoxEmpty" id=38]
 
 [sub_resource type="Theme" id=13]
 Button/fonts/font = SubResource( 11 )
-Button/styles/normal = SubResource( 12 )
+Button/styles/focus = SubResource( 39 )
+Button/styles/normal = SubResource( 38 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -272,8 +278,8 @@ material/0 = SubResource( 4 )
 visibility_aabb = AABB( -0.561094, -0.495488, -0.553337, 1.12888, 2.18098, 1.11117 )
 
 [node name="Skeleton" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider" index="0"]
-bones/11/bound_children = [  ]
-bones/13/bound_children = [  ]
+bones/11/bound_children = [ NodePath("AirbagAttachment") ]
+bones/13/bound_children = [ NodePath("HelmetAttachment") ]
 
 [node name="HelmetAttachment" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider/Skeleton" index="1"]
 transform = Transform( 0.924797, -0.243309, 0.292491, 0.316223, 0.919032, -0.235336, -0.21155, 0.310129, 0.926858, 0.310943, 0.482913, 0.241308 )
@@ -371,10 +377,12 @@ margin_bottom = -644.624
 [node name="SinglePlayerButton" type="Button" parent="Menu/MainMenu"]
 margin_right = 306.0
 margin_bottom = 67.0
-focus_mode = 0
+focus_next = NodePath("../MultiplayerButton")
+focus_previous = NodePath("../QuitButton")
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 theme = SubResource( 13 )
+action_mode = 0
 text = "Single Player"
 flat = true
 align = 0
@@ -383,10 +391,12 @@ align = 0
 margin_top = 75.0
 margin_right = 451.0
 margin_bottom = 142.0
-focus_mode = 0
+focus_next = NodePath("../OptionsButton")
+focus_previous = NodePath("../SinglePlayerButton")
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 theme = SubResource( 13 )
+action_mode = 0
 text = "Online Multiplayer"
 flat = true
 align = 0
@@ -395,10 +405,12 @@ align = 0
 margin_top = 150.0
 margin_right = 190.0
 margin_bottom = 217.0
-focus_mode = 0
+focus_next = NodePath("../ControlsButton")
+focus_previous = NodePath("../MultiplayerButton")
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 theme = SubResource( 13 )
+action_mode = 0
 text = "Options"
 flat = true
 align = 0
@@ -407,10 +419,12 @@ align = 0
 margin_top = 225.0
 margin_right = 204.0
 margin_bottom = 292.0
-focus_mode = 0
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../OptionsButton")
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 theme = SubResource( 13 )
+action_mode = 0
 text = "Controls"
 flat = true
 align = 0
@@ -419,10 +433,12 @@ align = 0
 margin_top = 300.0
 margin_right = 106.0
 margin_bottom = 367.0
-focus_mode = 0
+focus_next = NodePath("../SinglePlayerButton")
+focus_previous = NodePath("../ControlsButton")
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 theme = SubResource( 13 )
+action_mode = 0
 text = "Quit"
 flat = true
 align = 0
@@ -511,9 +527,13 @@ margin_bottom = -52.4739
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 0.75, 0.75 )
-focus_mode = 0
+focus_neighbour_left = NodePath("../../ColorPicker")
+focus_neighbour_top = NodePath("../../NPCs/NPCDecrease")
+focus_neighbour_right = NodePath("../LevelRight")
+focus_neighbour_bottom = NodePath("../../Laps/LapsDecrease")
 size_flags_horizontal = 3
 size_flags_vertical = 0
+theme = SubResource( 13 )
 shortcut_in_tooltip = false
 action_mode = 0
 enabled_focus_mode = 0
@@ -537,9 +557,13 @@ margin_bottom = -52.4739
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 0.75, 0.75 )
-focus_mode = 0
+focus_neighbour_left = NodePath("../LevelLeft")
+focus_neighbour_top = NodePath("../../Laps/LapsIncrease")
+focus_neighbour_right = NodePath("../../ColorPicker")
+focus_neighbour_bottom = NodePath("../../Laps/LapsIncrease")
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = SubResource( 13 )
 shortcut_in_tooltip = false
 action_mode = 0
 enabled_focus_mode = 0
@@ -612,9 +636,13 @@ margin_bottom = -52.6339
 grow_horizontal = 0
 grow_vertical = 2
 rect_scale = Vector2( 0.75, 0.75 )
-focus_mode = 0
+focus_neighbour_left = NodePath("../../Buttons/RaceButton")
+focus_neighbour_top = NodePath("../../Level/LevelLeft")
+focus_neighbour_right = NodePath("../LapsIncrease")
+focus_neighbour_bottom = NodePath("../../NPCs/NPCDecrease")
 size_flags_horizontal = 8
 size_flags_vertical = 0
+theme = SubResource( 13 )
 shortcut_in_tooltip = false
 action_mode = 0
 enabled_focus_mode = 0
@@ -638,9 +666,13 @@ margin_bottom = -52.5139
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 0.75, 0.75 )
-focus_mode = 0
+focus_neighbour_left = NodePath("../LapsDecrease")
+focus_neighbour_top = NodePath("../../Level/LevelRight")
+focus_neighbour_right = NodePath("../../Buttons/RaceButton")
+focus_neighbour_bottom = NodePath("../../NPCs/NPCIncrease")
 size_flags_horizontal = 8
 size_flags_vertical = 3
+theme = SubResource( 13 )
 shortcut_in_tooltip = false
 action_mode = 0
 enabled_focus_mode = 0
@@ -648,9 +680,6 @@ icon = ExtResource( 16 )
 flat = true
 align = 0
 expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="NPCs" type="Control" parent="Menu/SinglePlayerMenu"]
 anchor_left = 0.064
@@ -711,9 +740,13 @@ margin_bottom = -54.4899
 grow_horizontal = 0
 grow_vertical = 2
 rect_scale = Vector2( 0.75, 0.75 )
-focus_mode = 0
+focus_neighbour_left = NodePath("../../Buttons/BackButton")
+focus_neighbour_top = NodePath("../../Laps/LapsDecrease")
+focus_neighbour_right = NodePath("../NPCIncrease")
+focus_neighbour_bottom = NodePath("../../Level/LevelLeft")
 size_flags_horizontal = 8
 size_flags_vertical = 0
+theme = SubResource( 13 )
 shortcut_in_tooltip = false
 action_mode = 0
 enabled_focus_mode = 0
@@ -737,9 +770,13 @@ margin_bottom = -52.4899
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 0.75, 0.75 )
-focus_mode = 0
+focus_neighbour_left = NodePath("../NPCDecrease")
+focus_neighbour_top = NodePath("../../Laps/LapsIncrease")
+focus_neighbour_right = NodePath("../../Buttons/BackButton")
+focus_neighbour_bottom = NodePath("../../Level/LevelRight")
 size_flags_horizontal = 8
 size_flags_vertical = 3
+theme = SubResource( 13 )
 shortcut_in_tooltip = false
 action_mode = 0
 enabled_focus_mode = 0
@@ -769,12 +806,13 @@ custom_constants/vseparation = 16
 [node name="RaceButton" type="Button" parent="Menu/SinglePlayerMenu/Buttons"]
 margin_right = 325.0
 margin_bottom = 88.0
-focus_mode = 0
+focus_neighbour_left = NodePath("../../Laps/LapsIncrease")
+focus_neighbour_top = NodePath("../../ColorPicker")
+focus_neighbour_right = NodePath("../../Laps/LapsDecrease")
+focus_neighbour_bottom = NodePath("../BackButton")
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = SubResource( 13 )
-custom_fonts/font = ExtResource( 18 )
-shortcut_in_tooltip = false
 action_mode = 0
 text = "Race"
 flat = true
@@ -787,11 +825,13 @@ __meta__ = {
 margin_top = 104.0
 margin_right = 325.0
 margin_bottom = 192.0
-focus_mode = 0
+focus_neighbour_left = NodePath("../../NPCs/NPCIncrease")
+focus_neighbour_top = NodePath("../RaceButton")
+focus_neighbour_right = NodePath("../../NPCs/NPCDecrease")
+focus_neighbour_bottom = NodePath("../../ColorPicker")
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = SubResource( 13 )
-custom_fonts/font = ExtResource( 18 )
 shortcut_in_tooltip = false
 action_mode = 0
 text = "Back"
@@ -808,9 +848,12 @@ margin_left = 679.345
 margin_top = 95.0
 margin_right = -175.759
 margin_bottom = -328.456
+focus_neighbour_left = NodePath("../Level/LevelRight")
+focus_neighbour_top = NodePath("../Buttons/BackButton")
+focus_neighbour_right = NodePath("../Level/LevelLeft")
+focus_neighbour_bottom = NodePath("../Buttons/RaceButton")
 size_flags_horizontal = 10
-toggle_mode = false
-shortcut_in_tooltip = false
+theme = SubResource( 13 )
 align = 0
 color = Color( 0.184314, 0.788235, 1, 1 )
 edit_alpha = false
@@ -1221,11 +1264,13 @@ margin_bottom = -39.0
 text = "FPS:"
 
 [connection signal="pressed" from="Menu/ClientBtn" to="." method="_new_client"]
+[connection signal="visibility_changed" from="Menu/MainMenu" to="." method="_hide_show_main_menu"]
 [connection signal="pressed" from="Menu/MainMenu/SinglePlayerButton" to="." method="_single_player_menu"]
 [connection signal="pressed" from="Menu/MainMenu/MultiplayerButton" to="." method="_multiplayer_menu"]
 [connection signal="pressed" from="Menu/MainMenu/OptionsButton" to="." method="_options_menu"]
 [connection signal="pressed" from="Menu/MainMenu/ControlsButton" to="." method="_controls_menu"]
 [connection signal="pressed" from="Menu/MainMenu/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="visibility_changed" from="Menu/SinglePlayerMenu" to="Menu/SinglePlayerMenu" method="_hide_show"]
 [connection signal="button_down" from="Menu/SinglePlayerMenu/Level/LevelLeft" to="Menu/SinglePlayerMenu" method="_level_select_left"]
 [connection signal="button_down" from="Menu/SinglePlayerMenu/Level/LevelRight" to="Menu/SinglePlayerMenu" method="_level_select_right"]
 [connection signal="pressed" from="Menu/SinglePlayerMenu/Laps/LapsDecrease" to="Menu/SinglePlayerMenu" method="_decrease_lap_amount"]

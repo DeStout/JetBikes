@@ -200,16 +200,19 @@ func _get_joypad_input(delta) -> void:
 	vehicle_rotation.z = clamp(vehicle_rotation.z, -45, 45)
 	engine.rotation_degrees = vehicle_rotation
 
-
+	# Free rotate the player
 	if is_free_rotating and !is_on_ground:
 		if engine.rotation != Vector3.ZERO:
 			engine_rot_help.rotation += engine.rotation
 			$CollisionShape.rotation += engine.rotation
 			engine.rotation = Vector3.ZERO
-		var horz_rotation = Input.get_action_strength("StrifeRight") - Input.get_action_strength("StrifeLeft")
-		var vert_rotation = Input.get_action_strength("Reverse") - Input.get_action_strength("Accelerate")
-		free_rotate_origin.x = clamp(free_rotate_origin.x + horz_rotation * 10, -max_rotate_speed, max_rotate_speed)
-		free_rotate_origin.y = clamp(free_rotate_origin.y + vert_rotation * 10, -max_rotate_speed, max_rotate_speed)
+		# Limit to Joypad input, mask out mouse/keyboard input
+		if Input.get_joy_axis(0, 0) > InputMap.action_get_deadzone("Accelerate") or \
+						Input.get_joy_axis(0, 1) > InputMap.action_get_deadzone("StrifeLeft"):
+			var horz_rotation = Input.get_action_strength("StrifeRight") - Input.get_action_strength("StrifeLeft")
+			var vert_rotation = Input.get_action_strength("Reverse") - Input.get_action_strength("Accelerate")
+			free_rotate_origin.x = clamp(free_rotate_origin.x + horz_rotation * 10, -max_rotate_speed, max_rotate_speed)
+			free_rotate_origin.y = clamp(free_rotate_origin.y + vert_rotation * 10, -max_rotate_speed, max_rotate_speed)
 
 
 func has_control(is_paused : bool) -> void:

@@ -10230,7 +10230,7 @@ nodes/Blend1D/position = Vector2( -120, 60 )
 nodes/Blend2/node = SubResource( 7 )
 nodes/Blend2/position = Vector2( 100, 100 )
 nodes/output/position = Vector2( 360, 80 )
-node_connections = [ "output", 0, "Blend2", "Blend2", 0, "Blend1D", "Blend2", 1, "Animation" ]
+node_connections = [ "Blend2", 0, "Blend1D", "Blend2", 1, "Animation", "output", 0, "Blend2" ]
 
 [node name="Rider" type="Spatial"]
 
@@ -10297,7 +10297,7 @@ bones/11/name = "spine_02"
 bones/11/parent = 10
 bones/11/rest = Transform( 0.999976, -0.000219329, 0.00699933, -0.000103233, 0.998939, 0.0460511, -0.00700201, -0.0460507, 0.998915, 5.82077e-11, 0.185117, 9.3155e-10 )
 bones/11/enabled = true
-bones/11/bound_children = [ NodePath("AirbagAttachment") ]
+bones/11/bound_children = [  ]
 bones/12/name = "neck_01"
 bones/12/parent = 11
 bones/12/rest = Transform( 0.999909, -0.00231258, 0.0132514, 0.00560865, 0.967072, -0.254441, -0.0122267, 0.254493, 0.966997, 2.03727e-10, 0.246004, -3.7169e-08 )
@@ -10307,7 +10307,7 @@ bones/13/name = "head"
 bones/13/parent = 12
 bones/13/rest = Transform( 0.999909, 0.0106724, -0.00829656, 1.6755e-05, 0.612768, 0.790263, 0.0135179, -0.790191, 0.612712, -2.09548e-09, 0.0829918, 1.64397e-07 )
 bones/13/enabled = true
-bones/13/bound_children = [ NodePath("HelmetAttachment") ]
+bones/13/bound_children = [  ]
 bones/14/name = "clavicle.r"
 bones/14/parent = 11
 bones/14/rest = Transform( 0.251635, -0.933655, 0.254889, -0.172057, -0.302324, -0.937548, 0.952405, 0.192065, -0.236717, -0.0436024, 0.180817, 0.0252559 )
@@ -10744,14 +10744,14 @@ mesh = SubResource( 13 )
 skin = SubResource( 14 )
 
 [node name="HelmetAttachment" type="BoneAttachment" parent="Rider/Skeleton"]
-transform = Transform( 0.999996, -0.00272601, -0.000984448, 0.00231142, 0.955004, -0.296582, 0.00174862, 0.296578, 0.955007, -0.000493115, 0.613764, 0.214408 )
+transform = Transform( 0.999996, -0.00273493, -0.00098499, 0.00230843, 0.953071, -0.302737, 0.00176671, 0.302732, 0.953074, -0.000498469, 0.605068, 0.218847 )
 bone_name = "head"
 
 [node name="Helmet" parent="Rider/Skeleton/HelmetAttachment" instance=ExtResource( 4 )]
 transform = Transform( 0.582268, -0.00105757, -0.00307269, 0.00102824, 0.58225, -0.00554997, 0.0030826, 0.00554442, 0.582243, -0.00850093, 0.0759008, 0.00361532 )
 
 [node name="AirbagAttachment" type="BoneAttachment" parent="Rider/Skeleton"]
-transform = Transform( 0.999999, -0.00125572, 0.000310512, 0.000885222, 0.489287, -0.872122, 0.000943209, 0.872121, 0.489288, 8.15663e-05, 0.472504, -0.0804563 )
+transform = Transform( 0.999999, -0.00126258, 0.000316259, 0.000887465, 0.483651, -0.87526, 0.000952119, 0.875259, 0.483653, 7.83274e-05, 0.465714, -0.0769221 )
 bone_name = "spine_02"
 
 [node name="Airbag" parent="Rider/Skeleton/AirbagAttachment" instance=ExtResource( 5 )]

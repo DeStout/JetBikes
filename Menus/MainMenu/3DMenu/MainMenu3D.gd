@@ -6,11 +6,40 @@ onready var online_menu : Control = $Menu/OnlineMenu
 onready var controls_menu : Control = $Menu/ControlsMenu
 onready var options_menu : Control = $Menu/OptionsMenu
 
+onready var current_focus : Control = main_menu.get_node("SinglePlayerButton")
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 	if not OS.is_debug_build():
 		$MenuFrame/ClientBtn.visible = false
+
+
+func _hide_show_main_menu() -> void:
+	set_process_input(main_menu.visible)
+	yield(get_tree(), "idle_frame")
+
+	if main_menu.visible:
+		if Input.get_connected_joypads().size():
+			if current_focus == null:
+				main_menu.get_node("SinglePlayerButton")
+			current_focus.grab_focus()
+
+
+func _input(event: InputEvent) -> void:
+	if Input.get_connected_joypads().size():
+		if event.is_action_pressed("ui_up") or (event is InputEventJoypadMotion and \
+								event.axis == JOY_AXIS_1 and event.axis_value == -1):
+			current_focus = current_focus.get_node(current_focus.focus_previous)
+			current_focus.grab_focus()
+
+		if event.is_action_pressed("ui_down") or (event is InputEventJoypadMotion and \
+								event.axis == JOY_AXIS_1 and event.axis_value == 1):
+			current_focus = current_focus.get_node(current_focus.focus_next)
+			current_focus.grab_focus()
+
+		if event is InputEventJoypadButton and event.is_action_pressed("ui_accept"):
+			current_focus.emit_signal("pressed")
 
 
 func _new_client():

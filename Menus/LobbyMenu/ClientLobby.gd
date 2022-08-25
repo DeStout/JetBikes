@@ -22,6 +22,7 @@ func _ready():
 	for attempts in range(20):
 		if connected_to_host:
 			connect_menu.visible = false
+			$MenuFrame/LobbyFrame.visible = true
 			break
 		yield(get_tree().create_timer(0.5), "timeout")
 	$MenuFrame/ConnectingFrame/Timer.stop()

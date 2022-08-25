@@ -6,11 +6,50 @@ var solo_lap_amount : int = Globals.DEFAULT_LAP_NUMBER
 var solo_NPC_amount : int = Globals.DEFAULT_NPC_NUMBER
 var level_select : int = Globals.DEFAULT_LEVEL
 
+var current_focus : Control = null
+
+
 func _ready():
+	set_process_input(false)
+
 	$Level/LevelName.text = Globals.level_dict_keys[Globals.DEFAULT_LEVEL]
 	$Laps/NumLaps.text = str(solo_lap_amount)
 	$NPCs/NumNPCs.text = str(solo_NPC_amount)
 	$ColorPicker.color = Globals.player_color
+
+
+func _hide_show() -> void:
+	set_process_input(visible)
+	yield(get_tree(), "idle_frame")
+
+	if Input.get_connected_joypads().size():
+		current_focus = $Buttons/RaceButton
+		current_focus.grab_focus()
+
+
+func _input(event : InputEvent) -> void:
+	if Input.get_connected_joypads().size():
+		if event.is_action_pressed("ui_up") or (event is InputEventJoypadMotion and \
+								event.axis == JOY_AXIS_1 and event.axis_value == -1):
+			current_focus = current_focus.get_node(current_focus.focus_neighbour_top)
+		if event.is_action_pressed("ui_left") or (event is InputEventJoypadMotion and \
+								event.axis == JOY_AXIS_0 and event.axis_value == -1):
+			current_focus = current_focus.get_node(current_focus.focus_neighbour_left)
+		if event.is_action_pressed("ui_right") or (event is InputEventJoypadMotion and \
+								event.axis == JOY_AXIS_0 and event.axis_value == 1):
+			current_focus = current_focus.get_node(current_focus.focus_neighbour_right)
+		if event.is_action_pressed("ui_down") or (event is InputEventJoypadMotion and \
+								event.axis == JOY_AXIS_1 and event.axis_value == 1):
+			current_focus = current_focus.get_node(current_focus.focus_neighbour_bottom)
+
+		current_focus.grab_focus()
+
+		if event is InputEventJoypadButton:
+			if event.is_action_pressed("ui_accept"):
+				if current_focus is Button:
+					current_focus.emit_signal("pressed")
+			elif !$ColorPicker.pressed and event.is_action_pressed("ui_cancel"):
+				$Buttons/BackButton.emit_signal("pressed")
 
 
 func _start_race():

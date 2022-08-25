@@ -22,6 +22,7 @@ font_data = ExtResource( 1 )
 script = ExtResource( 4 )
 
 [node name="LobbyFrame" parent="MenuFrame" index="0"]
+visible = false
 margin_left = 1343.79
 margin_right = -87.4385
 __meta__ = {
@@ -237,21 +238,19 @@ __meta__ = {
 }
 
 [node name="ConnectingFrame" type="ColorRect" parent="MenuFrame" index="1"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 704.0
+margin_left = 1346.17
 margin_top = 228.0
-margin_right = -727.232
+margin_right = -85.0598
 margin_bottom = -222.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-color = Color( 0.25098, 0.25098, 0.25098, 1 )
+color = Color( 0.25098, 0.25098, 0.25098, 0 )
 script = ExtResource( 5 )
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
