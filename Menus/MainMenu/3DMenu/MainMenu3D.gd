@@ -28,18 +28,24 @@ func _hide_show_main_menu() -> void:
 
 func _input(event: InputEvent) -> void:
 	if Input.get_connected_joypads().size():
+#		if (event is InputEventJoypadButton and event.button_index == 12 and event.pressed == true) or \
 		if event.is_action_pressed("ui_up") or (event is InputEventJoypadMotion and \
 								event.axis == JOY_AXIS_1 and event.axis_value == -1):
 			current_focus = current_focus.get_node(current_focus.focus_previous)
-			current_focus.grab_focus()
-
+			yield(get_tree(), "idle_frame")
 		if event.is_action_pressed("ui_down") or (event is InputEventJoypadMotion and \
 								event.axis == JOY_AXIS_1 and event.axis_value == 1):
 			current_focus = current_focus.get_node(current_focus.focus_next)
-			current_focus.grab_focus()
+			yield(get_tree(), "idle_frame")
+
+		current_focus.grab_focus()
 
 		if event is InputEventJoypadButton and event.is_action_pressed("ui_accept"):
 			current_focus.emit_signal("pressed")
+
+
+func set_racer_color(color : Color) -> void:
+	pass
 
 
 func _new_client():
@@ -80,7 +86,6 @@ func hide_all() -> void:
 	online_menu.visible = false
 	options_menu.visible = false
 	controls_menu.visible = false
-
 
 
 func _on_QuitButton_pressed() -> void:

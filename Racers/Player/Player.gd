@@ -207,8 +207,8 @@ func _get_joypad_input(delta) -> void:
 			$CollisionShape.rotation += engine.rotation
 			engine.rotation = Vector3.ZERO
 		# Limit to Joypad input, mask out mouse/keyboard input
-		if Input.get_joy_axis(0, 0) > InputMap.action_get_deadzone("Accelerate") or \
-						Input.get_joy_axis(0, 1) > InputMap.action_get_deadzone("StrifeLeft"):
+		if Input.get_joy_axis(0, 1) > InputMap.action_get_deadzone("Accelerate") or \
+						Input.get_joy_axis(0, 0) > InputMap.action_get_deadzone("StrifeLeft"):
 			var horz_rotation = Input.get_action_strength("StrifeRight") - Input.get_action_strength("StrifeLeft")
 			var vert_rotation = Input.get_action_strength("Reverse") - Input.get_action_strength("Accelerate")
 			free_rotate_origin.x = clamp(free_rotate_origin.x + horz_rotation * 10, -max_rotate_speed, max_rotate_speed)

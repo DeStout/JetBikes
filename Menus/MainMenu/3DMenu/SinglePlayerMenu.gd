@@ -29,27 +29,47 @@ func _hide_show() -> void:
 
 func _input(event : InputEvent) -> void:
 	if Input.get_connected_joypads().size():
-		if event.is_action_pressed("ui_up") or (event is InputEventJoypadMotion and \
-								event.axis == JOY_AXIS_1 and event.axis_value == -1):
-			current_focus = current_focus.get_node(current_focus.focus_neighbour_top)
-		if event.is_action_pressed("ui_left") or (event is InputEventJoypadMotion and \
-								event.axis == JOY_AXIS_0 and event.axis_value == -1):
-			current_focus = current_focus.get_node(current_focus.focus_neighbour_left)
-		if event.is_action_pressed("ui_right") or (event is InputEventJoypadMotion and \
-								event.axis == JOY_AXIS_0 and event.axis_value == 1):
-			current_focus = current_focus.get_node(current_focus.focus_neighbour_right)
-		if event.is_action_pressed("ui_down") or (event is InputEventJoypadMotion and \
-								event.axis == JOY_AXIS_1 and event.axis_value == 1):
-			current_focus = current_focus.get_node(current_focus.focus_neighbour_bottom)
-
-		current_focus.grab_focus()
+		if !$ColorPicker.pressed:
+			if event.is_action_pressed("ui_up") or (event is InputEventJoypadMotion and \
+									event.axis == JOY_AXIS_1 and event.axis_value == -1):
+					current_focus = current_focus.get_node(current_focus.focus_neighbour_top)
+					yield(get_tree(), "idle_frame")
+			elif event.is_action_pressed("ui_left") or (event is InputEventJoypadMotion and \
+									event.axis == JOY_AXIS_0 and event.axis_value == -1):
+					current_focus = current_focus.get_node(current_focus.focus_neighbour_left)
+					yield(get_tree(), "idle_frame")
+			elif event.is_action_pressed("ui_right") or (event is InputEventJoypadMotion and \
+									event.axis == JOY_AXIS_0 and event.axis_value == 1):
+					current_focus = current_focus.get_node(current_focus.focus_neighbour_right)
+					yield(get_tree(), "idle_frame")
+			elif event.is_action_pressed("ui_down") or (event is InputEventJoypadMotion and \
+									event.axis == JOY_AXIS_1 and event.axis_value == 1):
+					current_focus = current_focus.get_node(current_focus.focus_neighbour_bottom)
+					yield(get_tree(), "idle_frame")
+			current_focus.grab_focus()
 
 		if event is InputEventJoypadButton:
-			if event.is_action_pressed("ui_accept"):
+			if Input.is_action_just_pressed("ui_accept"):
 				if current_focus is Button:
 					current_focus.emit_signal("pressed")
 			elif !$ColorPicker.pressed and event.is_action_pressed("ui_cancel"):
 				$Buttons/BackButton.emit_signal("pressed")
+
+
+func _process(delta: float) -> void:
+	if $ColorPicker.pressed:
+		if abs(Input.get_joy_axis(0, 3)) > InputMap.action_get_deadzone("CamLeft"):
+			var joy_str := Input.get_action_strength("CamDown") - Input.get_action_strength("CamUp")
+			$ColorPicker.color.h = clamp($ColorPicker.color.h + (joy_str * delta), 0.0, 1.0)
+
+		if abs(Input.get_joy_axis(0, 0)) > InputMap.action_get_deadzone("StrifeLeft"):
+			var joy_str := Input.get_action_strength("StrifeRight") - Input.get_action_strength("StrifeLeft")
+			$ColorPicker.color.s = clamp($ColorPicker.color.s + (joy_str * delta), 0.0, 1.0)
+
+		if abs(Input.get_joy_axis(0, 1)) > InputMap.action_get_deadzone("Accelerate"):
+			var joy_str := Input.get_action_strength("Accelerate") - Input.get_action_strength("Reverse")
+			$ColorPicker.color.v = clamp($ColorPicker.color.v + (joy_str * delta), 0.0, 1.0)
+
 
 
 func _start_race():
