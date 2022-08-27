@@ -23,8 +23,10 @@ func _hide_show() -> void:
 	yield(get_tree(), "idle_frame")
 
 	if Input.get_connected_joypads().size():
-		current_focus = $Buttons/RaceButton
+		if current_focus == null:
+			current_focus = $Buttons/RaceButton
 		current_focus.grab_focus()
+		yield(get_tree(), "idle_frame")
 
 
 func _input(event : InputEvent) -> void:
@@ -47,13 +49,15 @@ func _input(event : InputEvent) -> void:
 					current_focus = current_focus.get_node(current_focus.focus_neighbour_bottom)
 					yield(get_tree(), "idle_frame")
 			current_focus.grab_focus()
+			print(current_focus.name)
 
 		if event is InputEventJoypadButton:
 			if Input.is_action_just_pressed("ui_accept"):
 				if current_focus is Button:
+					print(current_focus.name)
 					current_focus.emit_signal("pressed")
 			elif !$ColorPicker.pressed and event.is_action_pressed("ui_cancel"):
-				$Buttons/BackButton.emit_signal("pressed")
+				$Buttons/BackButton.emit_signal("button_down")
 
 
 func _process(delta: float) -> void:

@@ -101,6 +101,10 @@ window/size/test_height=900
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/OnscreenKeyboard/plugin.cfg" )
+
 [global]
 
 shadow=false

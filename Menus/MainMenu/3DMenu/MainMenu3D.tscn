@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_NormalGL.png" type="Texture" id=2]
@@ -23,6 +23,8 @@
 [ext_resource path="res://Menus/MainMenu/3DMenu/OptionsMenu.gd" type="Script" id=21]
 [ext_resource path="res://Menus/MainMenu/ControlsMenu/ControlsMenu.png" type="Texture" id=22]
 [ext_resource path="res://Menus/MainMenu/3DMenu/OnlineMenu.gd" type="Script" id=23]
+[ext_resource path="res://Menus/MainMenu/3DMenu/ControlsMenu.gd" type="Script" id=24]
+[ext_resource path="res://addons/OnscreenKeyboard/onscreen_keyboard.gd" type="Script" id=25]
 
 [sub_resource type="GIProbeData" id=15]
 bounds = AABB( -5, -5, -5, 10, 10, 10 )
@@ -193,21 +195,38 @@ modulate_color = Color( 0.85098, 1, 0, 1 )
 [sub_resource type="StyleBoxFlat" id=42]
 bg_color = Color( 0.141176, 0.141176, 0.141176, 1 )
 
-[sub_resource type="OpenSimplexNoise" id=43]
+[sub_resource type="StyleBoxEmpty" id=43]
 
-[sub_resource type="NoiseTexture" id=44]
-seamless = true
-noise = SubResource( 43 )
+[sub_resource type="StyleBoxFlat" id=44]
+bg_color = Color( 0.85098, 1, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.85098, 1, 0, 1 )
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id=45]
 
 [sub_resource type="Theme" id=13]
 Button/fonts/font = SubResource( 11 )
 Button/styles/focus = SubResource( 39 )
 Button/styles/hover = SubResource( 41 )
 Button/styles/pressed = SubResource( 42 )
+CheckBox/styles/focus = SubResource( 39 )
+CheckBox/styles/pressed = SubResource( 43 )
 ColorPickerButton/fonts/font = SubResource( 11 )
-ColorPickerButton/icons/bg = SubResource( 44 )
 ColorPickerButton/styles/focus = SubResource( 39 )
-ColorPickerButton/styles/hover = SubResource( 41 )
+ColorPickerButton/styles/hover = SubResource( 44 )
+ColorPickerButton/styles/normal = SubResource( 45 )
 ColorPickerButton/styles/pressed = SubResource( 42 )
 
 [sub_resource type="DynamicFont" id=1]
@@ -877,7 +896,7 @@ focus_neighbour_bottom = NodePath("../Buttons/RaceButton")
 size_flags_horizontal = 10
 theme = SubResource( 13 )
 align = 0
-color = Color( 0.784314, 0.882353, 0.301961, 1 )
+color = Color( 0.647059, 0.937255, 0.67451, 1 )
 edit_alpha = false
 
 [node name="OnlineMenu" type="Control" parent="Menu"]
@@ -889,69 +908,85 @@ margin_top = 451.111
 margin_right = -200.773
 margin_bottom = -501.273
 script = ExtResource( 23 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="OnlineLabel" type="Label" parent="Menu/OnlineMenu"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -708.0
-margin_bottom = -373.0
+anchor_left = -1.55
+anchor_top = -0.925
+anchor_right = 1.217
+anchor_bottom = 2.028
+margin_left = 1433.82
+margin_top = 451.045
+margin_right = -908.735
+margin_bottom = -874.269
 custom_fonts/font = SubResource( 33 )
 text = "Online"
 
 [node name="HostJoin" type="HBoxContainer" parent="Menu/OnlineMenu"]
-anchor_top = 0.168
-anchor_right = 1.149
-anchor_bottom = 1.0
-margin_left = -20.8374
-margin_top = 0.080513
-margin_right = -541.716
-margin_bottom = -277.616
+anchor_left = -1.55
+anchor_top = -0.925
+anchor_right = 1.217
+anchor_bottom = 2.028
+margin_left = 1412.82
+margin_top = 545.045
+margin_right = -604.782
+margin_bottom = -790.885
 grow_vertical = 2
+theme = SubResource( 13 )
 custom_constants/separation = 32
 alignment = 1
 
 [node name="HostBox" type="CheckBox" parent="Menu/OnlineMenu/HostJoin"]
 margin_left = 58.0
 margin_right = 267.0
-margin_bottom = 128.0
+margin_bottom = 104.0
+focus_neighbour_left = NodePath("../JoinBox")
+focus_neighbour_top = NodePath("../../Buttons/RaceButton")
+focus_neighbour_right = NodePath("../JoinBox")
+focus_neighbour_bottom = NodePath("../../IPAdress/IPText")
+theme = SubResource( 13 )
 custom_fonts/font = SubResource( 34 )
 text = "Host"
 
 [node name="JoinBox" type="CheckBox" parent="Menu/OnlineMenu/HostJoin"]
 margin_left = 299.0
 margin_right = 483.0
-margin_bottom = 128.0
+margin_bottom = 104.0
+focus_neighbour_left = NodePath("../HostBox")
+focus_neighbour_top = NodePath("../../Buttons/BackButton")
+focus_neighbour_right = NodePath("../HostBox")
+focus_neighbour_bottom = NodePath("../../IPAdress/IPText")
+theme = SubResource( 13 )
 custom_fonts/font = SubResource( 35 )
 text = "Join"
 
 [node name="IPAdress" type="GridContainer" parent="Menu/OnlineMenu"]
-anchor_top = 0.127
-anchor_right = 0.569
-anchor_bottom = 1.0
-margin_left = 12.0
-margin_top = 147.664
-margin_right = -20.3547
-margin_bottom = -150.025
+anchor_left = -1.55
+anchor_top = -0.925
+anchor_right = 1.217
+anchor_bottom = 2.028
+margin_left = 1445.82
+margin_top = 660.636
+margin_right = -619.785
+margin_bottom = -651.294
 custom_constants/hseparation = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="Menu/OnlineMenu/IPAdress"]
-margin_right = 493.0
+margin_right = 494.0
 margin_bottom = 50.0
 custom_fonts/font = SubResource( 36 )
 text = "IP Address:"
 
 [node name="IPText" type="LineEdit" parent="Menu/OnlineMenu/IPAdress"]
 margin_top = 58.0
-margin_right = 493.0
+margin_right = 494.0
 margin_bottom = 128.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../../HostJoin/HostBox")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../../Buttons/RaceButton")
 size_flags_horizontal = 3
 size_flags_vertical = 8
+theme = SubResource( 13 )
 custom_fonts/font = SubResource( 5 )
 text = "127.0.0.1"
 max_length = 15
@@ -972,6 +1007,19 @@ wait_time = 0.65
 [node name="PopupMenu3" type="PopupMenu" parent="Menu/OnlineMenu/IPAdress/IPText"]
 items = [ "Cut", null, 0, false, false, 0, 268435544, null, "", false, "Copy", null, 0, false, false, 1, 268435523, null, "", false, "Paste", null, 0, false, false, 2, 268435542, null, "", false, "", null, 0, false, false, -1, 0, null, "", true, "Select All", null, 0, false, false, 4, 268435521, null, "", false, "Clear", null, 0, false, false, 3, 0, null, "", false, "", null, 0, false, false, -1, 0, null, "", true, "Undo", null, 0, false, false, 5, 268435546, null, "", false, "Redo", null, 0, false, false, 6, 301989978, null, "", false ]
 
+[node name="OnscreenKeyboard" type="PanelContainer" parent="Menu/OnlineMenu/IPAdress/IPText"]
+visible = false
+anchor_left = -2.927
+anchor_top = -10.267
+anchor_right = 2.255
+anchor_bottom = 10.304
+margin_left = 209.938
+margin_top = 429.69
+margin_right = -1241.97
+margin_bottom = -527.28
+script = ExtResource( 25 )
+autoShow = false
+
 [node name="OptimistLabel" type="Label" parent="Menu/OnlineMenu"]
 visible = false
 anchor_top = 0.127
@@ -991,19 +1039,24 @@ __meta__ = {
 [node name="Timer" type="Timer" parent="Menu/OnlineMenu/OptimistLabel"]
 
 [node name="Buttons" type="GridContainer" parent="Menu/OnlineMenu"]
-anchor_right = 1.082
-anchor_bottom = 1.0
-margin_left = 60.0
-margin_top = 399.877
-margin_right = -388.907
-margin_bottom = 48.2611
+anchor_left = -1.55
+anchor_top = -0.925
+anchor_right = 1.217
+anchor_bottom = 2.028
+margin_left = 1493.82
+margin_top = 850.922
+margin_right = -513.788
+margin_bottom = -453.008
 custom_constants/vseparation = 8
 columns = 2
 
 [node name="RaceButton" type="Button" parent="Menu/OnlineMenu/Buttons"]
 margin_right = 272.0
-margin_bottom = 88.0
-focus_mode = 0
+margin_bottom = 100.0
+focus_neighbour_left = NodePath("../BackButton")
+focus_neighbour_top = NodePath("../../IPAdress/IPText")
+focus_neighbour_right = NodePath("../BackButton")
+focus_neighbour_bottom = NodePath("../../HostJoin/HostBox")
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = SubResource( 13 )
@@ -1018,8 +1071,11 @@ __meta__ = {
 [node name="BackButton" type="Button" parent="Menu/OnlineMenu/Buttons"]
 margin_left = 280.0
 margin_right = 551.0
-margin_bottom = 88.0
-focus_mode = 0
+margin_bottom = 100.0
+focus_neighbour_left = NodePath("../RaceButton")
+focus_neighbour_top = NodePath("../../IPAdress/IPText")
+focus_neighbour_right = NodePath("../RaceButton")
+focus_neighbour_bottom = NodePath("../../HostJoin/JoinBox")
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = SubResource( 13 )
@@ -1204,7 +1260,7 @@ columns = 2
 
 [node name="ApplyButton" type="Button" parent="Menu/OptionsMenu/Buttons"]
 margin_right = 440.0
-margin_bottom = 88.0
+margin_bottom = 100.0
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -1220,7 +1276,7 @@ __meta__ = {
 [node name="BackButton" type="Button" parent="Menu/OptionsMenu/Buttons"]
 margin_left = 448.0
 margin_right = 888.0
-margin_bottom = 88.0
+margin_bottom = 100.0
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -1242,15 +1298,16 @@ margin_top = 428.376
 margin_right = -561.366
 margin_bottom = 15.376
 size_flags_vertical = 0
+script = ExtResource( 24 )
 
 [node name="ControlsLabel" type="Label" parent="Menu/ControlsMenu"]
 anchor_left = -3.002
 anchor_right = 1.237
 anchor_bottom = 1.233
-margin_left = 1775.41
-margin_top = -233.783
-margin_right = -573.946
-margin_bottom = -1433.07
+margin_left = 1749.22
+margin_top = -318.732
+margin_right = -600.136
+margin_bottom = -1518.02
 custom_fonts/font = SubResource( 31 )
 text = "Controls"
 align = 1
@@ -1261,15 +1318,14 @@ position = Vector2( 448.532, 322.54 )
 texture = ExtResource( 22 )
 
 [node name="BackButton" type="Button" parent="Menu/ControlsMenu"]
-margin_left = 886.985
-margin_top = 686.084
-margin_right = 1211.98
-margin_bottom = 774.084
+margin_left = 831.37
+margin_top = 727.615
+margin_right = 1156.36
+margin_bottom = 827.615
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = SubResource( 13 )
 custom_fonts/font = ExtResource( 18 )
-shortcut_in_tooltip = false
 action_mode = 0
 text = "Back"
 flat = true
@@ -1303,18 +1359,21 @@ text = "FPS:"
 [connection signal="button_down" from="Menu/SinglePlayerMenu/Buttons/BackButton" to="." method="return_to_main"]
 [connection signal="color_changed" from="Menu/SinglePlayerMenu/ColorPicker" to="." method="set_racer_color"]
 [connection signal="color_changed" from="Menu/SinglePlayerMenu/ColorPicker" to="Menu/SinglePlayerMenu" method="_select_color"]
-[connection signal="pressed" from="Menu/OnlineMenu/HostJoin/HostBox" to="Menu/OnlineMenu" method="_host"]
-[connection signal="pressed" from="Menu/OnlineMenu/HostJoin/JoinBox" to="Menu/OnlineMenu" method="_join"]
+[connection signal="visibility_changed" from="Menu/OnlineMenu" to="Menu/OnlineMenu" method="_hide_show"]
+[connection signal="button_down" from="Menu/OnlineMenu/HostJoin/HostBox" to="Menu/OnlineMenu" method="_host"]
+[connection signal="button_down" from="Menu/OnlineMenu/HostJoin/JoinBox" to="Menu/OnlineMenu" method="_join"]
 [connection signal="text_changed" from="Menu/OnlineMenu/IPAdress/IPText" to="Menu/OnlineMenu" method="_ip_set"]
 [connection signal="timeout" from="Menu/OnlineMenu/OptimistLabel/Timer" to="Menu/OnlineMenu" method="_unoptimist"]
 [connection signal="pressed" from="Menu/OnlineMenu/Buttons/RaceButton" to="Menu/OnlineMenu" method="_setup_online_lobby"]
 [connection signal="pressed" from="Menu/OnlineMenu/Buttons/BackButton" to="." method="return_to_main"]
+[connection signal="visibility_changed" from="Menu/OptionsMenu" to="Menu/OptionsMenu" method="_hide_show"]
 [connection signal="text_entered" from="Menu/OptionsMenu/SFX/Level" to="Menu/OptionsMenu" method="_update_sfx_sound_values"]
 [connection signal="value_changed" from="Menu/OptionsMenu/SFX/Slider" to="Menu/OptionsMenu" method="_update_sfx_sound_values"]
 [connection signal="text_entered" from="Menu/OptionsMenu/Music/Level" to="Menu/OptionsMenu" method="_update_music_sound_values"]
 [connection signal="value_changed" from="Menu/OptionsMenu/Music/Slider" to="Menu/OptionsMenu" method="_update_music_sound_values"]
 [connection signal="pressed" from="Menu/OptionsMenu/Buttons/ApplyButton" to="Menu/OptionsMenu" method="_apply_settings"]
 [connection signal="pressed" from="Menu/OptionsMenu/Buttons/BackButton" to="." method="return_to_main"]
+[connection signal="visibility_changed" from="Menu/ControlsMenu" to="Menu/ControlsMenu" method="_hide_show"]
 [connection signal="pressed" from="Menu/ControlsMenu/BackButton" to="." method="return_to_main"]
 
 [editable path="BGRot/Racer"]
