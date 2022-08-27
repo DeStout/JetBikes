@@ -183,6 +183,7 @@ size = 48
 font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxLine" id=39]
+content_margin_left = 2.0
 color = Color( 0.85098, 1, 0, 1 )
 thickness = 3
 vertical = true
@@ -197,14 +198,18 @@ bg_color = Color( 0.141176, 0.141176, 0.141176, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=43]
 
-[sub_resource type="StyleBoxFlat" id=44]
+[sub_resource type="StyleBoxLine" id=47]
+color = Color( 0.85098, 1, 0, 1 )
+thickness = 3
+vertical = true
+
+[sub_resource type="StyleBoxFlat" id=46]
 bg_color = Color( 0.85098, 1, 0, 1 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.85098, 1, 0, 1 )
-border_blend = true
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
@@ -214,8 +219,6 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxEmpty" id=45]
-
 [sub_resource type="Theme" id=13]
 Button/fonts/font = SubResource( 11 )
 Button/styles/focus = SubResource( 39 )
@@ -224,10 +227,8 @@ Button/styles/pressed = SubResource( 42 )
 CheckBox/styles/focus = SubResource( 39 )
 CheckBox/styles/pressed = SubResource( 43 )
 ColorPickerButton/fonts/font = SubResource( 11 )
-ColorPickerButton/styles/focus = SubResource( 39 )
-ColorPickerButton/styles/hover = SubResource( 44 )
-ColorPickerButton/styles/normal = SubResource( 45 )
-ColorPickerButton/styles/pressed = SubResource( 42 )
+ColorPickerButton/styles/focus = SubResource( 47 )
+ColorPickerButton/styles/hover = SubResource( 46 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -895,6 +896,7 @@ focus_neighbour_right = NodePath("../Level/LevelLeft")
 focus_neighbour_bottom = NodePath("../Buttons/RaceButton")
 size_flags_horizontal = 10
 theme = SubResource( 13 )
+flat = true
 align = 0
 color = Color( 0.647059, 0.937255, 0.67451, 1 )
 edit_alpha = false
@@ -995,30 +997,19 @@ clear_button_enabled = true
 placeholder_text = "IP Address"
 caret_blink = true
 
-[node name="Timer2" type="Timer" parent="Menu/OnlineMenu/IPAdress/IPText"]
-wait_time = 0.65
-
-[node name="PopupMenu2" type="PopupMenu" parent="Menu/OnlineMenu/IPAdress/IPText"]
-items = [ "Cut", null, 0, false, false, 0, 268435544, null, "", false, "Copy", null, 0, false, false, 1, 268435523, null, "", false, "Paste", null, 0, false, false, 2, 268435542, null, "", false, "", null, 0, false, false, -1, 0, null, "", true, "Select All", null, 0, false, false, 4, 268435521, null, "", false, "Clear", null, 0, false, false, 3, 0, null, "", false, "", null, 0, false, false, -1, 0, null, "", true, "Undo", null, 0, false, false, 5, 268435546, null, "", false, "Redo", null, 0, false, false, 6, 301989978, null, "", false ]
-
-[node name="Timer3" type="Timer" parent="Menu/OnlineMenu/IPAdress/IPText"]
-wait_time = 0.65
-
-[node name="PopupMenu3" type="PopupMenu" parent="Menu/OnlineMenu/IPAdress/IPText"]
-items = [ "Cut", null, 0, false, false, 0, 268435544, null, "", false, "Copy", null, 0, false, false, 1, 268435523, null, "", false, "Paste", null, 0, false, false, 2, 268435542, null, "", false, "", null, 0, false, false, -1, 0, null, "", true, "Select All", null, 0, false, false, 4, 268435521, null, "", false, "Clear", null, 0, false, false, 3, 0, null, "", false, "", null, 0, false, false, -1, 0, null, "", true, "Undo", null, 0, false, false, 5, 268435546, null, "", false, "Redo", null, 0, false, false, 6, 301989978, null, "", false ]
-
 [node name="OnscreenKeyboard" type="PanelContainer" parent="Menu/OnlineMenu/IPAdress/IPText"]
 visible = false
 anchor_left = -2.927
 anchor_top = -10.267
 anchor_right = 2.255
 anchor_bottom = 10.304
-margin_left = 209.938
+margin_left = 598.938
 margin_top = 429.69
 margin_right = -1241.97
 margin_bottom = -527.28
 script = ExtResource( 25 )
 autoShow = false
+customLayoutFile = "res://addons/OnscreenKeyboard/customize/keyboardLayouts/NumPadLayout.json"
 
 [node name="OptimistLabel" type="Label" parent="Menu/OnlineMenu"]
 visible = false

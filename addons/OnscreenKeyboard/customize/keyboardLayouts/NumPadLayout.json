@@ -1,0 +1,86 @@
+{
+	"debug": true,
+	"layouts": [
+	{
+		"name": "numberpad",
+		"rows": [
+		{
+			"keys": [
+			{
+				"type": "char",
+				"output": "1",
+				"display": "1"
+			},
+			{
+				"type": "char",
+				"output": "2",
+				"display": "2"
+			},
+			{
+				"type": "char",
+				"output": "3",
+				"display": "3"
+			}
+			]
+		},
+		{
+			"keys": [
+			{
+				"type": "char",
+				"output": "4",
+				"display": "4"
+			},
+			{
+				"type": "char",
+				"output": "5",
+				"display": "5"
+			},
+			{
+				"type": "char",
+				"output": "6",
+				"display": "6"
+			}
+			]
+		},
+		{
+			"keys": [
+			{
+				"type": "char",
+				"output": "7",
+				"display": "7"
+			},
+			{
+				"type": "char",
+				"output": "8",
+				"display": "8"
+			},
+			{
+				"type": "char",
+				"output": "9",
+				"display": "9"
+			}
+			]
+		},
+		{
+			"keys": [
+			{
+				"type": "char",
+				"output": ".",
+				"display": "."
+			},
+			{
+				"type": "char",
+				"output": "0",
+				"display": "0"
+			},
+			{
+				"type": "char",
+				"output": "9",
+				"display": "9"
+			}
+			]
+		}
+		]
+	}
+	]
+}

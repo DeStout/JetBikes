@@ -32,24 +32,23 @@ func _hide_show() -> void:
 func _input(event : InputEvent) -> void:
 	if Input.get_connected_joypads().size():
 		if !$ColorPicker.pressed:
-			if event.is_action_pressed("ui_up") or (event is InputEventJoypadMotion and \
+			if Input.is_action_just_pressed("ui_up") or (event is InputEventJoypadMotion and \
 									event.axis == JOY_AXIS_1 and event.axis_value == -1):
 					current_focus = current_focus.get_node(current_focus.focus_neighbour_top)
 					yield(get_tree(), "idle_frame")
-			elif event.is_action_pressed("ui_left") or (event is InputEventJoypadMotion and \
+			elif Input.is_action_just_pressed("ui_left") or (event is InputEventJoypadMotion and \
 									event.axis == JOY_AXIS_0 and event.axis_value == -1):
 					current_focus = current_focus.get_node(current_focus.focus_neighbour_left)
 					yield(get_tree(), "idle_frame")
-			elif event.is_action_pressed("ui_right") or (event is InputEventJoypadMotion and \
+			elif Input.is_action_just_pressed("ui_right") or (event is InputEventJoypadMotion and \
 									event.axis == JOY_AXIS_0 and event.axis_value == 1):
 					current_focus = current_focus.get_node(current_focus.focus_neighbour_right)
 					yield(get_tree(), "idle_frame")
-			elif event.is_action_pressed("ui_down") or (event is InputEventJoypadMotion and \
+			elif Input.is_action_just_pressed("ui_down") or (event is InputEventJoypadMotion and \
 									event.axis == JOY_AXIS_1 and event.axis_value == 1):
 					current_focus = current_focus.get_node(current_focus.focus_neighbour_bottom)
 					yield(get_tree(), "idle_frame")
 			current_focus.grab_focus()
-			print(current_focus.name)
 
 		if event is InputEventJoypadButton:
 			if Input.is_action_just_pressed("ui_accept"):
