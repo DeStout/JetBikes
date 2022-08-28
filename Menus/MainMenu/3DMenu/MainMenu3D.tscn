@@ -196,7 +196,7 @@ modulate_color = Color( 0.85098, 1, 0, 1 )
 [sub_resource type="StyleBoxFlat" id=42]
 bg_color = Color( 0.141176, 0.141176, 0.141176, 1 )
 
-[sub_resource type="StyleBoxEmpty" id=43]
+[sub_resource type="StyleBoxEmpty" id=48]
 
 [sub_resource type="StyleBoxLine" id=47]
 color = Color( 0.85098, 1, 0, 1 )
@@ -225,7 +225,7 @@ Button/styles/focus = SubResource( 39 )
 Button/styles/hover = SubResource( 41 )
 Button/styles/pressed = SubResource( 42 )
 CheckBox/styles/focus = SubResource( 39 )
-CheckBox/styles/pressed = SubResource( 43 )
+CheckBox/styles/pressed = SubResource( 48 )
 ColorPickerButton/fonts/font = SubResource( 11 )
 ColorPickerButton/styles/focus = SubResource( 47 )
 ColorPickerButton/styles/hover = SubResource( 46 )
@@ -284,10 +284,6 @@ font_data = ExtResource( 19 )
 
 [node name="MainMenu" type="Spatial"]
 script = ExtResource( 17 )
-__meta__ = {
-"_edit_horizontal_guides_": [ 619.588, 748.022, 874.078, 400.774, 1001.75 ],
-"_edit_vertical_guides_": [ 1500.72, 1819.43, 1330.66, 2385.66 ]
-}
 
 [node name="GIProbe" type="GIProbe" parent="."]
 subdiv = 0
@@ -944,7 +940,7 @@ margin_bottom = 104.0
 focus_neighbour_left = NodePath("../JoinBox")
 focus_neighbour_top = NodePath("../../Buttons/RaceButton")
 focus_neighbour_right = NodePath("../JoinBox")
-focus_neighbour_bottom = NodePath("../../IPAdress/IPText")
+focus_neighbour_bottom = NodePath("../../IPAddress/IPText")
 theme = SubResource( 13 )
 custom_fonts/font = SubResource( 34 )
 text = "Host"
@@ -956,12 +952,12 @@ margin_bottom = 104.0
 focus_neighbour_left = NodePath("../HostBox")
 focus_neighbour_top = NodePath("../../Buttons/BackButton")
 focus_neighbour_right = NodePath("../HostBox")
-focus_neighbour_bottom = NodePath("../../IPAdress/IPText")
+focus_neighbour_bottom = NodePath("../../IPAddress/IPText")
 theme = SubResource( 13 )
 custom_fonts/font = SubResource( 35 )
 text = "Join"
 
-[node name="IPAdress" type="GridContainer" parent="Menu/OnlineMenu"]
+[node name="IPAddress" type="GridContainer" parent="Menu/OnlineMenu"]
 anchor_left = -1.55
 anchor_top = -0.925
 anchor_right = 1.217
@@ -972,13 +968,13 @@ margin_right = -619.785
 margin_bottom = -651.294
 custom_constants/hseparation = 0
 
-[node name="Label" type="Label" parent="Menu/OnlineMenu/IPAdress"]
+[node name="Label" type="Label" parent="Menu/OnlineMenu/IPAddress"]
 margin_right = 494.0
 margin_bottom = 50.0
 custom_fonts/font = SubResource( 36 )
 text = "IP Address:"
 
-[node name="IPText" type="LineEdit" parent="Menu/OnlineMenu/IPAdress"]
+[node name="IPText" type="LineEdit" parent="Menu/OnlineMenu/IPAddress"]
 margin_top = 58.0
 margin_right = 494.0
 margin_bottom = 128.0
@@ -997,7 +993,7 @@ clear_button_enabled = true
 placeholder_text = "IP Address"
 caret_blink = true
 
-[node name="OnscreenKeyboard" type="PanelContainer" parent="Menu/OnlineMenu/IPAdress/IPText"]
+[node name="OnscreenKeyboard" type="PanelContainer" parent="Menu/OnlineMenu/IPAddress/IPText"]
 visible = false
 anchor_left = -2.927
 anchor_top = -10.267
@@ -1045,9 +1041,10 @@ columns = 2
 margin_right = 272.0
 margin_bottom = 100.0
 focus_neighbour_left = NodePath("../BackButton")
-focus_neighbour_top = NodePath("../../IPAdress/IPText")
+focus_neighbour_top = NodePath("../../IPAddress/IPText")
 focus_neighbour_right = NodePath("../BackButton")
 focus_neighbour_bottom = NodePath("../../HostJoin/HostBox")
+focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = SubResource( 13 )
@@ -1064,7 +1061,7 @@ margin_left = 280.0
 margin_right = 551.0
 margin_bottom = 100.0
 focus_neighbour_left = NodePath("../RaceButton")
-focus_neighbour_top = NodePath("../../IPAdress/IPText")
+focus_neighbour_top = NodePath("../../IPAddress/IPText")
 focus_neighbour_right = NodePath("../RaceButton")
 focus_neighbour_bottom = NodePath("../../HostJoin/JoinBox")
 size_flags_horizontal = 3
@@ -1351,12 +1348,12 @@ text = "FPS:"
 [connection signal="color_changed" from="Menu/SinglePlayerMenu/ColorPicker" to="." method="set_racer_color"]
 [connection signal="color_changed" from="Menu/SinglePlayerMenu/ColorPicker" to="Menu/SinglePlayerMenu" method="_select_color"]
 [connection signal="visibility_changed" from="Menu/OnlineMenu" to="Menu/OnlineMenu" method="_hide_show"]
-[connection signal="button_down" from="Menu/OnlineMenu/HostJoin/HostBox" to="Menu/OnlineMenu" method="_host"]
-[connection signal="button_down" from="Menu/OnlineMenu/HostJoin/JoinBox" to="Menu/OnlineMenu" method="_join"]
-[connection signal="text_changed" from="Menu/OnlineMenu/IPAdress/IPText" to="Menu/OnlineMenu" method="_ip_set"]
+[connection signal="toggled" from="Menu/OnlineMenu/HostJoin/HostBox" to="Menu/OnlineMenu" method="_host"]
+[connection signal="toggled" from="Menu/OnlineMenu/HostJoin/JoinBox" to="Menu/OnlineMenu" method="_join"]
+[connection signal="text_changed" from="Menu/OnlineMenu/IPAddress/IPText" to="Menu/OnlineMenu" method="_ip_set"]
 [connection signal="timeout" from="Menu/OnlineMenu/OptimistLabel/Timer" to="Menu/OnlineMenu" method="_unoptimist"]
-[connection signal="pressed" from="Menu/OnlineMenu/Buttons/RaceButton" to="Menu/OnlineMenu" method="_setup_online_lobby"]
-[connection signal="pressed" from="Menu/OnlineMenu/Buttons/BackButton" to="." method="return_to_main"]
+[connection signal="button_down" from="Menu/OnlineMenu/Buttons/RaceButton" to="Menu/OnlineMenu" method="_setup_online_lobby"]
+[connection signal="button_down" from="Menu/OnlineMenu/Buttons/BackButton" to="." method="return_to_main"]
 [connection signal="visibility_changed" from="Menu/OptionsMenu" to="Menu/OptionsMenu" method="_hide_show"]
 [connection signal="text_entered" from="Menu/OptionsMenu/SFX/Level" to="Menu/OptionsMenu" method="_update_sfx_sound_values"]
 [connection signal="value_changed" from="Menu/OptionsMenu/SFX/Slider" to="Menu/OptionsMenu" method="_update_sfx_sound_values"]
