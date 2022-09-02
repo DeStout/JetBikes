@@ -57,11 +57,13 @@ func _input(event: InputEvent) -> void:
 				current_focus.grab_focus()
 		elif Input.is_action_just_pressed("ui_down") or (event is InputEventJoypadMotion and \
 								event.axis == JOY_AXIS_1 and event.axis_value == 1):
-				temp_focus = current_focus.get_node(current_focus.focus_neighbour_down)
+				temp_focus = current_focus.get_node(current_focus.focus_neighbour_bottom)
+				while(temp_focus.get_node(temp_focus.focus_neighbour_bottom) == null):
+					pass
 				if !temp_focus.focus_mode == Control.FOCUS_NONE:
 					current_focus = temp_focus
 				else:
-					current_focus = temp_focus.get_node(temp_focus.focus_neighbour_down)
+					current_focus = temp_focus.get_node(temp_focus.focus_neighbour_bottom)
 				yield(get_tree(), "idle_frame")
 				current_focus.grab_focus()
 
@@ -73,9 +75,9 @@ func _input(event: InputEvent) -> void:
 					elif current_focus is LineEdit:
 						print("LineEdit - ", current_focus.name)
 						$IPAddress/IPText/OnscreenKeyboard.visible = true
-						current_focus = $IPAddress/IPText/OnscreenKeyboard
-						yield(get_tree(), "idle_frame")
-						current_focus.grab_focus()
+#						current_focus = $IPAddress/IPText/OnscreenKeyboard
+#						yield(get_tree(), "idle_frame")
+#						current_focus.grab_focus()
 				elif Input.is_action_just_pressed("ui_cancel"):
 					$Buttons/BackButton.emit_signal("pressed")
 
@@ -84,6 +86,7 @@ func _host(toggled : bool):
 	print("_host")
 	join_box.pressed = false
 	host_box.pressed = toggled
+#	host_box.focus_mode == Control.FOCUS_ALL
 	$IPAddress/IPText.text = Network.upnp.query_external_address()
 	$IPAddress/IPText.editable = toggled
 	is_host = true
@@ -102,22 +105,27 @@ func _join(toggled : bool):
 func _ip_set(new_text):
 	enabled_lobby_button(host_box.pressed or join_box.pressed)
 
+	if $IPAddress/IPText.text == "":
+		$Buttons/RaceButton.disabled = true
+
 
 func enabled_lobby_button(toggled : bool) -> void:
 	print("enabled_lobby_button")
 	if toggled:
 		if $IPAddress/IPText.text != "":
 			$Buttons/RaceButton.disabled = false
-			$Buttons/RaceButton.focus_mode = Control.FOCUS_NONE
+			$Buttons/RaceButton.focus_mode = Control.FOCUS_ALL
 
-	if !toggled:
+		if is_host:
+			$Buttons/RaceButton.text = "Host"
+		else:
+			$Buttons/RaceButton.text = "Join"
+
+	elif !toggled:
 		$Buttons/RaceButton.disabled = true
-		$Buttons/RaceButton.focus_mode = Control.FOCUS_ALL
+		$Buttons/RaceButton.focus_mode = Control.FOCUS_NONE
 		$Buttons/RaceButton.text = ""
-	elif is_host:
-		$Buttons/RaceButton.text = "Host"
-	else:
-		$Buttons/RaceButton.text = "Join"
+		$IPAddress/IPText.editable = false
 
 
 func _setup_online_lobby():
