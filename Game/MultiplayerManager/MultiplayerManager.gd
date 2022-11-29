@@ -24,8 +24,8 @@ func _ready() -> void:
 
 
 func setup_track() -> void:
-	get_parent().remove_child(get_parent().main_menu)
 	Globals.is_multiplayer = true
+	remove_child(_lobby)
 
 	var level_loader = level_loader_.instance()
 	add_child(level_loader)
@@ -36,7 +36,7 @@ func setup_track() -> void:
 	add_child(_multiplayer_track)
 	_multiplayer_track.connect("return_to_main", self, "return_to_lobby")
 
-	remove_child(_lobby)
+	get_parent().remove_child(get_parent().main_menu)
 	level_loader.queue_free()
 
 
