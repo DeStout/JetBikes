@@ -1,33 +1,29 @@
 extends LobbyMenu
 
+
 signal failed_connection
-
-onready var connect_menu = $MenuFrame/ConnectingFrame
-
-onready var level_name = $MenuFrame/LobbyFrame/ClientSettingsPanel/Level/LevelName
-onready var num_laps = $MenuFrame/LobbyFrame/ClientSettingsPanel/Laps/NumLaps
-onready var num_npcs = $MenuFrame/LobbyFrame/ClientSettingsPanel/NPCs/NumNPCs
-
-onready var ready_button = $MenuFrame/LobbyFrame/ClientSettingsPanel/Buttons/ReadyButton
-
 var connected_to_host = false
 
 
 func _ready():
 	Network.connect("connected_to_host", self, "connected_to_host")
-	$MenuFrame/ConnectingFrame.cancel_button = $MenuFrame/LobbyFrame/CancelPanel/CancelButton
 	update_lobby_info("Lobby Created")
 
+	_wait_for_connection()
+
+
+func _wait_for_connection() -> void:
 	# Restrict Client from joining "ghost" server
 	for attempts in range(20):
 		if connected_to_host:
-			connect_menu.visible = false
-			$MenuFrame/LobbyFrame.visible = true
+			$ConnectingMenu.visible = false
+			$LobbyFrame.visible = true
 			break
-		yield(get_tree().create_timer(0.5), "timeout")
-	$MenuFrame/ConnectingFrame/Timer.stop()
-#
+		yield(get_tree(), "idle_frame")
+	$ConnectingMenu.get_node("Timer").stop()
+
 	if !connected_to_host:
+		# Signal to MultiplayerManager
 		emit_signal("failed_connection")
 
 

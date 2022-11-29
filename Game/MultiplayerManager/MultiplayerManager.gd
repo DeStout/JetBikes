@@ -2,8 +2,8 @@ extends Node
 
 signal return_to_main
 
-var host_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/HostLobby3D.tscn")
-var client_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/ClientLobby3D.tscn")
+var host_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/HostLobby.tscn")
+var client_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/ClientLobby.tscn")
 var _lobby : Control
 
 var level_loader_ = preload("res://Menus/LoadingMenu/LoadingMenu.tscn")
@@ -48,11 +48,12 @@ func setup_lobby_network(is_host : bool) -> void:
 	else:
 		_lobby = client_lobby_.instance()
 		_lobby.connect("failed_connection", self, "return_to_main")
+		_lobby.get_node("ConnectingMenu/CancelButton").connect("pressed", self, "return_to_main")
 		connection = Network.init_client()
 #
 	if connection == OK:
 		add_child(_lobby)
-		_lobby.cancel_button.connect("pressed", self, "return_to_main")
+		_lobby.leave_button.connect("pressed", self, "return_to_main")
 	else:
 		print("Failed Server Connection - Returning to Main Menu")
 		return_to_main()

@@ -41,10 +41,11 @@ const GRAVITY = 150
 var level : int = DEFAULT_LEVEL
 var laps_number : int = DEFAULT_LAP_NUMBER
 var NPC_number : int = DEFAULT_NPC_NUMBER
+var max_NPC_number : int = 11
+
 var multiplayer_level : int = DEFAULT_LEVEL
 var multiplayer_laps_number : int = DEFAULT_LAP_NUMBER
 var multiplayer_NPC_number : int = DEFAULT_NPC_NUMBER
-var max_NPC_number : int = 11
 
 
 var race_on_going : bool = false

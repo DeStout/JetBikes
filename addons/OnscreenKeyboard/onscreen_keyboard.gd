@@ -30,7 +30,7 @@ signal layoutChanged
 ###########################
 
 func _enter_tree():
-	get_tree().get_root().connect("size_changed", self, "size_changed")
+#	get_tree().get_root().connect("size_changed", self, "size_changed")
 	_initKeyboard()
 
 #func _exit_tree():

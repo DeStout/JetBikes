@@ -83,7 +83,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _host(toggled : bool):
-	print("_host")
+#	print("_host")
 	join_box.pressed = false
 	host_box.pressed = toggled
 #	host_box.focus_mode == Control.FOCUS_ALL
@@ -94,7 +94,7 @@ func _host(toggled : bool):
 
 
 func _join(toggled : bool):
-	print("_join")
+#	print("_join")
 	host_box.pressed = false
 	join_box.pressed = toggled
 	$IPAddress/IPText.editable = true
@@ -110,7 +110,7 @@ func _ip_set(new_text):
 
 
 func enabled_lobby_button(toggled : bool) -> void:
-	print("enabled_lobby_button")
+#	print("enabled_lobby_button")
 	if toggled:
 		if $IPAddress/IPText.text != "":
 			$Buttons/RaceButton.disabled = false
@@ -130,4 +130,5 @@ func enabled_lobby_button(toggled : bool) -> void:
 
 func _setup_online_lobby():
 	Network.set_IP_address($IPAddress/IPText.text)
+	# Signal to Game
 	emit_signal("setup_online_lobby", is_host)

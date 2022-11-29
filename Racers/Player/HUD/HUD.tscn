@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Racers/Player/HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://Racers/Player/HUD/Minimap.gd" type="Script" id=2]
@@ -6,6 +6,10 @@
 [ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Game/Assets/Fonts/NinePin/Nine Pin.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://icon_484x484.png" type="Texture" id=6]
+
+[sub_resource type="DynamicFont" id=13]
+size = 24
+font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -40,7 +44,6 @@ font_data = ExtResource( 5 )
 viewport_path = NodePath("ArrowView")
 
 [node name="HUD" type="Control"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -49,39 +52,41 @@ mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_vertical_guides_": [ 960.0 ]
+}
 
 [node name="FPS" type="Label" parent="."]
+anchor_left = -0.000166639
+anchor_top = 0.0518519
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 2453.52
-margin_top = 1402.08
-margin_right = -66.4827
-margin_bottom = -12.9208
-__meta__ = {
-"_edit_use_anchors_": true
-}
+margin_left = 1784.32
+margin_top = 968.0
+margin_right = -18.0
+margin_bottom = -18.0
+custom_fonts/font = SubResource( 13 )
+text = "FPS:"
 
 [node name="LapLabel" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 1.0
-margin_right = -2200.0
-margin_bottom = -1317.0
+margin_left = 32.0
+margin_top = 32.0
+margin_right = -1648.0
+margin_bottom = -965.0
 custom_fonts/font = SubResource( 1 )
 text = "Lap: ~/3"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PlaceLabel" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 63.2063
-margin_top = 69.7399
-margin_right = -2262.79
-margin_bottom = -1165.26
+margin_left = 95.2063
+margin_top = 100.74
+margin_right = -1678.79
+margin_bottom = -808.26
 custom_fonts/font = SubResource( 2 )
 text = "12"
 align = 1
@@ -93,23 +98,21 @@ __meta__ = {
 [node name="RaceNotice" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -441.0
+margin_top = 256.0
+margin_bottom = -185.0
 grow_horizontal = 2
 grow_vertical = 2
 custom_fonts/font = SubResource( 3 )
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="BoostBar" type="ProgressBar" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 96.2808
-margin_top = 1376.0
-margin_right = -2247.72
-margin_bottom = -35.0001
+margin_left = 56.0
+margin_top = 1008.0
+margin_right = -1528.0
+margin_bottom = -32.0
 custom_styles/fg = SubResource( 4 )
 custom_styles/bg = SubResource( 5 )
 max_value = 250.0
@@ -117,9 +120,6 @@ step = 1.0
 value = 125.0
 rounded = true
 percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="BoostLabel" type="Label" parent="BoostBar"]
 anchor_right = 1.0
@@ -137,10 +137,10 @@ __meta__ = {
 [node name="Speed" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 38.0
-margin_top = 1277.7
-margin_right = -2362.0
-margin_bottom = -102.303
+margin_left = 128.0
+margin_top = 912.0
+margin_right = -1770.0
+margin_bottom = -133.0
 grow_horizontal = 2
 rect_scale = Vector2( 2.05922, 2.05922 )
 custom_fonts/font = SubResource( 12 )
@@ -162,14 +162,14 @@ render_direct_to_screen = true
 transform = Transform( 0.539403, 0, -0.842048, 0, 1, 0, 0.842048, 0, 0.539403, 0, 0, 0 )
 
 [node name="Arrow" type="Sprite" parent="."]
-position = Vector2( 1279.6, 123 )
-scale = Vector2( 1.19519, -1.19519 )
+position = Vector2( 960, 123 )
+scale = Vector2( 0.937501, -0.937501 )
 texture = SubResource( 11 )
 region_rect = Rect2( 0, 0, 256, 256 )
 
 [node name="Minimap" type="Sprite" parent="."]
-position = Vector2( 2176, 32 )
-scale = Vector2( 0.727273, 0.727273 )
+position = Vector2( 1672, 32 )
+scale = Vector2( 0.446282, 0.446282 )
 texture = ExtResource( 6 )
 centered = false
 offset = Vector2( -0.000244141, 0 )

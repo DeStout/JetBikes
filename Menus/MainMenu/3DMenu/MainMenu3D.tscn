@@ -178,32 +178,32 @@ size = Vector2( 2, 2 )
 size = 32
 font_data = ExtResource( 19 )
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=37]
 size = 48
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxLine" id=39]
+[sub_resource type="StyleBoxLine" id=38]
 content_margin_left = 2.0
 color = Color( 0.85098, 1, 0, 1 )
 thickness = 3
 vertical = true
 
-[sub_resource type="StyleBoxTexture" id=41]
+[sub_resource type="StyleBoxTexture" id=39]
 content_margin_left = 10.0
 region_rect = Rect2( 585, 358, 61, 20 )
 modulate_color = Color( 0.85098, 1, 0, 1 )
 
-[sub_resource type="StyleBoxFlat" id=42]
+[sub_resource type="StyleBoxFlat" id=40]
 bg_color = Color( 0.141176, 0.141176, 0.141176, 1 )
 
-[sub_resource type="StyleBoxEmpty" id=48]
+[sub_resource type="StyleBoxEmpty" id=41]
 
-[sub_resource type="StyleBoxLine" id=47]
+[sub_resource type="StyleBoxLine" id=42]
 color = Color( 0.85098, 1, 0, 1 )
 thickness = 3
 vertical = true
 
-[sub_resource type="StyleBoxFlat" id=46]
+[sub_resource type="StyleBoxFlat" id=43]
 bg_color = Color( 0.85098, 1, 0, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -220,15 +220,15 @@ expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
 [sub_resource type="Theme" id=13]
-Button/fonts/font = SubResource( 11 )
-Button/styles/focus = SubResource( 39 )
-Button/styles/hover = SubResource( 41 )
-Button/styles/pressed = SubResource( 42 )
-CheckBox/styles/focus = SubResource( 39 )
-CheckBox/styles/pressed = SubResource( 48 )
-ColorPickerButton/fonts/font = SubResource( 11 )
-ColorPickerButton/styles/focus = SubResource( 47 )
-ColorPickerButton/styles/hover = SubResource( 46 )
+Button/fonts/font = SubResource( 37 )
+Button/styles/focus = SubResource( 38 )
+Button/styles/hover = SubResource( 39 )
+Button/styles/pressed = SubResource( 40 )
+CheckBox/styles/focus = SubResource( 38 )
+CheckBox/styles/pressed = SubResource( 41 )
+ColorPickerButton/fonts/font = SubResource( 37 )
+ColorPickerButton/styles/focus = SubResource( 42 )
+ColorPickerButton/styles/hover = SubResource( 43 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -284,6 +284,10 @@ font_data = ExtResource( 19 )
 
 [node name="MainMenu" type="Spatial"]
 script = ExtResource( 17 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 276.0 ],
+"_edit_vertical_guides_": [ 1032.0 ]
+}
 
 [node name="GIProbe" type="GIProbe" parent="."]
 subdiv = 0
@@ -314,10 +318,6 @@ material/0 = SubResource( 4 )
 
 [node name="Particles" parent="BGRot/Racer/EngineRotationHelper/Engine" index="5"]
 visibility_aabb = AABB( -0.561094, -0.495488, -0.553337, 1.12888, 2.18098, 1.11117 )
-
-[node name="Skeleton" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider" index="0"]
-bones/11/bound_children = [ NodePath("AirbagAttachment") ]
-bones/13/bound_children = [ NodePath("HelmetAttachment") ]
 
 [node name="HelmetAttachment" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider/Skeleton" index="1"]
 transform = Transform( 0.924797, -0.243309, 0.292491, 0.316223, 0.919032, -0.235336, -0.21155, 0.310129, 0.926858, 0.310943, 0.482913, 0.241308 )
@@ -364,7 +364,6 @@ spot_angle_attenuation = 0.812254
 
 [node name="SpotLight3" type="SpotLight" parent="."]
 transform = Transform( -0.373409, -0.545623, 0.750241, 0, 0.80874, 0.588167, -0.927667, 0.219627, -0.301991, 1.70469, 2.56343, -0.0864811 )
-visible = false
 light_color = Color( 0.337255, 0.396078, 0.792157, 1 )
 light_energy = 3.364
 light_specular = 0.0
@@ -390,32 +389,31 @@ anchor_bottom = 1.0
 
 [node name="BG" type="Sprite" parent="Menu"]
 visible = false
-position = Vector2( 1280, 720 )
-scale = Vector2( 1, 1.05109 )
+position = Vector2( 960, 540 )
+scale = Vector2( 0.784955, 0.784884 )
 texture = ExtResource( 14 )
 
 [node name="ClientBtn" type="Button" parent="Menu"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 2226.0
-margin_top = 64.0
-margin_right = -62.0
-margin_bottom = -1285.0
+margin_left = 48.8564
+margin_top = 38.8016
+margin_right = -1623.14
+margin_bottom = -984.198
 custom_fonts/font = SubResource( 32 )
 text = "Launch Client"
 
 [node name="MainMenu" type="GridContainer" parent="Menu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1396.63
-margin_top = 428.376
-margin_right = -310.366
-margin_bottom = -644.624
+margin_left = 1128.0
+margin_top = 276.0
+margin_right = -311.0
+margin_bottom = -411.0
 
 [node name="SinglePlayerButton" type="Button" parent="Menu/MainMenu"]
-margin_right = 330.0
-margin_bottom = 79.0
+margin_right = 318.0
+margin_bottom = 73.0
 focus_next = NodePath("../MultiplayerButton")
 focus_previous = NodePath("../QuitButton")
 mouse_default_cursor_shape = 2
@@ -427,9 +425,9 @@ flat = true
 align = 0
 
 [node name="MultiplayerButton" type="Button" parent="Menu/MainMenu"]
-margin_top = 87.0
-margin_right = 475.0
-margin_bottom = 166.0
+margin_top = 77.0
+margin_right = 463.0
+margin_bottom = 150.0
 focus_next = NodePath("../OptionsButton")
 focus_previous = NodePath("../SinglePlayerButton")
 mouse_default_cursor_shape = 2
@@ -441,9 +439,9 @@ flat = true
 align = 0
 
 [node name="OptionsButton" type="Button" parent="Menu/MainMenu"]
-margin_top = 174.0
-margin_right = 214.0
-margin_bottom = 253.0
+margin_top = 154.0
+margin_right = 202.0
+margin_bottom = 227.0
 focus_next = NodePath("../ControlsButton")
 focus_previous = NodePath("../MultiplayerButton")
 mouse_default_cursor_shape = 2
@@ -455,9 +453,9 @@ flat = true
 align = 0
 
 [node name="ControlsButton" type="Button" parent="Menu/MainMenu"]
-margin_top = 261.0
-margin_right = 228.0
-margin_bottom = 340.0
+margin_top = 231.0
+margin_right = 216.0
+margin_bottom = 304.0
 focus_next = NodePath("../QuitButton")
 focus_previous = NodePath("../OptionsButton")
 mouse_default_cursor_shape = 2
@@ -469,9 +467,9 @@ flat = true
 align = 0
 
 [node name="QuitButton" type="Button" parent="Menu/MainMenu"]
-margin_top = 348.0
-margin_right = 130.0
-margin_bottom = 427.0
+margin_top = 308.0
+margin_right = 118.0
+margin_bottom = 381.0
 focus_next = NodePath("../SinglePlayerButton")
 focus_previous = NodePath("../ControlsButton")
 mouse_default_cursor_shape = 2
@@ -485,51 +483,41 @@ align = 0
 [node name="SinglePlayerMenu" type="Control" parent="Menu"]
 visible = false
 anchor_right = 1.0
-anchor_bottom = 0.951
-margin_left = 1330.63
-margin_top = 400.376
-margin_right = -175.316
-margin_bottom = -365.608
+anchor_bottom = 1.0
+margin_left = 960.0
+margin_top = 276.0
 script = ExtResource( 20 )
 
 [node name="SinglePlayerLabel" type="Label" parent="Menu/SinglePlayerMenu"]
 anchor_right = 1.0
-anchor_bottom = 0.998
-margin_left = 64.0002
-margin_right = -461.05
-margin_bottom = -476.822
+anchor_bottom = 1.0
+margin_left = 73.6414
+margin_right = -357.359
+margin_bottom = -737.0
 custom_fonts/font = SubResource( 1 )
 text = "Single Player Options"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Level" type="Control" parent="Menu/SinglePlayerMenu"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 67.3955
-margin_top = 129.728
-margin_right = -464.344
-margin_bottom = -243.054
+anchor_right = 0.998
+anchor_bottom = 0.998
+margin_left = 88.0
+margin_top = 91.296
+margin_right = -592.08
+margin_bottom = -584.096
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LevelLabel" type="Label" parent="Menu/SinglePlayerMenu/Level"]
-anchor_left = -0.129
-anchor_top = -0.562
-anchor_right = 1.889
-anchor_bottom = 2.054
-margin_left = 67.3786
-margin_top = 137.639
-margin_right = -464.338
-margin_bottom = -243.13
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 34.6327
+margin_top = 7.29599
+margin_right = -23.3673
+margin_bottom = -69.704
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -537,109 +525,78 @@ size_flags_vertical = 0
 custom_fonts/font = SubResource( 2 )
 text = "Level Select"
 align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LevelName" type="Label" parent="Menu/SinglePlayerMenu/Level"]
-anchor_left = -0.129
-anchor_top = -0.562
-anchor_right = 1.886
-anchor_bottom = 2.054
-margin_left = 67.3786
-margin_top = 142.585
-margin_right = -462.77
-margin_bottom = -311.604
+anchor_right = 1.003
+anchor_bottom = 1.001
+margin_left = 70.0
+margin_top = 68.376
+margin_right = -61.8341
+margin_bottom = -19.751
+grow_horizontal = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 27 )
 text = "test_track"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LevelLeft" type="Button" parent="Menu/SinglePlayerMenu/Level"]
-anchor_left = -0.129
-anchor_top = -0.562
-anchor_right = 1.886
-anchor_bottom = 2.054
-margin_left = 115.379
-margin_top = 184.152
-margin_right = -834.086
-margin_bottom = -325.29
-grow_horizontal = 2
-grow_vertical = 2
-rect_scale = Vector2( 0.75, 0.75 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 14.0
+margin_top = 50.0
+margin_right = -220.0
+margin_bottom = -4.0
 focus_neighbour_left = NodePath("../../ColorPicker")
-focus_neighbour_top = NodePath("../../NPCs/NPCDecrease")
 focus_neighbour_right = NodePath("../LevelRight")
-focus_neighbour_bottom = NodePath("../../Laps/LapsDecrease")
 size_flags_horizontal = 3
-size_flags_vertical = 0
+size_flags_vertical = 3
 theme = SubResource( 13 )
 action_mode = 0
 icon = ExtResource( 15 )
 flat = true
-align = 2
-expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+icon_align = 1
 
 [node name="LevelRight" type="Button" parent="Menu/SinglePlayerMenu/Level"]
-anchor_left = -0.129
-anchor_top = -0.562
-anchor_right = 1.889
-anchor_bottom = 2.054
-margin_left = 464.379
-margin_top = 182.163
-margin_right = -486.653
-margin_bottom = -323.28
-grow_horizontal = 2
-grow_vertical = 2
-rect_scale = Vector2( 0.75, 0.75 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 230.0
+margin_top = 50.0
+margin_right = -4.0
+margin_bottom = -4.0
 focus_neighbour_left = NodePath("../LevelLeft")
-focus_neighbour_top = NodePath("../../Laps/LapsIncrease")
 focus_neighbour_right = NodePath("../../ColorPicker")
-focus_neighbour_bottom = NodePath("../../Laps/LapsIncrease")
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource( 13 )
 action_mode = 0
 icon = ExtResource( 16 )
 flat = true
-align = 0
-expand_icon = true
+icon_align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Laps" type="Control" parent="Menu/SinglePlayerMenu"]
-anchor_right = 0.999
-anchor_bottom = 1.0
-margin_left = 67.3955
-margin_top = 265.728
-margin_right = -495.29
-margin_bottom = -123.054
+anchor_right = 0.998
+anchor_bottom = 0.998
+margin_left = 75.0
+margin_top = 218.296
+margin_right = -579.08
+margin_bottom = -457.096
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LapsLabel" type="Label" parent="Menu/SinglePlayerMenu/Laps"]
-anchor_left = -0.137
-anchor_top = -1.238
-anchor_right = 2.012
-anchor_bottom = 1.573
-margin_left = 67.1731
-margin_top = 265.766
-margin_right = -496.199
-margin_bottom = -122.988
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 34.6327
+margin_top = 7.29599
+margin_right = -23.3673
+margin_bottom = -69.704
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -647,103 +604,78 @@ size_flags_vertical = 0
 custom_fonts/font = SubResource( 2 )
 text = "Number of Laps"
 align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="NumLaps" type="Label" parent="Menu/SinglePlayerMenu/Laps"]
-anchor_left = -0.137
-anchor_top = -1.238
-anchor_right = 2.009
-anchor_bottom = 1.573
-margin_left = 67.1732
-margin_top = 268.819
-margin_right = -494.728
-margin_bottom = -177.139
+anchor_right = 1.003
+anchor_bottom = 1.001
+margin_left = 70.0
+margin_top = 68.376
+margin_right = -61.8341
+margin_bottom = -19.751
+grow_horizontal = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 27 )
 text = "3"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LapsDecrease" type="Button" parent="Menu/SinglePlayerMenu/Laps"]
-anchor_left = -0.137
-anchor_top = -1.238
-anchor_right = 2.009
-anchor_bottom = 1.573
-margin_left = 115.328
-margin_top = 307.16
-margin_right = -833.888
-margin_bottom = -185.288
-grow_horizontal = 0
-grow_vertical = 2
-rect_scale = Vector2( 0.75, 0.75 )
-focus_neighbour_left = NodePath("../../Buttons/RaceButton")
-focus_neighbour_top = NodePath("../../Level/LevelLeft")
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 14.0
+margin_top = 50.0
+margin_right = -220.0
+margin_bottom = -4.0
+focus_neighbour_left = NodePath("../../ColorPicker")
 focus_neighbour_right = NodePath("../LapsIncrease")
-focus_neighbour_bottom = NodePath("../../NPCs/NPCDecrease")
-size_flags_horizontal = 8
-size_flags_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = SubResource( 13 )
 action_mode = 0
 icon = ExtResource( 15 )
 flat = true
-align = 2
-expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+icon_align = 1
 
 [node name="LapsIncrease" type="Button" parent="Menu/SinglePlayerMenu/Laps"]
-anchor_left = -0.137
-anchor_top = -1.238
-anchor_right = 2.009
-anchor_bottom = 1.573
-margin_left = 464.173
-margin_top = 313.364
-margin_right = -485.042
-margin_bottom = -199.084
-grow_horizontal = 2
-grow_vertical = 2
-rect_scale = Vector2( 0.75, 0.75 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 230.0
+margin_top = 50.0
+margin_right = -4.0
+margin_bottom = -4.0
 focus_neighbour_left = NodePath("../LapsDecrease")
-focus_neighbour_top = NodePath("../../Level/LevelRight")
-focus_neighbour_right = NodePath("../../Buttons/RaceButton")
-focus_neighbour_bottom = NodePath("../../NPCs/NPCIncrease")
-size_flags_horizontal = 8
+focus_neighbour_right = NodePath("../../ColorPicker")
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource( 13 )
 action_mode = 0
 icon = ExtResource( 16 )
 flat = true
-align = 0
-expand_icon = true
-
-[node name="NPCs" type="Control" parent="Menu/SinglePlayerMenu"]
-anchor_left = 0.064
-anchor_top = 0.18
-anchor_right = 0.56
-anchor_bottom = 1.0
-margin_left = -0.064003
-margin_top = 277.106
-margin_right = -31.56
-margin_bottom = -11.054
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+icon_align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="NPCs" type="Control" parent="Menu/SinglePlayerMenu"]
+anchor_right = 0.998
+anchor_bottom = 0.998
+margin_left = 75.0
+margin_top = 341.296
+margin_right = -579.08
+margin_bottom = -334.096
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="NPCsLabel" type="Label" parent="Menu/SinglePlayerMenu/NPCs"]
 anchor_right = 1.0
-anchor_bottom = 1.143
-margin_bottom = -0.0160065
+anchor_bottom = 1.0
+margin_left = 34.6327
+margin_top = 7.29599
+margin_right = -23.3673
+margin_bottom = -69.704
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -751,91 +683,67 @@ size_flags_vertical = 0
 custom_fonts/font = SubResource( 2 )
 text = "Number of NPCs"
 align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="NumNPCs" type="Label" parent="Menu/SinglePlayerMenu/NPCs"]
-anchor_top = 0.357
-anchor_right = 1.0
-anchor_bottom = 1.143
-margin_top = -68.4579
-margin_bottom = -68.4899
+anchor_right = 1.003
+anchor_bottom = 1.001
+margin_left = 70.0
+margin_top = 68.376
+margin_right = -61.8341
+margin_bottom = -19.751
+grow_horizontal = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 27 )
-text = "11"
+text = "0"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="NPCDecrease" type="Button" parent="Menu/SinglePlayerMenu/NPCs"]
-anchor_left = -0.137
-anchor_top = -1.866
-anchor_right = 2.008
-anchor_bottom = 1.053
-margin_left = 111.31
-margin_top = 433.653
-margin_right = -832.56
-margin_bottom = -62.6276
-grow_horizontal = 0
-grow_vertical = 2
-rect_scale = Vector2( 0.75, 0.75 )
-focus_neighbour_left = NodePath("../../Buttons/BackButton")
-focus_neighbour_top = NodePath("../../Laps/LapsDecrease")
-focus_neighbour_right = NodePath("../NPCIncrease")
-focus_neighbour_bottom = NodePath("../../Level/LevelLeft")
-size_flags_horizontal = 8
-size_flags_vertical = 0
+[node name="NPCsDecrease" type="Button" parent="Menu/SinglePlayerMenu/NPCs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 14.0
+margin_top = 50.0
+margin_right = -220.0
+margin_bottom = -4.0
+focus_neighbour_left = NodePath("../../ColorPicker")
+focus_neighbour_top = NodePath("../NPCDecrease")
+focus_neighbour_right = NodePath("../NPCsIncrease")
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = SubResource( 13 )
 action_mode = 0
 icon = ExtResource( 15 )
 flat = true
-align = 2
-expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+icon_align = 1
 
-[node name="NPCIncrease" type="Button" parent="Menu/SinglePlayerMenu/NPCs"]
-anchor_left = -0.137
-anchor_top = -1.866
-anchor_right = 2.008
-anchor_bottom = 1.053
-margin_left = 467.31
-margin_top = 444.537
-margin_right = -485.56
-margin_bottom = -79.7436
-grow_horizontal = 2
-grow_vertical = 2
-rect_scale = Vector2( 0.75, 0.75 )
-focus_neighbour_left = NodePath("../NPCDecrease")
-focus_neighbour_top = NodePath("../../Laps/LapsIncrease")
-focus_neighbour_right = NodePath("../../Buttons/BackButton")
-focus_neighbour_bottom = NodePath("../../Level/LevelRight")
-size_flags_horizontal = 8
+[node name="NPCsIncrease" type="Button" parent="Menu/SinglePlayerMenu/NPCs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 230.0
+margin_top = 50.0
+margin_right = -4.0
+margin_bottom = -4.0
+focus_neighbour_left = NodePath("../NPCsDecrease")
+focus_neighbour_right = NodePath("../../ColorPicker")
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource( 13 )
 action_mode = 0
 icon = ExtResource( 16 )
 flat = true
-align = 0
-expand_icon = true
+icon_align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Buttons" type="GridContainer" parent="Menu/SinglePlayerMenu"]
-anchor_left = 0.559
-anchor_top = 0.18
-anchor_right = 0.999
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 78.7849
-margin_top = 188.378
-margin_right = -59.9979
-margin_bottom = -90.4559
+margin_left = 474.0
+margin_top = 279.0
+margin_right = -355.0
+margin_bottom = -363.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -843,11 +751,9 @@ size_flags_vertical = 8
 custom_constants/vseparation = 16
 
 [node name="RaceButton" type="Button" parent="Menu/SinglePlayerMenu/Buttons"]
-margin_right = 325.0
-margin_bottom = 79.0
-focus_neighbour_left = NodePath("../../Laps/LapsIncrease")
+margin_right = 131.0
+margin_bottom = 73.0
 focus_neighbour_top = NodePath("../../ColorPicker")
-focus_neighbour_right = NodePath("../../Laps/LapsDecrease")
 focus_neighbour_bottom = NodePath("../BackButton")
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -861,12 +767,10 @@ __meta__ = {
 }
 
 [node name="BackButton" type="Button" parent="Menu/SinglePlayerMenu/Buttons"]
-margin_top = 95.0
-margin_right = 325.0
-margin_bottom = 174.0
-focus_neighbour_left = NodePath("../../NPCs/NPCIncrease")
+margin_top = 89.0
+margin_right = 131.0
+margin_bottom = 162.0
 focus_neighbour_top = NodePath("../RaceButton")
-focus_neighbour_right = NodePath("../../NPCs/NPCDecrease")
 focus_neighbour_bottom = NodePath("../../ColorPicker")
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -880,12 +784,12 @@ __meta__ = {
 }
 
 [node name="ColorPicker" type="ColorPickerButton" parent="Menu/SinglePlayerMenu"]
-anchor_right = 1.001
+anchor_right = 1.002
 anchor_bottom = 1.0
-margin_left = 679.345
-margin_top = 95.0
-margin_right = -175.759
-margin_bottom = -328.456
+margin_left = 474.0
+margin_top = 91.296
+margin_right = -358.92
+margin_bottom = -581.704
 focus_neighbour_left = NodePath("../Level/LevelRight")
 focus_neighbour_top = NodePath("../Buttons/BackButton")
 focus_neighbour_right = NodePath("../Level/LevelLeft")
@@ -901,10 +805,8 @@ edit_alpha = false
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1434.18
-margin_top = 451.111
-margin_right = -200.773
-margin_bottom = -501.273
+margin_left = 960.0
+margin_top = 276.0
 script = ExtResource( 23 )
 
 [node name="OnlineLabel" type="Label" parent="Menu/OnlineMenu"]
@@ -912,10 +814,10 @@ anchor_left = -1.55
 anchor_top = -0.925
 anchor_right = 1.217
 anchor_bottom = 2.028
-margin_left = 1433.82
-margin_top = 451.045
-margin_right = -908.735
-margin_bottom = -874.269
+margin_left = 1560.13
+margin_top = 743.7
+margin_right = -932.187
+margin_bottom = -1563.51
 custom_fonts/font = SubResource( 33 )
 text = "Online"
 
@@ -924,19 +826,18 @@ anchor_left = -1.55
 anchor_top = -0.925
 anchor_right = 1.217
 anchor_bottom = 2.028
-margin_left = 1412.82
-margin_top = 545.045
-margin_right = -604.782
-margin_bottom = -790.885
+margin_left = 1560.13
+margin_top = 842.292
+margin_right = -727.187
+margin_bottom = -1435.92
 grow_vertical = 2
 theme = SubResource( 13 )
 custom_constants/separation = 32
 alignment = 1
 
 [node name="HostBox" type="CheckBox" parent="Menu/OnlineMenu/HostJoin"]
-margin_left = 58.0
-margin_right = 267.0
-margin_bottom = 104.0
+margin_right = 181.0
+margin_bottom = 96.0
 focus_neighbour_left = NodePath("../JoinBox")
 focus_neighbour_top = NodePath("../../Buttons/RaceButton")
 focus_neighbour_right = NodePath("../JoinBox")
@@ -946,9 +847,9 @@ custom_fonts/font = SubResource( 34 )
 text = "Host"
 
 [node name="JoinBox" type="CheckBox" parent="Menu/OnlineMenu/HostJoin"]
-margin_left = 299.0
-margin_right = 483.0
-margin_bottom = 104.0
+margin_left = 213.0
+margin_right = 369.0
+margin_bottom = 96.0
 focus_neighbour_left = NodePath("../HostBox")
 focus_neighbour_top = NodePath("../../Buttons/BackButton")
 focus_neighbour_right = NodePath("../HostBox")
@@ -962,22 +863,22 @@ anchor_left = -1.55
 anchor_top = -0.925
 anchor_right = 1.217
 anchor_bottom = 2.028
-margin_left = 1445.82
-margin_top = 660.636
-margin_right = -619.785
-margin_bottom = -651.294
+margin_left = 1560.13
+margin_top = 947.462
+margin_right = -505.187
+margin_bottom = -1312.75
 custom_constants/hseparation = 0
 
 [node name="Label" type="Label" parent="Menu/OnlineMenu/IPAddress"]
-margin_right = 494.0
+margin_right = 591.0
 margin_bottom = 50.0
 custom_fonts/font = SubResource( 36 )
 text = "IP Address:"
 
 [node name="IPText" type="LineEdit" parent="Menu/OnlineMenu/IPAddress"]
-margin_top = 58.0
-margin_right = 494.0
-margin_bottom = 128.0
+margin_top = 54.0
+margin_right = 591.0
+margin_bottom = 114.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../../HostJoin/HostBox")
 focus_neighbour_right = NodePath(".")
@@ -988,6 +889,7 @@ theme = SubResource( 13 )
 custom_fonts/font = SubResource( 5 )
 text = "127.0.0.1"
 max_length = 15
+editable = false
 context_menu_enabled = false
 clear_button_enabled = true
 placeholder_text = "IP Address"
@@ -1030,16 +932,16 @@ anchor_left = -1.55
 anchor_top = -0.925
 anchor_right = 1.217
 anchor_bottom = 2.028
-margin_left = 1493.82
-margin_top = 850.922
-margin_right = -513.788
-margin_bottom = -453.008
+margin_left = 1560.0
+margin_top = 1108.7
+margin_right = -671.32
+margin_bottom = -1171.51
 custom_constants/vseparation = 8
 columns = 2
 
 [node name="RaceButton" type="Button" parent="Menu/OnlineMenu/Buttons"]
-margin_right = 272.0
-margin_bottom = 100.0
+margin_right = 211.0
+margin_bottom = 94.0
 focus_neighbour_left = NodePath("../BackButton")
 focus_neighbour_top = NodePath("../../IPAddress/IPText")
 focus_neighbour_right = NodePath("../BackButton")
@@ -1050,6 +952,7 @@ size_flags_vertical = 0
 theme = SubResource( 13 )
 custom_fonts/font = ExtResource( 18 )
 disabled = true
+text = "Host"
 flat = true
 align = 0
 __meta__ = {
@@ -1057,9 +960,9 @@ __meta__ = {
 }
 
 [node name="BackButton" type="Button" parent="Menu/OnlineMenu/Buttons"]
-margin_left = 280.0
-margin_right = 551.0
-margin_bottom = 100.0
+margin_left = 215.0
+margin_right = 425.0
+margin_bottom = 94.0
 focus_neighbour_left = NodePath("../RaceButton")
 focus_neighbour_top = NodePath("../../IPAddress/IPText")
 focus_neighbour_right = NodePath("../RaceButton")
@@ -1079,21 +982,15 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1360.8
-margin_top = 400.376
-margin_right = -274.145
-margin_bottom = -552.008
+margin_left = 1032.0
+margin_top = 276.0
 script = ExtResource( 21 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="OptionsLabel" type="Label" parent="Menu/OptionsMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 0.231995
-margin_right = -675.768
-margin_bottom = -373.0
+margin_right = -676.0
+margin_bottom = -737.0
 custom_fonts/font = SubResource( 28 )
 text = "Options"
 align = 1
@@ -1103,13 +1000,10 @@ __meta__ = {
 }
 
 [node name="SFX" type="Control" parent="Menu/OptionsMenu"]
-anchor_top = 0.127
-anchor_right = 0.569
+anchor_right = 1.0
 anchor_bottom = 1.002
-margin_left = 16.0
-margin_top = 41.1948
-margin_right = -0.167908
-margin_bottom = -223.805
+margin_top = 143.0
+margin_bottom = -548.608
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1117,7 +1011,8 @@ __meta__ = {
 [node name="Label" type="Label" parent="Menu/OptionsMenu/SFX"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -8.0
+margin_right = -721.0
+margin_bottom = -75.0
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 29 )
 text = "SFX Volume"
@@ -1130,8 +1025,8 @@ anchor_top = 0.286
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
-margin_top = 15.968
-margin_right = -574.816
+margin_top = 16.396
+margin_right = -776.0
 margin_bottom = -16.0
 grow_vertical = 2
 size_flags_vertical = 0
@@ -1150,10 +1045,10 @@ __meta__ = {
 anchor_top = 0.286
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 196.0
-margin_top = -0.235889
-margin_right = 398.813
-margin_bottom = -0.66394
+margin_left = 151.0
+margin_top = -0.604
+margin_right = -62.0
+margin_bottom = -1.0
 min_value = -48.0
 max_value = -12.0
 value = -40.0
@@ -1167,13 +1062,10 @@ __meta__ = {
 }
 
 [node name="Music" type="Control" parent="Menu/OptionsMenu"]
-anchor_top = 0.127
-anchor_right = 0.569
+anchor_right = 1.0
 anchor_bottom = 1.002
-margin_left = 16.0
-margin_top = 202.195
-margin_right = -0.167969
-margin_bottom = -70.8052
+margin_top = 253.762
+margin_bottom = -434.846
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1181,10 +1073,11 @@ __meta__ = {
 [node name="Label" type="Label" parent="Menu/OptionsMenu/Music"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -687.0
+margin_bottom = -78.0
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 29 )
-text = "Music Volume
-"
+text = "Music Volume"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1194,8 +1087,8 @@ anchor_top = 0.286
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
-margin_top = 15.968
-margin_right = -574.816
+margin_top = 15.538
+margin_right = -776.0
 margin_bottom = -16.0
 grow_vertical = 2
 size_flags_vertical = 0
@@ -1214,10 +1107,10 @@ __meta__ = {
 anchor_top = 0.286
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 196.0
-margin_top = 0.0521049
-margin_right = 398.813
-margin_bottom = 0.336044
+margin_left = 151.0
+margin_top = 0.537998
+margin_right = -62.0
+margin_bottom = 1.0
 min_value = -48.0
 max_value = -12.0
 value = -40.0
@@ -1231,14 +1124,12 @@ __meta__ = {
 }
 
 [node name="Buttons" type="GridContainer" parent="Menu/OptionsMenu"]
-anchor_left = 0.569
-anchor_top = 0.127
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -489.355
-margin_top = 388.831
-margin_right = -0.0532227
-margin_bottom = 99.1421
+margin_left = 50.6327
+margin_top = 398.592
+margin_right = -294.367
+margin_bottom = -311.408
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -1247,8 +1138,8 @@ custom_constants/vseparation = 8
 columns = 2
 
 [node name="ApplyButton" type="Button" parent="Menu/OptionsMenu/Buttons"]
-margin_right = 440.0
-margin_bottom = 100.0
+margin_right = 270.0
+margin_bottom = 94.0
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -1262,9 +1153,9 @@ __meta__ = {
 }
 
 [node name="BackButton" type="Button" parent="Menu/OptionsMenu/Buttons"]
-margin_left = 448.0
-margin_right = 888.0
-margin_bottom = 100.0
+margin_left = 274.0
+margin_right = 543.0
+margin_bottom = 94.0
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -1281,10 +1172,7 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1394.63
-margin_top = 428.376
-margin_right = -561.366
-margin_bottom = 15.376
+margin_left = 1032.0
 size_flags_vertical = 0
 script = ExtResource( 24 )
 
@@ -1302,14 +1190,15 @@ align = 1
 valign = 1
 
 [node name="Sprite" type="Sprite" parent="Menu/ControlsMenu"]
-position = Vector2( 448.532, 322.54 )
+position = Vector2( 312.133, 544.296 )
+scale = Vector2( 0.921126, 0.921126 )
 texture = ExtResource( 22 )
 
 [node name="BackButton" type="Button" parent="Menu/ControlsMenu"]
-margin_left = 831.37
-margin_top = 727.615
-margin_right = 1156.36
-margin_bottom = 827.615
+margin_left = 637.37
+margin_top = 921.615
+margin_right = 962.36
+margin_bottom = 1021.61
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = SubResource( 13 )
@@ -1320,13 +1209,12 @@ flat = true
 align = 0
 
 [node name="FPS" type="Label" parent="Menu"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 2406.0
-margin_top = 1376.0
-margin_right = -43.0
-margin_bottom = -39.0
+margin_left = 26.2109
+margin_top = 1035.0
+margin_right = -1795.79
+margin_bottom = -25.0
 text = "FPS:"
 
 [connection signal="pressed" from="Menu/ClientBtn" to="." method="_new_client"]
@@ -1341,8 +1229,8 @@ text = "FPS:"
 [connection signal="button_down" from="Menu/SinglePlayerMenu/Level/LevelRight" to="Menu/SinglePlayerMenu" method="_level_select_right"]
 [connection signal="button_down" from="Menu/SinglePlayerMenu/Laps/LapsDecrease" to="Menu/SinglePlayerMenu" method="_decrease_lap_amount"]
 [connection signal="button_down" from="Menu/SinglePlayerMenu/Laps/LapsIncrease" to="Menu/SinglePlayerMenu" method="_increase_lap_amount"]
-[connection signal="button_down" from="Menu/SinglePlayerMenu/NPCs/NPCDecrease" to="Menu/SinglePlayerMenu" method="_decrease_NPC_amount"]
-[connection signal="button_down" from="Menu/SinglePlayerMenu/NPCs/NPCIncrease" to="Menu/SinglePlayerMenu" method="_increase_NPC_amount"]
+[connection signal="button_down" from="Menu/SinglePlayerMenu/NPCs/NPCsDecrease" to="Menu/SinglePlayerMenu" method="_decrease_NPC_amount"]
+[connection signal="button_down" from="Menu/SinglePlayerMenu/NPCs/NPCsIncrease" to="Menu/SinglePlayerMenu" method="_increase_NPC_amount"]
 [connection signal="button_down" from="Menu/SinglePlayerMenu/Buttons/RaceButton" to="Menu/SinglePlayerMenu" method="_start_race"]
 [connection signal="button_down" from="Menu/SinglePlayerMenu/Buttons/BackButton" to="." method="return_to_main"]
 [connection signal="color_changed" from="Menu/SinglePlayerMenu/ColorPicker" to="." method="set_racer_color"]

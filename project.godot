@@ -94,8 +94,8 @@ Debug="*res://Game/Singletons/Debug.gd"
 
 [display]
 
-window/size/width=2560
-window/size/height=1440
+window/size/width=1920
+window/size/height=1080
 window/size/test_width=1600
 window/size/test_height=900
 window/stretch/mode="viewport"
@@ -104,14 +104,6 @@ window/stretch/aspect="keep"
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/OnscreenKeyboard/plugin.cfg" )
-
-[global]
-
-shadow=false
-
-[gui]
-
-theme/use_hidpi=true
 
 [input]
 
@@ -266,12 +258,6 @@ CamDown={
 
 threads/thread_model=2
 quality/directional_shadow/size=8192
-quality/shadow_atlas/size=8192
 quality/shadow_atlas/cubemap_size=1024
-quality/shadows/filter_mode=2
 gles3/shaders/shader_compilation_mode=1
-gles3/shaders/max_simultaneous_compiles=4
-quality/filters/msaa=4
-quality/filters/use_fxaa=true
-quality/filters/use_debanding=true
 environment/default_environment="res://default_env.tres"

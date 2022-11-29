@@ -1,10 +1,5 @@
 extends LobbyMenu
 
-onready var level_name = $MenuFrame/LobbyFrame/HostSettingsPanel/Level/LevelName
-onready var num_laps = $MenuFrame/LobbyFrame/HostSettingsPanel/Laps/NumLaps
-onready var num_npcs = $MenuFrame/LobbyFrame/HostSettingsPanel/NPCs/NumNPCs
-onready var race_button = $MenuFrame/LobbyFrame/HostSettingsPanel/Buttons/RaceButton
-
 var level_select : int = Globals.multiplayer_level
 var lap_amount : int = Globals.multiplayer_laps_number
 var npc_amount : int = Globals.multiplayer_NPC_number
@@ -27,10 +22,10 @@ func _setup_race():
 func update_lobby_info(update_type : String):
 	.update_lobby_info(update_type)
 
-	race_button.disabled = false
+	ready_button.disabled = false
 	for player in Network.player_list:
 		if !Network.player_list[player].is_ready:
-			race_button.disabled = true
+			ready_button.disabled = true
 			break
 
 #	_check_max_npcs()

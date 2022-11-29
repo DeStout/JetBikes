@@ -75,9 +75,17 @@
 			},
 			{
 				"type": "char",
-				"output": "9",
-				"display": "9"
+				"output": "Backspace",
+              "display-icon": "PREDEFINED:DELETE"
 			}
+			]
+		},
+		{
+			"keys": [
+            {
+              "type": "special-hide-keyboard",
+              "display-icon": "PREDEFINED:HIDE"
+            }
 			]
 		}
 		]

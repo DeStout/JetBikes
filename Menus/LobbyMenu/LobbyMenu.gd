@@ -3,11 +3,14 @@ extends Control
 
 signal return_to_main
 
-onready var racer_name : LineEdit = $MenuFrame/LobbyFrame/RacerSettingsPanel/RacerName
-onready var vehicle_color : ColorPickerButton = $MenuFrame/LobbyFrame/RacerSettingsPanel/VehicleColor
-onready var racer_list : ItemList = $MenuFrame/LobbyFrame/ListPanel/RacersList
-
-onready var cancel_button : Button = $MenuFrame/LobbyFrame/CancelPanel/CancelButton
+onready var racer_name : LineEdit = $LobbyFrame/RacerSettings/RacerName
+onready var vehicle_color : ColorPickerButton = $LobbyFrame/RacerSettings/VehicleColor
+onready var racer_list : ItemList = $LobbyFrame/RacersList/RacersList
+onready var level_name = $LobbyFrame/RaceSettings/Level/LevelName
+onready var num_laps = $LobbyFrame/RaceSettings/Laps/NumLaps
+onready var num_npcs = $LobbyFrame/RaceSettings/NPCs/NumNPCs
+onready var ready_button : Button = $LobbyFrame/ButtonsPanel/ReadyButton
+onready var leave_button : Button = $LobbyFrame/ButtonsPanel/LeaveButton
 
 
 func _ready() -> void:
@@ -25,7 +28,6 @@ func _racer_color_changed(new_color : Color) -> void:
 
 func update_lobby_info(update_type : String) -> void:
 #	print("Updating Lobby: " + update_type)
-
 	if is_inside_tree():
 		racer_list.clear()
 		for player in Network.player_list:
@@ -58,6 +60,6 @@ func reset_lobby():
 		Network.is_in_race(false)
 
 
-func _on_CancelButton_pressed() -> void:
+func _leave() -> void:
 	# Signal to Network (close_network_connection)
 	emit_signal("return_to_main")

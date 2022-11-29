@@ -16,18 +16,18 @@ func _ready():
 func item_rect_changed():
 	if iconTexRect != null:
 		iconTexRect.rect_size = rect_size
-	
+
 func _init(_keyData):
 	keyData = _keyData
 	connect("button_up",self,"button_up")
 	connect("button_down",self,"button_down")
 	connect("item_rect_changed",self,"item_rect_changed")
-	
+
 	size_flags_horizontal = SIZE_EXPAND_FILL
 	size_flags_vertical = SIZE_EXPAND_FILL
-	
+
 	focus_mode = FOCUS_NONE
-	
+
 	if keyData.has("display"):
 		text = keyData.get("display")
 
@@ -58,6 +58,6 @@ func changeUppercase(value):
 
 func button_up():
 	emit_signal("released",keyData)
-	
+
 func button_down():
 	emit_signal("down",keyData)

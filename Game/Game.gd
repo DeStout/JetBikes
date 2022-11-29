@@ -22,6 +22,8 @@ func _ready():
 
 
 func start_single_player_game():
+	main_menu.hide_all()
+
 	var level_loader = level_loader_.instance()
 	add_child(level_loader)
 	level_loader.load_track(Globals.level_dict[Globals.level_dict_keys[Globals.level]])
@@ -32,8 +34,6 @@ func start_single_player_game():
 	_single_player_track.connect("return_to_main", self, "return_to_main_menu")
 
 	remove_child(main_menu)
-#	remove_child(level_loader)
-#	main_menu.hide_all()
 	level_loader.queue_free()
 
 
