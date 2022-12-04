@@ -1,6 +1,6 @@
 extends Track
 
-signal return_to_main
+#signal return_to_main
 
 
 

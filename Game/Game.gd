@@ -3,8 +3,8 @@ extends Node
 
 onready var main_menu = $MainMenu3D
 
-var online_multiplayer_manager_ = load("res://Game/MultiplayerManager/MultiplayerManager.tscn")
-var online_multiplayer_manager
+var online_multiplayer_manager_ = preload("res://Game/MultiplayerManager/MultiplayerManager.tscn")
+var online_multiplayer_manager : Node = null
 
 var level_loader_ = preload("res://Menus/LoadingMenu/LoadingMenu.tscn")
 
@@ -19,6 +19,8 @@ func _ready():
 	online_multiplayer_manager = online_multiplayer_manager_.instance()
 	main_menu.online_menu.connect("setup_online_lobby", self, "setup_online_lobby")
 	online_multiplayer_manager.connect("return_to_main", self, "return_to_main_menu")
+	online_multiplayer_manager.game = self
+
 
 
 func start_single_player_game():
@@ -38,10 +40,9 @@ func start_single_player_game():
 
 
 func setup_online_lobby(is_host : bool):
-	if online_multiplayer_manager == null:
-		online_multiplayer_manager = load("res://Game/MultiplayerManager/MultiplayerManager.tscn")
-		online_multiplayer_manager = online_multiplayer_manager.instance()
-		online_multiplayer_manager.connect("return_to_main", self, "return_to_main_menu")
+#	if online_multiplayer_manager == null:
+#		online_multiplayer_manager = online_multiplayer_manager.instance()
+#		online_multiplayer_manager.connect("return_to_main", self, "return_to_main_menu")
 
 #	remove_child(main_menu)
 	main_menu.hide_all()

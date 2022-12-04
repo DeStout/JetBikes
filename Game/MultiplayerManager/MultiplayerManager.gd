@@ -2,6 +2,8 @@ extends Node
 
 signal return_to_main
 
+var _game : Node = null
+
 var host_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/HostLobby.tscn")
 var client_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/ClientLobby.tscn")
 var _lobby : Control
@@ -50,7 +52,7 @@ func setup_lobby_network(is_host : bool) -> void:
 		_lobby.connect("failed_connection", self, "return_to_main")
 		_lobby.get_node("ConnectingMenu/CancelButton").connect("pressed", self, "return_to_main")
 		connection = Network.init_client()
-#
+
 	if connection == OK:
 		add_child(_lobby)
 		_lobby.leave_button.connect("pressed", self, "return_to_main")
@@ -105,9 +107,9 @@ func return_to_lobby() -> void:
 		remove_child(_multiplayer_track)
 
 	print("Race Finished - Returning to Lobby")
-	add_child(_lobby)
 	get_parent().add_child(get_parent().main_menu)
 	get_parent().move_child(self, 1)
+	add_child(_lobby)
 	yield(_lobby, "tree_entered")
 	_lobby.reset_lobby()
 

@@ -55,9 +55,8 @@ func update_lobby_info(update_type : String) -> void:
 
 
 func reset_lobby():
-	Network.track_ready(false)
-	if Network.self_data.is_in_race:
-		Network.is_in_race(false)
+	print("Parent Lobby reset")
+	Network.reset_racer()
 
 
 func _leave() -> void:

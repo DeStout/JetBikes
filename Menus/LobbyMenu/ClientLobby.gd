@@ -19,7 +19,7 @@ func _wait_for_connection() -> void:
 			$ConnectingMenu.visible = false
 			$LobbyFrame.visible = true
 			break
-		yield(get_tree(), "idle_frame")
+		yield(get_tree().create_timer(0.5), "timeout")
 	$ConnectingMenu.get_node("Timer").stop()
 
 	if !connected_to_host:
@@ -47,4 +47,5 @@ func update_lobby_info(update_type : String) -> void:
 
 func reset_lobby() -> void:
 	.reset_lobby()
+	print("Client Lobby reset")
 	toggle_racer_ready(false)

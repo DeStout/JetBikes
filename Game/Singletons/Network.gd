@@ -15,6 +15,8 @@ var _ip_address : String = _DEFAULT_IP
 
 var upnp : UPNP = UPNP.new()
 
+var race_finished := false
+
 #var test_track_ : PackedScene = load("res://Tracks/TestTrack/TestTrack.tscn")
 #var test_terrain_ : PackedScene = load("res://Tracks/TestTerrain/TestTerrain.tscn")
 #var level_dict : Dictionary = {
@@ -35,8 +37,8 @@ class PlayerData:
 	var placeholder_name : String = ""
 	var color : Color = Color(0.184314, 0.788235, 1)
 	var is_ready : bool = false
-	var preview_finished : bool = false
 	var is_in_race : bool = false
+	var preview_finished : bool = false
 	var global_trans : Transform = Transform(Basis(Vector3.ZERO))
 	var engine_rot : Vector3 = Vector3.ZERO
 	var placement : int = 0
@@ -49,8 +51,8 @@ class PlayerData:
 		temp_dict.placeholder_name = placeholder_name
 		temp_dict.color = color
 		temp_dict.is_ready = is_ready
-		temp_dict.preview_finished = preview_finished
 		temp_dict.is_in_race = is_in_race
+		temp_dict.preview_finished = preview_finished
 		temp_dict.global_trans = global_trans
 		temp_dict.engine_rot = engine_rot
 		temp_dict.placement = placement
@@ -63,8 +65,8 @@ class PlayerData:
 		placeholder_name = new_player_data.placeholder_name
 		color = new_player_data.color
 		is_ready = new_player_data.is_ready
-		preview_finished = new_player_data.preview_finished
 		is_in_race = new_player_data.is_in_race
+		preview_finished = new_player_data.preview_finished
 		global_trans = new_player_data.global_trans
 		engine_rot = new_player_data.engine_rot
 		placement = new_player_data.placement
@@ -113,18 +115,25 @@ remotesync func remove_disconnected_racer(racer_id : int) -> void:
 	emit_signal("remove_disconnected_racer", racer_id)
 
 
-remotesync func track_ready(track_ready : bool) -> void:
+remotesync func preview_finished() -> void:
 	if get_tree().get_rpc_sender_id() == 0:
-		self_data.preview_finished = track_ready
-		rpc("track_ready", track_ready)
+		self_data.preview_finished = true
+		rpc("preview_finished")
 	else:
-		player_list[get_tree().get_rpc_sender_id()].preview_finished = track_ready
+		player_list[get_tree().get_rpc_sender_id()].preview_finished = true
 		if get_tree().is_network_server():
+			print("Player " + player_list[get_tree().get_rpc_sender_id()].player_name + " is ready")
+			var all_players_ready = true
+
 			for player in player_list:
-				if player_list[player].is_in_race:
-					if !player_list[player].preview_finished:
-						return
-			rpc("start_race")
+				print(player_list[player].player_name, ": ", player_list[player].is_in_race, ", ", player_list[player].preview_finished)
+				if !player_list[player].is_in_race:
+					continue
+				elif !player_list[player].preview_finished:
+					all_players_ready = false
+					break
+			if all_players_ready:
+				rpc("start_race")
 
 
 remotesync func start_race() -> void:
@@ -136,14 +145,27 @@ remotesync func player_finished() -> void:
 	if get_tree().get_rpc_sender_id() == 0:
 		rpc("player_finished")
 	else:
-		# Signal to MultiplayerPlayersTracker (finish_race)
-		emit_signal("finish_race", player_list[get_tree().get_rpc_sender_id()].player_name)
+		if !race_finished:
+			race_finished = true
+			# Signal to MultiplayerPlayersTracker (finish_race)
+			emit_signal("finish_race", player_list[get_tree().get_rpc_sender_id()].player_name)
 
 
 remotesync func end_race() -> void:
 	if !get_tree().is_network_server():
 		# Signals to MultiplayerManager (return_to_lobby)
 		emit_signal("end_race")
+
+
+remotesync func reset_racer() -> void:
+	if get_tree().get_rpc_sender_id() == 0:
+		self_data.is_in_race = false
+		self_data.preview_finished = false
+		rpc("reset_racer")
+	else:
+		print("Player reset: ", player_list[get_tree().get_rpc_sender_id()].player_name)
+		player_list[get_tree().get_rpc_sender_id()].is_in_race = false
+		player_list[get_tree().get_rpc_sender_id()].preview_finished = false
 
 
 #
