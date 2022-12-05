@@ -5,7 +5,7 @@
 [ext_resource path="res://Racers/Player/HUD/Arrow/Arrow.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Game/Assets/Fonts/NinePin/Nine Pin.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://icon_484x484.png" type="Texture" id=6]
+[ext_resource path="res://Tracks/TestTerrain/Assets/D_Minimap.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=13]
 size = 24
@@ -168,8 +168,8 @@ texture = SubResource( 11 )
 region_rect = Rect2( 0, 0, 256, 256 )
 
 [node name="Minimap" type="Sprite" parent="."]
-position = Vector2( 1672, 32 )
-scale = Vector2( 0.446282, 0.446282 )
+position = Vector2( 1640, 0.000295639 )
+scale = Vector2( 0.578512, 0.578512 )
 texture = ExtResource( 6 )
 centered = false
 offset = Vector2( -0.000244141, 0 )

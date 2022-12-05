@@ -13,7 +13,7 @@ func set_max_laps(new_max_laps : int) -> void:
 
 
 func setup_minimap(new_minimap : Texture, new_minimap_camera : Camera, new_players : Array) -> void:
-	$Minimap.texture = new_minimap
+#	$Minimap.texture = new_minimap
 	$Minimap.minimap_camera = new_minimap_camera
 	$Minimap.players = new_players
 
