@@ -6,7 +6,7 @@ var connected_to_host = false
 
 
 func _ready():
-	Network.connect("connected_to_host", self, "connected_to_host")
+	Network.connect("connected_to_host", self, "successfully_connected")
 	update_lobby_info("Lobby Created")
 
 	_wait_for_connection()
@@ -14,7 +14,7 @@ func _ready():
 
 func _wait_for_connection() -> void:
 	# Restrict Client from joining "ghost" server
-	for attempts in range(20):
+	for _attempts in range(20):
 		if connected_to_host:
 			$ConnectingMenu.visible = false
 			$LobbyFrame.visible = true
@@ -27,11 +27,12 @@ func _wait_for_connection() -> void:
 		emit_signal("failed_connection")
 
 
-func connected_to_host():
+func successfully_connected():
 	connected_to_host = true
 
 
 func toggle_racer_ready(racer_ready : bool):
+	print("Ready button toggled: ", str(racer_ready))
 	ready_button.pressed = racer_ready
 	Network.update_player_ready(racer_ready)
 
@@ -48,4 +49,5 @@ func update_lobby_info(update_type : String) -> void:
 func reset_lobby() -> void:
 	.reset_lobby()
 	print("Client Lobby reset")
-	toggle_racer_ready(false)
+	if ready_button != null:
+		ready_button.pressed = false

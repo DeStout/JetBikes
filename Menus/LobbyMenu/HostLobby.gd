@@ -34,7 +34,7 @@ func update_lobby_info(update_type : String):
 func reset_lobby():
 	.reset_lobby()
 	print("Host Lobby reset")
-	Network.update_player_ready(true)
+#	Network.update_player_ready(true)
 #	get_tree().network_peer.refuse_new_connections = false
 
 

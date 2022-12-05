@@ -3,7 +3,7 @@ extends Control
 var max_laps : String
 
 
-func _process(delta):
+func _process(_delta):
 	$FPS.text = "FPS: " + str(Engine.get_frames_per_second())
 
 

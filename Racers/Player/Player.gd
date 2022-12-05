@@ -65,7 +65,7 @@ func _physics_process(delta : float) -> void:
 							velocity.dot(player_basis.y), velocity.dot(player_basis.z))
 
 		if !is_braking:
-			var delta_move : Vector3
+#			var delta_move : Vector3
 
 			#
 			# Apply acceleration/deacceleration along player X vector based on input
@@ -181,7 +181,7 @@ func _get_control_input() -> void:
 			hop = true
 
 
-func _get_joypad_input(delta) -> void:
+func _get_joypad_input(_delta) -> void:
 	# Rotate the Camera
 	cam_rot_help.rotate_y(6 * deg2rad(Input.get_action_strength("CamLeft") - Input.get_action_strength("CamRight")))
 	cam_rot_help.rotate_x(5 * -deg2rad(Input.get_action_strength("CamDown") - Input.get_action_strength("CamUp")))

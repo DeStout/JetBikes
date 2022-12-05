@@ -6,7 +6,7 @@ var num_periods : int = 0
 
 func _connecting():
 	connect_text.text = "Connecting"
-	for period in range(num_periods):
+	for _period in range(num_periods):
 		connect_text.text += " ."
 	connect_text.text += "\n\n"
 

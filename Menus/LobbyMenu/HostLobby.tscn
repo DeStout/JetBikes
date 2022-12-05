@@ -18,6 +18,8 @@ margin_left = 158.38
 margin_top = 29.04
 margin_right = -587.884
 margin_bottom = -38.111
+custom_colors/font_color = Color( 0.921569, 1, 0, 1 )
+custom_colors/font_color_hover = Color( 0.196078, 1, 0, 1 )
 text = "Race"
 
 [node name="LeaveButton" parent="LobbyFrame/ButtonsPanel" index="1"]

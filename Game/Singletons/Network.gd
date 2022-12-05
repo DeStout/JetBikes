@@ -76,7 +76,8 @@ var self_data : PlayerData = PlayerData.new()
 
 
 func _ready():
-	upnp.discover()
+	var upnp_result := upnp.discover()
+	print("Network UPNP Result: ", str(upnp_result))
 
 
 #
@@ -177,6 +178,7 @@ func set_IP_address(new_ip_address : String = _DEFAULT_IP) -> void:
 
 func init_host() -> int:
 	var port_result = upnp.add_port_mapping(_DEFAULT_PORT)
+	print("Network Port Code: ", str(port_result))
 
 	var peer = NetworkedMultiplayerENet.new()
 	var connection = peer.create_server(_DEFAULT_PORT, MAX_CONNECTIONS)
@@ -200,7 +202,6 @@ func init_client() -> int:
 	var connection = peer.create_client(_ip_address, _DEFAULT_PORT)
 	if connection == OK:
 		get_tree().set_network_peer(peer)
-
 		self_data.network_ID = get_tree().get_network_unique_id()
 
 	print("Client Connection Code: " + str(connection))
@@ -255,7 +256,9 @@ remotesync func update_player_info(new_player_name : String, new_player_color : 
 
 
 remotesync func update_player_ready(player_ready : bool) -> void:
+	print(get_tree().get_rpc_sender_id())
 	if get_tree().get_rpc_sender_id() == 0:
+		print("Player ready: ", str(player_ready))
 		self_data.is_ready = player_ready
 		player_list[get_tree().get_network_unique_id()].is_ready = player_ready
 		rpc("update_player_ready", player_ready)

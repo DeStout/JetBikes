@@ -3,7 +3,7 @@ extends Sprite
 var minimap_camera : Camera
 var players : Array
 
-func _process(delta):
+func _process(_delta):
 	update()
 
 func _draw():

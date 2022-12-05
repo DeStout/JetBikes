@@ -13,6 +13,10 @@ onready var ready_button : Button = $LobbyFrame/ButtonsPanel/ReadyButton
 onready var leave_button : Button = $LobbyFrame/ButtonsPanel/LeaveButton
 
 
+func _enter_tree() -> void:
+	reset_lobby()
+
+
 func _ready() -> void:
 	Network.connect("update_lobby", self, "update_lobby_info")
 	connect("return_to_main", Network, "close_network_connection")
@@ -26,8 +30,8 @@ func _racer_color_changed(new_color : Color) -> void:
 	Network.update_player_info(racer_name.text, new_color)
 
 
-func update_lobby_info(update_type : String) -> void:
-#	print("Updating Lobby: " + update_type)
+func update_lobby_info(_update_type : String) -> void:
+#	print("Updating Lobby: " + _update_type)
 	if is_inside_tree():
 		racer_list.clear()
 		for player in Network.player_list:

@@ -9,6 +9,7 @@
 script = ExtResource( 4 )
 
 [node name="ConnectingMenu" type="Control" parent="." index="0"]
+visible = false
 anchor_top = -0.001
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -50,9 +51,6 @@ flat = true
 wait_time = 0.5
 autostart = true
 
-[node name="LobbyFrame" parent="." index="1"]
-visible = false
-
 [node name="Label" parent="LobbyFrame" index="0"]
 text = "Client Lobby"
 
@@ -85,6 +83,9 @@ margin_left = 108.281
 margin_right = -191.719
 
 [node name="ReadyButton" parent="LobbyFrame/ButtonsPanel" index="0"]
+custom_colors/font_color = Color( 0.909804, 0.0431373, 0.0431373, 1 )
+custom_colors/font_color_hover = Color( 0.878431, 0.886275, 0.0352941, 1 )
+custom_colors/font_color_pressed = Color( 0, 0.796078, 0.0117647, 1 )
 toggle_mode = true
 
 [connection signal="pressed" from="ConnectingMenu/CancelButton" to="." method="_leave"]

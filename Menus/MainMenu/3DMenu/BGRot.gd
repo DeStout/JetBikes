@@ -5,7 +5,7 @@ onready var racer_default_rot = racer.rotation
 var time_elapsed := 0.0
 
 
-func _process(delta):
+func _process(_delta):
 	get_node("../Menu/FPS").text = "FPS: " + str(Engine.get_frames_per_second())
 
 

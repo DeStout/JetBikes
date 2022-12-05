@@ -40,8 +40,8 @@ func add_collision_impulse(impulse) -> void:
 	pass
 
 
-puppet func set_crashed(is_crashed : bool) -> void:
-	if is_crashed:
+puppet func set_crashed(_crashed : bool) -> void:
+	if _crashed:
 		crash_bike.visible = true
 
 		visible = false

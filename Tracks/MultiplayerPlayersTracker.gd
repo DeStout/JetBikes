@@ -24,7 +24,7 @@ func _init() -> void:
 
 
 
-func _process(delta : float) -> void:
+func _process(_delta : float) -> void:
 #	players.sort_custom(self, "_sort_placement")
 #	_alert_players()
 	pass

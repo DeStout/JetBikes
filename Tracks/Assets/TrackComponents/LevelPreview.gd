@@ -35,12 +35,12 @@ func _process(delta):
 		frames[frame_pos] = delta
 
 	if frames.size() > 1:
-		var mean : float
+		var mean := 0.0
 		for frame in frames:
 			mean += frame
 		mean /= frames.size()
 
-		var mean_depature : float = 0
+		var mean_depature := 0.0
 		for frame in frames:
 			mean_depature += pow(frame - mean, 2)
 		std_dev = sqrt(mean_depature / (frames.size() - 1))

@@ -65,7 +65,7 @@ var swing_poles : Array
 var crash_bike : RigidBody
 
 
-func _process(delta):
+func _process(_delta):
 	if current_path_node != null:
 		_path_node_distance()
 	_pitch_sfx()
@@ -405,10 +405,10 @@ func _set_audio_sfx(sfx_effect) -> void:
 
 
 # Helper function to align player with the ground normal
-func _align_to_normal(ground_normal : Vector3) -> Quat:
+func _align_to_normal(_ground_normal : Vector3) -> Quat:
 	var result : Basis = Basis()
-	result.y = ground_normal.normalized()
-	result.x = ground_normal.cross(global_transform.basis.z).normalized()
+	result.y = _ground_normal.normalized()
+	result.x = _ground_normal.cross(global_transform.basis.z).normalized()
 	result.z = result.x.cross(result.y).normalized()
 	return result.orthonormalized().get_rotation_quat()
 

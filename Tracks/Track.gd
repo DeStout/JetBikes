@@ -33,7 +33,7 @@ func _ready() -> void:
 		Network.connect("start_timer_start", self, "begin_countdown")
 
 
-func _process(delta) -> void:
+func _process(_delta) -> void:
 	if $StartTimer.time_left:
 		if !Globals.is_multiplayer:
 			$Players.player.HUD.set_race_notice("%d" % ($StartTimer.time_left + 1), true)

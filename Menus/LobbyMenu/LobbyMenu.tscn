@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Menus/LobbyMenu/LobbyMenu.gd" type="Script" id=1]
 [ext_resource path="res://Menus/Assets/MenuFont.tres" type="DynamicFont" id=2]
@@ -86,6 +86,28 @@ CheckBox/styles/pressed = SubResource( 48 )
 ColorPickerButton/fonts/font = SubResource( 11 )
 ColorPickerButton/styles/focus = SubResource( 47 )
 ColorPickerButton/styles/hover = SubResource( 46 )
+
+[sub_resource type="StyleBoxEmpty" id=52]
+
+[sub_resource type="StyleBoxEmpty" id=53]
+
+[sub_resource type="StyleBoxEmpty" id=54]
+
+[sub_resource type="StyleBoxEmpty" id=55]
+
+[sub_resource type="StyleBoxEmpty" id=56]
+
+[sub_resource type="Theme" id=57]
+Button/colors/font_color = Color( 1, 0, 0, 1 )
+Button/colors/font_color_disabled = Color( 0.210938, 0, 0, 1 )
+Button/colors/font_color_hover = Color( 1, 0.913725, 0, 1 )
+Button/colors/font_color_pressed = Color( 0.360784, 1, 0, 1 )
+Button/fonts/font = ExtResource( 2 )
+Button/styles/disabled = SubResource( 52 )
+Button/styles/focus = SubResource( 53 )
+Button/styles/hover = SubResource( 54 )
+Button/styles/normal = SubResource( 55 )
+Button/styles/pressed = SubResource( 56 )
 
 [node name="Lobby" type="Control"]
 anchor_right = 1.0
@@ -525,9 +547,10 @@ margin_right = -583.62
 margin_bottom = -38.426
 grow_horizontal = 2
 grow_vertical = 2
+focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 10
-custom_fonts/font = ExtResource( 2 )
+theme = SubResource( 57 )
 text = "Ready"
 flat = true
 

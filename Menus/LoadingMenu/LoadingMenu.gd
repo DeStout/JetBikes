@@ -10,7 +10,7 @@ func _ready():
 	set_process(false)
 
 
-func _process(delta):
+func _process(_delta):
 	poll_msg = loader.poll()
 
 	if poll_msg == OK || poll_msg == ERR_FILE_EOF:

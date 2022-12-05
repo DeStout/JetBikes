@@ -2,7 +2,7 @@ extends Node
 
 signal return_to_main
 
-var _game : Node = null
+var game : Node = null
 
 var host_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/HostLobby.tscn")
 var client_lobby_ : PackedScene = preload("res://Menus/LobbyMenu/ClientLobby.tscn")
@@ -35,10 +35,10 @@ func setup_track() -> void:
 	_multiplayer_track = yield(level_loader, "track_loaded")
 
 	_multiplayer_track = _multiplayer_track.instance()
+	get_parent().remove_child(get_parent().main_menu)
 	add_child(_multiplayer_track)
 	_multiplayer_track.connect("return_to_main", self, "return_to_lobby")
 
-	get_parent().remove_child(get_parent().main_menu)
 	level_loader.queue_free()
 
 
@@ -110,8 +110,6 @@ func return_to_lobby() -> void:
 	get_parent().add_child(get_parent().main_menu)
 	get_parent().move_child(self, 1)
 	add_child(_lobby)
-	yield(_lobby, "tree_entered")
-	_lobby.reset_lobby()
 
 
 func return_to_main() -> void:
