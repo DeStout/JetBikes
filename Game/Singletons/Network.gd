@@ -127,13 +127,13 @@ remotesync func preview_finished() -> void:
 			var all_players_ready = true
 
 			for player in player_list:
-				print(player_list[player].player_name, ": ", player_list[player].is_in_race, ", ", player_list[player].preview_finished)
 				if !player_list[player].is_in_race:
 					continue
 				elif !player_list[player].preview_finished:
 					all_players_ready = false
 					break
 			if all_players_ready:
+				print("All players present and ready - Starting Race!")
 				rpc("start_race")
 
 
@@ -164,7 +164,6 @@ remotesync func reset_racer() -> void:
 		self_data.preview_finished = false
 		rpc("reset_racer")
 	else:
-		print("Player reset: ", player_list[get_tree().get_rpc_sender_id()].player_name)
 		player_list[get_tree().get_rpc_sender_id()].is_in_race = false
 		player_list[get_tree().get_rpc_sender_id()].preview_finished = false
 
@@ -245,8 +244,6 @@ remotesync func update_player_info(new_player_name : String, new_player_color : 
 	if get_tree().get_rpc_sender_id() == 0:
 		self_data.player_name = new_player_name
 		self_data.color = new_player_color
-		player_list[self_data.network_ID].player_name = new_player_name
-		player_list[self_data.network_ID].color = new_player_color
 		rpc("update_player_info", new_player_name, new_player_color)
 	else:
 		player_list[get_tree().get_rpc_sender_id()].player_name = new_player_name
@@ -256,11 +253,8 @@ remotesync func update_player_info(new_player_name : String, new_player_color : 
 
 
 remotesync func update_player_ready(player_ready : bool) -> void:
-	print(get_tree().get_rpc_sender_id())
 	if get_tree().get_rpc_sender_id() == 0:
-		print("Player ready: ", str(player_ready))
 		self_data.is_ready = player_ready
-		player_list[get_tree().get_network_unique_id()].is_ready = player_ready
 		rpc("update_player_ready", player_ready)
 	else:
 		player_list[get_tree().get_rpc_sender_id()].is_ready = player_ready

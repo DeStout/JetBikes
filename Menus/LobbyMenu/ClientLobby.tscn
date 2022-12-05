@@ -9,7 +9,6 @@
 script = ExtResource( 4 )
 
 [node name="ConnectingMenu" type="Control" parent="." index="0"]
-visible = false
 anchor_top = -0.001
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -51,11 +50,11 @@ flat = true
 wait_time = 0.5
 autostart = true
 
+[node name="LobbyFrame" parent="." index="1"]
+visible = false
+
 [node name="Label" parent="LobbyFrame" index="0"]
 text = "Client Lobby"
-
-[node name="RacersList" parent="LobbyFrame/RacersList" index="1"]
-items = [ "Item 0", null, false, "Item 1", null, false, "Item 2", null, false, "Item 3", null, false, "Item 4", null, false, "Item 5", null, false, "Item 6", null, false, "Item 7", null, false, "Item 8", null, false, "Item 9", null, false, "Item 10", null, false, "Item 11", null, false, "Item 12", null, false, "Item 13", null, false, "Item 14", null, false, "Item 15", null, false, "Item 16", null, false, "Item 17", null, false, "Item 18", null, false, "Item 19", null, false, "Item 20", null, false, "Item 21", null, false, "Item 22", null, false, "Item 23", null, false ]
 
 [node name="LevelLeft" parent="LobbyFrame/RaceSettings/Level" index="2"]
 visible = false

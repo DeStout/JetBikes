@@ -14,6 +14,7 @@ onready var leave_button : Button = $LobbyFrame/ButtonsPanel/LeaveButton
 
 
 func _enter_tree() -> void:
+	yield(get_tree(), "physics_frame")
 	reset_lobby()
 
 
@@ -59,7 +60,6 @@ func update_lobby_info(_update_type : String) -> void:
 
 
 func reset_lobby():
-	print("Parent Lobby reset")
 	Network.reset_racer()
 
 

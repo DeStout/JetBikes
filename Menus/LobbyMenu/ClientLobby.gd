@@ -32,7 +32,6 @@ func successfully_connected():
 
 
 func toggle_racer_ready(racer_ready : bool):
-	print("Ready button toggled: ", str(racer_ready))
 	ready_button.pressed = racer_ready
 	Network.update_player_ready(racer_ready)
 
@@ -48,6 +47,5 @@ func update_lobby_info(update_type : String) -> void:
 
 func reset_lobby() -> void:
 	.reset_lobby()
-	print("Client Lobby reset")
 	if ready_button != null:
 		ready_button.pressed = false
