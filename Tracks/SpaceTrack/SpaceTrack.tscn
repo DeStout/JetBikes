@@ -1,0 +1,206 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Tracks/Track.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Tracks/SpaceTrack/SpaceTrackBase.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Tracks/Assets/TrackComponents/PathNode/PathNode.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Tracks/Assets/TrackComponents/PreviewFollow.gd" type="Script" id=4]
+[ext_resource path="res://Tracks/Assets/Skyboxes/Sky_LightBlue.png" type="Texture" id=5]
+[ext_resource path="res://Game/Music/Shiny Tech2.mp3" type="AudioStream" id=6]
+
+[sub_resource type="PanoramaSky" id=5]
+panorama = ExtResource( 5 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 5 )
+background_sky_orientation = Basis( 0.858423, 0.512942, 0, -0.486324, 0.813877, -0.31795, -0.16309, 0.272936, 0.948107 )
+ambient_light_color = Color( 0.0156863, 0.247059, 0.321569, 1 )
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.94
+glow_strength = 1.27
+glow_bloom = 0.08
+adjustment_enabled = true
+adjustment_brightness = 2.47
+adjustment_contrast = 1.24
+adjustment_saturation = 0.71
+
+[sub_resource type="Curve3D" id=4]
+_data = {
+"points": PoolVector3Array(  ),
+"tilts": PoolRealArray(  )
+}
+
+[sub_resource type="Curve3D" id=3]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -0.0658026, 0.0230522, -0.364449 ),
+"tilts": PoolRealArray( 0 )
+}
+
+[sub_resource type="PlaneMesh" id=6]
+size = Vector2( 1024, 1024 )
+
+[node name="Track" instance=ExtResource( 1 )]
+transform = Transform( 1.00013, 0, 0, 0, 1.00013, 0, 0, 0, 1.00013, 0, 177.023, 0 )
+
+[node name="SpaceTrack" parent="LevelGeo/Terrain" index="0" instance=ExtResource( 2 )]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0 )
+
+[node name="PlayerSpawn1" type="Spatial" parent="Players" index="1"]
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -19.3392, 4.13293, -27.6191 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn1" index="0"]
+
+[node name="PlayerSpawn2" type="Spatial" parent="Players" index="2"]
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -6.69703, 4.13293, -27.6191 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn2" index="0"]
+
+[node name="PlayerSpawn3" type="Spatial" parent="Players" index="3"]
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, 6.38612, 4.13295, -27.6191 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn3" index="0"]
+
+[node name="PlayerSpawn4" type="Spatial" parent="Players" index="4"]
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, 19.1753, 4.13295, -27.6191 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn4" index="0"]
+
+[node name="PlayerSpawn5" type="Spatial" parent="Players" index="5"]
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -19.3392, 4.13293, -11.1191 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn5" index="0"]
+
+[node name="PlayerSpawn6" type="Spatial" parent="Players" index="6"]
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -6.69703, 4.13293, -11.1191 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn6" index="0"]
+
+[node name="PlayerSpawn7" type="Spatial" parent="Players" index="7"]
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, 6.38612, 4.13295, -11.1191 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn7" index="0"]
+
+[node name="PlayerSpawn8" type="Spatial" parent="Players" index="8"]
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, 19.1753, 4.13295, -11.1191 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn8" index="0"]
+
+[node name="PlayerSpawn9" type="Spatial" parent="Players" index="9"]
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -19.3392, 4.13293, 5.38087 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn9" index="0"]
+
+[node name="PlayerSpawn10" type="Spatial" parent="Players" index="10"]
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -6.69703, 4.13293, 5.38087 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn10" index="0"]
+
+[node name="PlayerSpawn11" type="Spatial" parent="Players" index="11"]
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, 6.38612, 4.13295, 5.38087 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn11" index="0"]
+
+[node name="PlayerSpawn12" type="Spatial" parent="Players" index="12"]
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, 19.1753, 4.13295, 5.38087 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn12" index="0"]
+
+[node name="WorldEnvironment" parent="." index="3"]
+environment = SubResource( 2 )
+
+[node name="DirectionalLight" parent="." index="4"]
+transform = Transform( 0.90602, 1.02896e-07, 0.422927, -0.397961, 0.338447, 0.852537, -0.143157, -0.940847, 0.30668, 0, 56.2673, 0 )
+light_color = Color( 0.490196, 0.584314, 0.65098, 1 )
+light_energy = 0.133
+shadow_enabled = true
+shadow_color = Color( 0.00392157, 0.0392157, 0.0745098, 1 )
+
+[node name="TrackPath" type="Path" parent="." index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.67623, 0 )
+curve = SubResource( 4 )
+
+[node name="PathNode0" parent="PathNodes" index="0" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0111989, 10.0935, -60.8987 )
+box_visible = true
+width = 50.134
+height = 9.396
+next_serial = 1
+
+[node name="PathNode1" parent="PathNodes" index="1" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -36.8853, -60.3339, -231.636 )
+box_visible = true
+width = 50.134
+height = 9.396
+serial = 1
+next_serial = 2
+
+[node name="PathNode2" parent="PathNodes" index="2" instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12.1477, -60.3339, -280.669 )
+box_visible = true
+width = 50.134
+height = 9.396
+serial = 2
+
+[node name="PreviewPath1" type="Path" parent="LevelPreview" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.6445, -52.876 )
+curve = SubResource( 3 )
+
+[node name="PathFollow" type="PathFollow" parent="LevelPreview/PreviewPath1" index="0"]
+transform = Transform( 0.867784, -0.256575, 0.425505, 1.49012e-08, 0.856412, 0.516209, -0.496942, -0.448044, 0.743037, -0.0658026, 0.0230522, -0.364449 )
+rotation_mode = 4
+loop = false
+script = ExtResource( 4 )
+
+[node name="MinimapCamera" parent="Minimap" index="0"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 250, 0 )
+size = 1675.64
+far = 531.9
+
+[node name="MusicPlayer" parent="." index="13"]
+stream = ExtResource( 6 )
+volume_db = 7.682
+autoplay = true
+
+[node name="DeathFloor" type="MeshInstance" parent="." index="15"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -247.023, 0 )
+visible = false
+mesh = SubResource( 6 )
+
+[connection signal="preview_finished" from="LevelPreview" to="." method="_preview_finished"]

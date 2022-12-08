@@ -99,8 +99,7 @@ one_shot = true
 pause_mode = 2
 bus = "Music"
 
-[node name="SFX" type="AudioStreamPlayer" parent="."]
-bus = "SFX"
+[node name="SFX" type="Node" parent="."]
 
 [connection signal="ready" from="PathNodes" to="." method="setup_pathnodes"]
 [connection signal="timeout" from="StartTimer" to="." method="start_race" flags=6]

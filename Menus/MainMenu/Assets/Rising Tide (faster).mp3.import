@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Rising Tide (faster).mp3-b12b4c010b9ce47aa304d3cbcb4e2fa8.mp3str"
+
+[deps]
+
+source_file="res://Menus/MainMenu/Assets/Rising Tide (faster).mp3"
+dest_files=[ "res://.import/Rising Tide (faster).mp3-b12b4c010b9ce47aa304d3cbcb4e2fa8.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

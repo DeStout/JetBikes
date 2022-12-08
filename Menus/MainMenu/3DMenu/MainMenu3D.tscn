@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Racers/General/Bike/Assets/Materials/CarbonFiber/Fabric004_1K_NormalGL.png" type="Texture" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://Menus/MainMenu/3DMenu/OnlineMenu.gd" type="Script" id=23]
 [ext_resource path="res://Menus/MainMenu/3DMenu/ControlsMenu.gd" type="Script" id=24]
 [ext_resource path="res://addons/OnscreenKeyboard/onscreen_keyboard.gd" type="Script" id=25]
+[ext_resource path="res://Menus/MainMenu/Assets/Rising Tide (faster).mp3" type="AudioStream" id=26]
 
 [sub_resource type="GIProbeData" id=15]
 bounds = AABB( -5, -5, -5, 10, 10, 10 )
@@ -289,6 +290,11 @@ __meta__ = {
 "_edit_vertical_guides_": [ 1032.0 ]
 }
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 26 )
+autoplay = true
+bus = "Music"
+
 [node name="GIProbe" type="GIProbe" parent="."]
 subdiv = 0
 extents = Vector3( 5, 5, 5 )
@@ -318,10 +324,6 @@ material/0 = SubResource( 4 )
 
 [node name="Particles" parent="BGRot/Racer/EngineRotationHelper/Engine" index="5"]
 visibility_aabb = AABB( -0.561094, -0.495488, -0.553337, 1.12888, 2.18098, 1.11117 )
-
-[node name="Skeleton" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider" index="0"]
-bones/11/bound_children = [ NodePath("AirbagAttachment") ]
-bones/13/bound_children = [ NodePath("HelmetAttachment") ]
 
 [node name="HelmetAttachment" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider/Skeleton" index="1"]
 transform = Transform( 0.924797, -0.243309, 0.292491, 0.316223, 0.919032, -0.235336, -0.21155, 0.310129, 0.926858, 0.310943, 0.482913, 0.241308 )
@@ -398,7 +400,6 @@ scale = Vector2( 0.784955, 0.784884 )
 texture = ExtResource( 14 )
 
 [node name="ClientBtn" type="Button" parent="Menu"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 48.8564

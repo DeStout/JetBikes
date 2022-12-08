@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/The Complex.mp3-c579d3d4de5d8f4226180b62f0be638f.mp3str"
+
+[deps]
+
+source_file="res://Game/Music/The Complex.mp3"
+dest_files=[ "res://.import/The Complex.mp3-c579d3d4de5d8f4226180b62f0be638f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

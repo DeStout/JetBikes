@@ -5,8 +5,10 @@ var INFINITE_BOOST : bool = false
 
 #var test_track_ = "res://Tracks/TestTrack/TestTrack.tscn"
 var test_terrain_ = "res://Tracks/TestTerrain/TestTerrain.tscn"
+var space_track_ = "res://Tracks/SpaceTrack/SpaceTrack.tscn"
 var level_dict : Dictionary = {
-	"test_terrain" : test_terrain_
+	"test_terrain" : test_terrain_,
+	"space_track" : space_track_
 	}
 var level_dict_keys : Array = level_dict.keys()
 var DEFAULT_LEVEL = 0

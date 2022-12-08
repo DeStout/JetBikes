@@ -31,7 +31,7 @@ func setup_track() -> void:
 
 	var level_loader = level_loader_.instance()
 	add_child(level_loader)
-	level_loader.load_track(Globals.level_dict[Globals.level_dict_keys[Globals.level]])
+	level_loader.load_track(Globals.level_dict[Globals.level_dict_keys[Globals.multiplayer_level]])
 	_multiplayer_track = yield(level_loader, "track_loaded")
 
 	_multiplayer_track = _multiplayer_track.instance()

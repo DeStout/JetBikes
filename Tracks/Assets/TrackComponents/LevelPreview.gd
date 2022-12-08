@@ -21,10 +21,13 @@ func _ready():
 
 	preview_camera = preview_camera.instance()
 	_get_paths()
-	paths[path_index].get_node("PathFollow").add_child(preview_camera)
-	paths[path_index].get_node("PathFollow").start_preview()
+	if paths.size() > 0:
+		paths[path_index].get_node("PathFollow").add_child(preview_camera)
+		paths[path_index].get_node("PathFollow").start_preview()
 
-	$ColorRect/AnimationPlayer.play("FadeIn")
+		$ColorRect/AnimationPlayer.play("FadeIn")
+	else:
+		emit_signal("preview_finished")
 
 
 func _process(delta):

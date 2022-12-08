@@ -1,4 +1,4 @@
-[gd_scene load_steps=232 format=2]
+[gd_scene load_steps=233 format=2]
 
 [ext_resource path="res://Tracks/Assets/TrackComponents/SwingPole/SwingPole.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tracks/Assets/TrackComponents/Sign/M_WrongWay_D.png" type="Texture" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://Tracks/TestTerrain/Assets/Props/Rock_9/RockE.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Tracks/TestTerrain/Assets/Props/Pines/Pine2.mesh" type="ArrayMesh" id=19]
 [ext_resource path="res://Tracks/Assets/TrackComponents/PreviewFollow.gd" type="Script" id=20]
+[ext_resource path="res://Tracks/TestTerrain/Assets/SFX/Waterfall.wav" type="AudioStream" id=21]
 [ext_resource path="res://Tracks/TestTerrain/Assets/D_Mist.png" type="Texture" id=24]
 [ext_resource path="res://Tracks/TestTerrain/Assets/D_Waterfall.png" type="Texture" id=25]
 [ext_resource path="res://Tracks/Assets/TrackComponents/Sign/M_Sign_D.png" type="Texture" id=27]
@@ -4482,6 +4483,13 @@ far = 1000.0
 
 [node name="MusicPlayer" parent="." index="13"]
 stream = ExtResource( 7 )
+
+[node name="Waterfall_SFX" type="AudioStreamPlayer3D" parent="SFX" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -206.356, 124.601, -709.11 )
+stream = ExtResource( 21 )
+unit_size = 41.3
+autoplay = true
+max_distance = 372.36
 
 [connection signal="preview_finished" from="LevelPreview" to="." method="_preview_finished"]
 [connection signal="path_finished" from="LevelPreview/PreviewPath1/PathFollow" to="LevelPreview" method="switch_cameras"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Shiny Tech2.mp3-c24348f6667583409bb8a4a13df0c739.mp3str"
+
+[deps]
+
+source_file="res://Game/Music/Shiny Tech2.mp3"
+dest_files=[ "res://.import/Shiny Tech2.mp3-c24348f6667583409bb8a4a13df0c739.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
