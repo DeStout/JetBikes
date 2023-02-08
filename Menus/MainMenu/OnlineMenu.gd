@@ -29,7 +29,7 @@ func _hide_show() -> void:
 
 	if visible:
 		_add_connecting_menu()
-# 		TODO: Move to ConnectingMenu/ erverMenu
+#		TODO: Move to ConnectingMenu/ServerMenu
 #		if Input.get_connected_joypads().size():
 #			if current_focus == null:
 #				current_focus = $ConnectingMenu/CancelButton

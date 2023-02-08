@@ -104,14 +104,11 @@ __meta__ = {
 [node name="LabelsContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 32.0
+margin_left = 16.0
 margin_top = 256.0
-margin_right = -96.0
+margin_right = -112.0
 margin_bottom = -760.0
-custom_constants/separation = 110
-__meta__ = {
-"_edit_lock_": true
-}
+custom_constants/separation = 100
 
 [node name="LobbyLabel" type="Label" parent="LabelsContainer"]
 margin_top = 14.0
@@ -121,33 +118,33 @@ theme = SubResource( 13 )
 text = "Lobby"
 
 [node name="TrackLabel" type="Label" parent="LabelsContainer"]
-margin_left = 191.0
+margin_left = 181.0
 margin_top = 14.0
-margin_right = 263.0
+margin_right = 253.0
 margin_bottom = 50.0
 theme = SubResource( 13 )
 text = "Track"
 
 [node name="LapsLabel" type="Label" parent="LabelsContainer"]
-margin_left = 373.0
+margin_left = 353.0
 margin_top = 14.0
-margin_right = 435.0
+margin_right = 415.0
 margin_bottom = 50.0
 theme = SubResource( 13 )
 text = "Laps"
 
 [node name="RacersLabel" type="Label" parent="LabelsContainer"]
-margin_left = 545.0
+margin_left = 515.0
 margin_top = 14.0
-margin_right = 635.0
+margin_right = 605.0
 margin_bottom = 50.0
 theme = SubResource( 13 )
 text = "Racers"
 
 [node name="NPCsLabel" type="Label" parent="LabelsContainer"]
-margin_left = 745.0
+margin_left = 705.0
 margin_top = 14.0
-margin_right = 814.0
+margin_right = 774.0
 margin_bottom = 50.0
 theme = SubResource( 13 )
 text = "NPCs"
@@ -160,6 +157,7 @@ margin_right = -64.0
 margin_bottom = -184.0
 theme = SubResource( 13 )
 items = [ "Lobby 1", null, false, "Track 1", null, false, "Laps 1", null, false, "Racers 1", null, false, "NPCs 1", null, false, "Lobby 2", null, false, "Track 2", null, false, "Laps 2", null, false, "Racers 2", null, false, "NPCs 2", null, false ]
+allow_reselect = true
 auto_height = true
 max_columns = 5
 same_column_width = true
@@ -202,3 +200,5 @@ margin_bottom = 73.0
 theme = SubResource( 13 )
 text = "Disconnect"
 flat = true
+
+[connection signal="item_selected" from="ItemList" to="." method="_select_row"]

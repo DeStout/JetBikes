@@ -318,10 +318,6 @@ material/0 = SubResource( 4 )
 [node name="Particles" parent="BGRot/Racer/EngineRotationHelper/Engine" index="5"]
 visibility_aabb = AABB( -0.561094, -0.495488, -0.553337, 1.12888, 2.18098, 1.11117 )
 
-[node name="Skeleton" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider" index="0"]
-bones/11/bound_children = [ NodePath("AirbagAttachment") ]
-bones/13/bound_children = [ NodePath("HelmetAttachment") ]
-
 [node name="HelmetAttachment" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider/Skeleton" index="1"]
 transform = Transform( 0.924797, -0.243309, 0.292491, 0.316223, 0.919032, -0.235336, -0.21155, 0.310129, 0.926858, 0.310943, 0.482913, 0.241308 )
 

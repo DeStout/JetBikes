@@ -39,3 +39,4 @@ func return_to_main_menu():
 
 	if !has_node(main_menu.name):
 		add_child(main_menu)
+		main_menu.return_to_main()
