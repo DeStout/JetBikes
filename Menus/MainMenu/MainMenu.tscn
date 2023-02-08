@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://Menus/MainMenu/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Menus/Assets/MenuFont.tres" type="DynamicFont" id=2]
@@ -224,7 +224,12 @@ size = 26
 font_data = ExtResource( 7 )
 
 [sub_resource type="StyleBoxFlat" id=44]
-bg_color = Color( 0.627451, 0.627451, 0.627451, 1 )
+
+[sub_resource type="StyleBoxFlat" id=47]
+bg_color = Color( 0.425781, 0.425781, 0.425781, 1 )
+
+[sub_resource type="StyleBoxFlat" id=46]
+bg_color = Color( 0.375, 0.375, 0.375, 1 )
 
 [sub_resource type="Theme" id=13]
 Button/fonts/font = SubResource( 37 )
@@ -239,6 +244,9 @@ ColorPickerButton/styles/hover = SubResource( 43 )
 ItemList/colors/font_color = Color( 0.105882, 0.105882, 0.105882, 1 )
 ItemList/fonts/font = SubResource( 5 )
 ItemList/styles/bg = SubResource( 44 )
+ItemList/styles/cursor = SubResource( 47 )
+ItemList/styles/cursor_unfocused = null
+ItemList/styles/selected_focus = SubResource( 46 )
 Label/fonts/font = SubResource( 5 )
 
 [sub_resource type="DynamicFont" id=1]
@@ -309,6 +317,10 @@ material/0 = SubResource( 4 )
 
 [node name="Particles" parent="BGRot/Racer/EngineRotationHelper/Engine" index="5"]
 visibility_aabb = AABB( -0.561094, -0.495488, -0.553337, 1.12888, 2.18098, 1.11117 )
+
+[node name="Skeleton" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider" index="0"]
+bones/11/bound_children = [ NodePath("AirbagAttachment") ]
+bones/13/bound_children = [ NodePath("HelmetAttachment") ]
 
 [node name="HelmetAttachment" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider/Skeleton" index="1"]
 transform = Transform( 0.924797, -0.243309, 0.292491, 0.316223, 0.919032, -0.235336, -0.21155, 0.310129, 0.926858, 0.310943, 0.482913, 0.241308 )

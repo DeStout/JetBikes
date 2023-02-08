@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Game/Assets/Fonts/OpenSans/OpenSans-ExtraBold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Menus/OnlineMenu/ServerMenu.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=45]
 size = 96
@@ -53,7 +54,12 @@ size = 26
 font_data = ExtResource( 2 )
 
 [sub_resource type="StyleBoxFlat" id=44]
-bg_color = Color( 0.627451, 0.627451, 0.627451, 1 )
+
+[sub_resource type="StyleBoxFlat" id=47]
+bg_color = Color( 0.425781, 0.425781, 0.425781, 1 )
+
+[sub_resource type="StyleBoxFlat" id=46]
+bg_color = Color( 0.375, 0.375, 0.375, 1 )
 
 [sub_resource type="Theme" id=13]
 Button/fonts/font = SubResource( 37 )
@@ -68,68 +74,80 @@ ColorPickerButton/styles/hover = SubResource( 43 )
 ItemList/colors/font_color = Color( 0.105882, 0.105882, 0.105882, 1 )
 ItemList/fonts/font = SubResource( 5 )
 ItemList/styles/bg = SubResource( 44 )
+ItemList/styles/cursor = SubResource( 47 )
+ItemList/styles/cursor_unfocused = null
+ItemList/styles/selected_focus = SubResource( 46 )
 Label/fonts/font = SubResource( 5 )
 
 [node name="ServerMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 3 )
 __meta__ = {
+"_edit_group_": true,
 "_edit_vertical_guides_": [ 960.0 ]
 }
 
 [node name="ServerLabel" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -64.0
 margin_bottom = -824.0
 custom_fonts/font = SubResource( 45 )
 text = "Races List"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="ListLabels" type="HBoxContainer" parent="."]
+[node name="LabelsContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 96.0
+margin_left = 32.0
 margin_top = 256.0
-margin_right = -64.0
+margin_right = -96.0
 margin_bottom = -760.0
-custom_constants/separation = 82
+custom_constants/separation = 110
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="LobbyLabel" type="Label" parent="ListLabels"]
+[node name="LobbyLabel" type="Label" parent="LabelsContainer"]
 margin_top = 14.0
 margin_right = 81.0
 margin_bottom = 50.0
 theme = SubResource( 13 )
 text = "Lobby"
 
-[node name="TrackLabel" type="Label" parent="ListLabels"]
-margin_left = 163.0
+[node name="TrackLabel" type="Label" parent="LabelsContainer"]
+margin_left = 191.0
 margin_top = 14.0
-margin_right = 235.0
+margin_right = 263.0
 margin_bottom = 50.0
 theme = SubResource( 13 )
 text = "Track"
 
-[node name="LapsLabel" type="Label" parent="ListLabels"]
-margin_left = 317.0
+[node name="LapsLabel" type="Label" parent="LabelsContainer"]
+margin_left = 373.0
 margin_top = 14.0
-margin_right = 379.0
+margin_right = 435.0
 margin_bottom = 50.0
 theme = SubResource( 13 )
 text = "Laps"
 
-[node name="RacersLabel" type="Label" parent="ListLabels"]
-margin_left = 461.0
+[node name="RacersLabel" type="Label" parent="LabelsContainer"]
+margin_left = 545.0
 margin_top = 14.0
-margin_right = 551.0
+margin_right = 635.0
 margin_bottom = 50.0
 theme = SubResource( 13 )
 text = "Racers"
 
-[node name="NPCsLabel" type="Label" parent="ListLabels"]
-margin_left = 633.0
+[node name="NPCsLabel" type="Label" parent="LabelsContainer"]
+margin_left = 745.0
 margin_top = 14.0
-margin_right = 702.0
+margin_right = 814.0
 margin_bottom = 50.0
 theme = SubResource( 13 )
 text = "NPCs"
@@ -137,13 +155,50 @@ text = "NPCs"
 [node name="ItemList" type="ItemList" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 64.0
 margin_top = 320.0
 margin_right = -64.0
-margin_bottom = -456.0
+margin_bottom = -184.0
 theme = SubResource( 13 )
 items = [ "Lobby 1", null, false, "Track 1", null, false, "Laps 1", null, false, "Racers 1", null, false, "NPCs 1", null, false, "Lobby 2", null, false, "Track 2", null, false, "Laps 2", null, false, "Racers 2", null, false, "NPCs 2", null, false ]
 auto_height = true
 max_columns = 5
 same_column_width = true
-fixed_column_width = 160
+fixed_column_width = 172
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 936.0
+margin_right = -1026.0
+margin_bottom = -71.0
+custom_constants/separation = 86
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CreateButton" type="Button" parent="ButtonsContainer"]
+margin_right = 289.0
+margin_bottom = 73.0
+theme = SubResource( 13 )
+text = "Create New"
+flat = true
+
+[node name="JoinButton" type="Button" parent="ButtonsContainer"]
+margin_left = 375.0
+margin_right = 480.0
+margin_bottom = 73.0
+theme = SubResource( 13 )
+text = "Join"
+flat = true
+
+[node name="DisconnectButton" type="Button" parent="ButtonsContainer"]
+margin_left = 566.0
+margin_right = 846.0
+margin_bottom = 73.0
+theme = SubResource( 13 )
+text = "Disconnect"
+flat = true
