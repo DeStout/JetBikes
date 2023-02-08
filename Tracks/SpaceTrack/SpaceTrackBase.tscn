@@ -23,3 +23,15 @@ collision_mask = 17
 [node name="StaticBody" parent="Plat5" index="0"]
 collision_layer = 2
 collision_mask = 17
+
+[node name="StaticBody" parent="Plat6" index="0"]
+collision_layer = 2
+collision_mask = 17
+
+[node name="StaticBody" parent="Plat7" index="0"]
+collision_layer = 2
+collision_mask = 17
+
+[node name="StaticBody" parent="Plat8" index="0"]
+collision_layer = 2
+collision_mask = 17

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ControlsMenu.png-a66ebd2efb2a88976f01ec99d7ca7dcf.stex"
+path="res://.import/ControlsMenu.png-09c104e98f5fb91bd5d1aedc95b3e65c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Menus/MainMenu/ControlsMenu/ControlsMenu.png"
-dest_files=[ "res://.import/ControlsMenu.png-a66ebd2efb2a88976f01ec99d7ca7dcf.stex" ]
+source_file="res://Menus/MainMenu/Assets/Images/ControlsMenu.png"
+dest_files=[ "res://.import/ControlsMenu.png-09c104e98f5fb91bd5d1aedc95b3e65c.stex" ]
 
 [params]
 

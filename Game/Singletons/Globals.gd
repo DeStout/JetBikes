@@ -40,6 +40,8 @@ onready var level_bus : int = AudioServer.get_bus_index("Level_SFX")
 
 const GRAVITY = 150
 
+onready var game = get_tree().current_scene
+
 var level : int = DEFAULT_LEVEL
 var laps_number : int = DEFAULT_LAP_NUMBER
 var NPC_number : int = DEFAULT_NPC_NUMBER
@@ -48,7 +50,6 @@ var max_NPC_number : int = 11
 var multiplayer_level : int = DEFAULT_LEVEL
 var multiplayer_laps_number : int = DEFAULT_LAP_NUMBER
 var multiplayer_NPC_number : int = DEFAULT_NPC_NUMBER
-
 
 var race_on_going : bool = false
 

@@ -1,15 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Game/MultiplayerManager/MultiplayerManager.gd" type="Script" id=1]
-[ext_resource path="res://Game/Music/Juno Reactor - Pistolero.mp3" type="AudioStream" id=2]
+[ext_resource path="res://Game/MultiplayerManager/MultiplayerManager_old.gd" type="Script" id=1]
 
 [node name="OnlineMultiplayerManager" type="Node"]
 script = ExtResource( 1 )
-
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-pause_mode = 2
-stream = ExtResource( 2 )
-bus = "Music"
-
-[node name="SFX" type="AudioStreamPlayer" parent="."]
-bus = "SFX"

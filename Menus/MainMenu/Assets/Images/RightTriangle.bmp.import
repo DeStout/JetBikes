@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/RightTriangle.bmp-36b654a5f8e757f98b201d5e572f67dc.stex"
+path="res://.import/RightTriangle.bmp-abc03c5b33e4fe1890fc803c51db7660.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Menus/MainMenu/Assets/Sprites/RightTriangle.bmp"
-dest_files=[ "res://.import/RightTriangle.bmp-36b654a5f8e757f98b201d5e572f67dc.stex" ]
+source_file="res://Menus/MainMenu/Assets/Images/RightTriangle.bmp"
+dest_files=[ "res://.import/RightTriangle.bmp-abc03c5b33e4fe1890fc803c51db7660.stex" ]
 
 [params]
 

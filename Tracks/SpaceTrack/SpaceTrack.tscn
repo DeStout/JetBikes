@@ -27,14 +27,14 @@ adjustment_saturation = 0.71
 
 [sub_resource type="Curve3D" id=4]
 _data = {
-"points": PoolVector3Array(  ),
-"tilts": PoolRealArray(  )
+"points": PoolVector3Array( 1.76596, 0.430466, 4.6813, -1.76596, -0.430466, -4.6813, -0.181396, -0.0540314, -0.285873, -1.48744, -1.75658, 49.9052, 1.48744, 1.75658, -49.9052, -1.47173, 1.21451, -61.6482, 42.0313, -9.32343, -42.8229, -42.0313, 9.32343, 42.8229, -120.526, 52.6959, -126.554, -19.8007, 20.1568, -27.7652, 19.8007, -20.1568, 27.7652, -145.624, 34.1766, -15.3426, -39.5252, 19.4558, 20.7726, 39.5252, -19.4558, -20.7726, -56.613, -31.613, -0.224686, 0, 0, 0, 0, 0, 0, -23.6629, -46.7487, -66.9186, 0, 0, 0, 0, 0, 0, -20.7114, -47.5034, -293.472 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0 )
 }
 
 [sub_resource type="Curve3D" id=3]
 _data = {
-"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -0.0658026, 0.0230522, -0.364449 ),
-"tilts": PoolRealArray( 0 )
+"points": PoolVector3Array( -0.00427246, -1.32724, 23.6161, 0.00427246, 1.32724, -23.6161, -0.592957, -1.18716, -0.692879, 5.57834, -3.1601, 15.9987, -5.57834, 3.1601, -15.9987, -0.172745, -0.217407, -71.8354, 26.4355, -12.3825, 26.2712, -26.4355, 12.3825, -26.2712, -38.8233, 22.7169, -137.069 ),
+"tilts": PoolRealArray( 0, 0, 0 )
 }
 
 [sub_resource type="PlaneMesh" id=6]
@@ -44,10 +44,9 @@ size = Vector2( 1024, 1024 )
 transform = Transform( 1.00013, 0, 0, 0, 1.00013, 0, 0, 0, 1.00013, 0, 177.023, 0 )
 
 [node name="SpaceTrack" parent="LevelGeo/Terrain" index="0" instance=ExtResource( 2 )]
-transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0 )
 
 [node name="PlayerSpawn1" type="Spatial" parent="Players" index="1"]
-transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -19.3392, 4.13293, -27.6191 )
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -161.983, 75.7647, 61.4125 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -55,7 +54,7 @@ __meta__ = {
 [node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn1" index="0"]
 
 [node name="PlayerSpawn2" type="Spatial" parent="Players" index="2"]
-transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -6.69703, 4.13293, -27.6191 )
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -150.252, 75.8274, 61.4125 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -63,7 +62,7 @@ __meta__ = {
 [node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn2" index="0"]
 
 [node name="PlayerSpawn3" type="Spatial" parent="Players" index="3"]
-transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, 6.38612, 4.13295, -27.6191 )
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -138.991, 75.8274, 61.4125 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -71,7 +70,7 @@ __meta__ = {
 [node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn3" index="0"]
 
 [node name="PlayerSpawn4" type="Spatial" parent="Players" index="4"]
-transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, 19.1753, 4.13295, -27.6191 )
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -127.112, 75.7697, 61.4125 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -79,7 +78,7 @@ __meta__ = {
 [node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn4" index="0"]
 
 [node name="PlayerSpawn5" type="Spatial" parent="Players" index="5"]
-transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -19.3392, 4.13293, -11.1191 )
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -161.983, 75.7647, 77.9124 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -87,7 +86,7 @@ __meta__ = {
 [node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn5" index="0"]
 
 [node name="PlayerSpawn6" type="Spatial" parent="Players" index="6"]
-transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -6.69703, 4.13293, -11.1191 )
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -150.252, 75.8274, 77.9124 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -95,7 +94,7 @@ __meta__ = {
 [node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn6" index="0"]
 
 [node name="PlayerSpawn7" type="Spatial" parent="Players" index="7"]
-transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, 6.38612, 4.13295, -11.1191 )
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -138.991, 75.8274, 77.9124 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -103,7 +102,7 @@ __meta__ = {
 [node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn7" index="0"]
 
 [node name="PlayerSpawn8" type="Spatial" parent="Players" index="8"]
-transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, 19.1753, 4.13295, -11.1191 )
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -127.112, 75.7697, 77.9124 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -111,7 +110,7 @@ __meta__ = {
 [node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn8" index="0"]
 
 [node name="PlayerSpawn9" type="Spatial" parent="Players" index="9"]
-transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -19.3392, 4.13293, 5.38087 )
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -161.983, 75.7647, 94.4124 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -119,7 +118,7 @@ __meta__ = {
 [node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn9" index="0"]
 
 [node name="PlayerSpawn10" type="Spatial" parent="Players" index="10"]
-transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -6.69703, 4.13293, 5.38087 )
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -150.252, 75.8274, 94.4124 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -127,7 +126,7 @@ __meta__ = {
 [node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn10" index="0"]
 
 [node name="PlayerSpawn11" type="Spatial" parent="Players" index="11"]
-transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, 6.38612, 4.13295, 5.38087 )
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -138.991, 75.8274, 94.4124 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -135,7 +134,7 @@ __meta__ = {
 [node name="CSGSphere" type="CSGSphere" parent="Players/PlayerSpawn11" index="0"]
 
 [node name="PlayerSpawn12" type="Spatial" parent="Players" index="12"]
-transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, 19.1753, 4.13295, 5.38087 )
+transform = Transform( 0.769048, 0, 0, 0, 1, 0, 0, 0, 1, -127.112, 75.7697, 94.4124 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -153,37 +152,85 @@ shadow_enabled = true
 shadow_color = Color( 0.00392157, 0.0392157, 0.0745098, 1 )
 
 [node name="TrackPath" type="Path" parent="." index="5"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.67623, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -144.749, 76.1115, 114.069 )
 curve = SubResource( 4 )
 
 [node name="PathNode0" parent="PathNodes" index="0" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0111989, 10.0935, -60.8987 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -144.111, 82.7117, 50.9594 )
 box_visible = true
-width = 50.134
+width = 33.35
 height = 9.396
 next_serial = 1
 
 [node name="PathNode1" parent="PathNodes" index="1" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -36.8853, -60.3339, -231.636 )
+transform = Transform( -0.458828, 0.623774, 0.632761, 0.805547, 0.592535, -3.55792e-07, -0.374932, 0.509717, -0.77435, -277.482, 134.231, 9.3149 )
 box_visible = true
-width = 50.134
+width = 33.35
 height = 9.396
 serial = 1
 next_serial = 2
 
 [node name="PathNode2" parent="PathNodes" index="2" instance=ExtResource( 3 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12.1477, -60.3339, -280.669 )
+transform = Transform( 1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -169.192, 36.1799, 47.0467 )
 box_visible = true
-width = 50.134
+width = 33.35
 height = 9.396
 serial = 2
+next_serial = 3
+
+[node name="PathNode3" parent="PathNodes" index="3" instance=ExtResource( 3 )]
+transform = Transform( -0.171127, 0.657155, 0.734075, 0.967728, 0.252002, 4.21281e-08, -0.184988, 0.710383, -0.679071, -350.798, 105.287, -274.597 )
+box_visible = true
+width = 33.35
+height = 9.396
+serial = 3
+next_serial = 4
+
+[node name="PathNode4" parent="PathNodes" index="4" instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -86.3464, 35.7718, -95.9136 )
+box_visible = true
+width = 33.35
+height = 9.396
+serial = 4
+next_serial = 5
+
+[node name="PathNode5" parent="PathNodes" index="5" instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 342.359, -95.1046, -89.1647 )
+box_visible = true
+width = 33.35
+height = 9.396
+serial = 5
+next_serial = 6
+
+[node name="PathNode6" parent="PathNodes" index="6" instance=ExtResource( 3 )]
+transform = Transform( -0.11981, 0.00702359, 0.992772, 0.0585224, 0.998286, 4.64863e-10, -0.991071, 0.0580993, -0.120016, 148.414, -103.8, 4.4329 )
+box_visible = true
+width = 33.35
+height = 9.396
+serial = 6
+next_serial = 7
+
+[node name="PathNode7" parent="PathNodes" index="7" instance=ExtResource( 3 )]
+transform = Transform( -0.00708538, -9.60921e-05, -0.999975, -0.0135608, 0.999908, -6.31474e-12, 0.999883, 0.0135605, -0.00708603, 158.362, 43.8742, 151.155 )
+box_visible = true
+width = 33.35
+height = 9.396
+serial = 7
+next_serial = 8
+
+[node name="PathNode8" parent="PathNodes" index="8" instance=ExtResource( 3 )]
+transform = Transform( 0.073797, 0.149916, 0.985941, -0.891457, 0.453102, -0.00217111, -0.447058, -0.878763, 0.167081, 107.052, 144.155, 293.752 )
+box_visible = true
+width = 33.35
+height = 9.396
+serial = 8
 
 [node name="PreviewPath1" type="Path" parent="LevelPreview" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.6445, -52.876 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -145.536, 81.6883, 118.227 )
 curve = SubResource( 3 )
 
 [node name="PathFollow" type="PathFollow" parent="LevelPreview/PreviewPath1" index="0"]
-transform = Transform( 0.867784, -0.256575, 0.425505, 1.49012e-08, 0.856412, 0.516209, -0.496942, -0.448044, 0.743037, -0.0658026, 0.0230522, -0.364449 )
+transform = Transform( -1, -4.97454e-05, 0.000895212, 0, 0.998467, 0.055483, -0.000896588, 0.055483, -0.998466, -0.592957, -1.18716, -0.692879 )
 rotation_mode = 4
 loop = false
 script = ExtResource( 4 )

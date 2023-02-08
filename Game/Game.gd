@@ -1,10 +1,7 @@
 class_name Game
 extends Node
 
-onready var main_menu = $MainMenu3D
-
-var online_multiplayer_manager_ = preload("res://Game/MultiplayerManager/MultiplayerManager.tscn")
-var online_multiplayer_manager : Node = null
+onready var main_menu = $MainMenu
 
 var level_loader_ = preload("res://Menus/LoadingMenu/LoadingMenu.tscn")
 
@@ -15,12 +12,6 @@ func _ready():
 	randomize()
 
 	main_menu.single_player_menu.connect("setup_single_player_race", self, "start_single_player_game")
-
-	online_multiplayer_manager = online_multiplayer_manager_.instance()
-	main_menu.online_menu.connect("setup_online_lobby", self, "setup_online_lobby")
-	online_multiplayer_manager.connect("return_to_main", self, "return_to_main_menu")
-	online_multiplayer_manager.game = self
-
 
 
 func start_single_player_game():
@@ -39,18 +30,6 @@ func start_single_player_game():
 	level_loader.queue_free()
 
 
-func setup_online_lobby(is_host : bool):
-#	if online_multiplayer_manager == null:
-#		online_multiplayer_manager = online_multiplayer_manager.instance()
-#		online_multiplayer_manager.connect("return_to_main", self, "return_to_main_menu")
-
-#	remove_child(main_menu)
-	main_menu.hide_all()
-
-	add_child(online_multiplayer_manager)
-	online_multiplayer_manager.setup_lobby_network(is_host)
-
-
 func return_to_main_menu():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
@@ -58,12 +37,5 @@ func return_to_main_menu():
 		remove_child(_single_player_track)
 		_single_player_track = null
 
-	if has_node(online_multiplayer_manager.name):
-		remove_child(online_multiplayer_manager)
-		main_menu._multiplayer_menu()
-	else:
-		main_menu._single_player_menu()
-
 	if !has_node(main_menu.name):
 		add_child(main_menu)
-#	main_menu.return_to_main()

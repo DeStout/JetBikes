@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "LobbyMenu",
 "language": "GDScript",
-"path": "res://Menus/LobbyMenu/LobbyMenu.gd"
+"path": "res://Menus/OnlineMenu/old_menu/LobbyMenu.gd"
 }, {
 "base": "Area",
 "class": "ModNode",
@@ -80,7 +80,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="JetBikes"
+config/name="Jet Bikes"
 run/main_scene="res://Game/Game.tscn"
 boot_splash/image="res://Menus/Assets/Images/Splash.png"
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
@@ -89,8 +89,8 @@ config/icon="res://icon.png"
 [autoload]
 
 Globals="*res://Game/Singletons/Globals.gd"
-Network="*res://Game/Singletons/Network.gd"
 Debug="*res://Game/Singletons/Debug.gd"
+Network="*res://Game/Singletons/Network.gd"
 
 [display]
 
@@ -104,6 +104,10 @@ window/stretch/aspect="keep"
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/OnscreenKeyboard/plugin.cfg" )
+
+[global]
+
+verb=false
 
 [input]
 
@@ -253,6 +257,10 @@ CamDown={
 3d_physics/layer_3="LevelModels"
 3d_physics/layer_4="Water"
 3d_physics/layer_5="NPCs"
+
+[logging]
+
+file_logging/enable_file_logging=true
 
 [rendering]
 
