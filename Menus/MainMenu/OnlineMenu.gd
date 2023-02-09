@@ -13,10 +13,10 @@ var _server_menu : Control
 func _add_connecting_menu() -> void:
 	_connecting_menu = connecting_menu_.instance()
 	add_child(_connecting_menu)
-	_connecting_menu.connect("connected_successfully", self, "_add_server_menu")
+	_connecting_menu.connect("connected_successfully", self, "add_server_menu")
 
 
-func _add_server_menu() -> void:
+func add_server_menu() -> void:
 	if get_children().has(_connecting_menu):
 		_connecting_menu.queue_free()
 	_server_menu = server_menu_.instance()

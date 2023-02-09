@@ -2,10 +2,11 @@ extends Node
 
 
 signal connected_successfully
+signal update_lobby_list
 
 
-#const _IP : String = "127.0.0.1"
-const _IP : String = "144.24.39.221"
+const _IP : String = "127.0.0.1"
+#const _IP : String = "144.24.39.221"
 const _PORT : int = 34500
 var upnp : UPNP = UPNP.new()
 
@@ -26,6 +27,7 @@ func _ready():
 	print("Network UPNP Result: ", str(upnp_result))
 
 	set_self_data()
+	print(get_network_master())
 
 
 func set_self_data() -> void:
@@ -51,6 +53,14 @@ func create_client() -> int:
 
 	print("Client Creation Code: " + str(client_code))
 	return client_code
+
+
+func get_lobby_list() -> void:
+	rpc_id(1, "get_lobby_list")
+
+
+puppet func update_lobby_list(new_lobby_list) -> void:
+	emit_signal("update_lobby_list", new_lobby_list)
 
 
 func _peer_connected(new_peer_id) -> void:

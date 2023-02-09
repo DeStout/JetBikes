@@ -94,7 +94,7 @@ anchor_bottom = 1.0
 margin_right = -64.0
 margin_bottom = -824.0
 custom_fonts/font = SubResource( 45 )
-text = "Races List"
+text = "Lobbies List"
 align = 1
 valign = 1
 __meta__ = {
@@ -109,6 +109,9 @@ margin_top = 256.0
 margin_right = -112.0
 margin_bottom = -760.0
 custom_constants/separation = 100
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="LobbyLabel" type="Label" parent="LabelsContainer"]
 margin_top = 14.0

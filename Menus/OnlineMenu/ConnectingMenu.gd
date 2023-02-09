@@ -4,7 +4,7 @@ extends Control
 signal connected_successfully
 
 var connected_to_server := false
-var num_attempts := 10
+var num_attempts := 20
 var yield_length := 0.5
 
 var num_periods : int = 0
@@ -20,7 +20,7 @@ func _wait_for_connection() -> void:
 	# Restrict Client from joining "ghost" server
 	for _attempts in range(num_attempts):
 		if connected_to_server:
-			# Signal to OnlineMenu
+			# Signal to OnlineMenu (add_server_menu)
 			emit_signal("connected_successfully")
 			break
 		if is_visible_in_tree():
