@@ -14,16 +14,36 @@ func _ready() -> void:
 
 	Network.get_lobby_list()
 
-
+# Signaled from Network (update_lobby_list)
 func update_lobby_list(new_lobby_list) -> void:
 	lobby_list = new_lobby_list
-	print(lobby_list)
+	$LobbyList.clear()
+	for lobby in lobby_list:
+		$LobbyList.add_item(lobby[0])
+		$LobbyList.add_item(lobby[1])
+		$LobbyList.add_item(str(lobby[2]))
+		$LobbyList.add_item(str(lobby[3]) + "/" + str(lobby[4]))
+		$LobbyList.add_item(str(lobby[5]))
+
+
+func _popup_lobby_creation() -> void:
+	$LobbyCreation.popup()
+
+
+func _create_new_lobby() -> void:
+	Network.create_new_lobby($LobbyCreation/NameEdit.text)
+	_hide_lobby_creation()
+
+
+func _hide_lobby_creation() -> void:
+	$LobbyCreation.visible = false
+	$LobbyCreation/NameEdit.text = ""
 
 
 func _select_row(selection_idx) -> void:
 	var row = selection_idx / 5
 
-	$ItemList.select_mode = $ItemList.SELECT_MULTI
+	$LobbyList.select_mode = $LobbyList.SELECT_MULTI
 	for i in range(5):
-		$ItemList.select(i + (row * 5), false)
-	$ItemList.select_mode = $ItemList.SELECT_SINGLE
+		$LobbyList.select(i + (row * 5), false)
+	$LobbyList.select_mode = $LobbyList.SELECT_SINGLE

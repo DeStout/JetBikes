@@ -5,8 +5,8 @@ signal connected_successfully
 signal update_lobby_list
 
 
-const _IP : String = "127.0.0.1"
-#const _IP : String = "144.24.39.221"
+#const _IP : String = "127.0.0.1"
+const _IP : String = "144.24.39.221"
 const _PORT : int = 34500
 var upnp : UPNP = UPNP.new()
 
@@ -56,13 +56,20 @@ func create_client() -> int:
 
 
 func get_lobby_list() -> void:
-	rpc_id(1, "get_lobby_list")
+	rpc_id(1, "send_lobby_list")
 
 
 puppet func update_lobby_list(new_lobby_list) -> void:
 	emit_signal("update_lobby_list", new_lobby_list)
 
 
+func create_new_lobby(new_lobby_name) -> void:
+	rpc_id(1, "create_new_lobby", new_lobby_name)
+
+
+#
+# -- Network connection signals -- #
+#
 func _peer_connected(new_peer_id) -> void:
 	print("Peer Connected: ", new_peer_id)
 
