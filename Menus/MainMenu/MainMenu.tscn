@@ -319,7 +319,7 @@ material/0 = SubResource( 4 )
 visibility_aabb = AABB( -0.561094, -0.495488, -0.553337, 1.12888, 2.18098, 1.11117 )
 
 [node name="HelmetAttachment" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider/Skeleton" index="1"]
-transform = Transform( 0.924797, -0.243309, 0.292491, 0.316223, 0.919032, -0.235336, -0.21155, 0.310129, 0.926858, 0.310943, 0.482913, 0.241308 )
+transform = Transform( 0.999992, -0.00294874, -0.00260557, 0.00166003, 0.916475, -0.400088, 0.00356767, 0.40008, 0.916474, -0.00108238, 0.605131, 0.218817 )
 
 [node name="Helmet" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider/Skeleton/HelmetAttachment/Helmet" index="0"]
 material/0 = SubResource( 24 )
@@ -331,7 +331,7 @@ material/0 = SubResource( 25 )
 material/0 = SubResource( 25 )
 
 [node name="AirbagAttachment" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider/Skeleton" index="2"]
-transform = Transform( 0.963236, 0.205067, -0.173562, -0.203594, 0.135676, -0.969609, -0.175286, 0.969298, 0.172439, 0.235782, 0.4328, -0.0745817 )
+transform = Transform( 0.999999, -0.00174057, 0.00057612, 0.00134666, 0.484045, -0.875042, 0.0012442, 0.875041, 0.484047, -0.000334743, 0.465687, -0.0768995 )
 
 [node name="Airbag" parent="BGRot/Racer/EngineRotationHelper/Engine/Rider/Rider/Skeleton/AirbagAttachment/Airbag" index="0"]
 material/0 = SubResource( 26 )

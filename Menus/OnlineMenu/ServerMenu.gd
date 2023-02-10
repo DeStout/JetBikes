@@ -1,7 +1,7 @@
 extends Control
 
 
-signal lobby_created
+signal create_new_lobby
 
 onready var lobby_list := $LobbyFrame/LobbyList
 var list = []
@@ -38,7 +38,7 @@ func _popup_lobby_creation() -> void:
 func _create_new_lobby() -> void:
 	Network.create_new_lobby(lobby_creation.get_node("NameEdit").text)
 	_hide_lobby_creation()
-	emit_signal("lobby_created")
+	emit_signal("create_new_lobby", lobby_creation.get_node("NameEdit").text)
 
 
 func _hide_lobby_creation() -> void:

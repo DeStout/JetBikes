@@ -24,15 +24,16 @@ func add_server_menu() -> void:
 	_server_menu = server_menu_.instance()
 	add_child(_server_menu)
 
-	_server_menu.connect("lobby_created", self, "add_host_lobby")
+	_server_menu.connect("create_new_lobby", self, "add_host_lobby")
 #	_server_menu.connect("lobby_joined", self, "add_client_lobby")
 
 
-func add_host_lobby() -> void:
+func add_host_lobby(new_lobby_name) -> void:
 	if get_children().has(_server_menu):
 		_server_menu.queue_free()
 	_host_menu = host_menu_.instance()
 	add_child(_host_menu)
+	_host_menu.set_lobby_name(new_lobby_name)
 
 
 func add_client_lobby() -> void:

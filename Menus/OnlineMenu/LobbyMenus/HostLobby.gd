@@ -1,12 +1,14 @@
 extends LobbyMenu
 
+
+var lobby_name : String = ""
 var level_select : int = Globals.multiplayer_level
 var lap_amount : int = Globals.multiplayer_laps_number
 var npc_amount : int = Globals.multiplayer_NPC_number
 
 
 func _ready():
-#	level_name.text = Globals.level_dict_keys[level_select]
+	level_name.text = Globals.level_dict_keys[level_select]
 	num_laps.text = str(lap_amount)
 #	num_npcs.text = str(npc_amount)
 	num_npcs.text = str(0)
@@ -14,9 +16,14 @@ func _ready():
 	update_lobby_info("Lobby Created")
 
 
+func set_lobby_name(new_lobby_name) -> void:
+	lobby_name = new_lobby_name
+#	$LobbyFrame/LobbyName.text = new_lobby_name
+
+
 # Start Race Button
-func _setup_race():
-	print("Start Race")
+#func _setup_race():
+#	print("Start Race")
 #	Network.setup_online_multiplayer_race()
 
 
@@ -32,9 +39,9 @@ func update_lobby_info(update_type : String):
 #	_check_max_npcs()
 
 
-func reset_lobby():
-	.reset_lobby()
-	Network.update_player_ready(true)
+#func reset_lobby():
+#	.reset_lobby()
+#	Network.update_player_ready(true)
 #	get_tree().network_peer.refuse_new_connections = false
 
 

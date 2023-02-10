@@ -4,6 +4,7 @@ extends Node
 signal connected_successfully
 signal update_lobby_list
 signal lobby_created
+signal update_lobby
 
 
 const _IP : String = "127.0.0.1"
@@ -55,6 +56,17 @@ func create_client() -> int:
 	return client_code
 
 
+func reset_network() -> void:
+	set_self_data()
+
+	if get_tree().network_peer != null:
+		get_tree().network_peer.close_connection()
+		get_tree().set_network_peer(null)
+
+
+#
+# -- Server Menu Functions -- #
+#
 func get_lobby_list() -> void:
 	rpc_id(1, "send_lobby_list")
 
@@ -65,6 +77,17 @@ puppet func update_lobby_list(new_lobby_list) -> void:
 
 func create_new_lobby(new_lobby_name) -> void:
 	rpc_id(1, "create_new_lobby", new_lobby_name)
+
+
+#
+# -- Lobby Menu functions -- ##
+#
+func update_player_info(lobby_name : String, new_player_name : String, new_player_color : Color) -> void:
+	rpc_id(1, "update_lobby_player", lobby_name, new_player_name, new_player_color)
+
+
+func update_race_info(lobby_name : String, new_level : int, new_laps_amount : int, new_npcs_amount : int) -> void:
+	rpc_id(1, "update_lobby_race", lobby_name, new_level, new_laps_amount, new_npcs_amount)
 
 
 #
@@ -90,11 +113,3 @@ func _server_connection_failed() -> void:
 func _server_disconnected() -> void:
 	print("Disconnected From Server")
 	Globals.game.main_menu.return_to_main()
-
-
-func reset_network() -> void:
-	set_self_data()
-
-	if get_tree().network_peer != null:
-		get_tree().network_peer.close_connection()
-		get_tree().set_network_peer(null)
