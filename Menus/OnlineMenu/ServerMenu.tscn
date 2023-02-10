@@ -88,30 +88,34 @@ WindowDialog/constants/title_height = -70
 WindowDialog/fonts/title_font = SubResource( 37 )
 WindowDialog/styles/panel = SubResource( 48 )
 
-[node name="ServerMenu" type="Control"]
+[node name="LobbyMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 960.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true,
-"_edit_lock_": true,
 "_edit_vertical_guides_": [ 960.0 ]
 }
 
-[node name="ServerLabel" type="Label" parent="."]
+[node name="LobbyFrame" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ServerLabel" type="Label" parent="LobbyFrame"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -64.0
 margin_bottom = -824.0
 custom_fonts/font = SubResource( 45 )
-text = "Lobbies List"
+text = "Race Lobbies"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="LabelsContainer" type="HBoxContainer" parent="."]
+[node name="LabelsContainer" type="HBoxContainer" parent="LobbyFrame"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
@@ -124,47 +128,47 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="LobbyLabel" type="Label" parent="LabelsContainer"]
-margin_left = 509.0
+[node name="LobbyLabel" type="Label" parent="LobbyFrame/LabelsContainer"]
+margin_left = 29.0
 margin_top = 14.0
-margin_right = 590.0
+margin_right = 110.0
 margin_bottom = 50.0
 theme = SubResource( 13 )
 text = "Lobby"
 
-[node name="TrackLabel" type="Label" parent="LabelsContainer"]
-margin_left = 690.0
+[node name="TrackLabel" type="Label" parent="LobbyFrame/LabelsContainer"]
+margin_left = 210.0
 margin_top = 14.0
-margin_right = 762.0
+margin_right = 282.0
 margin_bottom = 50.0
 theme = SubResource( 13 )
 text = "Track"
 
-[node name="LapsLabel" type="Label" parent="LabelsContainer"]
-margin_left = 862.0
+[node name="LapsLabel" type="Label" parent="LobbyFrame/LabelsContainer"]
+margin_left = 382.0
 margin_top = 14.0
-margin_right = 924.0
+margin_right = 444.0
 margin_bottom = 50.0
 theme = SubResource( 13 )
 text = "Laps"
 
-[node name="RacersLabel" type="Label" parent="LabelsContainer"]
-margin_left = 1024.0
+[node name="RacersLabel" type="Label" parent="LobbyFrame/LabelsContainer"]
+margin_left = 544.0
 margin_top = 14.0
-margin_right = 1114.0
+margin_right = 634.0
 margin_bottom = 50.0
 theme = SubResource( 13 )
 text = "Racers"
 
-[node name="NPCsLabel" type="Label" parent="LabelsContainer"]
-margin_left = 1214.0
+[node name="NPCsLabel" type="Label" parent="LobbyFrame/LabelsContainer"]
+margin_left = 734.0
 margin_top = 14.0
-margin_right = 1283.0
+margin_right = 803.0
 margin_bottom = 50.0
 theme = SubResource( 13 )
 text = "NPCs"
 
-[node name="LobbyList" type="ItemList" parent="."]
+[node name="LobbyList" type="ItemList" parent="LobbyFrame"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 320.0
@@ -181,26 +185,26 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="ButtonsContainer" type="HBoxContainer" parent="."]
+[node name="ButtonsContainer" type="HBoxContainer" parent="LobbyFrame"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 24.0
 margin_top = 936.0
-margin_right = -1026.0
+margin_right = -90.0
 margin_bottom = -71.0
 custom_constants/separation = 86
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CreateButton" type="Button" parent="ButtonsContainer"]
+[node name="CreateButton" type="Button" parent="LobbyFrame/ButtonsContainer"]
 margin_right = 289.0
 margin_bottom = 73.0
 theme = SubResource( 13 )
 text = "Create New"
 flat = true
 
-[node name="JoinButton" type="Button" parent="ButtonsContainer"]
+[node name="JoinButton" type="Button" parent="LobbyFrame/ButtonsContainer"]
 margin_left = 375.0
 margin_right = 480.0
 margin_bottom = 73.0
@@ -208,7 +212,7 @@ theme = SubResource( 13 )
 text = "Join"
 flat = true
 
-[node name="DisconnectButton" type="Button" parent="ButtonsContainer"]
+[node name="DisconnectButton" type="Button" parent="LobbyFrame/ButtonsContainer"]
 margin_left = 566.0
 margin_right = 846.0
 margin_bottom = 73.0
@@ -216,18 +220,21 @@ theme = SubResource( 13 )
 text = "Disconnect"
 flat = true
 
-[node name="LobbyCreation" type="WindowDialog" parent="."]
+[node name="LobbyCreation" type="WindowDialog" parent="LobbyFrame"]
 visible = true
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 384.0
-margin_top = 256.0
-margin_right = -896.0
-margin_bottom = -584.0
+margin_left = -760.0
+margin_top = 472.0
+margin_right = -120.0
+margin_bottom = 728.0
 theme = SubResource( 13 )
 window_title = "Create New Lobby"
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="NameLabel" type="Label" parent="LobbyCreation"]
+[node name="NameLabel" type="Label" parent="LobbyFrame/LobbyCreation"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 26.0
@@ -237,7 +244,7 @@ margin_bottom = -145.0
 theme = SubResource( 13 )
 text = "Server Name"
 
-[node name="NameEdit" type="LineEdit" parent="LobbyCreation"]
+[node name="NameEdit" type="LineEdit" parent="LobbyFrame/LobbyCreation"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 216.0
@@ -247,7 +254,7 @@ margin_bottom = -125.0
 theme = SubResource( 13 )
 max_length = 11
 
-[node name="ButtonsContainer" type="HBoxContainer" parent="LobbyCreation"]
+[node name="ButtonsContainer" type="HBoxContainer" parent="LobbyFrame/LobbyCreation"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 120.0
@@ -258,20 +265,20 @@ theme = SubResource( 13 )
 custom_constants/separation = 59
 alignment = 1
 
-[node name="CreateButton" type="Button" parent="LobbyCreation/ButtonsContainer"]
+[node name="CreateButton" type="Button" parent="LobbyFrame/LobbyCreation/ButtonsContainer"]
 margin_right = 170.0
-margin_bottom = 73.0
+margin_bottom = 89.0
 text = "Create"
 flat = true
 
-[node name="CancelButton" type="Button" parent="LobbyCreation/ButtonsContainer"]
+[node name="CancelButton" type="Button" parent="LobbyFrame/LobbyCreation/ButtonsContainer"]
 margin_left = 229.0
 margin_right = 401.0
-margin_bottom = 73.0
+margin_bottom = 89.0
 text = "Cancel"
 flat = true
 
-[connection signal="item_selected" from="LobbyList" to="." method="_select_row"]
-[connection signal="pressed" from="ButtonsContainer/CreateButton" to="." method="_popup_lobby_creation"]
-[connection signal="pressed" from="LobbyCreation/ButtonsContainer/CreateButton" to="." method="_create_new_lobby"]
-[connection signal="pressed" from="LobbyCreation/ButtonsContainer/CancelButton" to="." method="_hide_lobby_creation"]
+[connection signal="item_selected" from="LobbyFrame/LobbyList" to="." method="_select_row"]
+[connection signal="pressed" from="LobbyFrame/ButtonsContainer/CreateButton" to="." method="_popup_lobby_creation"]
+[connection signal="pressed" from="LobbyFrame/LobbyCreation/ButtonsContainer/CreateButton" to="." method="_create_new_lobby"]
+[connection signal="pressed" from="LobbyFrame/LobbyCreation/ButtonsContainer/CancelButton" to="." method="_hide_lobby_creation"]

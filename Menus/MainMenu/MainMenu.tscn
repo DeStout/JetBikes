@@ -174,10 +174,6 @@ resource_local_to_scene = true
 material = SubResource( 23 )
 size = Vector2( 2, 2 )
 
-[sub_resource type="DynamicFont" id=32]
-size = 32
-font_data = ExtResource( 7 )
-
 [sub_resource type="DynamicFont" id=37]
 size = 48
 font_data = ExtResource( 26 )
@@ -275,6 +271,10 @@ font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=31]
 size = 48
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=32]
+size = 32
 font_data = ExtResource( 7 )
 
 [node name="MainMenu" type="Spatial"]
@@ -392,16 +392,6 @@ position = Vector2( 960, 540 )
 scale = Vector2( 0.784955, 0.784884 )
 texture = ExtResource( 18 )
 
-[node name="ClientBtn" type="Button" parent="Menu"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 48.8564
-margin_top = 38.8016
-margin_right = -1623.14
-margin_bottom = -984.198
-custom_fonts/font = SubResource( 32 )
-text = "Launch Client"
-
 [node name="MainMenu" type="GridContainer" parent="Menu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -413,7 +403,7 @@ margin_bottom = -411.0
 [node name="SinglePlayerButton" type="Button" parent="Menu/MainMenu"]
 margin_right = 318.0
 margin_bottom = 73.0
-focus_next = NodePath("../MultiplayerButton")
+focus_next = NodePath("../OnlineButton")
 focus_previous = NodePath("../QuitButton")
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
@@ -423,7 +413,7 @@ text = "Single Player"
 flat = true
 align = 0
 
-[node name="MultiplayerButton" type="Button" parent="Menu/MainMenu"]
+[node name="OnlineButton" type="Button" parent="Menu/MainMenu"]
 margin_top = 77.0
 margin_right = 463.0
 margin_bottom = 150.0
@@ -442,7 +432,7 @@ margin_top = 154.0
 margin_right = 202.0
 margin_bottom = 227.0
 focus_next = NodePath("../ControlsButton")
-focus_previous = NodePath("../MultiplayerButton")
+focus_previous = NodePath("../OnlineButton")
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 theme = SubResource( 13 )
@@ -804,7 +794,6 @@ edit_alpha = false
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 960.0
 script = ExtResource( 23 )
 
 [node name="OptionsMenu" type="Control" parent="Menu"]
@@ -1037,10 +1026,19 @@ text = "Back"
 flat = true
 align = 0
 
-[connection signal="pressed" from="Menu/ClientBtn" to="." method="_new_client"]
+[node name="ClientBtn" type="Button" parent="Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 48.8564
+margin_top = 38.8016
+margin_right = -1623.14
+margin_bottom = -984.198
+custom_fonts/font = SubResource( 32 )
+text = "Launch Client"
+
 [connection signal="visibility_changed" from="Menu/MainMenu" to="." method="_hide_show_main_menu"]
 [connection signal="pressed" from="Menu/MainMenu/SinglePlayerButton" to="." method="_single_player_menu"]
-[connection signal="pressed" from="Menu/MainMenu/MultiplayerButton" to="." method="_multiplayer_menu"]
+[connection signal="pressed" from="Menu/MainMenu/OnlineButton" to="." method="_online_menu"]
 [connection signal="pressed" from="Menu/MainMenu/OptionsButton" to="." method="_options_menu"]
 [connection signal="pressed" from="Menu/MainMenu/ControlsButton" to="." method="_controls_menu"]
 [connection signal="pressed" from="Menu/MainMenu/QuitButton" to="." method="_on_QuitButton_pressed"]
@@ -1065,6 +1063,7 @@ align = 0
 [connection signal="pressed" from="Menu/OptionsMenu/Buttons/BackButton" to="." method="return_to_main"]
 [connection signal="visibility_changed" from="Menu/ControlsMenu" to="Menu/ControlsMenu" method="_hide_show"]
 [connection signal="pressed" from="Menu/ControlsMenu/BackButton" to="." method="return_to_main"]
+[connection signal="pressed" from="Menu/ClientBtn" to="." method="_new_client"]
 
 [editable path="BGRot/Racer"]
 [editable path="BGRot/Racer/EngineRotationHelper/Engine"]

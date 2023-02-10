@@ -14,8 +14,8 @@ onready var leave_button : Button = $LobbyFrame/ButtonsPanel/LeaveButton
 
 
 func _enter_tree() -> void:
-	yield(get_tree(), "physics_frame")
-	reset_lobby()
+	yield(get_tree(), "idle_frame")
+#	reset_lobby()
 
 
 func _ready() -> void:
@@ -59,8 +59,8 @@ func update_lobby_info(_update_type : String) -> void:
 			racer_list.set_item_selectable(racer_list.get_item_count()-1, 0)
 
 
-func reset_lobby():
-	Network.reset_racer()
+#func reset_lobby():
+#	Network.reset_racer()
 
 
 func _leave() -> void:

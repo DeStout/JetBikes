@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "LobbyMenu",
 "language": "GDScript",
-"path": "res://Menus/OnlineMenu/old_menu/LobbyMenu.gd"
+"path": "res://Menus/OnlineMenu/LobbyMenus/LobbyMenu.gd"
 }, {
 "base": "Area",
 "class": "ModNode",

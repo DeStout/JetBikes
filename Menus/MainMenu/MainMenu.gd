@@ -44,7 +44,7 @@ func _input(event: InputEvent) -> void:
 		if event is InputEventJoypadButton and event.is_action_pressed("ui_accept"):
 			current_focus.emit_signal("pressed")
 
-## TODO
+## TODO: Change BG racer color
 func set_racer_color(color : Color) -> void:
 	pass
 
@@ -58,7 +58,7 @@ func _single_player_menu() -> void:
 	single_player_menu.visible = true
 
 
-func _multiplayer_menu() -> void:
+func _online_menu() -> void:
 	main_menu.visible = false
 	online_menu.visible = true
 

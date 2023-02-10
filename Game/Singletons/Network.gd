@@ -3,10 +3,11 @@ extends Node
 
 signal connected_successfully
 signal update_lobby_list
+signal lobby_created
 
 
-#const _IP : String = "127.0.0.1"
-const _IP : String = "144.24.39.221"
+const _IP : String = "127.0.0.1"
+#const _IP : String = "144.24.39.221"
 const _PORT : int = 34500
 var upnp : UPNP = UPNP.new()
 
@@ -27,7 +28,6 @@ func _ready():
 	print("Network UPNP Result: ", str(upnp_result))
 
 	set_self_data()
-	print(get_network_master())
 
 
 func set_self_data() -> void:
@@ -79,7 +79,7 @@ func _peer_disconnected(dead_peer_id) -> void:
 
 
 func _connected_to_server() -> void:
-	# Signal to ConnectingMenu
+	# Signal to ConnectingMenu (connected_to_server)
 	emit_signal("connected_successfully")
 
 
@@ -89,6 +89,7 @@ func _server_connection_failed() -> void:
 
 func _server_disconnected() -> void:
 	print("Disconnected From Server")
+	Globals.game.main_menu.return_to_main()
 
 
 func reset_network() -> void:

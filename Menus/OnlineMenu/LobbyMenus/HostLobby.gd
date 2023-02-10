@@ -6,7 +6,7 @@ var npc_amount : int = Globals.multiplayer_NPC_number
 
 
 func _ready():
-	level_name.text = Globals.level_dict_keys[level_select]
+#	level_name.text = Globals.level_dict_keys[level_select]
 	num_laps.text = str(lap_amount)
 #	num_npcs.text = str(npc_amount)
 	num_npcs.text = str(0)
@@ -16,7 +16,8 @@ func _ready():
 
 # Start Race Button
 func _setup_race():
-	Network.setup_online_multiplayer_race()
+	print("Start Race")
+#	Network.setup_online_multiplayer_race()
 
 
 func update_lobby_info(update_type : String):

@@ -1,49 +1,55 @@
 extends Control
 
 
-var lobby_list = []
+signal lobby_created
 
-onready var disconnect_button := $ButtonsContainer/DisconnectButton
+onready var lobby_list := $LobbyFrame/LobbyList
+var list = []
+
+onready var lobby_creation := $LobbyFrame/LobbyCreation
+onready var disconnect_button := $LobbyFrame/ButtonsContainer/DisconnectButton
 
 
 func _ready() -> void:
-	Network.connect("update_lobby_list", self, "update_lobby_list")
+	Network.connect("update_lobby_list", self, "update_list")
 
 	disconnect_button.connect("pressed", Network, "reset_network")
 	disconnect_button.connect("pressed", Globals.game.main_menu, "return_to_main")
 
 	Network.get_lobby_list()
 
-# Signaled from Network (update_lobby_list)
-func update_lobby_list(new_lobby_list) -> void:
-	lobby_list = new_lobby_list
-	$LobbyList.clear()
-	for lobby in lobby_list:
-		$LobbyList.add_item(lobby[0])
-		$LobbyList.add_item(lobby[1])
-		$LobbyList.add_item(str(lobby[2]))
-		$LobbyList.add_item(str(lobby[3]) + "/" + str(lobby[4]))
-		$LobbyList.add_item(str(lobby[5]))
+
+# Signaled from Network (update_list)
+func update_list(new_list) -> void:
+	list = new_list
+	lobby_list.clear()
+	for lobby in list:
+		lobby_list.add_item(lobby[0])
+		lobby_list.add_item(lobby[1])
+		lobby_list.add_item(str(lobby[2]))
+		lobby_list.add_item(str(lobby[3]) + "/" + str(lobby[4]))
+		lobby_list.add_item(str(lobby[5]))
 
 
 func _popup_lobby_creation() -> void:
-	$LobbyCreation.popup()
+	lobby_creation.popup()
 
 
 func _create_new_lobby() -> void:
-	Network.create_new_lobby($LobbyCreation/NameEdit.text)
+	Network.create_new_lobby(lobby_creation.get_node("NameEdit").text)
 	_hide_lobby_creation()
+	emit_signal("lobby_created")
 
 
 func _hide_lobby_creation() -> void:
-	$LobbyCreation.visible = false
-	$LobbyCreation/NameEdit.text = ""
+	lobby_creation.visible = false
+	lobby_creation.get_node("NameEdit").text = ""
 
 
 func _select_row(selection_idx) -> void:
 	var row = selection_idx / 5
 
-	$LobbyList.select_mode = $LobbyList.SELECT_MULTI
+	lobby_list.select_mode = lobby_list.SELECT_MULTI
 	for i in range(5):
-		$LobbyList.select(i + (row * 5), false)
-	$LobbyList.select_mode = $LobbyList.SELECT_SINGLE
+		lobby_list.select(i + (row * 5), false)
+	lobby_list.select_mode = lobby_list.SELECT_SINGLE
